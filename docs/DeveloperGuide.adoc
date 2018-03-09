@@ -857,10 +857,15 @@ _{More to be added}_
 .  Should be able to show the analytical results within two seconds.
 .  Should be user-firendly for non-programmers.
 
-_{More to be added}_
-
 [appendix]
 == Glossary
+
+[[relational-database]] Relational Database::
+A relational model that organizes data into tables where rows representing instances  
+and columns representing values attributed to that instance. 
+
+[[hot-keys]] Hot Keys::
+A combination of keys which provides a shortcut to perform certain tasks.
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
