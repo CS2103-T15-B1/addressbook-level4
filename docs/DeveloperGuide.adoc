@@ -861,7 +861,7 @@ _{More to be added}_
 == Glossary
 
 [[relational-database]] Relational Database::
-A relational model that organizes data into tables where rows representing instances  
+A database that organizes data into tables where rows representing instances  
 and columns representing values attributed to that instance. 
 
 [[hot-keys]] Hot Keys::
