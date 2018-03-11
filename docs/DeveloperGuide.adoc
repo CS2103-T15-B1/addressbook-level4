@@ -963,13 +963,22 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 entires in the relational tables without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Should be able to handle invalid input (highlight error and give correct instructions).
+.  should work on both 32-bit and 64-bit environment
+.  Should be able to show the analytical results within two seconds.
+.  Should be user-firendly for non-programmers.
 
 [appendix]
 == Glossary
+
+[[relational-database]] Relational Database::
+A database that organizes data into tables where rows representing instances  
+and columns representing values attributed to that instance. 
+
+[[hot-keys]] Hot Keys::
+A combination of keys which provides a shortcut to perform certain tasks.
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
