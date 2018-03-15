@@ -12,26 +12,26 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 === Siva Subbiah
 image::damithc.jpg[width="150", align="left"]
 
-Role: Developer
+Role: Model Developer
 
 '''
 
 === Low Jia Jin
 image::lejolly.png[width="150", align="left"]
 
-Role: Developer
+Role: UI Developer
 
 '''
 
 === Chu Qinghao
 image::yijinl.jpg[width="150", align="left"]
 
-Role: Developer
+Role: Logic Developer
 
 '''
 
 === He Yingxu
 
-Role: Developer
+Role: Storage Developer
 
 '''
