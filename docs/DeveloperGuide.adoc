@@ -790,6 +790,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Value proposition*: manage contacts faster than a typical mouse/GUI driven app
 
+== Feature Contribution
+
+*Qinghao*:
+
+* *Major*: Add individual customer/product stats, like customer ranking by spending, product ranking by sales etc. This is a key feature of the project that provides retail analytics for the user.
+* *Major*: Add order class and associated tests. This is to keep track of a customer's order(s) and the products in the order.
+
 [appendix]
 == User Stories
 
