@@ -795,7 +795,22 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 *Qinghao*:
 
 * *Major*: Add individual customer/product stats, like customer ranking by spending, product ranking by sales etc. This is a key feature of the project that provides retail analytics for the user.
-* *Major*: Add order class and associated tests. This is to keep track of a customer's order(s) and the products in the order.
+* *Major*: Add order class, to keep track of a customer's order(s) and the products in the order.
+
+*Yingxu*:
+
+* *Major*: Add product class, to keep track of a single product type
+* *Minor*: Money class to keep track of price etc. because it cannot be stored in a Double due to precision issues
+
+*Jia Jin*:
+
+* *Major*: Recommendations engine for customer, so that the user can provide these personalized recommendations to customers.
+* *Minor*: Basic filtered getter utilities for Product, Customer, Order classes
+
+*Siva*:
+
+* *Major*: Geographic visualization of customer locations, for the user to see where their customers are located so to better optimize their logistics
+* *Minor*: Add customer-specific variables to existing address book code.
 
 [appendix]
 == User Stories
