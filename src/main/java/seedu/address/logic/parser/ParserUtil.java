@@ -65,15 +65,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<Gender> parseGender(Optional<Gender> gender) throws IllegalValueException {
-        requireNonNull(gender);
-        return gender.isPresent() ? Optional.of(parseName(gender.get())) : Optional.empty();
-    }
-
-    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *

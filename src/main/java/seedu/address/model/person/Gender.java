@@ -26,7 +26,7 @@ public class Gender {
     /**
      * Constructs a {@code Gender}.
      *
-     * @param gender A valid gender (ie "M" or "F").
+     * @param gender A valid gender (ie "M" or "F") (case insensitive).
      */
     public Gender(String gender) {
         requireNonNull(gender);
@@ -35,9 +35,10 @@ public class Gender {
     }
 
     private void setGender(String gender) {
-        if(gender.equals(MALE_SHORTFORM)){
+        String genderUpperCase = gender.toUpperCase();
+        if(genderUpperCase.equals(MALE_SHORTFORM)){
             this.gender = GenderType.MALE;
-        } else if(gender.equals(FEMALE_SHORTFORM)){
+        } else if(genderUpperCase.equals(FEMALE_SHORTFORM)){
             this.gender = GenderType.FEMALE;
         }
     }
@@ -46,7 +47,8 @@ public class Gender {
      * Returns true if a given string is a valid person gender.
      */
     public static boolean isValidGender(String test) {
-        return test.equals(MALE_SHORTFORM) || test.equals(FEMALE_SHORTFORM);
+        String testUpperCase = test.toUpperCase();
+        return testUpperCase.equals(MALE_SHORTFORM) || testUpperCase.equals(FEMALE_SHORTFORM);
     }
 
 
