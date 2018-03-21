@@ -8,7 +8,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to the retail analytics.
  */
 public class AddCommand extends UndoableCommand {
 

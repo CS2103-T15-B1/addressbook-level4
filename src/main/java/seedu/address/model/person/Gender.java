@@ -5,43 +5,60 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's gender in the retail analytics.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidGender(String)}
  */
 public class Gender {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_GENDER_CONSTRAINTS =
             "Gender should only be 'M' or 'F', and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MALE_SHORTFORM = "M";
+    public static final String FEMALE_SHORTFORM = "F";
+    public static final String EMPTY_STRING = "";
 
-    public final String gender;
+
+    private enum GenderType{
+        MALE, FEMALE
+    }
+
+    private GenderType gender;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Gender}.
      *
-     * @param name A valid name.
+     * @param gender A valid gender (ie "M" or "F").
      */
-    public Gender(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_NAME_CONSTRAINTS);
-        this.gender = name;
+    public Gender(String gender) {
+        requireNonNull(gender);
+        checkArgument(isValidGender(gender), MESSAGE_GENDER_CONSTRAINTS);
+        setGender(gender);
+    }
+
+    private void setGender(String gender) {
+        if(gender.equals(MALE_SHORTFORM)){
+            this.gender = GenderType.MALE;
+        } else if(gender.equals(FEMALE_SHORTFORM)){
+            this.gender = GenderType.FEMALE;
+        }
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid person gender.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidGender(String test) {
+        return test.equals(MALE_SHORTFORM) || test.equals(FEMALE_SHORTFORM);
     }
 
 
     @Override
     public String toString() {
-        return gender;
+        if (gender.equals(GenderType.MALE)){
+            return MALE_SHORTFORM;
+        } else if (gender.equals(GenderType.FEMALE)){
+            return FEMALE_SHORTFORM;
+        }else{
+            return EMPTY_STRING;
+        }
     }
 
     @Override
