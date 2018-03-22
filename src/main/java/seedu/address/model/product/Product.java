@@ -8,8 +8,11 @@ import java.util.Locale;
  * Attributes: name, price, category
  */
 public class Product {
+    private static int productCounter = 0;
+
     private final String name;
     private final int price;
+    private final int id;
     private Category category;
 
     /**
@@ -22,6 +25,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.category = category;
+        this.id = ++productCounter;
     }
 
     public String getName() { return name; }
