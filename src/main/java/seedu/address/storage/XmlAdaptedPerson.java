@@ -64,6 +64,20 @@ public class XmlAdaptedPerson {
     }
 
     /**
+     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     */
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String gender, List<XmlAdaptedTag> tagged) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.gender = gender;
+        if (tagged != null) {
+            this.tagged = new ArrayList<>(tagged);
+        }
+    }
+
+    /**
      * Converts a given Person into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
@@ -101,6 +115,14 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         final Name name = new Name(this.name);
+
+        if (this.gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(this.gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
+        }
+        final Gender gender = new Gender(this.gender);
 
         if (this.phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
