@@ -794,10 +794,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Feature Contribution*
 
-* Low Jia Jin [major]: Recommendations engine; given a customer, find and list the products that the customer has not yet bought, but is likely to want to buy using the purchase history of other customers of similar profile. Aids e-tailer in targeted marketing (e.g. sending emails to customers with personalized product recommendations).
-* Low Jia Jin [minor]: Translates text output from aforementioned recommendations engine into GUI. Can provide extra information such as product photos of recommended products.
-* Low Jia Jin [minor]: Extends aforementioned recommendations engine such that given a product, we can find the customer profile (age, gender, etc.) that is most likely to buy it. Aids e-tailer in creating marketing personas that can be used to craft advertisements that appeal to specific audiences, increasing sales for underperforming products.
-
 [appendix]
 == User Stories
 
