@@ -42,16 +42,16 @@ public class Recommender {
     public void getRecommendations() throws Exception {
         // Read list of users
         Instances test = new Instances(new BufferedReader(new FileReader("RecInput.arff")));
-        ArrayList<RecommenderProductDecision> ProductRecPerPerson = new ArrayList<>();
+        ArrayList<RecommenderProductDecision> ProductRecOfAPerson = new ArrayList<>();
         for (int i = 0; i < orders.classAttribute().numValues(); i += 2) {
             String currentProductPredicted = orders.classAttribute().value(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
             RecommenderProductDecision decision = new RecommenderProductDecision(
                     currentProductPredicted, classifier.distributionForInstance(test.instance(0))[0]);
-            ProductRecPerPerson.add(decision);
+            ProductRecOfAPerson.add(decision);
         }
-        Collections.sort(ProductRecPerPerson);
-        System.out.println(Arrays.toString(ProductRecPerPerson.toArray()));
+        Collections.sort(ProductRecOfAPerson);
+        System.out.println(Arrays.toString(ProductRecOfAPerson.toArray()));
     }
 
     private void parseOrdersFromFile() {

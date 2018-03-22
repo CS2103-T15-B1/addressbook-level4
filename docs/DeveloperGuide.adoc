@@ -385,6 +385,34 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+[[Implementation-Recommender]]
+=== Recommender
+
+==== Recommender Training Pipeline
+Obtaining recommendations for products that a given customer is likely to want to buy can actually be thought of as a classification problem. The `Order` records serves as the test dataset, the instance variables of each Order's `Customer` serve as the features, and the associated `Product` is the class label.
+
+Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:
+
+. Convert the `Order` records into a `.arff` file, the default format used by Weka, using the `ConvertToArff` class.
+[NOTE]
+The `.arff` must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as `"n" + productId`.  Since the `.arff` only stores the classification features ([v1.2]: age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the `Order` records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the `.arff`.
+. For each product, use `RemoveWithValues` to create an `isolator` that can filter out the orders involving that specific product in the `.arff`. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).
+. Pass the `isolator` into a `ProductTrainer`, which will use `ChiSquaredAttributeEval` to select the features most strongly associated with a purchase decision (i.e. an order exists for a given customer profile), and then build a `NaiveBayes` classifier around those features, for that specific product.
+[NOTE]
+The `ChiSquaredAttributeEval` only uses the 2 most discriminatory features to build the classifier, even with additional features to be added in future revisions. This combats the Curse of Dimensionality, given the possibly modest number of orders that a small business might have.
+. Save each successful `NaiveBayes` build to a `HashMap` keyed by the product ID, for later use on the test set (i.e. the customer whom we want to get likely purchase recommendations for).
+[NOTE]
+[From v1.3] The classifiers would be saved to the hard disk, so that we do not have to re-initialize a `Recommender` every time the AddressBook is opened, since classifier building is computationally expensive.
+
+==== Recommender Testing Pipeline
+. Assign `classifierDict` in `Recommender` using one of the following means:
+.. Run the training pipeline in 3.5.1.
+.. [From v1.3] The `Recommender` constructor will be overloaded to support a `classifierDict` attribute. We can use the `ReadClassifierDict` class in `Storage` to read the saved file to a `classifierDict`.
+. Call `getRecommendations(customerId)`, which will result in getting the appropriate features from said `Customer`, and then running the features as an `Instance` through every classifier in `classifierDict`. The confidence of each purchase decision is returned via `distributionForInstance` as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the `Product` predicted to be most attractive to said `Customer` listed first, is assigned to `ProductRecOfAPerson`.
+[NOTE]
+[From v1.3] A RecommendCommand Class will be added to facilitate the calling of `getRecommendations` through the CLI.
+. All `Product` objects which a given `Customer` has already bought will be stripped from his `ProductRecOfAPerson`. The remaining list will be sent to `ui` for output.
+
 == Documentation
 
 We use asciidoc for writing documentation.
