@@ -12,13 +12,13 @@ import java.util.ArrayList;
  */
 
 public class Order {
+    private static int orderCounter = 0;
+
     private final int personId;
     private final int id;
     private final LocalDateTime time;
     private final ArrayList<Triple<Integer, Integer, Money>> orderList;
 
-    // TODO save this in file when saving orders
-    private static int orderCounter = 0;
 
     /** Every field must be present and not null.
      * @param personId id of person (customer) who made the order. Can be thought of as a foreign key
@@ -60,6 +60,20 @@ public class Order {
             total = total.plus(itemTotal);
         }
         return total;
+    }
+
+    /**
+     * Performs some basic checks to see if order is valid.
+     * @return
+     */
+    public boolean isValid() {
+        boolean valid = true;
+        // TODO Check if all products exists
+
+        // Check that total order price is non-negative
+        valid = valid && !this.getOrderTotal().isMinus();
+
+        return valid;
     }
 
     /**

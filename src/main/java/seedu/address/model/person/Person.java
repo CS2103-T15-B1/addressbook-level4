@@ -2,10 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.order.Order;
+import seedu.address.model.order.exceptions.InvalidOrderException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -21,6 +25,8 @@ public class Person {
     private final Address address;
 
     private final UniqueTagList tags;
+
+    private final ArrayList<Order> orders = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -49,6 +55,34 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Adds order to list of orders
+     * @param order
+     * @throws InvalidOrderException throws exception if order is invalid
+     */
+    public void addOrder(Order order) throws InvalidOrderException {
+        if(!order.isValid()) throw new InvalidOrderException();
+        orders.add(order);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    /**
+     * Get orders made equals or after to a certain time
+     * @param time
+     * @return orders after certain time
+     */
+    public ArrayList<Order> getOrdersSinceTime(LocalDateTime time) {
+        ArrayList<Order> ordersSinceTime = new ArrayList<>();
+        for(Order order : orders) {
+            if (order.getTime().compareTo(time) >= 0)
+                ordersSinceTime.add(order);
+        }
+        return ordersSinceTime;
     }
 
     /**
