@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import seedu.address.model.util.Triple;
+import seedu.address.model.money.Money;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -55,8 +56,8 @@ public class Order {
         for(Triple<Integer, Integer, Money> product : orderList) {
             Money price = product.getThird();
             int numItems = product.getSecond();
-            Money itemTotal = price.multiply(numItems);
-            total = total.add(itemTotal);
+            Money itemTotal = price.times(numItems);
+            total = total.plus(itemTotal);
         }
         return total;
     }

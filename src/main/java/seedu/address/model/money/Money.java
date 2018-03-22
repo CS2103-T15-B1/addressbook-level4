@@ -2,21 +2,18 @@ package seedu.address.model.money;
 
 import java.util.*;
 import java.io.Serializable;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
 import java.math.RoundingMode;
 
 import seedu.address.model.money.exceptions.MismatchedCurrencyException;
+import seedu.address.model.money.exceptions.ObjectNotMoneyException;
 /**
  * Represent an amount of money in any currency.
  *
  * This class assumes decimal currency, without funky divisions
  * like 1/5 and so on. Money objects are immutable.
- * Many operations return new Money objects. In addition, most operations
- * involving more than one Money object will throw a
+ * Most operations involving more than one Money object will throw a
  * MismatchedCurrencyException if the currencies don't match.
  *
  */
@@ -25,63 +22,40 @@ public class Money implements Comparable<Money>, Serializable {
     /**
      * The money amount.
      * Never null.
-     * @serial
      */
     private BigDecimal fAmount;
 
     /**
      * The currency of the money, such as US Dollars or Euros.
      * Never null.
-     * @serial
      */
     private final Currency fCurrency;
 
     /**
      * The rounding style to be used.
-     * See {@link BigDecimal}.
-     * @serial
      */
     private final RoundingMode fRounding;
 
     /**
      * The default currency to be used if no currency is passed to the constructor.
+     * To be initialized by the static init().
      */
     private static Currency DEFAULT_CURRENCY;
 
     /**
      * The default rounding style to be used if no currency is passed to the constructor.
-     * See {@link BigDecimal}.
      */
     private static RoundingMode DEFAULT_ROUNDING;
 
-    /** @serial */
     private int fHashCode;
     private static final int HASH_SEED = 23;
     private static final int HASH_FACTOR = 37;
 
     /**
-     * Determines if a deserialized file is compatible with this class.
-     *
-     * Maintainers must change this value if and only if the new version
-     * of this class is not compatible with old versions. See Sun docs
-     * for <a href=http://java.sun.com/products/jdk/1.1/docs/guide
-     * /serialization/spec/version.doc.html> details. </a>
-     *
-     * Not necessary to include in first version of the class, but
-     * included here as a reminder of its importance.
-     */
-    private static final long serialVersionUID = 7526471155622776147L;
-
-    /**
      * Set default values for currency and rounding style.
-     *
      * This method will be called only once before start-up
      *
-     * <P>The recommended rounding style is {@link RoundingMode#HALF_EVEN}, also called
-     * <em>banker's rounding</em>; this rounding style introduces the least bias.
-     *
-     * <P>Setting these defaults allow you to use the more terse constructors of this class,
-     * which are much more convenient.
+     * HALF_EVEN may be a good example.
      */
     public static void init(Currency aDefaultCurrency, RoundingMode aDefaultRounding){
         DEFAULT_CURRENCY = aDefaultCurrency;
@@ -92,13 +66,11 @@ public class Money implements Comparable<Money>, Serializable {
      * Full constructor.
      *
      * @param aAmount is required, can be positive or negative. The number of
-     * decimals in the amount cannot <em>exceed</em> the maximum number of
-     * decimals for the given {@link Currency}. It's possible to create a
-     * <tt>Money</tt> object in terms of 'thousands of dollars', for instance.
-     * Such an amount would have a scale of -3.
-     * @param aCurrency is required.
+     * decimals in the amount cannot exceed the maximum number of
+     * decimals for the given Currency.
+     * @param aCurrency
      * @param aRoundingStyle is required, must match a rounding style used by
-     * {@link BigDecimal}.
+     * BigDecimal.
      */
     public Money(BigDecimal aAmount, Currency aCurrency, RoundingMode aRoundingStyle){
         fAmount = aAmount;
@@ -118,7 +90,7 @@ public class Money implements Comparable<Money>, Serializable {
     /**
      * Constructor taking the money amount and currency.
      *
-     * <P>The rounding style takes a default value.
+     * The rounding style takes a default value.
      * @param aAmount is required, can be positive or negative.
      * @param aCurrency is required.
      */
@@ -134,6 +106,12 @@ public class Money implements Comparable<Money>, Serializable {
         this(aAmount, DEFAULT_CURRENCY, aRoundingStyle);
     }
 
+    /**
+     * empty constructor
+     */
+    public Money() {
+        this(new BigDecimal(0.00), DEFAULT_CURRENCY, DEFAULT_ROUNDING);
+    }
     /** Return the amount passed to the constructor. */
     public BigDecimal getAmount() { return fAmount; }
 
@@ -145,7 +123,8 @@ public class Money implements Comparable<Money>, Serializable {
 
     /**
      * Return true only if aThat Money has the same currency
-     * as this Money.
+     * as this Money. For the public use.
+     * Assume the aThat is also a money object
      */
     public boolean isSameCurrencyAs(Money aThat){
         boolean result = false;
@@ -155,51 +134,50 @@ public class Money implements Comparable<Money>, Serializable {
         return result;
     }
 
-    /** Return <tt>true</tt> only if the amount is positive. */
+    /** Return true only if the amount is positive. */
     public boolean isPlus(){
         return fAmount.compareTo(ZERO) > 0;
     }
 
-    /** Return <tt>true</tt> only if the amount is negative. */
     public boolean isMinus(){
         return fAmount.compareTo(ZERO) <  0;
     }
 
-    /** Return <tt>true</tt> only if the amount is zero. */
     public boolean isZero(){
         return fAmount.compareTo(ZERO) ==  0;
     }
 
     /**
-     * Add <tt>aThat</tt> <tt>Money</tt> to this <tt>Money</tt>.
+     * Add aThat Money to this Money.
      * Currencies must match.
      */
-    public Money plus(Money aThat){
-        checkCurrenciesMatch(aThat);
-        return new Money(fAmount.add(aThat.fAmount), fCurrency, fRounding);
+    public Money plus(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return new Money(fAmount.add(that.fAmount), fCurrency, fRounding);
     }
 
     /**
-     * Subtract <tt>aThat</tt> <tt>Money</tt> from this <tt>Money</tt>.
+     * Subtract aThat Money from this Money.
      * Currencies must match.
      */
-    public Money minus(Money aThat){
-        checkCurrenciesMatch(aThat);
-        return new Money(fAmount.subtract(aThat.fAmount), fCurrency, fRounding);
+    public Money minus(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return new Money(fAmount.subtract(that.fAmount), fCurrency, fRounding);
     }
 
     /**
-     * Sum a collection of <tt>Money</tt> objects.
-     * Currencies must match. You are encouraged to use database summary functions
-     * whenever possible, instead of this method.
+     * Sum a collection of Money objects.
+     * Currencies must match.
      *
-     * @param aMoneys collection of <tt>Money</tt> objects, all of the same currency.
+     * @param aMoneys collection of Money objects, all of the same currency.
      * If the collection is empty, then a zero value is returned.
-     * @param aCurrencyIfEmpty is used only when <tt>aMoneys</tt> is empty; that way, this
-     * method can return a zero amount in the desired currency.
      */
-    public static Money sum(Collection<Money> aMoneys, Currency aCurrencyIfEmpty){
-        Money sum = new Money(ZERO, aCurrencyIfEmpty);
+    public static Money sum(Collection<Money> aMoneys){
+        Money sum = new Money(ZERO);
         for(Money money : aMoneys){
             sum = sum.plus(money);
         }
@@ -209,64 +187,49 @@ public class Money implements Comparable<Money>, Serializable {
     /**
      * Equals (insensitive to scale).
      *
-     * <P>Return <tt>true</tt> only if the amounts are equal.
-     * Currencies must match.
-     * This method is <em>not</em> synonymous with the <tt>equals</tt> method.
+     * Return true only if the amounts are equal.
+     * Currencies must match. This method is not synonymous with the equals method.
      */
-    public boolean eq(Money aThat) {
-        checkCurrenciesMatch(aThat);
-        return compareAmount(aThat) == 0;
+    public boolean eq(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return compareAmount(that) == 0;
+    }
+
+    public boolean gt(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return compareAmount(that) > 0;
+    }
+
+    public boolean gteq(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return compareAmount(that) >= 0;
+    }
+
+    public boolean lt(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return compareAmount(that) < 0;
+    }
+
+    public boolean lteq(Object aThat){
+        checkObjectIsMoney(aThat);
+        Money that = (Money)aThat;
+        checkCurrenciesMatch(that);
+        return compareAmount(that) <= 0;
     }
 
     /**
-     * Greater than.
+     * Multiply this Money by an integral factor.
      *
-     * <P>Return <tt>true</tt> only if  'this' amount is greater than
-     * 'that' amount. Currencies must match.
-     */
-    public boolean gt(Money aThat) {
-        checkCurrenciesMatch(aThat);
-        return compareAmount(aThat) > 0;
-    }
-
-    /**
-     * Greater than or equal to.
-     *
-     * <P>Return <tt>true</tt> only if 'this' amount is
-     * greater than or equal to 'that' amount. Currencies must match.
-     */
-    public boolean gteq(Money aThat) {
-        checkCurrenciesMatch(aThat);
-        return compareAmount(aThat) >= 0;
-    }
-
-    /**
-     * Less than.
-     *
-     * <P>Return <tt>true</tt> only if 'this' amount is less than
-     * 'that' amount. Currencies must match.
-     */
-    public boolean lt(Money aThat) {
-        checkCurrenciesMatch(aThat);
-        return compareAmount(aThat) < 0;
-    }
-
-    /**
-     * Less than or equal to.
-     *
-     * <P>Return <tt>true</tt> only if 'this' amount is less than or equal to
-     * 'that' amount. Currencies must match.
-     */
-    public boolean lteq(Money aThat) {
-        checkCurrenciesMatch(aThat);
-        return compareAmount(aThat) <= 0;
-    }
-
-    /**
-     * Multiply this <tt>Money</tt> by an integral factor.
-     *
-     * The scale of the returned <tt>Money</tt> is equal to the scale of 'this'
-     * <tt>Money</tt>.
+     * The scale of the returned Money is equal to the scale of 'this'
+     * Money.
      */
     public Money times(int aFactor){
         BigDecimal factor = new BigDecimal(aFactor);
@@ -275,10 +238,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     /**
-     * Multiply this <tt>Money</tt> by an non-integral factor (having a decimal point).
-     *
-     * <P>The scale of the returned <tt>Money</tt> is equal to the scale of
-     * 'this' <tt>Money</tt>.
+     * Multiply this Money by an non-integral factor (having a decimal point).
      */
     public Money times(double aFactor){
         BigDecimal newAmount = fAmount.multiply(asBigDecimal(aFactor));
@@ -287,10 +247,10 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     /**
-     * Divide this <tt>Money</tt> by an integral divisor.
+     * Divide this Money by an integral divisor.
      *
-     * <P>The scale of the returned <tt>Money</tt> is equal to the scale of
-     * 'this' <tt>Money</tt>.
+     * The scale of the returned Money is equal to the scale of
+     * 'this' Money since this Money is scale is applied to the new Money.
      */
     public Money div(int aDivisor){
         BigDecimal divisor = new BigDecimal(aDivisor);
@@ -299,10 +259,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     /**
-     * Divide this <tt>Money</tt> by an non-integral divisor.
-     *
-     * <P>The scale of the returned <tt>Money</tt> is equal to the scale of
-     * 'this' <tt>Money</tt>.
+     * Divide this Money by an non-integral divisor.
      */
     public Money div(double aDivisor){
         BigDecimal newAmount = fAmount.divide(asBigDecimal(aDivisor), fRounding);
@@ -321,9 +278,9 @@ public class Money implements Comparable<Money>, Serializable {
 
     /**
      * Returns
-     * {@link #getAmount()}.getPlainString() + space + {@link #getCurrency()}.getSymbol().
+     * getAmount().getPlainString() + space + getCurrency().getSymbol().
      *
-     * <P>The return value uses the runtime's <em>default locale</em>, and will not
+     * The return value uses the default locale/currency, and will not
      * always be suitable for display to an end user.
      */
     public String toString(){
@@ -331,11 +288,10 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     /**
-     * Like {@link BigDecimal#equals(java.lang.Object)}, this <tt>equals</tt> method
-     * is also sensitive to scale.
+     * This equal is sensitive to scale.
      *
-     * For example, <tt>10</tt> is <em>not</em> equal to <tt>10.00</tt>
-     * The {@link #eq(Money)} method, on the other hand, is <em>not</em>
+     * For example, 10 is not equal to 10.00
+     * The eq method, on the other hand, is not
      * sensitive to scale.
      */
     public boolean equals(Object aThat){
@@ -359,6 +315,11 @@ public class Money implements Comparable<Money>, Serializable {
         return fHashCode;
     }
 
+    /**
+     * Compare by amount, then currency and rounding method.
+     * @param aThat
+     * @return
+     */
     public int compareTo(Money aThat) {
         final int EQUAL = 0;
 
@@ -380,27 +341,6 @@ public class Money implements Comparable<Money>, Serializable {
         return EQUAL;
     }
 
-    /**
-     * Always treat de-serialization as a full-blown constructor, by
-     * validating the final state of the de-serialized object.
-     */
-    private void readObject(
-            ObjectInputStream aInputStream
-    ) throws ClassNotFoundException, IOException {
-        //always perform the default de-serialization first
-        aInputStream.defaultReadObject();
-        //defensive copy for mutable date field
-        //BigDecimal is not technically immutable, since its non-final
-        fAmount = new BigDecimal( fAmount.toPlainString() );
-        //ensure that object state has not been corrupted or tampered with maliciously
-        validateState();
-    }
-
-    private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
-        //perform the default serialization for all non-transient, non-static fields
-        aOutputStream.defaultWriteObject();
-    }
-
     private void validateState(){
         if( fAmount == null ) {
             throw new IllegalArgumentException("Amount cannot be null");
@@ -420,10 +360,22 @@ public class Money implements Comparable<Money>, Serializable {
         return fCurrency.getDefaultFractionDigits();
     }
 
+    /**
+     * throw new exception if the other Monday is not the same currency.
+     * @param aThat
+     */
     private void checkCurrenciesMatch(Money aThat){
         if (! this.fCurrency.equals(aThat.getCurrency())) {
             throw new MismatchedCurrencyException(
                     aThat.getCurrency() + " doesn't match the expected currency : " + fCurrency
+            );
+        }
+    }
+
+    private void checkObjectIsMoney(Object aThat) {
+        if (! (aThat instanceof Money) ) {
+            throw new ObjectNotMoneyException(
+                    aThat.getClass() + " doesn't match with Money class"
             );
         }
     }
