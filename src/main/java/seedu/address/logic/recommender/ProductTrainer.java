@@ -20,8 +20,8 @@ public class ProductTrainer {
             "Invalid parameters for {@code crossValidateModel()} method, or orders modified after classifier built.";
 
     private static final int WEKA_NUM_FEATURES_USED = 2;
-    private static final int WEKA_MIN_ORDERS = 4;
-    private static final boolean WEKA_EVALUATE_CLASSIFIER = true;
+    private static final int WEKA_MIN_ORDERS = 5;
+    private static final boolean WEKA_EVALUATE_CLASSIFIER = false;
 
     private Instances orders;
     private AttributeSelectedClassifier attrSelClassifier;
@@ -103,9 +103,10 @@ public class ProductTrainer {
             // Evaluates the classifier with a n-fold cross validation, where n = {@code WEKA_MIN_ORDERS}
             evaluation = new Evaluation(orders);
             evaluation.crossValidateModel(attrSelClassifier, orders, WEKA_MIN_ORDERS, new Random(1));
+            System.out.println(orders.classAttribute());
+            System.out.println(evaluation.toSummaryString());
         } catch (Exception e) {
             System.out.println(MESSAGE_CANNOT_EVALUATE_CLASSIFIER);
         }
-        System.out.println(evaluation.toSummaryString());
     }
 }
