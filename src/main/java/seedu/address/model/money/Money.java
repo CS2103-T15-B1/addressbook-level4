@@ -37,30 +37,24 @@ public class Money implements Comparable<Money>, Serializable {
     private final RoundingMode fRounding;
 
     /**
+     *
+     */
+    private static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
+
+    /**
      * The default currency to be used if no currency is passed to the constructor.
      * To be initialized by the static init().
      */
-    private static Currency DEFAULT_CURRENCY;
+    private static Currency DEFAULT_CURRENCY = Currency.getInstance("SGD");
 
     /**
      * The default rounding style to be used if no currency is passed to the constructor.
      */
-    private static RoundingMode DEFAULT_ROUNDING;
+    private static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
     private int fHashCode;
     private static final int HASH_SEED = 23;
     private static final int HASH_FACTOR = 37;
-
-    /**
-     * Set default values for currency and rounding style.
-     * This method will be called only once before start-up
-     *
-     * HALF_EVEN may be a good example.
-     */
-    public static void init(Currency aDefaultCurrency, RoundingMode aDefaultRounding){
-        DEFAULT_CURRENCY = aDefaultCurrency;
-        DEFAULT_ROUNDING = aDefaultRounding;
-    }
 
     /**
      * Full constructor.
@@ -110,7 +104,7 @@ public class Money implements Comparable<Money>, Serializable {
      * empty constructor
      */
     public Money() {
-        this(new BigDecimal(0.00), DEFAULT_CURRENCY, DEFAULT_ROUNDING);
+        this(DEFAULT_AMOUNT, DEFAULT_CURRENCY, DEFAULT_ROUNDING);
     }
     /** Return the amount passed to the constructor. */
     public BigDecimal getAmount() { return fAmount; }
