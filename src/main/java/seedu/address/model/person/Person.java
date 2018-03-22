@@ -100,6 +100,11 @@ public class Person {
 //        return lastOrder.getTime();
 //    }
 
+    public LocalDateTime getLastOrderTime() {
+        Order lastOrder = orders.get(orders.size() - 1);
+        return lastOrder.getTime();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
