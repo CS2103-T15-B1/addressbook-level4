@@ -28,6 +28,7 @@ public class GenderTest {
         assertFalse(Gender.isValidGender(" ")); // spaces only
         assertFalse(Gender.isValidGender("^")); // only non-alphanumeric characters
         assertFalse(Gender.isValidGender("M*")); // contains non-alphanumeric characters
+        assertFalse(Gender.isValidGender("M ")); // male with space
 
         // valid gender
         assertTrue(Gender.isValidGender("M")); // male in uppercase
