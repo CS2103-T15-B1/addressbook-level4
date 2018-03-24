@@ -56,7 +56,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Gender} of the {@code Person} that we are building.
      */
     public PersonBuilder withGender(String gender) {
         this.gender = new Gender(gender);
