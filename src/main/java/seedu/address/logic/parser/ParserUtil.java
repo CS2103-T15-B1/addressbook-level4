@@ -65,10 +65,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String gender} into a {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code name} is invalid.
+     * @throws IllegalValueException if the given {@code gender} is invalid.
      */
     public static Gender parseGender(String gender) throws IllegalValueException {
         requireNonNull(gender);
@@ -80,12 +80,84 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> gender} into an {@code Optional<Gender>} if {@code gender} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
     public static Optional<Gender> parseGender(Optional<String> gender) throws IllegalValueException {
         requireNonNull(gender);
         return gender.isPresent() ? Optional.of(parseGender(gender.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String age} into a {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws IllegalValueException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code Optional<String> age} into an {@code Optional<Age>} if {@code age} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Age> parseAge(Optional<String> age) throws IllegalValueException {
+        requireNonNull(age);
+        return age.isPresent() ? Optional.of(parseAge(age.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String latitude} into a {@code Latitude}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code latitude} is invalid.
+     */
+    public static Latitude parseLatitude(String latitude) throws IllegalValueException {
+        requireNonNull(latitude);
+        String trimmedLatitude = latitude.trim();
+        if (!Latitude.isValidLatitude(trimmedLatitude)) {
+            throw new IllegalValueException(Latitude.MESSAGE_LATITUDE_CONSTRAINTS);
+        }
+        return new Latitude(trimmedLatitude);
+    }
+
+    /**
+     * Parses a {@code Optional<String> latitude} into an {@code Optional<Latitude>} if {@code latitude} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Latitude> parseLatitude(Optional<String> latitude) throws IllegalValueException {
+        requireNonNull(latitude);
+        return latitude.isPresent() ? Optional.of(parseLatitude(latitude.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String longitude} into a {@code Longitude}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code longitude} is invalid.
+     */
+    public static Longitude parseLongitude(String longitude) throws IllegalValueException {
+        requireNonNull(longitude);
+        String trimmedLongitude = longitude.trim();
+        if (!Longitude.isValidLongitude(trimmedLongitude)) {
+            throw new IllegalValueException(Longitude.MESSAGE_LONGITUDE_CONSTRAINTS);
+        }
+        return new Longitude(trimmedLongitude);
+    }
+
+    /**
+     * Parses a {@code Optional<String> longitude} into an {@code Optional<Longitude>} if {@code longitude} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Longitude> parseLongitude(Optional<String> longitude) throws IllegalValueException {
+        requireNonNull(longitude);
+        return longitude.isPresent() ? Optional.of(parseLongitude(longitude.get())) : Optional.empty();
     }
 
     /**

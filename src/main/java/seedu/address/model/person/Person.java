@@ -24,9 +24,9 @@ public class Person {
     private final Email email;
     private final Address address;
     private final Gender gender;
-//    private final Address age;
-//    private final Address lat;
-//    private final Address lon;
+    private final Age age;
+    private final Latitude latitude;
+    private final Longitude longitude;
 
     private final UniqueTagList tags;
 
@@ -35,13 +35,17 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender,
+                  Age age, Latitude latitude, Longitude longitude, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, gender, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.gender = gender;
+        this.age = age;
+        this.latitude = latitude;
+        this.longitude = longitude;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -64,6 +68,18 @@ public class Person {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public Latitude getLatitude() {
+        return latitude;
+    }
+
+    public Longitude getLongitude() {
+        return longitude;
+    }
+
+    public Age getAge() {
+        return age;
     }
 
     /**
@@ -141,5 +157,6 @@ public class Person {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 
 }

@@ -24,9 +24,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GENDER,
+                        PREFIX_AGE, PREFIX_LATITUDE, PREFIX_LONGITUDE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
+                PREFIX_AGE, PREFIX_LATITUDE, PREFIX_LONGITUDE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -37,9 +39,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
             Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER)).get();
+            Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE)).get();
+            Latitude latitude = ParserUtil.parseLatitude(argMultimap.getValue(PREFIX_LATITUDE)).get();
+            Longitude longitude = ParserUtil.parseLongitude(argMultimap.getValue(PREFIX_LONGITUDE)).get();
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, address, gender, tagList);
+            Person person = new Person(name, phone, email, address, gender, age, latitude, longitude, tagList);
 
             return new AddCommand(person);
         } catch (IllegalValueException ive) {

@@ -17,6 +17,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GENDER = "F";
+    public static final String DEFAULT_AGE = "23";
+    public static final String DEFAULT_LATITUDE = "1.406916";
+    public static final String DEFAULT_LONGITUDE = "103.769663";
     public static final String DEFAULT_TAGS = "friends";
 
     private Name name;
@@ -24,6 +27,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Gender gender;
+    private Age age;
+    private Latitude latitude;
+    private Longitude longitude;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -32,6 +38,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         gender = new Gender(DEFAULT_GENDER);
+        age = new Age(DEFAULT_AGE);
+        latitude = new Latitude(DEFAULT_LATITUDE);
+        longitude = new Longitude(DEFAULT_LONGITUDE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
 
@@ -44,6 +53,9 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         gender = personToCopy.getGender();
+        age = personToCopy.getAge();
+        latitude = personToCopy.getLatitude();
+        longitude = personToCopy.getLongitude();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -60,6 +72,30 @@ public class PersonBuilder {
      */
     public PersonBuilder withGender(String gender) {
         this.gender = new Gender(gender);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAge(String age) {
+        this.age = new Age(age);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Latitude} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLatitude(String latitude) {
+        this.latitude = new Latitude(latitude);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Longitude} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLongitude(String longitude) {
+        this.longitude = new Longitude(longitude);
         return this;
     }
 
@@ -96,7 +132,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, gender, tags);
+        return new Person(name, phone, email, address, gender, age, latitude, longitude, tags);
     }
 
 }
