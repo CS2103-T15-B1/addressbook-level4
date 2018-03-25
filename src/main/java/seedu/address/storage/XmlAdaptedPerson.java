@@ -102,14 +102,6 @@ public class XmlAdaptedPerson {
         }
         final Name name = new Name(this.name);
 
-        if (this.gender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
-        }
-        if (!Gender.isValidGender(this.gender)) {
-            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
-        }
-        final Gender gender = new Gender(this.gender);
-
         if (this.phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
