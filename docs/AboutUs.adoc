@@ -3,7 +3,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://github.com/CS2103JAN2018-T15-B1[T15-B1] team. +
+Retail Analytics was developed by the https://github.com/CS2103JAN2018-T15-B1[T15-B1] team. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -12,7 +12,9 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 === Siva Subbiah
 image::damithc.jpg[width="150", align="left"]
 
-Role: Model Developer
+Role:
+Model Developer
+Git expert
 
 '''
 

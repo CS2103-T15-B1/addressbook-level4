@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Retail Analytics - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -813,8 +813,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Siva*:
 
-* *Major*: Geographic visualization of customer locations, for the user to have a idea of where their customers are
-located so to better optimize their logistics
+* *Major*: Geographic visualization of customer locations, for the user to have a idea of where their customers are located so to better optimize their logistics
 * *Minor*: Add customer-specific variables to existing address book code.
 
 [appendix]
