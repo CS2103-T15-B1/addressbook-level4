@@ -23,6 +23,10 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Address address;
+    private final Gender gender;
+//    private final Address age;
+//    private final Address lat;
+//    private final Address lon;
 
     private final UniqueTagList tags;
 
@@ -31,12 +35,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, gender, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.gender = gender;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -55,6 +60,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     /**
@@ -113,7 +122,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, gender, tags);
     }
 
     @Override
@@ -126,6 +135,8 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Gender: ")
+                .append(getGender())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
