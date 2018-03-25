@@ -23,7 +23,7 @@ public class Longitude {
 
     public static final String MESSAGE_LONGITUDE_CONSTRAINTS =
             String.format("Latitude numbers must be a decimal value between %f and %f", MIN_LONGITUDE, MAX_LONGITUDE);
-    public static final String LONGITUDE_VALIDATION_REGEX = "-?\\d*\\.?\\d*";
+    public static final String LONGITUDE_VALIDATION_REGEX = "-?\\d+\\.?\\d*";
     private static final DecimalFormat format = new DecimalFormat("##.######");
 
     public final String value;

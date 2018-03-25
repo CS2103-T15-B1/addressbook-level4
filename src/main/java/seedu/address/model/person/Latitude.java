@@ -23,7 +23,7 @@ public class Latitude {
 
     public static final String MESSAGE_LATITUDE_CONSTRAINTS =
             String.format("Latitude numbers must be a decimal value between %f and %f", MIN_LATITUDE, MAX_LATITUDE);
-    public static final String LATITUDE_VALIDATION_REGEX = "\\d*\\.?\\d*";
+    public static final String LATITUDE_VALIDATION_REGEX = "-?\\d+\\.?\\d*";
     private static final DecimalFormat format = new DecimalFormat("##.######");
 
     public final String value;
