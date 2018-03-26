@@ -40,4 +40,19 @@ public class LongitudeTest {
         assertTrue(Longitude.isValidLongitude("180")); // integers
         assertTrue(Longitude.isValidLongitude("-180")); // negative integer
     }
+
+    @Test
+    public void getValue() {
+        Latitude latitude= new Latitude("1.234");
+        assertEquals("01.234000", latitude.getValue());
+
+        latitude= new Latitude("-1.234");
+        assertEquals("-01.234000", latitude.getValue());
+
+        latitude= new Latitude("0");
+        assertEquals("00.000000", latitude.getValue());
+
+        latitude= new Latitude("2");
+        assertEquals("02.000000", latitude.getValue());
+    }
 }

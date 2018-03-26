@@ -24,7 +24,7 @@ public class Longitude {
     public static final String MESSAGE_LONGITUDE_CONSTRAINTS =
             String.format("Latitude numbers must be a decimal value between %f and %f", MIN_LONGITUDE, MAX_LONGITUDE);
     public static final String LONGITUDE_VALIDATION_REGEX = "-?\\d+\\.?\\d*";
-    private static final DecimalFormat format = new DecimalFormat("##.######");
+    private static final DecimalFormat format = new DecimalFormat("000.000000");
 
     public final String value;
 
@@ -36,7 +36,7 @@ public class Longitude {
     public Longitude(String longitude) {
         requireNonNull(longitude);
         checkArgument(isValidLongitude(longitude), MESSAGE_LONGITUDE_CONSTRAINTS);
-        this.value = format.format(longitude);
+        this.value = format.format(Double.parseDouble(longitude));
     }
 
     /**
@@ -52,6 +52,10 @@ public class Longitude {
             }
         }
         return false;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override
