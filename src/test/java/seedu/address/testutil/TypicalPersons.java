@@ -21,8 +21,8 @@ public class TypicalPersons {
             .withLongitude("103.769663").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432").withGender("M").withAge("23").withLatitude("1.406916")
-            .withLongitude("103.769663").withTags("owesMoney", "friends").build();
+            .withEmail("johnd@example.com").withPhone("98765432").withGender("F").withAge("23").withLatitude("1.406916")
+            .withLongitude("103.769663").withTags("friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withGender("M").withAge("23").withLatitude("1.406916")
             .withLongitude("103.769663").build();
@@ -46,6 +46,18 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withGender("F").withAge("23").withLatitude("1.406916")
             .withLongitude("103.769663").build();
+
+    //Persons with same uneditable attributes ie Gender, Age, Latitude and Longitude
+    public static final Person JACOB = new PersonBuilder().withName("Jacob Becky").withPhone("9482224")
+            .withEmail("werner@example.com").withAddress("michegan ave").withGender("M").withAge("23").withLatitude("1.406916")
+            .withLongitude("103.769663").build();
+    public static final Person KALE = new PersonBuilder().withName("Kale Cook").withPhone("9482427")
+            .withEmail("lydia@example.com").withAddress("little tokyo").withGender("M").withAge("23").withLatitude("1.406916")
+            .withLongitude("103.769663").build();
+    public static final Person LEE = new PersonBuilder().withName("Lee Sim").withPhone("9482442")
+            .withEmail("anna@example.com").withAddress("4th street").withGender("M").withAge("23").withLatitude("1.406916")
+            .withLongitude("103.769663").build();
+
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -74,6 +86,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JACOB, KALE, LEE));
     }
 }

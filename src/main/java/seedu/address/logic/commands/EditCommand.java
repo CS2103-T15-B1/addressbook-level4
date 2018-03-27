@@ -47,7 +47,7 @@ public class EditCommand extends UndoableCommand {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    private Person personToEdit;
+    private Person  personToEdit;
     private Person editedPerson;
 
     /**
@@ -136,7 +136,6 @@ public class EditCommand extends UndoableCommand {
         private Phone phone;
         private Email email;
         private Address address;
-        private Gender gender;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -150,7 +149,6 @@ public class EditCommand extends UndoableCommand {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setGender(toCopy.gender);
             setTags(toCopy.tags);
         }
 
@@ -167,14 +165,6 @@ public class EditCommand extends UndoableCommand {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setGender(Gender gender) {
-            this.gender = gender;
-        }
-
-        public Optional<Gender> getGender() {
-            return Optional.ofNullable(gender);
         }
 
         public void setPhone(Phone phone) {
