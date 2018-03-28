@@ -36,6 +36,8 @@ public class RecommendCommand extends Command {
             "Parameters: INDEX (must be a positive integer)\n" +
             "Example:" + COMMAND_WORD + " 1";
 
+    private static final String ARFF_NAME = "data/Orders.arff";
+
     private final Index targetIndex;
 
     private Person personToRecommendFor;
