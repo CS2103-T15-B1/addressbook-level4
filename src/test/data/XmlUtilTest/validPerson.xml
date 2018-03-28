@@ -5,5 +5,8 @@
     <email>hans@example</email>
     <address>4th street</address>
     <gender isPrivate="false">M</gender>
+    <age>23</age>
+    <latitude>1.352222</latitude>
+    <longitude>103.981970</longitude>
     <tagged>friends</tagged>
 </person>

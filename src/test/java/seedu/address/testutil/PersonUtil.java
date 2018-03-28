@@ -26,7 +26,11 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_GENDER + person.getGender().toString() + " ");
+        sb.append(PREFIX_GENDER + person.getGender().value + " ");
+        sb.append(PREFIX_AGE + person.getAge().value + " ");
+        sb.append(PREFIX_LATITUDE + person.getLatitude().value + " ");
+        sb.append(PREFIX_LONGITUDE + person.getLongitude().value + " ");
+
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

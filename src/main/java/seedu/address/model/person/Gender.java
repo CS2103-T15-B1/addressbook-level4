@@ -14,14 +14,8 @@ public class Gender {
 
     public static final String MALE_SHORTFORM = "M";
     public static final String FEMALE_SHORTFORM = "F";
-    public static final String EMPTY_STRING = "";
 
-
-    private enum GenderType{
-        MALE, FEMALE
-    }
-
-    private GenderType gender;
+    public String value;
 
     /**
      * Constructs a {@code Gender}.
@@ -35,11 +29,13 @@ public class Gender {
     }
 
     private void setGender(String gender) {
+        assert isValidGender(gender);
+
         String genderUpperCase = gender.toUpperCase();
         if(genderUpperCase.equals(MALE_SHORTFORM)){
-            this.gender = GenderType.MALE;
+            value = MALE_SHORTFORM;
         } else if(genderUpperCase.equals(FEMALE_SHORTFORM)){
-            this.gender = GenderType.FEMALE;
+            value = FEMALE_SHORTFORM;
         }
     }
 
@@ -54,25 +50,19 @@ public class Gender {
 
     @Override
     public String toString() {
-        if (gender.equals(GenderType.MALE)){
-            return MALE_SHORTFORM;
-        } else if (gender.equals(GenderType.FEMALE)){
-            return FEMALE_SHORTFORM;
-        }else{
-            return EMPTY_STRING;
-        }
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Gender // instanceof handles nulls
-                && this.gender.equals(((Gender) other).gender)); // state check
+                && this.value.equals(((Gender) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return gender.hashCode();
+        return value.hashCode();
     }
 
 }

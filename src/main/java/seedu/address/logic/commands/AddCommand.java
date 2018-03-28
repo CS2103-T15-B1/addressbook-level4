@@ -22,8 +22,8 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE + "AGE "
-            + PREFIX_LAT + "LAT "
-            + PREFIX_LON + "LON "
+            + PREFIX_LATITUDE + "LAT "
+            + PREFIX_LONGITUDE + "LON "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -32,8 +32,8 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE + "23 "
-            + PREFIX_LAT + "1.2345 "
-            + PREFIX_LON + "1.2345 "
+            + PREFIX_LATITUDE + "1.339160 "
+            + PREFIX_LONGITUDE + "103.745166 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

@@ -32,6 +32,10 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
+      <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
+      <Label fx:id="latitude" styleClass="cell_small_label" text="\$latitude" />
+      <Label fx:id="longitude" styleClass="cell_small_label" text="\$longitude" />
+
     </VBox>
   </GridPane>
 </HBox>

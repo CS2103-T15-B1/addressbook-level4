@@ -7,6 +7,9 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <gender isPrivate="false">M</gender>
+        <age isPrivate="false">23</age>
+        <latitude isPrivate="false">1.339160</latitude>
+        <longitude isPrivate="false">103.745166</longitude>
     </persons>
     <!-- Person with invalid phone field -->
     <persons>
@@ -15,5 +18,8 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <gender isPrivate="false">M</gender>
+        <age isPrivate="false">23</age>
+        <latitude isPrivate="false">1.339160</latitude>
+        <longitude isPrivate="false">103.745166</longitude>
     </persons>
 </addressbook>

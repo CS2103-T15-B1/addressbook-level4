@@ -47,7 +47,7 @@ public class EditCommand extends UndoableCommand {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    private Person personToEdit;
+    private Person  personToEdit;
     private Person editedPerson;
 
     /**
@@ -99,9 +99,13 @@ public class EditCommand extends UndoableCommand {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Gender updatedGender = personToEdit.getGender();// edit command does not allow editing gender
+        Age updatedAge = personToEdit.getAge();// edit command does not allow editing age
+        Latitude updatedLatitude = personToEdit.getLatitude();// edit command does not allow editing latitude
+        Longitude updatedLongitude = personToEdit.getLongitude();// edit command does not allow editing longitude
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedGender, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedGender,
+                updatedAge, updatedLatitude, updatedLongitude, updatedTags);
     }
 
     @Override
@@ -132,7 +136,6 @@ public class EditCommand extends UndoableCommand {
         private Phone phone;
         private Email email;
         private Address address;
-        private Gender gender;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -146,7 +149,6 @@ public class EditCommand extends UndoableCommand {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setGender(toCopy.gender);
             setTags(toCopy.tags);
         }
 
@@ -163,14 +165,6 @@ public class EditCommand extends UndoableCommand {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setGender(Gender gender) {
-            this.gender = gender;
-        }
-
-        public Optional<Gender> getGender() {
-            return Optional.ofNullable(gender);
         }
 
         public void setPhone(Phone phone) {

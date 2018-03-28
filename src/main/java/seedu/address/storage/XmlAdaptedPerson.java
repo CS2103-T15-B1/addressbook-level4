@@ -29,6 +29,12 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String gender;
+    @XmlElement(required = true)
+    private String age;
+    @XmlElement(required = true)
+    private String latitude;
+    @XmlElement(required = true)
+    private String longitude;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -42,12 +48,16 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String gender, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String gender,
+                            String age, String latitude, String longitude, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.gender = gender;
+        this.age = age;
+        this.latitude = latitude;
+        this.longitude = longitude;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -63,7 +73,10 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        gender = source.getGender().toString();
+        gender = source.getGender().value;
+        age =source.getAge().value;
+        latitude = source.getLatitude().value;
+        longitude = source.getLongitude().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -89,14 +102,6 @@ public class XmlAdaptedPerson {
         }
         final Name name = new Name(this.name);
 
-        if (this.gender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
-        }
-        if (!Gender.isValidGender(this.gender)) {
-            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
-        }
-        final Gender gender = new Gender(this.gender);
-
         if (this.phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -121,8 +126,40 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
+        if (this.gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(this.gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
+        }
+        final Gender gender = new Gender(this.gender);
+
+        if (this.age == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+        }
+        if (!Age.isValidAge(this.age)) {
+            throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
+        }
+        final Age age = new Age(this.age);
+
+        if (this.latitude == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Latitude.class.getSimpleName()));
+        }
+        if (!Latitude.isValidLatitude(this.latitude)) {
+            throw new IllegalValueException(Latitude.MESSAGE_LATITUDE_CONSTRAINTS);
+        }
+        final Latitude latitude = new Latitude(this.latitude);
+
+        if (this.longitude == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Longitude.class.getSimpleName()));
+        }
+        if (!Longitude.isValidLongitude(this.longitude)) {
+            throw new IllegalValueException(Longitude.MESSAGE_LONGITUDE_CONSTRAINTS);
+        }
+        final Longitude longitude = new Longitude(this.longitude);
+
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address,gender, tags);
+        return new Person(name, phone, email, address,gender, age, latitude, longitude, tags);
     }
 
     @Override
@@ -141,6 +178,9 @@ public class XmlAdaptedPerson {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(gender, otherPerson.gender)
+                && Objects.equals(age, otherPerson.age)
+                && Objects.equals(latitude, otherPerson.latitude)
+                && Objects.equals(longitude, otherPerson.longitude)
                 && tagged.equals(otherPerson.tagged);
     }
 }
