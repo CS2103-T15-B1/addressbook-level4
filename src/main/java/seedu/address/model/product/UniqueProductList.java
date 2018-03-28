@@ -24,6 +24,32 @@ public class UniqueProductList implements Iterable<Product> {
 
     private final ObservableList<Product> internalList = FXCollections.observableArrayList();
 
+    public boolean contains(Product toCheck) {
+        requireNonNull(toCheck);
+        return internalList.contains(toCheck);
+    }
+
+    public void add(Product toAdd) throws DuplicateProductException {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateProductException();
+        }
+        internalList.add(toAdd);
+    }
+
+    public void setProducts(UniqueProductList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    public void setProducts(List<Product> products) throws DuplicateProductException{
+        requireAllNonNull(products);
+        final UniqueProductList replacement = new UniqueProductList();
+        for (final Product product : products) {
+            replacement.add(product);
+        }
+        setProducts(replacement);
+    }
+
     /**
      * Returns true if the list contains an equivalent product as the given argument.
      */
