@@ -11,7 +11,7 @@ public class RecommendCommand extends Command {
 
     public static final String COMMAND_WORD = "recommend";
 
-    public static final String MESSAGE_SUCCESS = "Recommended";
+    public static final String MESSAGE_SUCCESS = "Recommendations for: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the products most likely to be bought by the " +
             "person identified by the index number used in the last person listing.\n" +
@@ -19,6 +19,8 @@ public class RecommendCommand extends Command {
             "Example:" + COMMAND_WORD + " 1";
 
     private final Index targetIndex;
+
+    private Person personToRecommendFor;
 
     public RecommendCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -28,11 +30,12 @@ public class RecommendCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        personToRecommendFor = lastShownList.get(targetIndex.getZeroBased());
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS + " " + String.valueOf(targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personToRecommendFor.getName()));
     }
 }
