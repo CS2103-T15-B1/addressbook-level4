@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -81,6 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
+
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
@@ -94,6 +96,18 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new AssertionError("AddressBooks should not have duplicate persons");
         } catch (DuplicateProductException ep) {
             throw new AssertionError("AddressBooks should not have duplicate products");
+        }
+
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setOrders(newData.getOrderList());
+        } catch (DuplicateOrderException doe) {
+
         }
     }
 
