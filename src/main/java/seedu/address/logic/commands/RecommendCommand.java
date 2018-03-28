@@ -38,6 +38,8 @@ public class RecommendCommand extends Command {
 
     private final Index targetIndex;
 
+    private Person personToRecommendFor;
+
     public RecommendCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
