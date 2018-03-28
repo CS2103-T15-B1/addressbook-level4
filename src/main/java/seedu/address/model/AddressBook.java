@@ -13,12 +13,14 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.UniqueProductList;
+import seedu.address.model.product.exceptions.DuplicateProductException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -63,6 +65,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setProducts(List<Product> products) throws DuplicateProductException {
+        this.products.setProducts(products);
+    }
+
+    public void setOrders(List<Order> orders) throws DuplicateOrderException {
+        this.orders.setOrders(orders);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -73,6 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
+
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
@@ -81,6 +92,18 @@ public class AddressBook implements ReadOnlyAddressBook {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
+        }
+
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setOrders(newData.getOrderList());
+        } catch (DuplicateOrderException doe) {
+
         }
     }
 
