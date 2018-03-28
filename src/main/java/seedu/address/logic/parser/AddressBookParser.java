@@ -83,7 +83,7 @@ public class AddressBookParser {
             return new UndoCommand();
 
         case RecommendCommand.COMMAND_WORD:
-            return new RecommendCommand();
+            return new RecommendCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
