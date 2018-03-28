@@ -110,6 +110,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         } catch (DuplicateOrderException doe) {
 
         }
+
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setOrders(newData.getOrderList());
+        } catch (DuplicateOrderException doe) {
+
+        }
     }
 
     //// person-level operations
