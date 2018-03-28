@@ -1,6 +1,10 @@
 package seedu.address.logic.recommender;
 
+import seedu.address.model.person.Person;
 import weka.classifiers.Classifier;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.filters.unsupervised.instance.RemoveWithValues;
 
@@ -20,6 +24,7 @@ public class Recommender {
     private static final String MESSAGE_ERROR_READING_ARFF = "Error reading ARFF, check file name and format.";
     private static final String MESSAGE_CANNOT_CLOSE_READER = "Cannot close ARFF reader, reader still in use.";
     private static final String MESSAGE_BAD_REMOVER_SETTINGS = "{@code WEKA_REMOVER_SETTINGS} has invalid value.";
+    private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "Cannot classify instance.";
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
@@ -39,19 +44,42 @@ public class Recommender {
         arffPath = path;
     }
 
-    public void getRecommendations() throws Exception {
-        // Read list of users
-        Instances test = new Instances(new BufferedReader(new FileReader("RecInput.arff")));
-        ArrayList<RecommenderProductDecision> ProductRecPerPerson = new ArrayList<>();
+    public String getRecommendations(Person person) {
+        Instance personInstance = parsePerson(person);
+        ArrayList<RecommenderProductDecision> ProductRecOfAPerson = new ArrayList<>();
         for (int i = 0; i < orders.classAttribute().numValues(); i += 2) {
             String currentProductPredicted = orders.classAttribute().value(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
-            RecommenderProductDecision decision = new RecommenderProductDecision(
-                    currentProductPredicted, classifier.distributionForInstance(test.instance(0))[0]);
-            ProductRecPerPerson.add(decision);
+            try {
+                RecommenderProductDecision decision = new RecommenderProductDecision(
+                        currentProductPredicted, classifier.distributionForInstance(personInstance)[0]);
+                ProductRecOfAPerson.add(decision);
+            } catch (Exception e) {
+                System.out.println(MESSAGE_CANNOT_CLASSIFY_INSTANCE);
+            }
         }
-        Collections.sort(ProductRecPerPerson);
-        System.out.println(Arrays.toString(ProductRecPerPerson.toArray()));
+        Collections.sort(ProductRecOfAPerson);
+        return Arrays.toString(ProductRecOfAPerson.toArray());
+    }
+
+    private Instance parsePerson(Person person) {
+
+        ArrayList<String> genderNominals = new ArrayList<String>(Arrays.asList("m", "f"));
+        Attribute ageAttribute = new Attribute("age");
+        Attribute genderAttribute = new Attribute("gender", genderNominals);
+        Attribute classAttribute = new Attribute("class", new ArrayList<>());
+
+        ArrayList<Attribute> attributes = new ArrayList<Attribute>(
+                Arrays.asList(ageAttribute, genderAttribute, classAttribute));
+
+        Instances persons = new Instances("persons", attributes, 1);
+
+        Instance personInstance = new DenseInstance(3);
+        personInstance.setDataset(persons);
+        personInstance.setValue(0, 16);
+        personInstance.setValue(1, "m");
+
+        return personInstance;
     }
 
     private void parseOrdersFromFile() {
