@@ -1,11 +1,16 @@
 package seedu.address.model.money;
 
+import java.text.NumberFormat;
 import java.util.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
+import static java.util.Objects.requireNonNull;
+
 import java.math.RoundingMode;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.money.exceptions.MismatchedCurrencyException;
 import seedu.address.model.money.exceptions.ObjectNotMoneyException;
 /**
@@ -19,7 +24,7 @@ import seedu.address.model.money.exceptions.ObjectNotMoneyException;
  */
 public class Money implements Comparable<Money>, Serializable {
 
-    public static final String MONEY_VALIDATION_REGEX = "\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX = "(\\p{Sc})?\\s*\\d+(\\.\\d+)?";
 
     public static final String MESSAGE_MONEY_CONSTRAINTS =
             String.format("price should only contains digits and cannot be negative");
@@ -41,18 +46,18 @@ public class Money implements Comparable<Money>, Serializable {
      */
     private final RoundingMode fRounding;
 
-    private static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
+    public static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
 
     /**
      * The default currency to be used if no currency is passed to the constructor.
      * To be initialized by the static init().
      */
-    private static Currency DEFAULT_CURRENCY = Currency.getInstance("SGD");
+    public static Currency DEFAULT_CURRENCY = Currency.getInstance("SGD");
 
     /**
      * The default rounding style to be used if no currency is passed to the constructor.
      */
-    private static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
+    public static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
     private int fHashCode;
     private static final int HASH_SEED = 23;
@@ -122,6 +127,16 @@ public class Money implements Comparable<Money>, Serializable {
      */
     public static boolean isValidMoney(String test) {
         return test.matches(MONEY_VALIDATION_REGEX);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code price} is invalid.
+     */
+    public static Money parsePrice(String price) throws IllegalValueException {
+        return ParserUtil.parsePrice(price);
     }
 
     /**
