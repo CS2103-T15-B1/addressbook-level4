@@ -76,8 +76,8 @@ public class Recommender {
 
         Instance personInstance = new DenseInstance(3);
         personInstance.setDataset(persons);
-        personInstance.setValue(0, 16);
-        personInstance.setValue(1, "m");
+        personInstance.setValue(0, Double.parseDouble(person.getAge().value));
+        personInstance.setValue(1, person.getGender().value.toLowerCase());
 
         return personInstance;
     }
