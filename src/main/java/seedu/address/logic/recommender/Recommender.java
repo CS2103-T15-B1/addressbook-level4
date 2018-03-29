@@ -18,13 +18,17 @@ public class Recommender {
 
     private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "Cannot classify instance.";
 
-    public String getRecommendations(Instances orders, Person person, HashMap<String, Classifier> classifierDict) {
+    /**
+     * Determines the likelihood of a person wanting to buy any product, assuming the product has a classifier.
+     * @return A string in the following format: [<product id, probability of buying>, <...>, ...].
+     */
+    public String getRecommendations(ArrayList<String> productsWithClassifiers, Person person, HashMap<String, Classifier> classifierDict) {
 
         Instance personInstance = parsePerson(person);
         ArrayList<Recommender.RecommenderProductDecision> ProductRecOfAPerson = new ArrayList<>();
 
-        for (int i = 0; i < orders.classAttribute().numValues(); i += 2) {
-            String currentProductPredicted = orders.classAttribute().value(i);
+        for (int i = 0; i < productsWithClassifiers.size(); i += 2) {
+            String currentProductPredicted = productsWithClassifiers.get(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
             try {
                 Recommender.RecommenderProductDecision decision = new Recommender.RecommenderProductDecision(
@@ -39,6 +43,9 @@ public class Recommender {
         return Arrays.toString(ProductRecOfAPerson.toArray());
     }
 
+    /**
+     * Extracts the feature data from a {@code person} and turns them into a {@code DenseInstance} for classification.
+     */
     private Instance parsePerson(Person person) {
 
         ArrayList<String> genderNominals = new ArrayList<String>(Arrays.asList("m", "f"));
@@ -59,6 +66,9 @@ public class Recommender {
         return personInstance;
     }
 
+    /**
+     * Represents the confidence in the decision of whether to buy a given product, referenced by its {@code productId}.
+     */
     private final class RecommenderProductDecision implements Comparable<RecommenderProductDecision> {
         private String productId;
         private double buyProb;
@@ -76,6 +86,9 @@ public class Recommender {
             return buyProb;
         }
 
+        /**
+         * Used in sorting the recommendations so only the most confident recommendations are presented.
+         */
         @Override
         public int compareTo(RecommenderProductDecision other) {
             return compare(other.getBuyProb(), buyProb);
