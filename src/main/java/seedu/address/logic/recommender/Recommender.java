@@ -27,7 +27,7 @@ public class Recommender {
         Instance personInstance = parsePerson(person);
         ArrayList<Recommender.RecommenderProductDecision> ProductRecOfAPerson = new ArrayList<>();
 
-        for (int i = 0; i < productsWithClassifiers.size(); i += 2) {
+        for (int i = 0; i < productsWithClassifiers.size(); i++) {
             String currentProductPredicted = productsWithClassifiers.get(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
             try {
