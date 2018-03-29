@@ -1,7 +1,7 @@
 package seedu.address.model.product;
 
 
-import java.util.Locale;
+import seedu.address.model.money.Money;
 
 /**
  * presents the product offered in the retail store.
@@ -10,9 +10,9 @@ import java.util.Locale;
 public class Product {
     private static int productCounter = 0;
 
-    private final String name;
-    private final int price;
     private final int id;
+    private final ProductName name;
+    private final Money price;
     private Category category;
 
     /**
@@ -21,16 +21,16 @@ public class Product {
      * @param price
      * @param category category of the product.
      */
-    public Product(String name, int price, Category category) {
+    public Product(ProductName name, Money price, Category category) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.id = ++productCounter;
     }
 
-    public String getName() { return name; }
+    public ProductName getName() { return name; }
 
-    public int getPrice() { return price; }
+    public Money getPrice() { return price; }
 
     public Category getCategory() { return category; }
 

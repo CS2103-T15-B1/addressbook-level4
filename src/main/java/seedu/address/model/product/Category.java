@@ -6,9 +6,20 @@ package seedu.address.model.product;
  */
 public class Category {
     public final String categoryName;
+    public static final String CATEGORY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    public static final String MESSAGE_CATEGORY_CONSTRAINTS =
+            "Category should only contain alphanumeric characters and spaces, and it should not be blank";
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    /**
+     * Returns true if a given string is a valid category.
+     */
+    public static boolean isValidCategory(String test) {
+        return test.matches(CATEGORY_VALIDATION_REGEX);
     }
 
     @Override

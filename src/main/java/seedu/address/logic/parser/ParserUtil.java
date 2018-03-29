@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,7 +11,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.money.Money;
 import seedu.address.model.person.*;
+import seedu.address.model.product.Category;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -231,6 +236,84 @@ public class ParserUtil {
         requireNonNull(email);
         return email.isPresent() ? Optional.of(parseEmail(email.get())) : Optional.empty();
     }
+
+    /// product-level
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code name} is invalid.
+     */
+    public static ProductName parseProductName(String name) throws IllegalValueException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!ProductName.isValidProductName(trimmedName)) {
+            throw new IllegalValueException(ProductName.MESSAGE_PRODUCT_NAME_CONSTRAINTS);
+        }
+        return new ProductName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<ProductName> parseProductName(Optional<String> name) throws IllegalValueException {
+        requireNonNull(name);
+        return name.isPresent() ? Optional.of(parseProductName(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code price} is invalid.
+     */
+    public static Money parsePrice(String price) throws IllegalValueException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Money.isValidMoney(trimmedPrice)) {
+            throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return new Money(new BigDecimal(trimmedPrice));
+    }
+
+    /**
+     * Parses a {@code Optional<String> price} into an {@code Optional<price>} if {@code price} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Money> parsePrice(Optional<String> price) throws IllegalValueException {
+        requireNonNull(price);
+        return price.isPresent() ? Optional.of(parsePrice(price.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String category} into a {@code category}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code category} is invalid.
+     */
+    public static Category parseCategory(String category) throws IllegalValueException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new IllegalValueException(Category.MESSAGE_CATEGORY_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses a {@code Optional<String> category} into an {@code Optional<category>} if {@code category} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Category> parseCategory(Optional<String> category) throws IllegalValueException {
+        requireNonNull(category);
+        return category.isPresent() ? Optional.of(parseCategory(category.get())) : Optional.empty();
+    }
+
+
+
+
+    /// tag-level
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
