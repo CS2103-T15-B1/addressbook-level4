@@ -19,6 +19,11 @@ import seedu.address.model.money.exceptions.ObjectNotMoneyException;
  */
 public class Money implements Comparable<Money>, Serializable {
 
+    public static final String MONEY_VALIDATION_REGEX = "\\d+(\\.\\d+)?";
+
+    public static final String MESSAGE_MONEY_CONSTRAINTS =
+            String.format("price should only contains digits and cannot be negative");
+
     /**
      * The money amount.
      * Never null.
@@ -36,9 +41,6 @@ public class Money implements Comparable<Money>, Serializable {
      */
     private final RoundingMode fRounding;
 
-    /**
-     *
-     */
     private static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
 
     /**
@@ -114,6 +116,13 @@ public class Money implements Comparable<Money>, Serializable {
 
     /** Return the rounding style passed to the constructor, or the default rounding style. */
     public RoundingMode getRoundingStyle() { return fRounding; }
+
+    /**
+     * Returns true if a given string is a valid Money.
+     */
+    public static boolean isValidMoney(String test) {
+        return test.matches(MONEY_VALIDATION_REGEX);
+    }
 
     /**
      * Return true only if aThat Money has the same currency
