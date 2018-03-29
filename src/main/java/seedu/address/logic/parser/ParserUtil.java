@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.money.Money;
+import seedu.address.model.order.SubOrder;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
@@ -257,5 +256,40 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String subOrder} into an actual {@code SubOrder}.
+     *
+     * @throws IllegalValueException if the given {@code subOrder} is invalid.
+     */
+    public static SubOrder parseSubOrder(String subOrder) throws IllegalValueException {
+        //TODO add catch exception for money
+
+        requireNonNull(subOrder);
+        String trimmed = subOrder.trim();
+        String[] components = trimmed.split("\\w");
+        if(components.length != 3)
+            throw new IllegalValueException(SubOrder.MESSAGE_SUBORDER_CONSTRAINTS);
+        try {
+            int productId = Integer.parseInt(components[0]);
+            int numProduct = Integer.parseInt(components[1]);
+            Money productPrice = new Money(components[2]);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(SubOrder.MESSAGE_SUBORDER_CONSTRAINTS);
+        }
+        return new SubOrder(productId, numProduct, productPrice);
+    }
+
+    /**
+     * Parses {@code Collection<String> subOrders} into a {@code List<SubOrder>}
+     */
+    public static List<SubOrder> parseSubOrders(Collection<String> subOrders) throws IllegalValueException {
+        requireNonNull(subOrders);
+        final List<SubOrder> subOrderList = new ArrayList<>();
+        for (String subOrder : subOrders) {
+            subOrderList.add(parseSubOrder(subOrder));
+        }
+        return subOrderList;
     }
 }

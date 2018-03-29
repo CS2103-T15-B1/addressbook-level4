@@ -13,6 +13,10 @@ public class SubOrder {
     private final int numProduct;
     private final Money productPrice;
 
+    public static final String MESSAGE_SUBORDER_CONSTRAINTS =
+            "Sub-Orders needs to have three elements, first two of which are integers representing product ID and"+
+            " number of that product bought, and the price of the product as purchased.";
+
     /** Every field must be present and non-null. */
     public SubOrder(int id, int num, Money price) {
         productID = id;
