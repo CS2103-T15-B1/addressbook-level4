@@ -12,6 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -98,6 +101,21 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.updatePerson(target, editedPerson);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public synchronized void addOrder(Order order) throws DuplicateOrderException {
+        addressBook.addOrder(order);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateOrder(Order target, Order editedOrder)
+        throws DuplicateOrderException, OrderNotFoundException {
+        requireAllNonNull(target, editedOrder);
+
+        addressBook.updateOrder(target, editedOrder);
         indicateAddressBookChanged();
     }
 
