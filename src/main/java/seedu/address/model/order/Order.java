@@ -1,6 +1,5 @@
 package seedu.address.model.order;
 
-import seedu.address.model.util.Triple;
 import seedu.address.model.money.Money;
 
 import java.time.LocalDateTime;
@@ -17,14 +16,14 @@ public class Order {
     private final String personId;
     private final int id;
     private final LocalDateTime time;
-    private final List<Triple<Integer, Integer, Money>> orderList;
+    private final List<SubOrder> orderList;
 
 
     /** Every field must be present and not null.
      * @param personId id of person (customer) who made the order. Can be thought of as a foreign key
      * @param orderList ArrayList of triple(product id, number bought, price) to represent the order
      */
-    public Order(String personId, List<Triple<Integer, Integer, Money>> orderList) {
+    public Order(String personId, List<SubOrder> orderList) {
         this.id = ++orderCounter;
         this.time = LocalDateTime.now();
         this.personId = personId;
@@ -56,7 +55,7 @@ public class Order {
      * Gets the details of the products and prices for an order.
      * @return List of (Product ID, Number bought, Price)
      */
-    public List<Triple<Integer, Integer, Money>> getOrderList() {
+    public List<SubOrder> getOrderList() {
         return orderList;
     }
 
@@ -66,11 +65,9 @@ public class Order {
      */
     public Money getOrderTotal() {
         Money total = new Money();
-        for(Triple<Integer, Integer, Money> product : orderList) {
-            Money price = product.getThird();
-            int numItems = product.getSecond();
-            Money itemTotal = price.times(numItems);
-            total = total.plus(itemTotal);
+        for(SubOrder subOrder : orderList) {
+            Money subOrderPrice = subOrder.getTotalPrice();
+            total = total.plus(subOrderPrice);
         }
         return total;
     }
@@ -96,7 +93,7 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Triple<Integer, Integer, Money> product : orderList) {
+        for(SubOrder product : orderList) {
             // TODO get product by id, and convert to string
         }
         return sb.toString();
