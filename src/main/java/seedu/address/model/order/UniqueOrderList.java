@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +36,20 @@ public class UniqueOrderList implements Iterable<Order> {
     }
 
     /**
+     * Removes the equivalent order from the list.
+     *
+     * @throws OrderNotFoundException if no such person could be found in the list.
+     */
+    public boolean remove(Order toRemove) throws OrderNotFoundException {
+        requireNonNull(toRemove);
+        final boolean orderFoundAndDeleted = internalList.remove(toRemove);
+        if (!orderFoundAndDeleted) {
+            throw new OrderNotFoundException();
+        }
+        return orderFoundAndDeleted;
+    }
+
+    /**
      * Sets an order list to a new one.
      * @param replacement the new list
      */
@@ -53,6 +68,28 @@ public class UniqueOrderList implements Iterable<Order> {
             replacement.add(order);
         }
         setOrders(replacement);
+    }
+
+    /**
+     * Replaces the order {@code target} in the list with {@code editedOrder}.
+     *
+     * @throws DuplicateOrderException if the replacement is equivalent to another existing order in the list.
+     * @throws OrderNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setOrder(Order target, Order editedPerson)
+            throws DuplicateOrderException, OrderNotFoundException {
+        requireNonNull(editedPerson);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new OrderNotFoundException();
+        }
+
+        if (!target.equals(editedPerson) && internalList.contains(editedPerson)) {
+            throw new DuplicateOrderException();
+        }
+
+        internalList.set(index, editedPerson);
     }
 
     /**
