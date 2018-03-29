@@ -15,11 +15,18 @@ public class UniqueOrderList implements Iterable<Order> {
 
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();
 
+    /**
+     * Returns true if the list contains an order
+     */
     public boolean contains(Order toCheck) {
         requireNonNull(toCheck);
         return internalList.contains(toCheck);
     }
 
+    /**
+     * Adds a new order to the list
+     * @param toAdd unique new order to be added. It shouldn't exist in list.
+     */
     public void add(Order toAdd) throws DuplicateOrderException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -28,10 +35,18 @@ public class UniqueOrderList implements Iterable<Order> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Sets an order list to a new one.
+     * @param replacement the new list
+     */
     public void setOrders(UniqueOrderList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
+    /**
+     * Creates a new order list based on a list of distinct order objects.
+     * @param orders list of orders
+     */
     public void setOrders(List<Order> orders) throws DuplicateOrderException {
         requireAllNonNull(orders);
         final UniqueOrderList replacement = new UniqueOrderList();
