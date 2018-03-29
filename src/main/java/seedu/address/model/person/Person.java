@@ -110,6 +110,10 @@ public class Person {
         return ordersSinceTime;
     }
 
+    /**
+     * Get time of most recent order
+     * @return last order time
+     */
     public LocalDateTime getLastOrderTime() {
         Order lastOrder = orders.get(orders.size() - 1);
         return lastOrder.getTime();
