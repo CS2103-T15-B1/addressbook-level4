@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -184,6 +185,43 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
+
+    //// order-level operations
+
+    /**
+     * Adds new order to address book.
+     * @throws DuplicateOrderException if this order already exists.
+     */
+    public void addOrder(Order o) throws DuplicateOrderException {
+        orders.add(o);
+    }
+
+    /**
+     * Replaces the given order {@code target} in the list with {@code editedOrder}.
+     *
+     * @throws DuplicateOrderException if updating the order's details causes the order to be equivalent to
+     *      another existing order.
+     * @throws OrderNotFoundException if {@code target} could not be found.
+     */
+    public void updateOrder(Order target, Order editedOrder)
+            throws DuplicateOrderException, OrderNotFoundException {
+        requireNonNull(editedOrder);
+
+        orders.setOrder(target, editedOrder);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws OrderNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeOrder(Order key) throws OrderNotFoundException {
+        if(orders.remove(key)) {
+            return true;
+        } else {
+            throw new OrderNotFoundException();
+        }
+    }
+
 
     //// util methods
 
