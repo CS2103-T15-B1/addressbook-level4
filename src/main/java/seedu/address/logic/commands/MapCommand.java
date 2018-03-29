@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.net.URL;
 import java.util.List;
 
+import seedu.address.MainApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -9,23 +11,22 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
+import static seedu.address.ui.BrowserPanel.SEARCH_PAGE_URL;
+import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
+
 /**
- * MAPs a person identified using it's last displayed index from the address book.
+ * Displays the geographic distribution of selected customers in Retail Analytics.
  */
 public class MapCommand extends Command {
 
     public static final String COMMAND_WORD = "map";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the geographic distribution of all customers in Retail Analytics.\n"
+            + ": Displays the geographic distribution of selected customers in Retail Analytics.\n"
             + "Parameters: QUERY (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " all";
 
-
-
-
-
-    public static final String MESSAGE_MAP_PERSON_SUCCESS = "Number of customers displayed: %1$s";
+    public static final String MESSAGE_MAP_PERSON_SUCCESS = "Number of customers displayed on map: %1$s";
 
     private final String query;
 
@@ -34,15 +35,9 @@ public class MapCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
-
+    public CommandResult execute() {
         List<Person> lastShownList = model.getFilteredPersonList();
-
-//        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-//        }
-//
-//        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+//        loadPersonPage(TypicalPersons.Alice);
         return new CommandResult(String.format(MESSAGE_MAP_PERSON_SUCCESS, lastShownList.size()));
 
     }
