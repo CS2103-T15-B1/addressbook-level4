@@ -59,6 +59,11 @@ public class Money implements Comparable<Money>, Serializable {
      */
     public static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
+    /**
+     * String representation for Money class.
+     */
+    public final String value;
+
     private int fHashCode;
     private static final int HASH_SEED = 23;
     private static final int HASH_FACTOR = 37;
@@ -77,6 +82,7 @@ public class Money implements Comparable<Money>, Serializable {
         fAmount = aAmount;
         fCurrency = aCurrency;
         fRounding = aRoundingStyle;
+        value = fCurrency.getSymbol() + " " + fAmount.toPlainString();
         validateState();
     }
 
@@ -301,9 +307,7 @@ public class Money implements Comparable<Money>, Serializable {
      * The return value uses the default locale/currency, and will not
      * always be suitable for display to an end user.
      */
-    public String toString(){
-        return fAmount.toPlainString() + " " + fCurrency.getSymbol();
-    }
+    public String toString(){ return value; }
 
     /**
      * This equal is sensitive to scale.

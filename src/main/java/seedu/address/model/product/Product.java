@@ -28,6 +28,8 @@ public class Product {
         this.id = ++productCounter;
     }
 
+    public int getId() { return id; }
+
     public ProductName getName() { return name; }
 
     public Money getPrice() { return price; }
