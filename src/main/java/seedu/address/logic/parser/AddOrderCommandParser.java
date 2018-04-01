@@ -36,11 +36,11 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         try {
             //Note: We use email String as Order foreign key
             String email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get().toString();
+
             List<SubOrder> subOrderList =
                     ParserUtil.parseSubOrders(argMultimap.getAllValues(PREFIX_ORDER));
 
             Order order = new Order(email, subOrderList);
-
             return new AddOrderCommand(order);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
