@@ -30,12 +30,6 @@ public interface ReadOnlyAddressBook {
     ObservableList<Tag> getTagList();
 
     /**
-     * Returns an unmodifiable view of the products list
-     * This list will not contain any duplicate products.
-     */
-    ObservableList<Product> getProductList();
-
-    /**
      * Returns an unmodifiable view of the orders list
      * This list will not contain any duplicate orders.
      */

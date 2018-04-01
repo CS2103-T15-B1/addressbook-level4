@@ -31,21 +31,6 @@ public class RecommendCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the products most likely to be bought by the " +
-            "person identified by the index number used in the last person listing.\n" +
-            "Parameters: INDEX (must be a positive integer)\n" +
-            "Example:" + COMMAND_WORD + " 1";
-
-    private static final String ARFF_NAME = "data/Orders.arff";
-
-    private final Index targetIndex;
-
-    private Person personToRecommendFor;
-
-    public RecommendCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
-    }
-
     @Override
     public CommandResult execute() throws CommandException {
 

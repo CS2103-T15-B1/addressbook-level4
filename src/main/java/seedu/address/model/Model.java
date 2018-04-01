@@ -35,11 +35,17 @@ public interface Model {
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
 
-    /** Deletes the given person. */
+    /** Deletes the given product. */
     void deleteProduct(Product target) throws ProductNotFoundException;
 
-    /** Adds the given person */
+    /** Adds the given product */
     void addProduct(Product product) throws DuplicateProductException;
+
+    /** Deletes the given order. */
+    //void deleteOrder(Order target) throws OrderNotFoundException;
+
+    /** Adds the given order */
+    void addOrder(Order product) throws DuplicateOrderException;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
