@@ -34,7 +34,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         }
 
         try {
-            //TODO decide on whether to use Email or String object as Key for Order
+            //Note: We use email String as Order foreign key
             String email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get().toString();
             List<SubOrder> subOrderList =
                     ParserUtil.parseSubOrders(argMultimap.getAllValues(PREFIX_ORDER));
