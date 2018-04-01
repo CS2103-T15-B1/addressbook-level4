@@ -9,6 +9,9 @@ import seedu.address.model.product.ProductName;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.*;
 
+/**
+ * JAXB-friendly version of the Product.
+ */
 public class XmlAdaptedProduct {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Product's %s field is missing!";
@@ -91,7 +94,7 @@ public class XmlAdaptedProduct {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedProduct)) {
             return false;
         }
 
