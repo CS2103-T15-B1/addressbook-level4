@@ -23,9 +23,8 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String PERSON_LOCATION_PAGE_URL = "PersonLocationPage.html";
-    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "SelectedPersonsLocationPage.html";
-//            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final String PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/PersonLocationPage.html?name=";
+    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/SelectedPersonsLocationPage.html";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -48,15 +47,15 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads location of person in Google Maps
      */
     private void loadPersonLocationPage(Person person) {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + PERSON_LOCATION_PAGE_URL);
-        loadPage(defaultPage.toExternalForm());
+        loadPage(PERSON_LOCATION_PAGE_URL + person.getName().fullName);
     }
     /**
      * Loads location of selected persons in Google Maps
      */
     private void loadSelectedPersonsLocationPage(List<Person> selectedPersons) {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
-        loadPage(defaultPage.toExternalForm());
+        loadPage(SELECTED_PERSON_LOCATION_PAGE_URL);
+//        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
+//        loadPage(defaultPage.toExternalForm());
     }
 
     public void loadPage(String url) {
