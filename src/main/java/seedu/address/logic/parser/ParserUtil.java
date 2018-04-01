@@ -324,9 +324,6 @@ public class ParserUtil {
         return category.isPresent() ? Optional.of(parseCategory(category.get())) : Optional.empty();
     }
 
-
-
-
     /// tag-level
 
     /**
