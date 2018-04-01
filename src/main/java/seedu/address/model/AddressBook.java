@@ -91,9 +91,12 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toList());
         List<Product> syncedProductList = newData.getProductList().stream()
                 .collect(Collectors.toList());
+        List<Order> syncedOrderList = newData.getOrderList().stream()
+                .collect(Collectors.toList());
 
         try {
             setPersons(syncedPersonList);
+            setProducts(syncedProductList);
             setProducts(syncedProductList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");

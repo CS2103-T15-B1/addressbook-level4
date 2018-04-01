@@ -32,6 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final AddressBook addressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Product> filteredProducts;
+    private FilteredList<Order> filteredOrders;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredProducts = new FilteredList<>(this.addressBook.getProductList());
+        filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
     }
 
     public ModelManager() {
@@ -112,8 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //TODO deleteOrder and uncomment implementation in super
 
-    //=========== Filtered Person List Accessors =============================================================
-
+    //=========== Filtered Person, product and Order List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code addressBook}
@@ -143,6 +144,22 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredProductList(Predicate<Product> predicate) {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Orders} backed by the internal list of
+     * {@code addressBook}
+     */
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        return FXCollections.unmodifiableObservableList(filteredOrders);
+    }
+
+    @Override
+    public void updateFilteredOrderList(Predicate<Order> predicate) {
+        requireNonNull(predicate);
+        filteredOrders.setPredicate(predicate);
     }
 
     @Override
