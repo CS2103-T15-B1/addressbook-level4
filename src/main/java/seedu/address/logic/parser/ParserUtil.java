@@ -364,7 +364,7 @@ public class ParserUtil {
     public static SubOrder parseSubOrder(String subOrder) throws IllegalValueException {
         requireNonNull(subOrder);
         String trimmed = subOrder.trim();
-        String[] components = trimmed.split("\\w");
+        String[] components = trimmed.split("\\s");
         int productId;
         int numProduct;
         Money productPrice;
@@ -373,7 +373,7 @@ public class ParserUtil {
         try {
             productId = Integer.parseInt(components[0]);
             numProduct = Integer.parseInt(components[1]);
-            productPrice = new Money();
+            productPrice = Money.parsePrice(components[2]);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(SubOrder.MESSAGE_SUBORDER_CONSTRAINTS);
         }

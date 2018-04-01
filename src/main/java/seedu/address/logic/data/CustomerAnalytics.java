@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 
 public class CustomerAnalytics extends Analytics {
+    // TODO rewrite
 //    /**
 //     * Orders person list by total spending across all orders, from smallest to largest
 //     * @param personList
