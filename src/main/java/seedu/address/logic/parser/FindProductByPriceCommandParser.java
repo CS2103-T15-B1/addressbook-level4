@@ -7,24 +7,26 @@ import seedu.address.model.money.Money;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 
 public class FindProductByPriceCommandParser implements Parser<FindProductByPriceCommand> {
 
     public FindProductByPriceCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CONDITION, PREFIX_PRICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_MIN_PRICE, PREFIX_MAX_PRICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CONDITION, PREFIX_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MIN_PRICE, PREFIX_MAX_PRICE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindProductByPriceCommand.MESSAGE_USAGE));
         }
 
         try {
-            Condition condition = ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION)).get();
-            Money price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE)).get();
+            Money minPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_MIN_PRICE)).get();
+            Money maxPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_MAX_PRICE)).get();
+
+            return new FindProductByPriceCommand(new ProductCostsBetweenPredicate(minPrice, maxPrice));
 
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
