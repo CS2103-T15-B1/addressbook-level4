@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindProductByCategoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductCategoryContainsKeywordsPredicate;
