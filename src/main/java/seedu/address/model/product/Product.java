@@ -56,8 +56,7 @@ public class Product {
 
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Name: ")
+        builder.append(" Name: ")
                 .append(getName())
                 .append(" Price: ")
                 .append(getPrice())
