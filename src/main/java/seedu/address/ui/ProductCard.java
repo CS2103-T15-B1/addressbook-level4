@@ -33,7 +33,7 @@ public class ProductCard extends UiPart<Region> {
     @FXML
     private Label price;
     @FXML
-    private Label category;
+    private FlowPane category;
 
     public ProductCard(Product product, int displayedIndex) {
         super(FXML);
@@ -41,7 +41,7 @@ public class ProductCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullProductName);
         price.setText(product.getPrice().value);
-        category.setText(product.getCategory().value);
+        category.getChildren().add(new Label(product.getCategory().value));
     }
 
     @Override
