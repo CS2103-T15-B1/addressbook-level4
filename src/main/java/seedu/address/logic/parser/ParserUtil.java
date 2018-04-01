@@ -274,11 +274,13 @@ public class ParserUtil {
     public static Money parsePrice(String price) throws IllegalValueException {
         requireNonNull(price);
         String trimmedPrice = price.trim();
-        Currency currency = parseCurrency(trimmedPrice);
-
-        trimmedPrice = trimmedPrice.substring(1).trim();
+        Currency currency = Money.DEFAULT_CURRENCY;
         if (!Money.isValidMoney(trimmedPrice)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.substring(0,1);
+            currency = parseCurrency(currencySymbol);
+            trimmedPrice = trimmedPrice.substring(1).trim();
         }
         return new Money(new BigDecimal(trimmedPrice), currency);
     }

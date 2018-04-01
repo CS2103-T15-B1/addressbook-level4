@@ -24,10 +24,12 @@ import seedu.address.model.money.exceptions.ObjectNotMoneyException;
  */
 public class Money implements Comparable<Money>, Serializable {
 
-    public static final String MONEY_VALIDATION_REGEX = "(\\p{Sc})?\\s*\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX_WITH_CURRENCY = "(\\p{Sc})\\s*\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX_WITHOUT_CURRENCY = "\\d+(\\.\\d+)?";
 
     public static final String MESSAGE_MONEY_CONSTRAINTS =
-            String.format("price should only contains digits and cannot be negative");
+            String.format("price should only contains currency symbol(optional) and digits," +
+                    " and it cannot be negative");
 
     /**
      * The money amount.
@@ -132,7 +134,21 @@ public class Money implements Comparable<Money>, Serializable {
      * Returns true if a given string is a valid Money.
      */
     public static boolean isValidMoney(String test) {
-        return test.matches(MONEY_VALIDATION_REGEX);
+        return isValidMoneyWithoutCurrency(test) || isValidMoneyWithCurrency(test);
+    }
+
+    /**
+     * Returns true if a given string is a valid Money with currency symbol.
+     */
+    public static boolean isValidMoneyWithCurrency(String test) {
+        return test.matches(MONEY_VALIDATION_REGEX_WITH_CURRENCY);
+    }
+
+    /**
+     * Returns true if a given string is a valid Money without currency symbol.
+     */
+    public static boolean isValidMoneyWithoutCurrency(String test) {
+        return test.matches(MONEY_VALIDATION_REGEX_WITHOUT_CURRENCY);
     }
 
     /**
