@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+        border: red;
+       }
+
+       h3 {
+         text-align: center;
+         color: white;
+         text-decoration: underline;
+       }
+       body{
+        background-color: #D2691E;
+       }
+    </style>
+</head>
+<body>
+<h3>Geographic Visulisation</h3>
+<div id="map"></div>
+<script>
+    var testLocations = [
+      {lat: 1.290643, lng: 103.781101},
+      {lat: 1.31, lng: 103.9},
+      {lat: 1.3, lng: 103.6},
+      {lat: 1.31, lng: 103.8},
+      {lat: 1.3008, lng: 103.8},
+      {lat: 1.30, lng: 103.78},
+      {lat: 1.307, lng: 103.6},
+      {lat: 1.26, lng: 103.79},
+      {lat: 1.24, lng: 103.799},
+      {lat: 1.29, lng: 103.8},
+      ]
+
+    function initMap() {
+      var  centerOfSingapore= {lat: 1.361607, lng: 103.807203};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: centerOfSingapore
+      });
+      // var marker = new google.maps.Marker({
+      //   position: {lat: 1.317848, lng: 103.708716},
+      //   animation: google.maps.Animation.DROP,
+      //   map: map
+      // });
+
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+      var markers = testLocations.map(function(location, i) {
+          return new google.maps.Marker({
+              position: location,
+              label: labels[i % labels.length],
+              map:map,
+              animation: google.maps.Animation.DROP
+        });
+      });
+      var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+  </script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2xHmZDa_1SLz0-0NVx1Peqzp13mXrNkA&callback=initMap">
+</script>
+</body>
+</html>

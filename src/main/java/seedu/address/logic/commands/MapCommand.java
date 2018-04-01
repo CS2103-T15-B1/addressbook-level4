@@ -1,19 +1,10 @@
 package seedu.address.logic.commands;
 
-import java.net.URL;
 import java.util.List;
 
-import seedu.address.MainApp;
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.RenderMapEvent;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
-
-import static seedu.address.ui.BrowserPanel.SEARCH_PAGE_URL;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
 /**
  * Displays the geographic distribution of selected customers in Retail Analytics.
