@@ -71,6 +71,28 @@ public class UniqueOrderList implements Iterable<Order> {
     }
 
     /**
+     * Replaces the order {@code target} in the list with {@code editedOrder}.
+     *
+     * @throws DuplicateOrderException if the replacement is equivalent to another existing order in the list.
+     * @throws OrderNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setOrder(Order target, Order editedOrder)
+            throws DuplicateOrderException, OrderNotFoundException {
+        requireNonNull(editedOrder);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new OrderNotFoundException();
+        }
+
+        if (!target.equals(editedOrder) && internalList.contains(editedOrder)) {
+            throw new DuplicateOrderException();
+        }
+
+        internalList.set(index, editedOrder);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Order> asObservableList() {
