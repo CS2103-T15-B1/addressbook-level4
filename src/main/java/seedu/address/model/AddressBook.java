@@ -15,6 +15,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.UniqueProductList;
+import seedu.address.model.product.exceptions.DuplicateProductException;
+import seedu.address.model.product.exceptions.ProductNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -25,6 +29,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueProductList products;
     private final UniqueTagList tags;
 
     /*
@@ -36,6 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        products = new UniqueProductList();
         tags = new UniqueTagList();
     }
 
@@ -55,6 +61,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setProducts(List<Product> products) throws DuplicateProductException{
+        this.products.setProducts(products);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -68,11 +78,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
+        List<Product> syncedProductList = newData.getProductList().stream()
+                .collect(Collectors.toList());
 
         try {
             setPersons(syncedPersonList);
+            setProducts(syncedProductList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
+        } catch (DuplicateProductException ep) {
+            throw new AssertionError("AddressBooks should not have duplicate products");
         }
     }
 
@@ -132,7 +147,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getGender(),
+                person.getAge(), person.getLatitude(), person.getLongitude(), correctTagReferences);
     }
 
     /**
@@ -144,6 +160,32 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         } else {
             throw new PersonNotFoundException();
+        }
+    }
+
+    //// product-level operations
+
+    /**
+     * Adds a product to the address book.
+     */
+    public void addProduct(Product p) throws DuplicateProductException {
+        //Product product = syncWithMasterTagList(p);
+        //Maybe need to synchronize with CategoryList in the future.
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        products.add(p);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws ProductNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeProduct(Product key) throws ProductNotFoundException {
+        if (products.remove(key)) {
+            return true;
+        } else {
+            throw new ProductNotFoundException();
         }
     }
 
@@ -164,6 +206,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Product> getProductList() {
+        return products.asObservableList();
     }
 
     @Override

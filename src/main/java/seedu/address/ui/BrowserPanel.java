@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/PersonLocationPage.html?name=";
+    public static final String PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/PersonLocationPage.html?name=%s&lat=%s&lon=%s";
     public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/SelectedPersonsLocationPage.html";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -47,7 +47,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads location of person in Google Maps
      */
     private void loadPersonLocationPage(Person person) {
-        loadPage(PERSON_LOCATION_PAGE_URL + person.getName().fullName);
+        loadPage(String.format(PERSON_LOCATION_PAGE_URL, person.getName().fullName, person.getLatitude().value,person.getLongitude().value));
     }
     /**
      * Loads location of selected persons in Google Maps

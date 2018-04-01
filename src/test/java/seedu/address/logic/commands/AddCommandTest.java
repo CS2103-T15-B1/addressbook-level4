@@ -24,6 +24,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.exceptions.DuplicateProductException;
+import seedu.address.model.product.exceptions.ProductNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -114,6 +117,28 @@ public class AddCommandTest {
 
         @Override
         public void deletePerson(Person target) throws PersonNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteProduct(Product target) throws ProductNotFoundException {
+            fail("This method should not be called.");
+
+        }
+
+        @Override
+        public void addProduct(Product product) throws DuplicateProductException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Product> getFilteredProductList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
+        public void updateFilteredProductList(Predicate<Product> predicate) {
             fail("This method should not be called.");
         }
 

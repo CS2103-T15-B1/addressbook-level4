@@ -20,6 +20,12 @@
        }
     </style>
     <script type="text/javascript">
+    </script>
+</head>
+<body>
+<h3><span id="name"></span>'s Location</h3>
+<div id="map"></div>
+<script>
     function getJsonFromUrl() {
       var query = location.search.substr(1);
       var result = {};
@@ -33,12 +39,6 @@
     document.addEventListener("DOMContentLoaded", function(event) {
       document.getElementById("name").innerHTML=getJsonFromUrl().name;
     });
-  </script>
-</head>
-<body>
-<h3><span id="name"></span>'s Location</h3>
-<div id="map"></div>
-<script>
 
     function initMap() {
       var  centerOfSingapore= {lat: 1.361607, lng: 103.807203};
@@ -47,7 +47,7 @@
         center: centerOfSingapore
       });
       var marker = new google.maps.Marker({
-        position: {lat: 1.317848, lng: 103.708716},
+        position: {lat: 1.361607, lng: 103.807203},
         animation: google.maps.Animation.DROP,
         map: map
       });

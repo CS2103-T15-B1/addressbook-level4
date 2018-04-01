@@ -2,18 +2,23 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Collection;
+import java.util.Currency;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.money.Money;
+import seedu.address.model.person.*;
+import seedu.address.model.product.Category;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,6 +70,102 @@ public class ParserUtil {
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         requireNonNull(name);
         return name.isPresent() ? Optional.of(parseName(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws IllegalValueException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code Optional<String> gender} into an {@code Optional<Gender>} if {@code gender} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Gender> parseGender(Optional<String> gender) throws IllegalValueException {
+        requireNonNull(gender);
+        return gender.isPresent() ? Optional.of(parseGender(gender.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String age} into a {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws IllegalValueException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code Optional<String> age} into an {@code Optional<Age>} if {@code age} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Age> parseAge(Optional<String> age) throws IllegalValueException {
+        requireNonNull(age);
+        return age.isPresent() ? Optional.of(parseAge(age.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String latitude} into a {@code Latitude}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code latitude} is invalid.
+     */
+    public static Latitude parseLatitude(String latitude) throws IllegalValueException {
+        requireNonNull(latitude);
+        String trimmedLatitude = latitude.trim();
+        if (!Latitude.isValidLatitude(trimmedLatitude)) {
+            throw new IllegalValueException(Latitude.MESSAGE_LATITUDE_CONSTRAINTS);
+        }
+        return new Latitude(trimmedLatitude);
+    }
+
+    /**
+     * Parses a {@code Optional<String> latitude} into an {@code Optional<Latitude>} if {@code latitude} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Latitude> parseLatitude(Optional<String> latitude) throws IllegalValueException {
+        requireNonNull(latitude);
+        return latitude.isPresent() ? Optional.of(parseLatitude(latitude.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String longitude} into a {@code Longitude}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code longitude} is invalid.
+     */
+    public static Longitude parseLongitude(String longitude) throws IllegalValueException {
+        requireNonNull(longitude);
+        String trimmedLongitude = longitude.trim();
+        if (!Longitude.isValidLongitude(trimmedLongitude)) {
+            throw new IllegalValueException(Longitude.MESSAGE_LONGITUDE_CONSTRAINTS);
+        }
+        return new Longitude(trimmedLongitude);
+    }
+
+    /**
+     * Parses a {@code Optional<String> longitude} into an {@code Optional<Longitude>} if {@code longitude} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Longitude> parseLongitude(Optional<String> longitude) throws IllegalValueException {
+        requireNonNull(longitude);
+        return longitude.isPresent() ? Optional.of(parseLongitude(longitude.get())) : Optional.empty();
     }
 
     /**
@@ -138,6 +239,99 @@ public class ParserUtil {
         requireNonNull(email);
         return email.isPresent() ? Optional.of(parseEmail(email.get())) : Optional.empty();
     }
+
+    /// product-level
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code name} is invalid.
+     */
+    public static ProductName parseProductName(String name) throws IllegalValueException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!ProductName.isValidProductName(trimmedName)) {
+            throw new IllegalValueException(ProductName.MESSAGE_PRODUCT_NAME_CONSTRAINTS);
+        }
+        return new ProductName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<ProductName> parseProductName(Optional<String> name) throws IllegalValueException {
+        requireNonNull(name);
+        return name.isPresent() ? Optional.of(parseProductName(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code price} is invalid.
+     */
+    public static Money parsePrice(String price) throws IllegalValueException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        Currency currency = Money.DEFAULT_CURRENCY;
+        if (!Money.isValidMoney(trimmedPrice)) {
+            throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.substring(0,1);
+            currency = parseCurrency(currencySymbol);
+            trimmedPrice = trimmedPrice.substring(1).trim();
+        }
+        return new Money(new BigDecimal(trimmedPrice), currency);
+    }
+
+    private static Currency parseCurrency(String price) {
+        for (Locale locale : NumberFormat.getAvailableLocales()) {
+            String code = NumberFormat.getCurrencyInstance(locale).getCurrency().getSymbol();
+            if (price.equals(code)) {
+                return Currency.getInstance(locale);
+            }
+        }
+        return Money.DEFAULT_CURRENCY;
+    }
+
+    /**
+     * Parses a {@code Optional<String> price} into an {@code Optional<price>} if {@code price} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Money> parsePrice(Optional<String> price) throws IllegalValueException {
+        requireNonNull(price);
+        return price.isPresent() ? Optional.of(parsePrice(price.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String category} into a {@code category}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code category} is invalid.
+     */
+    public static Category parseCategory(String category) throws IllegalValueException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new IllegalValueException(Category.MESSAGE_CATEGORY_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses a {@code Optional<String> category} into an {@code Optional<category>} if {@code category} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Category> parseCategory(Optional<String> category) throws IllegalValueException {
+        requireNonNull(category);
+        return category.isPresent() ? Optional.of(parseCategory(category.get())) : Optional.empty();
+    }
+
+
+
+
+    /// tag-level
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

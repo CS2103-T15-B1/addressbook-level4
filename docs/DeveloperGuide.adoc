@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Retail Analytics - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team Retailer Analytics`      Since: `Feb 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -380,10 +380,56 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
+=== Geographical Visualisation (`map` command)
+
+====How the feature is implemented
+We are using https://developers.google.com/maps/[Google Maps API] to implement this feature. The map command has
+parameters which will describe a querry (yet to be implemented), which will render a google map image with
+the locations of the filtered customers in the map.
+
+
+====Alternatives considered
+
+Initially we wanted to use a static image of Singapore and create edit the map based on the locations of the customers
+on the fly. However, we realised that the user might want a zoomable interface, if he needed the spread of customers
+ viewed at a certain zoom level. Furthermore, this would restrit the use of our product only to retailer who are
+ delevering around Singapore. Using the Google Maps API would enable our users to operate at any country and also have
+ customers around the world.
+
+
+
 [[Implementation-Configuration]]
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+[[Implementation-Recommender]]
+=== Recommender
+
+==== Recommender Training Pipeline
+Obtaining recommendations for products that a given customer is likely to want to buy can actually be thought of as a classification problem. The `Order` records serves as the test dataset, the instance variables of each Order's `Customer` serve as the features, and the associated `Product` is the class label.
+
+Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:
+
+. Convert the `Order` records into a `.arff` file, the default format used by Weka, using the `ConvertToArff` class.
+[NOTE]
+The `.arff` must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as `"n" + productId`.  Since the `.arff` only stores the classification features ([v1.2]: age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the `Order` records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the `.arff`.
+. For each product, use `RemoveWithValues` to create an `isolator` that can filter out the orders involving that specific product in the `.arff`. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).
+. Pass the `isolator` into a `ProductTrainer`, which will use `ChiSquaredAttributeEval` to select the features most strongly associated with a purchase decision (i.e. an order exists for a given customer profile), and then build a `NaiveBayes` classifier around those features, for that specific product.
+[NOTE]
+The `ChiSquaredAttributeEval` only uses the 2 most discriminatory features to build the classifier, even with additional features to be added in future revisions. This combats the Curse of Dimensionality, given the possibly modest number of orders that a small business might have.
+. Save each successful `NaiveBayes` build to a `HashMap` keyed by the product ID, for later use on the test set (i.e. the customer whom we want to get likely purchase recommendations for).
+[NOTE]
+[From v1.3] The classifiers would be saved to the hard disk, so that we do not have to re-initialize a `Recommender` every time the AddressBook is opened, since classifier building is computationally expensive.
+
+==== Recommender Testing Pipeline
+. Assign `classifierDict` in `Recommender` using one of the following means:
+.. Run the training pipeline in 3.5.1.
+.. [From v1.3] The `Recommender` constructor will be overloaded to support a `classifierDict` attribute. We can use the `ReadClassifierDict` class in `Storage` to read the saved file to a `classifierDict`.
+. Call `getRecommendations(customerId)`, which will result in getting the appropriate features from said `Customer`, and then running the features as an `Instance` through every classifier in `classifierDict`. The confidence of each purchase decision is returned via `distributionForInstance` as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the `Product` predicted to be most attractive to said `Customer` listed first, is assigned to `ProductRecOfAPerson`.
+[NOTE]
+[From v1.3] A RecommendCommand Class will be added to facilitate the calling of `getRecommendations` through the CLI.
+. All `Product` objects which a given `Customer` has already bought will be stripped from his `ProductRecOfAPerson`. The remaining list will be sent to `ui` for output.
 
 == Documentation
 
@@ -782,13 +828,39 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* small/medium e-retailer handling hundreds to thousands of customers and orders
+* primarily does deliveries of a select inventory to customer addresses
+* desires analytics to aid in business management and marketing
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: allows for statistic retrieval, trend analysis, and visualization of customers, products, and orders with an efficient text based input
+
+*Feature Contribution*
+
+=== Feature Contribution
+
+*Qinghao*:
+
+* *Major*: Add individual customer/product stats, like customer ranking by spending, product ranking by sales etc. This is a key feature of the project that provides retail analytics for the user.
+* *Major*: Add order class, to keep track of a customer's order(s) and the products in the order.
+
+*Yingxu*:
+
+* *Major*: Add product class, to keep track of a single product type
+* *Minor*: Money class to keep track of price etc. because it cannot be stored in a Double due to precision issues
+
+*Jia Jin*:
+
+* *Major*: Recommendations engine for customer, so that the user can provide these personalized recommendations to customers.
+* *Minor*: Basic filtered getter utilities for Product, Customer, Order classes
+
+*Siva*:
+
+* *Major*: Geographic visualization of customer locations, for the user to have a idea of where their customers are located so to better optimize their logistics
+* *Minor*: Add customer-specific variables to existing address book code.
 
 [appendix]
 == User Stories
@@ -798,28 +870,178 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |user |add a product by specifying its name, price, and category only |track its sales going forward
 
-|`* * *` |user |add a new person |
+|`* * *` |user who is adding a new product |create new product categories on-the-fly |manage pivots in inventory composition
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |add a customer by specifying their email, name, and address only, with age and gender optional |keep track of each individual’s orders going forward
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |add an order by specifying the date, the buyer, and a list of products bought | avoid repetitively creating multiple orders with the same date and buyer
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user with many new customers, products, and orders |import customers, products, and orders via XML files instead of adding them one-by-one |bulk load the database without wasting time
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |user importing the aforementioned XML |a description of the specific entry and the violation to be highlighted if any entry violates the relevant relation |avoid manually hunting through a possibly huge XML to locate the import error
+
+|`* *` |user |search for customers via their names or emails |view the profile of each customer and their purchase history
+
+|`* *` |user who is searching for customers |have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching |still locate customers without precisely remembering their name/email when I have many customers
+
+|`* *` |user |also search for products in similar fashion as customers by typing their name or category |view the profile of each product and its sales history
+
+|`* *` |user currently on a product’s profile |update that product’s price |reproduce discounts or price raises in this application
+
+|`* *` |user |obtain a ranked list of customers by total or recent spending |reach out and reward loyal customers accordingly
+
+|`* *` |user |obtain separate list of active/inactive users |make distinct decisions that focus on maximizing active ones or recapturing inactive ones
+
+|`* *` |user |obtain a ranked list of products by total or recent sales |request appropriate inventory
+
+|`* *` |user |obtain the aforementioned total and recent sales across entire product categories too |know which categories to pivot my retail business toward
+
+|`* *` |user |search for customers via their names or emails |view the profile of each customer and their purchase history
+
+|`* *` |user |graph the aforementioned product and category sales across time |identify changes in product performance to decide on product strategy
+
+|`* *` |user |graph the numbers and proportions of active/inactive users across time |identify changes in user retention
+
+|`*` |user |graph the average monthly/yearly sales value of active users across time |use willingness to spend as a proxy of user trust and engagement, and make informed changes to marketing strategy to hit the desired ARPU
+
+|`* *` |user |graph the total revenue across time |visually grasp if my business as a whole has been growing
+
+|`* *` |user viewing the aforementioned graphs |data points and relevant summary statistics can be exported to an XML for download |perform further analysis in another software (e.g. Tableau, MS Excel, etc.)
+
+|`* * *` |user |use the recommendations engine identify which users still haven’t bought, but are likely to want to buy a given product |perform targeted marketing (e.g. email blasts with specific products)
+
+|`* *` |user |re-train the recommendations engine's classifier on the latest data whenever desired |ensure its relevance as new products and orders come in
+
+|`* * *` |user |display customers as an overlay on a map |understand how customers are geographically distributed, which have many possible gains (e.g. determine placement of physical marketing collateral such as flyers and banners)
+
+|`* * *` |user using the map overlay |filter the users by total and recent expenditure |visually grasp the geographical distribution of my most/least valuable customers to understand market penetration and inform customer personas
+
+|`* *` |user using the map overlay |filter the users by products or product categories ordered |the penetration of specific products to personas that might be more prevalent in given locales
+
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `RetailAnalytics` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: UC1 - Add customer
+
+*MSS*
+
+1.  User requests to add customer (with atributes: email, name, age, gender, address)
+2.  RetailAnalytics adds customer and shows success message
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The formatting of the statement is invalid.
++
+[none]
+** 1a1. RetailAnalytics shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC2 - Add Order
+
+*MSS*
+
+1.  User requests to add order (with atributes: date, customer email, product name)
+2.  RetailAnalytics adds order and shows success message
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The formatting of the statement is invalid.
++
+[none]
+** 1a1. RetailAnalytics shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC3 - Add Product
+
+*MSS*
+
+1.  User requests to add product (with atributes: name, price, category)
+2.  RetailAnalytics adds product and shows success message
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The formatting of the statement is invalid.
++
+[none]
+** 1a1. RetailAnalytics shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC4 - Delete customer
+
+*MSS*
+
+1.  User requests to list customers
+2.  RetailAnalytics shows a list of customers
+3.  User requests to delete a specific customer in the list
+4.  RetailAnalytics deletes the customer and all transactions associated with him
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. RetailAnalytics shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC5 - Request Analytics (Customer ranking or Product Ranking)
+
+*MSS*
+
+1.  User requests a specific type of analytics
+2.  RetailAnalytics shows a list of Customers or Products
++
+Use case ends.
+
+[discrete]
+=== Use case: UC6 - Request Geographic Visualisation of Analytics (Customer ranking or Product Ranking)
+
+*MSS*
+
+1.  User requests to geographic visualisation of analytics
+2.  RetailAnalytics shows list of Customers and a map showing the spread of customers
++
+Use case ends.
+
+[discrete]
+=== Use case: UC7 -  Search for person
+
+*MSS*
+
+1.  User searches for person based on name or email
+2.  RetailAnalytics shows a list of customers with that name or email ( fuzzy-search)
++
+Use case ends.
+
+[discrete]
+=== Use case: UC8 - Delete person
 
 *MSS*
 
@@ -844,19 +1066,26 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
-
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 entires in the relational tables without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Should be able to handle invalid input (highlight error and give correct instructions).
+.  should work on both 32-bit and 64-bit environment
+.  Should be able to show the analytical results within two seconds.
+.  Should be user-firendly for non-programmers.
 
 [appendix]
 == Glossary
+
+[[relational-database]] Relational Database::
+A database that organizes data into tables where rows representing instances  
+and columns representing values attributed to that instance. 
+
+[[hot-keys]] Hot Keys::
+A combination of keys which provides a shortcut to perform certain tasks.
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
