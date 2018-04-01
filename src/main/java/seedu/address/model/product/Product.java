@@ -28,11 +28,31 @@ public class Product {
         this.id = ++productCounter;
     }
 
+    public int getId() { return id; }
+
     public ProductName getName() { return name; }
 
     public Money getPrice() { return price; }
 
     public Category getCategory() { return category; }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Product)) {
+            return false;
+        }
+
+        Product otherPerson = (Product) other;
+        return otherPerson.getName().equals(this.getName())
+                && otherPerson.getId() == (this.getId())
+                && otherPerson.getPrice().equals(this.getPrice())
+                && otherPerson.getCategory().equals(this.getCategory())
+                ;
+    }
 
     public String toString() {
         final StringBuilder builder = new StringBuilder();

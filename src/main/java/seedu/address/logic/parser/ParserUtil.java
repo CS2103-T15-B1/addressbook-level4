@@ -3,8 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Collection;
+import java.util.Currency;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -271,10 +274,25 @@ public class ParserUtil {
     public static Money parsePrice(String price) throws IllegalValueException {
         requireNonNull(price);
         String trimmedPrice = price.trim();
+        Currency currency = Money.DEFAULT_CURRENCY;
         if (!Money.isValidMoney(trimmedPrice)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.substring(0,1);
+            currency = parseCurrency(currencySymbol);
+            trimmedPrice = trimmedPrice.substring(1).trim();
         }
-        return new Money(new BigDecimal(trimmedPrice));
+        return new Money(new BigDecimal(trimmedPrice), currency);
+    }
+
+    private static Currency parseCurrency(String price) {
+        for (Locale locale : NumberFormat.getAvailableLocales()) {
+            String code = NumberFormat.getCurrencyInstance(locale).getCurrency().getSymbol();
+            if (price.equals(code)) {
+                return Currency.getInstance(locale);
+            }
+        }
+        return Money.DEFAULT_CURRENCY;
     }
 
     /**

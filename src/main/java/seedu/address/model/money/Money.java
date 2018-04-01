@@ -1,11 +1,16 @@
 package seedu.address.model.money;
 
+import java.text.NumberFormat;
 import java.util.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
+import static java.util.Objects.requireNonNull;
+
 import java.math.RoundingMode;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.money.exceptions.MismatchedCurrencyException;
 import seedu.address.model.money.exceptions.ObjectNotMoneyException;
 /**
@@ -19,10 +24,12 @@ import seedu.address.model.money.exceptions.ObjectNotMoneyException;
  */
 public class Money implements Comparable<Money>, Serializable {
 
-    public static final String MONEY_VALIDATION_REGEX = "\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX_WITH_CURRENCY = "(\\p{Sc})\\s*\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX_WITHOUT_CURRENCY = "\\d+(\\.\\d+)?";
 
     public static final String MESSAGE_MONEY_CONSTRAINTS =
-            String.format("price should only contains digits and cannot be negative");
+            String.format("price should only contains currency symbol(optional) and digits," +
+                    " and it cannot be negative");
 
     /**
      * The money amount.
@@ -41,18 +48,23 @@ public class Money implements Comparable<Money>, Serializable {
      */
     private final RoundingMode fRounding;
 
-    private static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
+    public static BigDecimal DEFAULT_AMOUNT = new BigDecimal(0.00);
 
     /**
      * The default currency to be used if no currency is passed to the constructor.
      * To be initialized by the static init().
      */
-    private static Currency DEFAULT_CURRENCY = Currency.getInstance("SGD");
+    public static Currency DEFAULT_CURRENCY = Currency.getInstance("SGD");
 
     /**
      * The default rounding style to be used if no currency is passed to the constructor.
      */
-    private static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
+    public static RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
+
+    /**
+     * String representation for Money class.
+     */
+    public final String value;
 
     private int fHashCode;
     private static final int HASH_SEED = 23;
@@ -72,6 +84,7 @@ public class Money implements Comparable<Money>, Serializable {
         fAmount = aAmount;
         fCurrency = aCurrency;
         fRounding = aRoundingStyle;
+        value = fCurrency.getSymbol() + " " + fAmount.toPlainString();
         validateState();
     }
 
@@ -121,7 +134,31 @@ public class Money implements Comparable<Money>, Serializable {
      * Returns true if a given string is a valid Money.
      */
     public static boolean isValidMoney(String test) {
-        return test.matches(MONEY_VALIDATION_REGEX);
+        return isValidMoneyWithoutCurrency(test) || isValidMoneyWithCurrency(test);
+    }
+
+    /**
+     * Returns true if a given string is a valid Money with currency symbol.
+     */
+    public static boolean isValidMoneyWithCurrency(String test) {
+        return test.matches(MONEY_VALIDATION_REGEX_WITH_CURRENCY);
+    }
+
+    /**
+     * Returns true if a given string is a valid Money without currency symbol.
+     */
+    public static boolean isValidMoneyWithoutCurrency(String test) {
+        return test.matches(MONEY_VALIDATION_REGEX_WITHOUT_CURRENCY);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code price} is invalid.
+     */
+    public static Money parsePrice(String price) throws IllegalValueException {
+        return ParserUtil.parsePrice(price);
     }
 
     /**
@@ -286,9 +323,7 @@ public class Money implements Comparable<Money>, Serializable {
      * The return value uses the default locale/currency, and will not
      * always be suitable for display to an end user.
      */
-    public String toString(){
-        return fAmount.toPlainString() + " " + fCurrency.getSymbol();
-    }
+    public String toString(){ return value; }
 
     /**
      * This equal is sensitive to scale.
