@@ -12,7 +12,7 @@ import seedu.address.model.product.exceptions.DuplicateProductException;
  */
 public class AddProductCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "addp";
+    public static final String COMMAND_WORD = "addproduct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to retail analytics. "
             + "Parameters: "

@@ -13,7 +13,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  */
 public class AddOrderCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "addo";
+    public static final String COMMAND_WORD = "addorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates new order given a person's email, and non-empty list of (Product ID, Number bought, Price)\n"
