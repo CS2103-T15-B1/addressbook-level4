@@ -99,16 +99,6 @@ public class Person {
 //    }
 
     /**
-     * Get time of most recent order
-     * @return last order time
-     */
-//    public LocalDateTime getLastOrderTime() {
-//        List<Order> allOrders = getOrders();
-//        Order lastOrder = allOrders.get(allOrders.size() - 1);
-//        return lastOrder.getTime();
-//    }
-
-    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
