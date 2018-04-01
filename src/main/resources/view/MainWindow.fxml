@@ -47,21 +47,21 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="personList" minWidth="220" prefWidth="220" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox fx:id="productList" layoutX="340.0" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="productList" layoutX="220.0" minWidth="220" prefWidth="220" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox fx:id="orderList" layoutX="680.0" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="orderList" layoutX="440.0" minWidth="220" prefWidth="220" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
