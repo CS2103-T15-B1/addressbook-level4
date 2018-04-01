@@ -42,6 +42,6 @@ public class Category {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + value + ']';
+        return value;
     }
 }
