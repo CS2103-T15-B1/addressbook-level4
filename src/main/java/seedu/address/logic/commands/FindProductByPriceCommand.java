@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.model.product.ProductCostsBetweenPredicate;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;

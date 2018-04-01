@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.FindProductByPriceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.money.Money;
+import seedu.address.model.product.ProductCostsBetweenPredicate;
 
 import java.util.stream.Stream;
 
