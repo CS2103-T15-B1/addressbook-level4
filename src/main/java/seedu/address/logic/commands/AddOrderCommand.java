@@ -22,9 +22,9 @@ public class AddOrderCommand extends UndoableCommand {
             + PREFIX_ORDER + "SUBORDER (List of product ID, Number, Price)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
-            + PREFIX_ORDER + "1 5 $3.00"
-            + PREFIX_ORDER + "2 4 $2.50"
-            + PREFIX_ORDER + "3 1 $100";
+            + PREFIX_ORDER + "1 5 $3.00 "
+            + PREFIX_ORDER + "2 4 $2.50 "
+            + PREFIX_ORDER + "3 1 $100 ";
 
     public static final String MESSAGE_SUCCESS = "New order added.";
     public static final String MESSAGE_DUPLICATE_ORDER = "This person already exists in the retail analytics";
