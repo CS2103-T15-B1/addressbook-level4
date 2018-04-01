@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.net.URL;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -22,7 +23,8 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL = "GeographicVisualisationPage.html";
+    public static final String PERSON_LOCATION_PAGE_URL = "PersonLocationPage.html";
+    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "SelectedPersonsLocationPage.html";
 //            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -42,16 +44,20 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-//    private void loadPersonPage(Person person) {
-//        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
-//    }
-
-    private void loadPersonPage(Person person) {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
+    /**
+     * Loads location of person in Google Maps
+     */
+    private void loadPersonLocationPage(Person person) {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + PERSON_LOCATION_PAGE_URL);
         loadPage(defaultPage.toExternalForm());
     }
-
-
+    /**
+     * Loads location of selected persons in Google Maps
+     */
+    private void loadSelectedPersonsLocationPage(List<Person> selectedPersons) {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
+        loadPage(defaultPage.toExternalForm());
+    }
 
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
@@ -75,12 +81,12 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection().person);
+        loadPersonLocationPage(event.getNewSelection().person);
     }
 
     @Subscribe
     private void handleRenderMapEvent(RenderMapEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getSelectedPersons().get(0));
+        loadSelectedPersonsLocationPage(event.getSelectedPersons());
     }
 }
