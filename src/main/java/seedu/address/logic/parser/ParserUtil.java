@@ -366,17 +366,18 @@ public class ParserUtil {
      * @throws IllegalValueException if the given {@code subOrder} is invalid.
      */
     public static SubOrder parseSubOrder(String subOrder) throws IllegalValueException {
-        //TODO add catch exception for money
-
         requireNonNull(subOrder);
         String trimmed = subOrder.trim();
         String[] components = trimmed.split("\\w");
+        int productId;
+        int numProduct;
+        Money productPrice;
         if(components.length != 3)
             throw new IllegalValueException(SubOrder.MESSAGE_SUBORDER_CONSTRAINTS);
         try {
-            int productId = Integer.parseInt(components[0]);
-            int numProduct = Integer.parseInt(components[1]);
-            Money productPrice = new Money(components[2]);
+            productId = Integer.parseInt(components[0]);
+            numProduct = Integer.parseInt(components[1]);
+            productPrice = new Money();
         } catch (NumberFormatException e) {
             throw new IllegalValueException(SubOrder.MESSAGE_SUBORDER_CONSTRAINTS);
         }
