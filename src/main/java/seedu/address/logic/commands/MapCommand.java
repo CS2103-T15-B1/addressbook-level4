@@ -8,6 +8,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.RenderMapEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
@@ -36,8 +37,8 @@ public class MapCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        List<Person> lastShownList = model.getFilteredPersonList();
-//        loadPersonPage(TypicalPersons.Alice);
+        List<Person> lastShownList = model.getFilteredPersonList();//see find command when using querry
+        EventsCenter.getInstance().post(new RenderMapEvent(lastShownList));
         return new CommandResult(String.format(MESSAGE_MAP_PERSON_SUCCESS, lastShownList.size()));
 
     }
