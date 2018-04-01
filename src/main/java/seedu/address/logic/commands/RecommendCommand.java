@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.recommender.Recommender;
+import seedu.address.logic.recommender.RecommenderManager;
 import seedu.address.model.person.Person;
 
 import java.util.List;
@@ -41,8 +41,8 @@ public class RecommendCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Recommender recommender = new Recommender(ARFF_NAME);
-        String recommendations = recommender.getRecommendations(personToRecommendFor);
+        RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME);
+        String recommendations = recommenderManager.getRecommendations(personToRecommendFor);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToRecommendFor.getName(), recommendations));
     }
