@@ -31,6 +31,13 @@ public class Category {
     @Override
     public int hashCode() { return categoryName.hashCode(); }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Category // instanceof handles nulls
+                && this.value.equals(((Category) other).value)); // state check
+    }
+
     /**
      * Format state as text for viewing.
      */
