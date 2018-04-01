@@ -112,8 +112,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //TODO deleteOrder and uncomment implementation in super
-
+    @Override
+    public synchronized void deleteOrder(Order target) throws OrderNotFoundException {
+        addressBook.removeOrder(target);
+        indicateAddressBookChanged();
+    }
     //=========== Filtered Person, product and Order List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of

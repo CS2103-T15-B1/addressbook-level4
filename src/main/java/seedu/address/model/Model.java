@@ -42,7 +42,7 @@ public interface Model {
     void addProduct(Product product) throws DuplicateProductException;
 
     /** Deletes the given order. */
-    //void deleteOrder(Order target) throws OrderNotFoundException;
+    void deleteOrder(Order target) throws OrderNotFoundException;
 
     /** Adds the given order */
     void addOrder(Order product) throws DuplicateOrderException;
