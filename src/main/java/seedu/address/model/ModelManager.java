@@ -110,14 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    @Override
-    public void updateOrder(Order target, Order editedOrder)
-        throws DuplicateOrderException, OrderNotFoundException {
-        requireAllNonNull(target, editedOrder);
-
-        addressBook.updateOrder(target, editedOrder);
-        indicateAddressBookChanged();
-    }
+    //TODO deleteOrder and uncomment implementation in super
 
     //=========== Filtered Person List Accessors =============================================================
 

@@ -33,7 +33,6 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueProductList products;
     private final UniqueTagList tags;
     private final UniqueProductList products;
     private final UniqueOrderList orders;
@@ -47,7 +46,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        products = new UniqueProductList();
         tags = new UniqueTagList();
         products = new UniqueProductList();
         orders = new UniqueOrderList();
@@ -71,6 +69,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setProducts(List<Product> products) throws DuplicateProductException{
         this.products.setProducts(products);
+    }
+
+    public void setOrders(List<Order> orders) throws DuplicateOrderException {
+        this.orders.setOrders(orders);
     }
 
     public void setTags(Set<Tag> tags) {
@@ -102,12 +104,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         try {
             setProducts(newData.getProductList());
         } catch (DuplicateProductException dpe) {
-
-        }
-
-        try {
-            setOrders(newData.getOrderList());
-        } catch (DuplicateOrderException doe) {
 
         }
 
@@ -276,11 +272,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
-    }
-
-    @Override
-    public ObservableList<Product> getProductList() {
-        return products.asObservableList();
     }
 
     @Override
