@@ -1,9 +1,11 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalOrders.OrderOne;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProducts.EGG;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
@@ -53,7 +56,8 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
         List<Product> newProducts = Arrays.asList(EGG, EGG);
-        AddressBookStub newData = new AddressBookStub(newPersons, newProducts, newTags);
+        List<Order> newOrders = Arrays.asList(OrderOne, OrderOne);
+        AddressBookStub newData = new AddressBookStub(newPersons, newProducts, newOrders, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -78,11 +82,14 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
         private final ObservableList<Product> products = FXCollections.observableArrayList();
+        private final ObservableList<Order> orders = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Product> products, Collection<? extends Tag> tags) {
+
+        AddressBookStub(Collection<Person> persons, Collection<Product> products, Collection<Order> orders, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
             this.products.setAll(products);
+            this.orders.setAll(orders);
         }
 
         @Override
@@ -92,6 +99,9 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Product> getProductList() { return products; }
+
+        @Override
+        public ObservableList<Order> getOrderList() {return orders;}
 
         @Override
         public ObservableList<Tag> getTagList() {
