@@ -1,10 +1,12 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.order.Order;
 
 /**
@@ -44,10 +46,19 @@ public class OrderCard extends UiPart<Region> {
         time.setText(order.getTime().toString());
 
         order.getOrderList().forEach(subOrder ->
-                subOrders.getChildren().add(new Label(
-                        Integer.toString(subOrder.getProductID()) + "\n"
-                                + Integer.toString(subOrder.getNumProduct())
-                )));
+                subOrders.getChildren().add(
+                        createProductBox(subOrder.getProductID(),subOrder.getNumProduct())
+                ));
+        subOrders.setHgap(10);
+    }
+
+    private VBox createProductBox (int productID, int NumProduct) {
+        VBox box = new VBox();
+        ObservableList list = box.getChildren();
+        Label id = new Label("ProductID: " + productID);
+        Label num = new Label("Num: " + NumProduct);
+        list.addAll(id, num);
+        return box;
     }
 
     @Override
