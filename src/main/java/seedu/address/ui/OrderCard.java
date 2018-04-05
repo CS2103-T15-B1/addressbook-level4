@@ -45,7 +45,7 @@ public class OrderCard extends UiPart<Region> {
         id.setText(Integer.toString(order.getId()));
         time.setText(order.getTime().toString());
 
-        order.getOrderList().forEach(subOrder ->
+        order.getSubOrders().forEach(subOrder ->
                 subOrders.getChildren().add(
                         createProductBox(subOrder.getProductID(),subOrder.getNumProduct())
                 ));
