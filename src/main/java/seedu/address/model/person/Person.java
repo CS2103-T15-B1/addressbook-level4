@@ -3,13 +3,8 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
-import seedu.address.model.order.Order;
-import seedu.address.model.order.exceptions.InvalidOrderException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -29,8 +24,6 @@ public class Person {
     private final Longitude longitude;
 
     private final UniqueTagList tags;
-
-    private final ArrayList<Order> orders = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -82,33 +75,28 @@ public class Person {
         return age;
     }
 
-    /**
-     * Adds order to list of orders
-     * @param order
-     * @throws InvalidOrderException throws exception if order is invalid
-     */
-    public void addOrder(Order order) throws InvalidOrderException {
-        if(!order.isValid()) throw new InvalidOrderException();
-        orders.add(order);
-    }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
+//    public List<Order> getOrders() {
+//        //TODO Use order getter to find orders belonging to this person
+//    }
 
     /**
      * Get orders made equals or after to a certain time
      * @param time
      * @return orders after certain time
      */
-    public ArrayList<Order> getOrdersSinceTime(LocalDateTime time) {
-        ArrayList<Order> ordersSinceTime = new ArrayList<>();
-        for(Order order : orders) {
-            if (order.getTime().compareTo(time) >= 0)
-                ordersSinceTime.add(order);
-        }
-        return ordersSinceTime;
-    }
+//    public List<Order> getOrdersSinceTime(LocalDateTime time) {
+//        //TODO Use order getter to find orders belonging to this person
+//    }
+
+    /**
+     * Get time of most recent order
+     * @return last order time
+     */
+//    public LocalDateTime getLastOrderTime() {
+//        List<Order> allOrders = getOrders();
+//        Order lastOrder = allOrders.get(allOrders.size() - 1);
+//        return lastOrder.getTime();
+//    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

@@ -11,6 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.UniqueOrderList;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -29,8 +33,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueProductList products;
     private final UniqueTagList tags;
+    private final UniqueProductList products;
+    private final UniqueOrderList orders;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -41,8 +46,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        products = new UniqueProductList();
         tags = new UniqueTagList();
+        products = new UniqueProductList();
+        orders = new UniqueOrderList();
     }
 
     public AddressBook() {}
@@ -65,6 +71,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.products.setProducts(products);
     }
 
+    public void setOrders(List<Order> orders) throws DuplicateOrderException {
+        this.orders.setOrders(orders);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -75,19 +85,41 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
+
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
         List<Product> syncedProductList = newData.getProductList().stream()
                 .collect(Collectors.toList());
+        List<Order> syncedOrderList = newData.getOrderList().stream()
+                .collect(Collectors.toList());
 
         try {
             setPersons(syncedPersonList);
+            setProducts(syncedProductList);
             setProducts(syncedProductList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
         } catch (DuplicateProductException ep) {
             throw new AssertionError("AddressBooks should not have duplicate products");
+        }
+
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setOrders(newData.getOrderList());
+        } catch (DuplicateOrderException doe) {
+
         }
     }
 
@@ -195,6 +227,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(t);
     }
 
+    //// order-level operations
+
+    /**
+     * Adds new order to address book.
+     * @throws DuplicateOrderException if this order already exists.
+     */
+    public void addOrder(Order o) throws DuplicateOrderException {
+        orders.add(o);
+    }
+
+    /**
+     * Replaces the given order {@code target} in the list with {@code editedOrder}.
+     *
+     * @throws DuplicateOrderException if updating the order's details causes the order to be equivalent to
+     *      another existing order.
+     * @throws OrderNotFoundException if {@code target} could not be found.
+     */
+    public void updateOrder(Order target, Order editedOrder)
+            throws DuplicateOrderException, OrderNotFoundException {
+        requireNonNull(editedOrder);
+
+        orders.setOrder(target, editedOrder);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws OrderNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeOrder(Order key) throws OrderNotFoundException {
+        if(orders.remove(key)) {
+            return true;
+        } else {
+            throw new OrderNotFoundException();
+        }
+    }
+
+
     //// util methods
 
     @Override
@@ -209,13 +278,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Tag> getTagList() {
+        return tags.asObservableList();
+    }
+
+    @Override
     public ObservableList<Product> getProductList() {
         return products.asObservableList();
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return tags.asObservableList();
+    public ObservableList<Order> getOrderList() {
+        return orders.asObservableList();
     }
 
     @Override

@@ -16,7 +16,7 @@ import seedu.address.model.product.exceptions.ProductNotFoundException;
  */
 public class DeleteProductCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "deletep";
+    public static final String COMMAND_WORD = "deleteproduct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the product identified by the index number used in the last product listing.\n"

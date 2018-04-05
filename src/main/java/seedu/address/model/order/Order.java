@@ -1,10 +1,9 @@
 package seedu.address.model.order;
 
-import seedu.address.model.util.Triple;
 import seedu.address.model.money.Money;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a customer's order.
@@ -14,36 +13,49 @@ import java.util.ArrayList;
 public class Order {
     private static int orderCounter = 0;
 
-    private final int personId;
+    private final String personId;
     private final int id;
     private final LocalDateTime time;
-    private final ArrayList<Triple<Integer, Integer, Money>> orderList;
+    private final List<SubOrder> orderList;
 
 
     /** Every field must be present and not null.
      * @param personId id of person (customer) who made the order. Can be thought of as a foreign key
      * @param orderList ArrayList of triple(product id, number bought, price) to represent the order
      */
-    public Order(int personId, ArrayList<Triple<Integer, Integer, Money>> orderList) {
+    public Order(String personId, List<SubOrder> orderList) {
         this.id = ++orderCounter;
         this.time = LocalDateTime.now();
         this.personId = personId;
         this.orderList = orderList;
     }
 
-    public int getPersonId() {
+    /**
+     * Returns ID(i.e. email) of person who made the order.
+     */
+    public String getPersonId() {
         return personId;
     }
 
+    /**
+     * Returns order ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Returns time of order
+     */
     public LocalDateTime getTime() {
         return time;
     }
 
-    public ArrayList<Triple<Integer, Integer, Money>> getOrderList() {
+    /**
+     * Gets the details of the products and prices for an order.
+     * @return List of (Product ID, Number bought, Price)
+     */
+    public List<SubOrder> getOrderList() {
         return orderList;
     }
 
@@ -53,11 +65,9 @@ public class Order {
      */
     public Money getOrderTotal() {
         Money total = new Money();
-        for(Triple<Integer, Integer, Money> product : orderList) {
-            Money price = product.getThird();
-            int numItems = product.getSecond();
-            Money itemTotal = price.times(numItems);
-            total = total.plus(itemTotal);
+        for(SubOrder subOrder : orderList) {
+            Money subOrderPrice = subOrder.getTotalPrice();
+            total = total.plus(subOrderPrice);
         }
         return total;
     }
@@ -83,9 +93,19 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Triple<Integer, Integer, Money> product : orderList) {
+        for(SubOrder product : orderList) {
             // TODO get product by id, and convert to string
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this ||
+                ((other instanceof Order) &&
+                        ((Order) other).getPersonId() == this.getPersonId() &&
+                        ((Order) other).getId() == this.getId() &&
+                        ((Order) other).getOrderList() == this.getOrderList()
+                );
     }
 }

@@ -18,7 +18,6 @@ import seedu.address.model.product.exceptions.ProductNotFoundException;
  * Supports a minimal set of list operations.
  *
  * @see Product#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueProductList implements Iterable<Product> {
 

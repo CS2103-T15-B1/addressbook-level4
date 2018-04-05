@@ -3,6 +3,9 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -32,11 +35,17 @@ public interface Model {
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
 
-    /** Deletes the given person. */
+    /** Deletes the given product. */
     void deleteProduct(Product target) throws ProductNotFoundException;
 
-    /** Adds the given person */
+    /** Adds the given product */
     void addProduct(Product product) throws DuplicateProductException;
+
+    /** Deletes the given order. */
+    void deleteOrder(Order target) throws OrderNotFoundException;
+
+    /** Adds the given order */
+    void addOrder(Order product) throws DuplicateOrderException;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -65,5 +74,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    /** Returns an unmodifiable view of the filtered order list */
+    ObservableList<Order> getFilteredOrderList();
+
+    /**
+     * Updates the filter of the filtered order list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredOrderList(Predicate<Order> predicate);
 
 }

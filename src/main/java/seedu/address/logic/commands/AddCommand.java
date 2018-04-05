@@ -12,7 +12,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  */
 public class AddCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addperson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to retail analytics. "
             + "Parameters: "
@@ -38,7 +38,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the retail analytics";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the database";
 
     private final Person toAdd;
 
