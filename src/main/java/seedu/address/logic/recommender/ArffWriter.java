@@ -11,12 +11,21 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 //@@author lowjiajin
 public class ArffWriter {
 
     private static final String PREFIX_NOT = "!";
-    private static final String MESSAGE_ARFF_WRITE_FAIL = "Failed to write .arff" +
+    private static final String ARFF_HEADER = "@RELATION ConvertedOrders\n\n" +
+            "@ATTRIBUTE age NUMERIC\n" +
+            "@ATTRIBUTE gender {M, F}\n" +
+            "@ATTRIBUTE class {%s}\n\n" +
+            "@DATA";
+
+    private static final String MESSAGE_ARFF_HEADER_WRITE_FAIL = "Failed to write .arff header information" +
+            " while building recommender training set.";
+    private static final String MESSAGE_ARFF_DATA_WRITE_FAIL = "Failed to write .arff data entries" +
             " while building recommender training set.";
     private static final String MESSAGE_ARFF_CREATION_FAIL = "Failed to create .arff" +
             " while building recommender training set.";
@@ -42,9 +51,11 @@ public class ArffWriter {
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(arffPath));
+            writeArffHeader(writer);
             for (Person person : persons) {
                 writeOrdersOfPersonToArff(productsBoughtMap, person, writer);
             }
+            writer.close();
         } catch (IOException ioe) {
             System.out.println(MESSAGE_ARFF_CREATION_FAIL);
         }
@@ -63,19 +74,31 @@ public class ArffWriter {
 
     private void writeOrdersOfPersonToArff(
             Map<String, HashSet<Integer>> productsBoughtMap, Person person, BufferedWriter writer) {
-        HashSet<Integer> productsBoughtByPerson = productsBoughtMap.get(person.getEmail());
+
+        HashSet<Integer> productsBoughtByPerson = productsBoughtMap.getOrDefault(
+                person.getEmail(), new HashSet<>());
         for (Product product : products) {
             try {
                 writer.write(formatPersonFeatures(person).concat(
                         checkProductClassLabel(product.getId(), productsBoughtByPerson)));
             } catch (IOException ioe) {
-                System.out.println(MESSAGE_ARFF_WRITE_FAIL);
+                System.out.println(MESSAGE_ARFF_DATA_WRITE_FAIL);
             }
         }
     }
 
+    private void writeArffHeader(BufferedWriter writer) {
+        String classLabels = products.stream()
+                .map(this::convertProductToBinaryLabels).collect(Collectors.joining(", "));
+        try {
+            writer.write(String.format(ARFF_HEADER, classLabels));
+        } catch (IOException ioe) {
+            System.out.println(MESSAGE_ARFF_HEADER_WRITE_FAIL);
+        }
+    }
+
     private String formatPersonFeatures(Person person) {
-        return String.format("%1$s,%2$s,", person.getAge().value, person.getGender());
+        return String.format("\n%1$s,%2$s,", person.getAge().value, person.getGender());
     }
 
     private String checkProductClassLabel(Integer productId, HashSet<Integer> productsBoughtByPerson) {
@@ -88,4 +111,7 @@ public class ArffWriter {
         }
     }
 
+    private String convertProductToBinaryLabels(Product product) {
+        return String.format("%1$s, !%1$s", String.valueOf(product.getId()));
+    }
 }

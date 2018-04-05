@@ -19,6 +19,7 @@ public class RecommenderManager {
     private static final String MESSAGE_ERROR_READING_ARFF = "Error reading ARFF, check file name and format.";
     private static final String MESSAGE_CANNOT_CLOSE_READER = "Cannot close ARFF reader, reader still in use.";
     private static final String MESSAGE_BAD_REMOVER_SETTINGS = "{@code WEKA_REMOVER_SETTINGS} has invalid value.";
+    private static final String MESSAGE_ORDERS_IS_NULL = "No orders read from .arff. Check data entries in file.";
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
@@ -69,6 +70,15 @@ public class RecommenderManager {
      * iff a given {@code trainer} can successfully perform the classifier training.
      */
     private void trainRecommenderOnOrders() {
+
+        try {
+            if (orders == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException npe) {
+            System.out.println(MESSAGE_ORDERS_IS_NULL);
+        }
+
         classifierDict = new HashMap<>();
         productsWithClassifiers = new ArrayList<>();
 
