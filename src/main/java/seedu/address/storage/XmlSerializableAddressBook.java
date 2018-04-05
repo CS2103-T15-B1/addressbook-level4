@@ -21,6 +21,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedPerson> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private List<XmlAdaptedProduct> products;
+    @XmlElement
+    private List<XmlAdaptedOrder> orders;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +33,8 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
+        products = new ArrayList<>();
+        orders = new ArrayList<>();
     }
 
     /**
@@ -38,6 +44,8 @@ public class XmlSerializableAddressBook {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        products.addAll(src.getProductList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
+        orders.addAll(src.getOrderList().stream().map(XmlAdaptedOrder::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +62,12 @@ public class XmlSerializableAddressBook {
         for (XmlAdaptedPerson p : persons) {
             addressBook.addPerson(p.toModelType());
         }
+        for (XmlAdaptedProduct pr : products) {
+            addressBook.addProduct(pr.toModelType());
+        }
+        for (XmlAdaptedOrder o : orders) {
+            addressBook.addOrder(o.toModelType());
+        }
         return addressBook;
     }
 
@@ -68,6 +82,9 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
-        return persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
+        return persons.equals(otherAb.persons)
+                && tags.equals(otherAb.tags)
+                && products.equals(otherAb.products)
+                && orders.equals(otherAb.orders);
     }
 }

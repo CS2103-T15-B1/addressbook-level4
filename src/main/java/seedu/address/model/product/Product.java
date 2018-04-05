@@ -15,17 +15,28 @@ public class Product {
     private final Money price;
     private Category category;
 
-    /**
-     *
-     * @param name
-     * @param price
-     * @param category category of the product.
-     */
     public Product(ProductName name, Money price, Category category) {
+        this.id = ++productCounter;
         this.name = name;
         this.price = price;
         this.category = category;
-        this.id = ++productCounter;
+    }
+
+    /**
+     * Adds a product with specified id. Used for regenerating product list from storage.
+     * Note that this sets the productCounter to the maximum id added into the list, to ensure distinctness of
+     * product ids.
+     * @param id
+     * @param name
+     * @param price
+     * @param category
+     */
+    public Product(int id, ProductName name, Money price, Category category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        productCounter = Math.max(productCounter, id);
     }
 
     public int getId() { return id; }
