@@ -18,5 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
     public static final Prefix PREFIX_PRICE = new Prefix("pr/");
     public static final Prefix PREFIX_ORDER = new Prefix("o/");
+    public static final Prefix PREFIX_MIN_PRICE = new Prefix("minpr/");
+    public static final Prefix PREFIX_MAX_PRICE = new Prefix("maxpr/");
 
 }

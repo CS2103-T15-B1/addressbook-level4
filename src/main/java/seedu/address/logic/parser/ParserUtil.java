@@ -13,7 +13,6 @@ import seedu.address.model.money.Money;
 import seedu.address.model.order.SubOrder;
 import seedu.address.model.person.*;
 import seedu.address.model.product.Category;
-import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.tag.Tag;
 
@@ -323,9 +322,6 @@ public class ParserUtil {
         requireNonNull(category);
         return category.isPresent() ? Optional.of(parseCategory(category.get())) : Optional.empty();
     }
-
-
-
 
     /// tag-level
 
