@@ -1,5 +1,6 @@
 package seedu.address.logic.recommender;
 
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
@@ -18,6 +19,7 @@ public class RecommenderManager {
     private static final String MESSAGE_ERROR_READING_ARFF = "Error reading ARFF, check file name and format.";
     private static final String MESSAGE_CANNOT_CLOSE_READER = "Cannot close ARFF reader, reader still in use.";
     private static final String MESSAGE_BAD_REMOVER_SETTINGS = "{@code WEKA_REMOVER_SETTINGS} has invalid value.";
+    private static final String MESSAGE_ORDERS_IS_NULL = "No orders read from .arff. Check data entries in file.";
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
@@ -32,8 +34,9 @@ public class RecommenderManager {
      * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person} .
      * @param arffPath the data folder where the .arff orders file is stored.
      */
-    public RecommenderManager(String arffPath) {
+    public RecommenderManager(String arffPath, ReadOnlyAddressBook addressBook) {
         setFilePath(arffPath);
+        writeOrdersAsTraningData(addressBook);
         parseOrdersFromFile();
         trainRecommenderOnOrders();
     }
@@ -51,6 +54,11 @@ public class RecommenderManager {
         return recommender.getRecommendations(productsWithClassifiers, person, classifierDict);
     }
 
+    private void writeOrdersAsTraningData(ReadOnlyAddressBook addressBook) {
+        ArffWriter arffWriter = new ArffWriter(arffPath, addressBook);
+        arffWriter.makeArffFromOrders();
+    }
+
     private void parseOrdersFromFile() {
         getReaderFromArff();
         getOrdersFromReader();
@@ -62,6 +70,15 @@ public class RecommenderManager {
      * iff a given {@code trainer} can successfully perform the classifier training.
      */
     private void trainRecommenderOnOrders() {
+
+        try {
+            if (orders == null) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException npe) {
+            System.out.println(MESSAGE_ORDERS_IS_NULL);
+        }
+
         classifierDict = new HashMap<>();
         productsWithClassifiers = new ArrayList<>();
 
