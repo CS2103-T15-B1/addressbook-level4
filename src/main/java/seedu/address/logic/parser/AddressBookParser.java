@@ -67,6 +67,7 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        //@@author lowjiajin
         case FindProductByCategoryCommand.COMMAND_WORD:
             return new FindProductByCategoryCommandParser().parse(arguments);
 
@@ -76,6 +77,7 @@ public class AddressBookParser {
         case FindProductByPriceCommand.COMMAND_WORD:
             return new FindProductByPriceCommandParser().parse(arguments);
 
+        //@@author
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -91,9 +93,11 @@ public class AddressBookParser {
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        //@@author lowjiajin
         case RecommendCommand.COMMAND_WORD:
             return new RecommendCommandParser().parse(arguments);
 
+        //@@author
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 

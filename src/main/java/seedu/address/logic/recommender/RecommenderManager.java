@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//@@author lowjiajin
 public class RecommenderManager {
     private static final String MESSAGE_INVALID_ARFF_PATH = "%1$s does not refer to a valid ARFF file.";
     private static final String MESSAGE_ERROR_READING_ARFF = "Error reading ARFF, check file name and format.";

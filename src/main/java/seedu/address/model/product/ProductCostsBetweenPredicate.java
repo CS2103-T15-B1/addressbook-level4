@@ -4,6 +4,7 @@ import seedu.address.model.money.Money;
 
 import java.util.function.Predicate;
 
+//@@author lowjiajin
 public class ProductCostsBetweenPredicate implements Predicate<Product> {
 
     private final Money minPrice;

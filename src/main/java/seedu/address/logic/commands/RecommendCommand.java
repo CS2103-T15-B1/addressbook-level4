@@ -8,6 +8,7 @@ import seedu.address.model.person.Person;
 
 import java.util.List;
 
+//@@author lowjiajin
 public class RecommendCommand extends Command {
 
     public static final String COMMAND_WORD = "recommend";
