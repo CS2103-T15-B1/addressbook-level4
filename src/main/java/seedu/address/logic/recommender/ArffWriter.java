@@ -76,7 +76,7 @@ public class ArffWriter {
             Map<String, HashSet<Integer>> productsBoughtMap, Person person, BufferedWriter writer) {
 
         HashSet<Integer> productsBoughtByPerson = productsBoughtMap.getOrDefault(
-                person.getEmail(), new HashSet<>());
+                person.getEmail().value, new HashSet<>());
         for (Product product : products) {
             try {
                 writer.write(formatPersonFeatures(person).concat(
