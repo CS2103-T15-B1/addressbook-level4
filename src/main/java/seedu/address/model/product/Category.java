@@ -5,7 +5,6 @@ package seedu.address.model.product;
  * Guarantees:
  */
 public class Category {
-    public final String categoryName;
     public static final String CATEGORY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public static final String MESSAGE_CATEGORY_CONSTRAINTS =
@@ -17,7 +16,6 @@ public class Category {
     public final String value;
 
     public Category(String categoryName) {
-        this.categoryName = categoryName;
         this.value = categoryName;
     }
 
@@ -29,7 +27,7 @@ public class Category {
     }
 
     @Override
-    public int hashCode() { return categoryName.hashCode(); }
+    public int hashCode() { return value.hashCode(); }
 
     @Override
     public boolean equals(Object other) {
