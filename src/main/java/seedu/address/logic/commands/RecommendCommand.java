@@ -27,13 +27,13 @@ public class RecommendCommand extends Command {
     private static final String ARFF_NAME = "data/Orders.arff";
 
     private final Index targetIndex;
+    private final ReadOnlyAddressBook addressBook;
 
     private Person personToRecommendFor;
 
     public RecommendCommand(Index targetIndex, ReadOnlyAddressBook addressBook) {
         this.targetIndex = targetIndex;
-        ArffWriter arffWriter = new ArffWriter(addressBook);
-        arffWriter.convertOrdersToArff();
+        this.addressBook = addressBook;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class RecommendCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME);
+        RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME, addressBook);
         String recommendations = recommenderManager.getRecommendations(personToRecommendFor);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToRecommendFor.getName(), recommendations));

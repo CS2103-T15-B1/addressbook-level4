@@ -1,5 +1,6 @@
 package seedu.address.logic.recommender;
 
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
@@ -32,8 +33,9 @@ public class RecommenderManager {
      * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person} .
      * @param arffPath the data folder where the .arff orders file is stored.
      */
-    public RecommenderManager(String arffPath) {
+    public RecommenderManager(String arffPath, ReadOnlyAddressBook addressBook) {
         setFilePath(arffPath);
+        writeOrdersAsTraningData(addressBook);
         parseOrdersFromFile();
         trainRecommenderOnOrders();
     }
@@ -49,6 +51,11 @@ public class RecommenderManager {
     public String getRecommendations(Person person) {
         Recommender recommender = new Recommender();
         return recommender.getRecommendations(productsWithClassifiers, person, classifierDict);
+    }
+
+    private void writeOrdersAsTraningData(ReadOnlyAddressBook addressBook) {
+        ArffWriter arffWriter = new ArffWriter(arffPath, addressBook);
+        arffWriter.makeArffFromOrders();
     }
 
     private void parseOrdersFromFile() {
