@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+        border: red;
+       }
+
+       h3 {
+         text-align: center;
+         color: white;
+         text-decoration: underline;
+       }
+       body{
+        background-color: #D2691E;
+       }
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<h3><span id="name"></span>'s Location</h3>
+<div id="map"></div>
+<script>
+    function getJsonFromUrl() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+      return result;
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+      document.getElementById("name").innerHTML=getJsonFromUrl().name;
+    });
+
+    function initMap() {
+      var  centerOfSingapore= {lat: 1.361607, lng: 103.807203};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: centerOfSingapore
+      });
+      var marker = new google.maps.Marker({
+        position: {lat: parseFloat(getJsonFromUrl().lat), lng: parseFloat(getJsonFromUrl().lon)},
+        animation: google.maps.Animation.DROP,
+        map: map
+      });
+    }
+  </script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2xHmZDa_1SLz0-0NVx1Peqzp13mXrNkA&callback=initMap">
+</script>
+</body>
+</html>

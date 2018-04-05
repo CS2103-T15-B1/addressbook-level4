@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.net.URL;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -13,6 +14,7 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.RenderMapEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,8 +23,9 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final String PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/PersonLocationPage.html?name=%s&lat=%s&lon=%s";
+
+    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/SelectedPersonsLocationPage.html";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -41,8 +44,20 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+    /**
+     * Loads location of person in Google Maps
+     */
+    private void loadPersonLocationPage(Person person) {
+        loadPage(String.format(PERSON_LOCATION_PAGE_URL, person.getName().fullName, person.getLatitude().value,person.getLongitude().value));
+
+    }
+    /**
+     * Loads location of selected persons in Google Maps
+     */
+    private void loadSelectedPersonsLocationPage(List<Person> selectedPersons) {
+        loadPage(SELECTED_PERSON_LOCATION_PAGE_URL);
+//        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
+//        loadPage(defaultPage.toExternalForm());
     }
 
     public void loadPage(String url) {
@@ -67,6 +82,12 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection().person);
+        loadPersonLocationPage(event.getNewSelection().person);
+    }
+
+    @Subscribe
+    private void handleRenderMapEvent(RenderMapEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadSelectedPersonsLocationPage(event.getSelectedPersons());
     }
 }
