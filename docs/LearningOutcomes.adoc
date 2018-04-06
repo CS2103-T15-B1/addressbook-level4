@@ -1,4 +1,4 @@
-= Learning Outcomes
+ Learning Outcomes
 :toc: macro
 :toc-title:
 :toclevels: 1
