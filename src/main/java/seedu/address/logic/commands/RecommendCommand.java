@@ -16,7 +16,7 @@ public class RecommendCommand extends Command {
     public static final String COMMAND_WORD = "recommend";
 
     public static final String MESSAGE_SUCCESS = "Recommendations for: %1$s\n" +
-            "Format: [<product id, probability of buying>, <...>, ...]\n" +
+            "Output format: [<product id, probability of buying>...]\n" +
             "%2$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the products most likely to be bought by the " +
