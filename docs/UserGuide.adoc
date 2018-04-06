@@ -13,11 +13,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team Retailer Analytics`      Since: `Feb 2018`      Licence: `MIT`
+By: `Team T15-B1`      Since: `Feb 2018`      Licence: `MIT`
 
 == Introduction
 
-Retailer Analytics (RA) is for *retailers who handle hundreds to thousands of customers and orders and who are comfortable with using a desktop app to manage their analytics*. More importantly, RA is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RA can get your customer analytics tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Retail Analytics (RA) is for *retailers who handle hundreds to thousands of customers and orders and who are comfortable with using a desktop app to manage their analytics*. More importantly, RA is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RA can get your customer analytics tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -81,12 +81,32 @@ Adds an order to Retail Analytics app +
 Format: `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST`
 
 [TIP]
-An order can have multiple suborders, but must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
+An order must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
 
 Examples:
 
 * `addorder e/alex@example.com o/1 2 $3` adds an order where alex bought 2 pieces of product whose id is 1 for $3 each.
-* `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1` example with 2 orders
+* `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1` adds an order where alex bought 1 of product 1 for $1 and 1 of product 2 for $1, making $2 total.
+
+=== Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Finding all products within a certain price range: `findproductbyprice`
 Filters out all the products within the range [`MIN_PRICE`, `MAX_PRICE`] and displays them in the GUI.+
@@ -159,26 +179,6 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Deleting a person : `delete`
 
@@ -309,6 +309,10 @@ There is no need to save manually.
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague`
+* *Add Product* `addproduct n/NAME pr/PRICE c/CATEGORY` +
+e.g. `addproduct n/Egg pr/$1 c/Food`
+* *Add Order* `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST` +
+e.g. `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
@@ -316,9 +320,13 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Find Product by Price* `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
+* *Find Product by Category* `findproductbycategory CATEGORY`
 * *List* : `list`
 * *Geographically Visualise Data* : `map`
 * *Help* : `help`
+* *Recommendations* `recommend INDEX` +
+e.g. `recommend 1`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
