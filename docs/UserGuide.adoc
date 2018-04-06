@@ -35,12 +35,6 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all customers
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 g/M lat/1.2345 lon/5.4321` : adds a customer named `John Doe` to Retail Analytics.
-* **`delete`**`3` : deletes the 3rd customer shown in the current list
-* *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
@@ -62,7 +56,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to Retail Analytics +
+Adds a person to Retail Analytics app +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...`
 
 [TIP]
@@ -73,12 +67,39 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
 
+=== Adding a product: `addproduct`
+
+Adds a person to Retail Analytics app +
+Format: `addproduct n/NAME pr/PRICE c/CATEGORY`
+
+=== Adding an order: `addorder`
+Adds an order to Retail Analytics app +
+Format: `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST`
+
+[TIP]
+An order can have multiple suborders, but must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
+
+=== Finding product recommendations for a person: `recommend`
+Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
+
+An analagous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
+
+(For V1.5rc) - Does not recommend items a person has already bought. +
+(For V2.0) - Introduce more features other than age and gender.
+
+[TIP]
+The sample data provided includes an order history of mostly younger persons buying `TrendyShirt`, older persons buying `Dentures`, females buying `Lipstick`, and a general audience for `Toothbrush`. You can casually validate the algorithm by noticing that the recommendations for a younger person ranks `TrendyShirt` at the front of the output, while `Dentures` will be right at the rear. Experiment by adding different persons, products, and orders, and see how he recommendations respond!
+
+Examples
+
+* `recommend 1` finds recommendations for person whose last shown index is 1.
+
 === Listing all persons : `list`
 
 Shows a list of all persons in Retail Analytics. +
 Format: `list`
 
-=== Visulising locations of all persons in a map: `map`
+=== Visualising locations of all persons in a map: `map`
 
 Displays spread of all people in Retail Analytics on a map. +
 Format: `map`
