@@ -150,7 +150,10 @@ Format: `list`
 
 === Visualising locations of all persons in a map: `map`
 
-Displays spread of all people in Retail Analytics on a map. +
+Displays spread of all people in Retail Analytics on a map with clustering.
+ Zooming in and out of the map cause the clustering to change.
+ For the current version, the map command still uses stubs.
+ Note that you can alsp click on a person to view his location individually+
 Format: `map`
 
 [TIP]
