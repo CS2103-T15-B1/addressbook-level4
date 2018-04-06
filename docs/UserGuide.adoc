@@ -79,13 +79,25 @@ Format: `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUA
 [TIP]
 An order can have multiple suborders, but must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
 
+=== Finding all products within a certain price range: `findproductbyprice`
+Filters out all the products within the range [`MIN_PRICE`, `MAX_PRICE`] and displays them in the GUI.+
+
+Format: `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
+
+=== Find all products of a certain category: `findproductbycategory`
+Filters out all the products of a specific category and displays them in the GUI.
+
+Format: `findproductbycategory CATEGORY`
+
 === Finding product recommendations for a person: `recommend`
 Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
 
 An analagous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
 
 (For V1.5rc) - Does not recommend items a person has already bought. +
-(For V2.0) - Introduce more features other than age and gender.
+(For V2.0) - Introduce more features other than age and gender.+
+
+Format: `recommend INDEX`
 
 [TIP]
 The sample data provided includes an order history of mostly younger persons buying `TrendyShirt`, older persons buying `Dentures`, females buying `Lipstick`, and a general audience for `Toothbrush`. You can casually validate the algorithm by noticing that the recommendations for a younger person ranks `TrendyShirt` at the front of the output, while `Dentures` will be right at the rear. Experiment by adding different persons, products, and orders, and see how he recommendations respond!
