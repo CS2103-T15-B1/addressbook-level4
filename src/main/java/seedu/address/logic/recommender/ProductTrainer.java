@@ -11,6 +11,7 @@ import weka.filters.unsupervised.instance.RemoveWithValues;
 
 import java.util.Random;
 
+//@@author lowjiajin
 public class ProductTrainer {
     private static final String MESSAGE_CANNOT_ISOLATE_PRODUCT = "Error when isolating orders of a given product. " +
             "Check that {@code isolator} has valid settings for orders";

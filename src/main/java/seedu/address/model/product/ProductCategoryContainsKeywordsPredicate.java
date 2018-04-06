@@ -5,6 +5,7 @@ import seedu.address.commons.util.StringUtil;
 import java.util.List;
 import java.util.function.Predicate;
 
+//@@author lowjiajin
 public class ProductCategoryContainsKeywordsPredicate implements Predicate<Product> {
     private final List<String> keywords;
 

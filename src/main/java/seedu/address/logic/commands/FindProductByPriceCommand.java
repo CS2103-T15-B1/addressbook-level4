@@ -6,6 +6,7 @@ import seedu.address.model.product.ProductCostsBetweenPredicate;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
 
+//@@author lowjiajin
 public class FindProductByPriceCommand extends Command {
 
     public static final String COMMAND_WORD = "findproductbyprice";

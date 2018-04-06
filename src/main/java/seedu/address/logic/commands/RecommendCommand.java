@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.recommender.ArffWriter;
 import seedu.address.logic.recommender.RecommenderManager;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 import java.util.List;
 
+//@@author lowjiajin
 public class RecommendCommand extends Command {
 
     public static final String COMMAND_WORD = "recommend";
@@ -24,11 +27,13 @@ public class RecommendCommand extends Command {
     private static final String ARFF_NAME = "data/Orders.arff";
 
     private final Index targetIndex;
+    private final ReadOnlyAddressBook addressBook;
 
     private Person personToRecommendFor;
 
-    public RecommendCommand(Index targetIndex) {
+    public RecommendCommand(Index targetIndex, ReadOnlyAddressBook addressBook) {
         this.targetIndex = targetIndex;
+        this.addressBook = addressBook;
     }
 
     @Override
@@ -41,7 +46,7 @@ public class RecommendCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME);
+        RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME, addressBook);
         String recommendations = recommenderManager.getRecommendations(personToRecommendFor);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToRecommendFor.getName(), recommendations));

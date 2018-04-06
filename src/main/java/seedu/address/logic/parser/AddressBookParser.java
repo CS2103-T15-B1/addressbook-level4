@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Parses user input.
@@ -24,10 +26,11 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param addressBook used to transmit the address book for recommender
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, ReadOnlyAddressBook addressBook) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -67,6 +70,7 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        //@@author lowjiajin
         case FindProductByCategoryCommand.COMMAND_WORD:
             return new FindProductByCategoryCommandParser().parse(arguments);
 
@@ -76,6 +80,7 @@ public class AddressBookParser {
         case FindProductByPriceCommand.COMMAND_WORD:
             return new FindProductByPriceCommandParser().parse(arguments);
 
+        //@@author
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -91,9 +96,11 @@ public class AddressBookParser {
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        //@@author lowjiajin
         case RecommendCommand.COMMAND_WORD:
-            return new RecommendCommandParser().parse(arguments);
+            return new RecommendCommandParser(addressBook).parse(arguments);
 
+        //@@author
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 

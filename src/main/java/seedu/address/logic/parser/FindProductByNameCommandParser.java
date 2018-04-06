@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+//@@author lowjiajin
 public class FindProductByNameCommandParser implements Parser<FindProductByNameCommand> {
 
     public FindProductByNameCommand parse(String args) throws ParseException {

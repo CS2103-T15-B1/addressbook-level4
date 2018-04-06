@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 
+//@@author lowjiajin
 public class FindProductByNameCommand extends Command {
 
     public static final String COMMAND_WORD = "findproductbyname";

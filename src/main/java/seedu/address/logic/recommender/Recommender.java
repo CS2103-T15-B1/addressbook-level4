@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import static java.lang.Double.compare;
 
+//@@author lowjiajin
 public class Recommender {
 
     private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "Cannot classify instance.";

@@ -12,6 +12,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 
+//@@author lowjiajin
 public class FindProductByPriceCommandParser implements Parser<FindProductByPriceCommand> {
 
     public FindProductByPriceCommand parse(String args) throws ParseException {
