@@ -13,27 +13,29 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::sivalavida.jpg[width="150", align="left"]
 
 Role:
-Model Developer
-Git expert
+Head Visualization Developer
 
 '''
 
 === Low Jia Jin
 image::lowjiajin.png[width="150", align="left"]
 
-Role: UI Developer
+Role:
+Head Machine Learning Engineer
 
 '''
 
 === Chu Qinghao
 image::qinghao1.jpg[width="150", align="left"]
 
-Role: Logic Developer
+Role:
+Head Backend Engineer
 
 '''
 
 === He Yingxu
 
-Role: Storage Developer
+Role:
+Head Backend Engineer
 
 '''
