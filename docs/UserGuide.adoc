@@ -57,7 +57,7 @@ Format: `help`
 === Adding a person: `add`
 
 Adds a person to Retail Analytics app +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -95,7 +95,7 @@ Format: `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
 
 Example:
 
-* `findproductbyprice minpr/10 maxpr/200`
+* `findproductbyprice minpr/10 maxpr/200` finds products with price between 10 and 200, inclusive
 
 === Find all products of a certain category: `findproductbycategory`
 Filters out all the products of a specific category and displays them in the GUI.
@@ -104,12 +104,12 @@ Format: `findproductbycategory CATEGORY`
 
 Example:
 
-* `findproductbycategory Clothing`
+* `findproductbycategory Clothing` finds all products of category `Clothing`
 
 === Finding product recommendations for a person: `recommend`
 Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
 
-An analagous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
+An analogous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
 
 (For V1.5rc) - Does not recommend items a person has already bought. +
 (For V2.0) - Introduce more features other than age and gender.+
@@ -132,6 +132,13 @@ Format: `list`
 
 Displays spread of all people in Retail Analytics on a map. +
 Format: `map`
+
+[TIP]
+The map clusters people by location. These clusters are displayed as blue dots.
+
+Example
+
+* `map all` displays everyone in the map
 
 === Editing a person : `edit`
 
@@ -231,7 +238,8 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify Retail Analytics's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify Retail Analytics's content  +
+(`add`, `delete`, `edit`, `addproduct`, `addorder` and `clear`).
 ====
 
 Examples:
@@ -290,8 +298,6 @@ There is no need to save manually.
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
