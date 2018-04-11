@@ -35,15 +35,20 @@ public class ArffWriter {
     private final ObservableList<Order> orders;
     private final String arffPath;
 
+    private HashMap<Integer, String> productIdToNameMap;
+
     public ArffWriter(String arffPath, ReadOnlyAddressBook addressBook) {
         persons = addressBook.getPersonList();
         products = addressBook.getProductList();
         orders = addressBook.getOrderList();
         this.arffPath = arffPath;
+
+        productIdToNameMap = new HashMap<>();
     }
 
     public void makeArffFromOrders() {
 
+        makeProductIdToNameMap();
         Map<String, HashSet<Integer>> productsBoughtMap = new HashMap<>();
         for (Order order : orders) {
             recordWhichPersonBoughtWhichProduct(productsBoughtMap, order);
@@ -80,7 +85,7 @@ public class ArffWriter {
         for (Product product : products) {
             try {
                 writer.write(formatPersonFeatures(person).concat(
-                        checkProductClassLabel(product.getId(), productsBoughtByPerson)));
+                        getProductClassLabel(product.getId(), productsBoughtByPerson)));
             } catch (IOException ioe) {
                 System.out.println(MESSAGE_ARFF_DATA_WRITE_FAIL);
             }
@@ -101,17 +106,23 @@ public class ArffWriter {
         return String.format("\n%1$s,%2$s,", person.getAge().value, person.getGender());
     }
 
-    private String checkProductClassLabel(Integer productId, HashSet<Integer> productsBoughtByPerson) {
+    private String getProductClassLabel(Integer productId, HashSet<Integer> productsBoughtByPerson) {
         boolean hasBoughtProduct = productsBoughtByPerson.contains(productId);
 
         if (hasBoughtProduct) {
-            return String.valueOf(productId);
+            return productIdToNameMap.get(productId);
         } else {
-            return PREFIX_NOT.concat(String.valueOf(productId));
+            return PREFIX_NOT.concat(productIdToNameMap.get(productId));
         }
     }
 
     private String convertProductToBinaryLabels(Product product) {
-        return String.format("%1$s, !%1$s", String.valueOf(product.getId()));
+        return String.format("%1$s, !%1$s", productIdToNameMap.get(product.getId()));
+    }
+
+    private void makeProductIdToNameMap() {
+        for (Product product : products) {
+            productIdToNameMap.put(product.getId(), product.getName().fullProductName);
+        }
     }
 }
