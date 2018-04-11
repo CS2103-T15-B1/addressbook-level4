@@ -54,18 +54,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `addperson`
 
 Adds a person to Retail Analytics app +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
+Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
+* `addperson n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
+* `addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
 
 === Adding a product: `addproduct`
 
@@ -185,10 +185,10 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Deleting a person : `delete`
+=== Deleting a person : `deleteperson`
 
 Deletes the specified person from Retail Analytics. +
-Format: `delete INDEX`
+Format: `deleteperson INDEX`
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -199,10 +199,10 @@ Format: `delete INDEX`
 Examples:
 
 * `list` +
-`delete 2` +
+`deleteperson 2` +
 Deletes the 2nd person in Retail Analytics.
 * `find Betsy` +
-`delete 1` +
+`deleteperson 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Selecting a person : `select`
