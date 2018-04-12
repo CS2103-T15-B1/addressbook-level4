@@ -1,6 +1,8 @@
 package seedu.address.model.order;
 
 import seedu.address.model.money.Money;
+import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -91,14 +93,39 @@ public class Order {
 
     /**
      * Performs some basic checks to see if order is valid.
-     * @return
+     * - Checks that customer email is valid
+     * - Checks that all product IDs exist
+     * @param customers list of all customers to check email against
+     * @param products list of all products to check product ID against
+     * @return validity
      */
-    public boolean isValid() {
+    public boolean isValid(List<Person> customers, List<Product> products) {
         boolean valid = true;
-        // TODO Check if all products exists
+
+        //Check that email is valid
+        boolean foundEmail = false;
+        for (Person customer : customers) {
+            String email = customer.getEmail().toString();
+            if (email.equals(personId)) {
+                foundEmail = true;
+                break;
+            }
+        }
+        valid = foundEmail && valid; // Trip valid to false if email not found
+
+        //Check that productIDs are valid (using SubOrder class)
+        boolean allSubOrdersValid = true;
+        for (SubOrder subOrder : subOrders) {
+            if (!subOrder.isValid(products)) {
+                allSubOrdersValid = false;
+                break;
+            }
+        }
+        valid = allSubOrdersValid && valid;
 
         // Check that total order price is non-negative
-        valid = valid && !this.getOrderTotal().isMinus();
+        boolean negativeOrderPrice = this.getOrderTotal().isMinus();
+        valid = !negativeOrderPrice && valid;
 
         return valid;
     }
