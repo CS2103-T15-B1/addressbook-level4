@@ -40,12 +40,12 @@ public class RecommendCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         List<Person> lastShownList = model.getFilteredPersonList();
-        personToRecommendFor = lastShownList.get(targetIndex.getZeroBased());
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        personToRecommendFor = lastShownList.get(targetIndex.getZeroBased());
         RecommenderManager recommenderManager = new RecommenderManager(ARFF_NAME, addressBook);
         String recommendations = recommenderManager.getRecommendations(personToRecommendFor);
 

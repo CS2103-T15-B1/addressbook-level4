@@ -80,6 +80,9 @@ public class AddressBookParser {
         case FindProductByPriceCommand.COMMAND_WORD:
             return new FindProductByPriceCommandParser().parse(arguments);
 
+        case ListProductCommand.COMMAND_WORD:
+            return new ListProductCommand();
+
         //@@author
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
