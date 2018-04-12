@@ -58,11 +58,7 @@ public class Product {
         }
 
         Product otherPerson = (Product) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getId() == (this.getId())
-                && otherPerson.getPrice().equals(this.getPrice())
-                && otherPerson.getCategory().equals(this.getCategory())
-                ;
+        return otherPerson.getName().equals(this.getName());
     }
 
     public String toString() {
