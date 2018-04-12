@@ -60,25 +60,25 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `addperson`
 
 Adds a person to Retail Analytics +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...`
+Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
+* `addperson n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
+* `addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
 
 === Listing all persons : `list`
 
 Shows a list of all persons in Retail Analytics. +
 Format: `list`
 
-=== Visulising locations of all persons in a map: `map`
+=== Visualising locations of all persons in a map: `map`
 
 Displays spread of all people in Retail Analytics on a map. +
 Format: `map`
@@ -123,10 +123,10 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a person : `deleteperson`
 
 Deletes the specified person from Retail Analytics. +
-Format: `delete INDEX`
+Format: `deleteperson INDEX`
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -137,10 +137,10 @@ Format: `delete INDEX`
 Examples:
 
 * `list` +
-`delete 2` +
+`deleteperson 2` +
 Deletes the 2nd person in Retail Analytics.
 * `find Betsy` +
-`delete 1` +
+`deleteperson 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Selecting a person : `select`
@@ -186,7 +186,7 @@ Undoable commands: those commands that modify Retail Analytics's content (`add`,
 
 Examples:
 
-* `delete 1` +
+* `deleteperson 1` +
 `list` +
 `undo` (reverses the `delete 1` command) +
 
@@ -195,7 +195,7 @@ Examples:
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `deleteperson 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -207,15 +207,15 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
+* `deleteperson 1` +
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 
-* `delete 1` +
+* `deleteperson 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `deleteperson 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -251,11 +251,11 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague`
+* *Add* `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...` +
+e.g. `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
+* *Delete* : `deleteperson INDEX` +
+e.g. `deleteperson 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
