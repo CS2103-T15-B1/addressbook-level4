@@ -1,0 +1,51 @@
+= Chu Qinghao - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Retail Analytics
+
+---
+
+== Overview
+
+Retail Analytics is a desktop application written in Java for retailers that allows them to view, list and edit customers, orders and products. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added extra tables
+and relational logic so that advanced queries can be made in the application.
+
+
+== Summary of contributions
+
+* *Major enhancement*: added an extra order table to the application
+** What it does: allows the user to add orders which have customer, product and price fields.
+** Justification: This feature is crucial for the user of our product (retailers) and orders are a
+    central feature to our product.
+** Highlights: This enhancement greatly increased the complexity of the software (it only had one table originally). It required an in-depth analysis of code and design alternatives.
+   The implementation too was challenging as it required modifications to most of the code base at all abstraction levels.
+
+* *Major enhancement*: added a way to sort customers by total spending, total spending since `date` and last order date.
+** What it does: allows the user to sort the customer list by the above-mentioned variables.
+** Justification: This feature provides valuable insights for the retailers and allows them to see who are the most active and valuable customers.
+
+* *Code contributed*:
+//TODO
+
+* *Other contributions*:
+//TODO
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5` (4 releases) on GitHub
+** Enhancements to existing features:
+//TODO
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+
+== Contributions to the User Guide
+
+//TODO
+
+== Contributions to the Developer Guide
+
+//TODO
