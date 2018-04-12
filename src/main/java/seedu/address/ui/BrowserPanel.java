@@ -25,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/PersonLocationPage.html?name=%s&lat=%s&lon=%s";
 
-    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/SelectedPersonsLocationPage.html";
+    public static final String SELECTED_PERSON_LOCATION_PAGE_URL = "https://sivalavida.github.io/SelectedPersonsLocationPage.html?";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -49,15 +49,25 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadPersonLocationPage(Person person) {
         loadPage(String.format(PERSON_LOCATION_PAGE_URL, person.getName().fullName, person.getLatitude().value,person.getLongitude().value));
-
     }
     /**
      * Loads location of selected persons in Google Maps
      */
     private void loadSelectedPersonsLocationPage(List<Person> selectedPersons) {
-        loadPage(SELECTED_PERSON_LOCATION_PAGE_URL);
+        String completeUrl = SELECTED_PERSON_LOCATION_PAGE_URL;
+        boolean firstPerson = true;
+        for (Person person:selectedPersons){
+            if (!firstPerson){
+                completeUrl += "&";
+            }else{
+                firstPerson = false;
+            }
+            completeUrl += String.format("lat=%s,%s",person.getLatitude().value,person.getLongitude().value);
+        }
+        loadPage(completeUrl);
 //        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
 //        loadPage(defaultPage.toExternalForm());
+
     }
 
     public void loadPage(String url) {
