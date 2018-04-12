@@ -1,6 +1,9 @@
 package seedu.address.model.order;
 
 import seedu.address.model.money.Money;
+import seedu.address.model.product.Product;
+
+import java.util.List;
 
 /**
  * SubOrder class for each single product purchased in an Order. Should be composited with Order
@@ -38,5 +41,29 @@ public class SubOrder {
 
     public Money getTotalPrice() {
         return productPrice.times(numProduct);
+    }
+
+    /**
+     * Checks that suborder is valid
+     * - product ID is in list of products
+     * - productPrice is non-negative
+     * @param products list of products to check against (global list)
+     * @return validity
+     */
+    public boolean isValid(List<Product> products) {
+        boolean valid = true;
+        boolean idFound = false;
+        for(Product product : products) {
+            if (product.getId() == productID) {
+                idFound = true;
+                break;
+            }
+        }
+        valid = idFound && valid; //Trip valid to false if product isn't found
+
+        boolean negativeProductPrice = productPrice.isMinus();
+        valid = !negativeProductPrice && valid;
+
+        return valid;
     }
 }
