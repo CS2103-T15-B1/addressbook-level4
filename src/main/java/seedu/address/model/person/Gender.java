@@ -15,7 +15,7 @@ public class Gender {
     public static final String MALE_SHORTFORM = "M";
     public static final String FEMALE_SHORTFORM = "F";
 
-    public String value;
+    public String value;//either "M" or "F"
 
     /**
      * Constructs a {@code Gender}.
