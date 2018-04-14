@@ -48,6 +48,13 @@ public class Age {
         return false;
     }
 
+    /**
+     * Returns the int value of the persons Age
+     */
+    public int getNumericalAge() {
+        return Integer.parseInt(value);
+    }
+
     @Override
     public String toString() {
         return value;
