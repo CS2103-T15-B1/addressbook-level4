@@ -54,22 +54,22 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `addperson`
 
-Adds a person to Retail Analytics app +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
+Adds a person to Retail Analytics app. +
+Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
+* `addperson n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/301.1, block 123, #01-01`
+* `addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/302.5 t/criminal`
 
 === Adding a product: `addproduct`
 
-Adds a person to Retail Analytics app +
+Adds a product to Retail Analytics app. +
 Format: `addproduct n/NAME pr/PRICE c/CATEGORY`
 
 Example:
@@ -77,7 +77,7 @@ Example:
 * `addproduct n/Egg pr/$1 c/Food`
 
 === Adding an order: `addorder`
-Adds an order to Retail Analytics app +
+Adds an order to Retail Analytics app. +
 Format: `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST`
 
 [TIP]
@@ -127,7 +127,9 @@ Example:
 * `findproductbycategory Clothing` finds all products of category `Clothing`
 
 === Finding product recommendations for a person: `recommend`
-Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
+Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. The model is trained only on a person's age and gender. To cap the influence of high volume buyers, each multiple purchases of the same product are ignored. +
+
+Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
 
 An analogous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
 
@@ -183,10 +185,10 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Deleting a person : `delete`
+=== Deleting a person : `deleteperson`
 
 Deletes the specified person from Retail Analytics. +
-Format: `delete INDEX`
+Format: `deleteperson INDEX`
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -197,10 +199,10 @@ Format: `delete INDEX`
 Examples:
 
 * `list` +
-`delete 2` +
+`deleteperson 2` +
 Deletes the 2nd person in Retail Analytics.
 * `find Betsy` +
-`delete 1` +
+`deleteperson 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Selecting a person : `select`
@@ -247,7 +249,7 @@ Undoable commands: those commands that modify Retail Analytics's content  +
 
 Examples:
 
-* `delete 1` +
+* `deleteperson 1` +
 `list` +
 `undo` (reverses the `delete 1` command) +
 
@@ -256,7 +258,7 @@ Examples:
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `deleteperson 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -268,15 +270,15 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
+* `deleteperson 1` +
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 
-* `delete 1` +
+* `deleteperson 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `deleteperson 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -310,15 +312,16 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague`
+
+* *Add* `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]...` +
+e.g. `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague`
 * *Add Product* `addproduct n/NAME pr/PRICE c/CATEGORY` +
 e.g. `addproduct n/Egg pr/$1 c/Food`
 * *Add Order* `add e/EMAIL o/SUBORDER...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST` +
 e.g. `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
+* *Delete* : `deleteperson INDEX` +
+e.g. `deleteperson 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +

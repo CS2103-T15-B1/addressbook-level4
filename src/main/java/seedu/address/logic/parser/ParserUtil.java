@@ -274,20 +274,12 @@ public class ParserUtil {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
         } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
             String currencySymbol = trimmedPrice.substring(0,1);
-            currency = parseCurrency(currencySymbol);
+            currency = Money.parseCurrency(currencySymbol);
             trimmedPrice = trimmedPrice.substring(1).trim();
         }
-        return new Money(new BigDecimal(trimmedPrice), currency);
-    }
 
-    private static Currency parseCurrency(String price) {
-        for (Locale locale : NumberFormat.getAvailableLocales()) {
-            String code = NumberFormat.getCurrencyInstance(locale).getCurrency().getSymbol();
-            if (price.equals(code)) {
-                return Currency.getInstance(locale);
-            }
-        }
-        return Money.DEFAULT_CURRENCY;
+        return new Money(new BigDecimal(trimmedPrice), currency);
+
     }
 
     /**
