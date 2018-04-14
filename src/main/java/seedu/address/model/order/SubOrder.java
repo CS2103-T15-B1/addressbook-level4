@@ -66,4 +66,16 @@ public class SubOrder {
 
         return valid;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Product ID: ");
+        sb.append(productID);
+        sb.append(" x");
+        sb.append(numProduct);
+        sb.append(" @");
+        sb.append(productPrice);
+        return sb.toString();
+    }
 }
