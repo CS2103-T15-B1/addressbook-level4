@@ -144,6 +144,31 @@ public class Money implements Comparable<Money>, Serializable {
         return test.matches(MONEY_VALIDATION_REGEX_WITH_CURRENCY);
     }
 
+//    /**
+//     *
+//     */
+//    public static boolean hasCorrectDigit(Currency currency, String test) {
+//
+//    }
+
+    /**
+     * Return the currency that the symbol represents if the symbol is valid, otherwise returns the default
+     * currency
+     *
+     * @param symbol
+     * @return
+     */
+    public static Currency parseCurrency(String symbol) {
+        for (Currency currency: Currency.getAvailableCurrencies()) {
+            String code = currency.getSymbol();
+            if (symbol.equals(code)) {
+                return currency;
+            }
+        }
+        return Money.DEFAULT_CURRENCY;
+    }
+
+
     /**
      * Returns true if a given string is a valid Money without currency symbol.
      */

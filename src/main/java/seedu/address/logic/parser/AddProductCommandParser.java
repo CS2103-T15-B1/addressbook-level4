@@ -40,6 +40,8 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
             return new AddProductCommand(product);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage(), iae);
         }
     }
 
