@@ -15,30 +15,26 @@ Retail Analytics (RA) is for e-retailers who handle of customers and orders and 
 * *Major enhancement*: added `map` command and the HTML page for the browser
 ** What it does: Renders a webpage which graphically visualises a list of querried customers on Google Maps.
 ** Justification: This feature improves the product significantly because this tool enables the retailer to gain knowledge of where his customers are located. Therefore, he would be able to make better decisions for example as to where to locate a new warehouse.
-** Highlights: To come up with this command, I had to create a way to generate queries for the retailer to filter his list of customers by age, gender.As such it was
+** Highlights: To come up with this command, I had to create a way to generate queries for the retailer to filter his list of customers by age, gender, name and tags. As such I have to create several predicates to filter the customers. I also had to read up on the Google Maps Clustering API in order to learn how to use it for our application.
 
 * *Minor enhancement*: added several attributes to the person model such as `Age`, `Gender`, `Latitude`, `Longitude`.
 ** Justification: This feature is required so that we can get the location of the customers and the so that we can filter the list of customers based on these parameters which will be useful for the user.
 
 * *Code contributed*:
-link:..\collated\functional\Sivalavida.md[Functional Code]
-link:..\collated\test\Sivalavida.md[Test Code]
+* *Code contributed*: https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/Sivalavida.md[Functional Code], https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/Sivalavida.md[Test Code]
+
 
 * *Other contributions*:
 ** General team tasks:
-*** Added sample data for Person with new attributes which I created.
+*** Added sample data for Person with new attributes which I created.(Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#23])
 *** Created the HTML page for the Browser Panel hosted on my Github account. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#37])
 ** Documentation:
 *** Wrote Appendix D of the Developer Guide. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#3])
 *** Edited documentation outside of my feature contribution to keep the documentation updated.
-
 ** Project management:
 *** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
-** Enhancements to existing features:
-** Documentation:
-***  User Guide
 ** Community:
-*** PRs reviewed : https://github.com[#27], https://github.com[#34]
+*** Reported bugs and suggestions for other group in class.
 
 == Contributions to the User Guide
 
