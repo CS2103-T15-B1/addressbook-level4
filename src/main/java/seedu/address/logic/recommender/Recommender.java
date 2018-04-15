@@ -19,6 +19,8 @@ import weka.core.Instances;
  */
 public class Recommender {
 
+    private static Recommender theOne = null;
+
     private static final int POSITIVE_CLASS_INDEX = 0;
 
     private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "The attribute format has to match the classifier "
@@ -29,6 +31,17 @@ public class Recommender {
     private static final String CLASS_ATTRIBUTE_NAME = "class";
     private static final String INSTANCE_TYPE = "person";
     private static final ArrayList<String> GENDER_NOMINALS = new ArrayList<String>(Arrays.asList("m", "f"));
+
+    private Recommender() {
+        // Empty constructor for singleton class
+    }
+
+    public static Recommender createRecommender() {
+        if (theOne == null) {
+            theOne = new Recommender();
+        }
+        return theOne;
+    }
 
     /**
      * Determines the likelihood of a person wanting to buy any product, assuming the product has a classifier,
