@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
 
+//@@author YingxuH
 /**
  * An UI component that displays information of a {@code Product}.
  */
@@ -33,7 +34,7 @@ public class ProductCard extends UiPart<Region> {
     @FXML
     private Label price;
     @FXML
-    private FlowPane category;
+    private Label category;
 
     public ProductCard(Product product, int displayedIndex) {
         super(FXML);
@@ -41,7 +42,8 @@ public class ProductCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex));
         name.setText(product.getName().fullProductName);
         price.setText(product.getPrice().repMoney);
-        category.getChildren().add(new Label("- " + product.getCategory().value));
+        category.setText("- " + product.getCategory().value);
+
     }
 
     @Override

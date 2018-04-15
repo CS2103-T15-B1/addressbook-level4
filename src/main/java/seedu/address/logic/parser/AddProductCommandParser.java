@@ -12,6 +12,7 @@ import seedu.address.model.money.Money;
 import seedu.address.model.money.exceptions.CurrencyUnknownException;
 import seedu.address.model.product.*;
 
+//@@author YingxuH
 /**
  * Parses input arguments and creates a new AddProductCommand object
  */
