@@ -3,6 +3,7 @@ package seedu.address.model.product;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author YingxuH
 /**
  * Represents a Person's ProductName in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidProductName(String)}

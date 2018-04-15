@@ -17,6 +17,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ProductPanelSelectionChangedEvent;
 import seedu.address.model.product.Product;
 
+//@@author YingxuH
 /**
  * Panel containing the list of products.
  */

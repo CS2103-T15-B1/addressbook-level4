@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Low Jia Jin - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Low Jia Jin - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-retail-analytics"><a class="link" href="#project-retail-analytics">PROJECT: Retail Analytics</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Retail Analytics is a desktop application written in Java for retailers of small and medium sized businesses who are comfortable managing their marketing informatics via CLI.
+It allows them to view, list and edit customers, orders and products, as well as obtain marketing insights from said data.</p>
+</div>
+<div class="paragraph">
+<p>There is a supplementary GUI created with JavaFX for visualization purposes.
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added extra tables
+and relational logic so that advanced queries can be made in the application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Added the <code>recommend</code> command and all the logic and utilities backing it.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Given a single user, determine which products he/she is likely to want to buy given the order history of the entire company.</p>
+</li>
+<li>
+<p>Justification: Many businesses nowadays use product recommendations systems to increase sales through targeted advertising.
+Akin to the emails you get from Amazon recommending products you might want.
+Through this <code>recommend</code> command, business owners are able to know which customers to target with which products in their inventory, ultimately boosting sales.</p>
+</li>
+<li>
+<p>Highlights: This enhancement morphs the software beyond a mere recording tool, to one which is capable of offering marketing insights that may not be self-evident from the raw data alone.
+It also works reasonably well despite being trained on only two features, which is a boon for smaller businesses who might not want to manage (or might not even have) excessive user data. It is a complex feature requiring six distinct classes to manage the interfacing between the app and the classification systems, as well as model training and testing protocols.</p>
+</li>
+<li>
+<p>Credits: The open source Machine Learning library, Weka, was used to obtain the Naive Bayes classifier and the classifier&#8217;s instance feeding pipeline.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Added 2 commands to allow the listing of all products <strong>within a certain price range</strong>, or <strong>from a certain category</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Justification: Even small and medium businesses might have a significant inventory of products that exceeds what the GUI can conveniently display at one time.
+Thus it is crucial to be able to filter that list by natural predicates, such as by the products' price range or category, to obtain more manageable subsets of products for further analysis.</p>
+</li>
+<li>
+<p>Highlights: Both commands have distinct parsing routines and logic.
+The price range filter requiring two distinct arguments representing the minimal and maximal extremes of the range, and a predicate to perform the numerical comparison.
+The category filter behaves more similarly to the code for finding a person.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Appropriated the original find command&#8217;s behaviour for findproductsbyname.</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: <a href="..\collated\functional\lowjiajin.md">Functional Code</a></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>General team tasks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped populate sample data for fresh address book. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/40">#40</a>)</p>
+</li>
+<li>
+<p>Added unique product and order lists, as well as relevant setters and exceptions. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/34">#34</a>)</p>
+</li>
+<li>
+<p>Solved bugs of teammates' feature scope while they were busy. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/76">#76</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote Appendix B and C of the Developer Guide. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/3">#3</a>)</p>
+</li>
+<li>
+<p>Rewrote sections of the User and Developer outside of my feature contribution scope to be consistent with the app. (Pull requests <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/13">#13</a>, <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/40">#40</a>, <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/86">#86</a>, <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/87">#87</a>, etc.)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project Management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped flag, redirect, and close all duplicate issues during user testing. (<a href="https://github.com/CS2103JAN2018-T15-B1/main/issues?q=is%3Aissue+is%3Aclosed">Most of</a> issues #43 to #73)</p>
+</li>
+<li>
+<p>Maintained the issue tracker in general (tagging, assignments)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reported bugs and suggestions for other group in class. (Issues <a href="https://github.com/CS2103JAN2018-T16-B2/main/issues/160">#160</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/issues/142">#142</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/issues/137">#137</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/issues/132">#132</a>, and many others)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed Gradle&#8217;s javax.xml dependencies so the jar works on Java 9 as well. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/40">#40</a>)</p>
+</li>
+<li>
+<p>Added Weka as a dependency in Gradle (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/14">#14</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="finding-product-recommendations-for-a-person-code-recommend-code"><a class="link" href="#finding-product-recommendations-for-a-person-code-recommend-code">Finding product recommendations for a person: <code>recommend</code></a></h3>
+<div class="paragraph">
+<p>Given a person, analyzes the app&#8217;s entire order history to train a predictive model that guesses which products are likely to appeal to a given person.</p>
+</div>
+<div class="paragraph">
+<p>Outputs a list of (<code>product name</code>, <code>predicted chance of purchase</code>), ranked in descending order of predicted chance of purchase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RecommendEg.jpg" alt="RecommendEg" width="600">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The model makes predictions only considering the persons' <em>age</em> and <em>gender</em>. To cap the influence of high volume buyers, multiple purchases of the same product are ignored.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An analogous use would be how companies like Amazon know which products to recommend you in their targeted emails. Now, you can do the same for your business too.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>For v2.0</strong>: Support for consideration of predictive factors other than age and gender, and the option to not recommend products a user has already bought.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>recommend INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The sample data provided includes an order history of mostly younger persons buying <code>TrendyShirt</code>, older persons buying <code>Dentures</code>, females buying <code>Lipstick</code>, and a general audience for <code>Toothbrush</code>. You can casually validate the algorithm by noticing that the recommendations for a younger person ranks <code>TrendyShirt</code> at the front of the output, while <code>Dentures</code> will be right at the rear. Experiment by adding different persons, products, and orders, and see how he recommendations respond!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recommend 1</code> finds recommendations for person whose last shown index is 1.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-products-by-name-code-findproductbyname-code"><a class="link" href="#locating-products-by-name-code-findproductbyname-code">Locating products by name: <code>findproductbyname</code></a></h3>
+<div class="paragraph">
+<p>Finds products whose names contain any of the given keywords.
+Format: <code>findproductbyname KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Like <code>find</code>, the search is case insensitive and the keyword order does not matter. Only the name is searched and perfect keyword matches will be returned.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-all-products-within-a-certain-price-range-code-findproductbyprice-code"><a class="link" href="#finding-all-products-within-a-certain-price-range-code-findproductbyprice-code">Finding all products within a certain price range: <code>findproductbyprice</code></a></h3>
+<div class="paragraph">
+<p>Filters out all the products within the range [<code>MIN_PRICE</code>, <code>MAX_PRICE</code>] and displays them in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findproductbyprice minpr/10 maxpr/200</code> finds products with price between 10 and 200, inclusive</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-all-products-of-a-certain-category-code-findproductbycategory-code"><a class="link" href="#find-all-products-of-a-certain-category-code-findproductbycategory-code">Find all products of a certain category: <code>findproductbycategory</code></a></h3>
+<div class="paragraph">
+<p>Filters out all the products of a specific category and displays them in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>findproductbycategory CATEGORY [MORE_CATEGORIES]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findproductbycategory Clothing</code><br>
+Finds all products of category <code>Clothing</code></p>
+</li>
+<li>
+<p><code>findproductbycategory Clothing health</code><br>
+Finds all products of category <code>Clothing</code> and <code>Health</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="Implementation-Recommender"><a class="link" href="#Implementation-Recommender">Recommender</a></h3>
+<div class="sect3">
+<h4 id="recommender-training-pipeline"><a class="link" href="#recommender-training-pipeline">Recommender Training Pipeline</a></h4>
+<div class="paragraph">
+<p>Obtaining recommendations for products that a given customer is likely to want to buy can actually be thought of as a classification problem. The <code>Order</code> records serves as the test dataset, the instance variables of each Order&#8217;s <code>Customer</code> serve as the features, and the associated <code>Product</code> is the class label.</p>
+</div>
+<div class="paragraph">
+<p>Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Convert the <code>Order</code> records into a <code>.arff</code> file, the default format used by Weka, using the <code>ArffWriter</code> class.
+The precise formatting of the data to the <code>.arff</code> header and data entry format is handled by the <code>ArffFormatter</code>, before being passed back to the <code>ArffWriter</code> for the file writing.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>.arff</code> must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as <code>"n" + productId</code>.  Since the <code>.arff</code> only stores the classification features (age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the <code>Order</code> records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the <code>.arff</code>. Additionally, the feature is binary (either bought or did not buy a product), the quantity of purchases does not count.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>For each product, use <code>RemoveWithValues</code> to create an <code>isolator</code> that can filter out the orders involving that specific product in the <code>.arff</code>. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).</p>
+</li>
+<li>
+<p>Pass the <code>isolator</code> into a <code>ProductTrainer</code>, which will use <code>ChiSquaredAttributeEval</code> to select the features most strongly associated with a purchase decision (i.e. an order exists for a given customer profile), and then build a <code>NaiveBayes</code> classifier around those features, for that specific product.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+[v2.0] Total user spending and recent user spending will be added as machine learning features.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>ChiSquaredAttributeEval</code> only uses the 2 most discriminatory features to build the classifier, even with additional features to be added in v2.0. This combats the Curse of Dimensionality, given the possibly modest number of orders that a small business might have.
+. Save each successful <code>NaiveBayes</code> build to a <code>HashMap</code> keyed by the product ID, for later use on the test set (i.e. the customer whom we want to get likely purchase recommendations for).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recommender-testing-pipeline"><a class="link" href="#recommender-testing-pipeline">Recommender Testing Pipeline</a></h4>
+<div class="paragraph">
+<p>The execution of the <code>recommend</code> command in the CLI will run the testing pipeline. The implementation is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the training pipeline in 3.5.1.</p>
+</li>
+<li>
+<p>Call <code>getRecommendations(customerId)</code>, which will result in getting the appropriate features from said <code>Customer</code>, and then running the features as an <code>Instance</code> through every classifier in <code>classifierDict</code>. The confidence of each purchase decision is returned via <code>distributionForInstance</code> as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the <code>Product</code> predicted to be most attractive to said <code>Customer</code> listed first, is assigned to <code>ProductRecOfAPerson</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+[v2.0] All <code>Product</code> objects which a given <code>Customer</code> has already bought will be stripped from his <code>ProductRecOfAPerson</code>. The remaining list will be sent to <code>ui</code> for output.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The ranked list of recommendations is then passed back up to <code>RecommendCommand</code> via <code>RecommendManager</code> for CLI output.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sequence-diagram"><a class="link" href="#sequence-diagram">Sequence Diagram</a></h4>
+<div class="paragraph">
+<p>A sequence diagram describing both training and testing pipelines is provided below. It excludes return variables for brevity.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RecommenderSequenceDiagram.jpg" alt="RecommenderSequenceDiagram" width="1500">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-conversion-of-orders-to-training-data-format"><a class="link" href="#aspect-conversion-of-orders-to-training-data-format">Aspect: Conversion of orders to training data format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Convert orders into a .arff file, stored in the data folder, which can be read by Weka as a training dataset.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: All the header information and data entries are easily viewable as plaintext, allowing for quick prototyping and rapid debugging.</p>
+</li>
+<li>
+<p>Cons: Requires a class to handle .arff formatting, which can be rather arbitrary. Unnecessarily adds the potential for IO errors due to the requirement of parsing a physical file, especially since the .arff file may simply be opened and modified to take on unexpected formats and values.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Build the training set using the built in <code>Instances</code> and <code>Attribute</code> classes provided by Weka.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No writing of physical files required; entire recommendation process contained in memory.</p>
+</li>
+<li>
+<p>Cons: Weka&#8217;s documentation for those classes are rather opaque, and many methods have been deprecated. The way classes and attributes are assigned are rather unwieldy, and printing the relevant values of the training set becomes extremely involved.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-what-kind-of-classification-to-perform"><a class="link" href="#aspect-what-kind-of-classification-to-perform">Aspect: What kind of classification to perform</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Perform a binary classification for each product</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows a person not buying a product to be treated as a signal for recommender decision (e.g. no young people buy dentures), which maximizes predictive power on small order sets.</p>
+</li>
+<li>
+<p>Cons: Does not predict newly introduced products with few orders well, because the lack of orders is seen as a measure of how unpopular a product is regardless of a person&#8217;s profile.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Perform a multiclass classification across all products</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require us to comb through orders to find products that a person has yet to buy.</p>
+</li>
+<li>
+<p>Cons: Multiclass classifiers tend to perform badly unless there are many training data points.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-15 23:03:12 SGT
+</div>
+</div>
+</body>
+</html>

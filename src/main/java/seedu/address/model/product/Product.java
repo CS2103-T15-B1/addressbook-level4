@@ -5,6 +5,7 @@ import seedu.address.model.money.Money;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+//@@author YingxuH
 /**
  * presents the product offered in the retail store.
  * Attributes: name, price, category

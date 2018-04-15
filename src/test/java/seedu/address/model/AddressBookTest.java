@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalPersons.*;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProducts.*;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -102,7 +101,7 @@ public class AddressBookTest {
         public ObservableList<Product> getProductList() { return products; }
 
         @Override
-        public ObservableList<Order> getOrderList() {return orders;}
+        public ObservableList<Order> getOrderList() { return orders;}
 
         @Override
         public ObservableList<Tag> getTagList() {
