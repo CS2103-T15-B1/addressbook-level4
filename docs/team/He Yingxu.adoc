@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= He Yingxu - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
@@ -12,60 +12,32 @@ AddressBook - Level 4 is a retailer analysis application used for retailers to k
 
 == Summary of contributions
 
-* *Major enhancement*: added *Completed product class together with GUI*
+* *Major enhancement*: added *Completed product class together with order's GUI*
 ** What it does: allows the user to add and delete product. Preceding undo commands can be reversed by using the redo command.
 ** Justification: It enables the customers to add new products into the storage. This feature is also a premise for other new features of our application.
 ** Highlights: This enhancement requires new commands and parsers to handle the execution related to the new product class, as well as new elements in the UI component to visualize the product list.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: added the GUI element for order class and added Money class to enable working with money.
+* *Minor enhancement*: added Money class to enable working with money.
+** what is does: Money class can recognize all the invalid currency type in the ISO 4217 code. Support operations like addition and subtraction. 
+** Justification: This feature makes sure product & order class functions properly as well as supports the features of our recommendation engine. 
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
+* *Minor enhancement*: added basic GUI for order class.
+* *Code contributed*: https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/YingxuH.md[Functional Code], https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/YingxuH.md[Test Code]
 * *Other contributions*:
+*** General 
+** help teammates implements command and model implementations for order class. (Commit https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/7afb006202449bcf21cc45bb3a7e2cf168cec555[7afb006], https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/5b84edd89f6cb13a8224d4a29b1eefe7830561d7[5b84edd]) (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
+*** 
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** resized the customers' list in GUI (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Project management:
+** maintain the issue tracker during our project progress 1.1 to 1.5. 
+** help solve issues reported during the in-class testing session. https://github.com/CS2103JAN2018-T15-B1/main/issues/52[52]
 
-_{you can add/remove categories in the list above}_
+*** Enhancements to existing features:
+** added product and order in GUI
+** resized the customers' list in GUI (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/30[#30], https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
+*** Documentation:
+** Did cosmetic tweaks to existing contents of the User Guide.
+** draw UI and Model UML diagram in DeveloperGuide to help developers better visualize the architect (posted by my teammate).
+*** Community:
+** PRs reviewed 
 
-== Contributions to the User Guide
-
-
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
-
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
-== Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
-
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
