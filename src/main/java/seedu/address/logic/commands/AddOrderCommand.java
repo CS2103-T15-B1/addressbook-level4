@@ -20,12 +20,12 @@ public class AddOrderCommand extends UndoableCommand {
             + ": Creates new order given a person's email, and non-empty list of (Product ID, Number bought, Price)\n"
             + "Parameters:"
             + PREFIX_EMAIL + "EMAIL (Must be an existing person)"
-            + PREFIX_ORDER + "SUBORDER (List of product ID, Number, Price)\n"
+            + PREFIX_SUBORDER + "SUBORDER (List of product ID, Number, Price)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
-            + PREFIX_ORDER + "1 5 $3.00 "
-            + PREFIX_ORDER + "2 4 $2.50 "
-            + PREFIX_ORDER + "3 1 $100 ";
+            + PREFIX_SUBORDER + "1 5 $3.00 "
+            + PREFIX_SUBORDER + "2 4 $2.50 "
+            + PREFIX_SUBORDER + "3 1 $100 ";
 
     public static final String MESSAGE_SUCCESS = "New order added.";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the app.";
