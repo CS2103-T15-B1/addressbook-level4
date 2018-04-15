@@ -66,7 +66,7 @@ public class PersonBuilder {
         this.name = new Name(name);
         return this;
     }
-
+    //@@author Sivalavida
     /**
      * Sets the {@code Gender} of the {@code Person} that we are building.
      */
@@ -98,7 +98,7 @@ public class PersonBuilder {
         this.longitude = new Longitude(longitude);
         return this;
     }
-
+    //@@author
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */

@@ -109,39 +109,43 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Finding all products within a certain price range: `findproductbyprice`
-Filters out all the products within the range [`MIN_PRICE`, `MAX_PRICE`] and displays them in the GUI.+
+Filters out all the products within the range [`MIN_PRICE`, `MAX_PRICE`] and displays them in the GUI.
 
-Format: `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
+*Format*: `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
 
-Example:
+*Example*:
 
 * `findproductbyprice minpr/10 maxpr/200` finds products with price between 10 and 200, inclusive
 
 === Find all products of a certain category: `findproductbycategory`
 Filters out all the products of a specific category and displays them in the GUI.
 
-Format: `findproductbycategory CATEGORY`
+*Format*: `findproductbycategory CATEGORY`
 
-Example:
+*Example*:
 
 * `findproductbycategory Clothing` finds all products of category `Clothing`
 
 === Finding product recommendations for a person: `recommend`
-Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. The model is trained only on a person's age and gender. To cap the influence of high volume buyers, each multiple purchases of the same product are ignored. +
+Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. 
 
-Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase. +
+Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase.
 
-An analogous real-world use would be how companies like Amazon know which products to recommend you in their targeted emails. +
+image::recommend-example.jpg[width="600"]
 
-(For V1.5rc) - Does not recommend items a person has already bought. +
-(For V2.0) - Introduce more features other than age and gender.+
+[IMPORTANT]
+The model is trained only on a person's _age_ and _gender_. To cap the influence of high volume buyers, multiple purchases of the same product are ignored. +
 
-Format: `recommend INDEX`
+An analogous use would be how companies like Amazon know which products to recommend you in their targeted emails. Now, you can do the same for your business too. +
+
+*For v2.0*: Introduce more ML features other than age and gender, and the option to not recommend products a user has already bought.
+
+*Format*: `recommend INDEX`
 
 [TIP]
 The sample data provided includes an order history of mostly younger persons buying `TrendyShirt`, older persons buying `Dentures`, females buying `Lipstick`, and a general audience for `Toothbrush`. You can casually validate the algorithm by noticing that the recommendations for a younger person ranks `TrendyShirt` at the front of the output, while `Dentures` will be right at the rear. Experiment by adding different persons, products, and orders, and see how he recommendations respond!
 
-Example
+*Example*:
 
 * `recommend 1` finds recommendations for person whose last shown index is 1.
 
@@ -150,20 +154,31 @@ Example
 Shows a list of all persons in Retail Analytics. +
 Format: `list`
 
-=== Visualising locations of all persons in a map: `map`
+=== Displays the geographic distribution of queried customers in Retail Analytics with clustering: `map`
 
-Displays spread of all people in Retail Analytics on a map with clustering.
- Zooming in and out of the map cause the clustering to change.
- For the current version, the map command still uses stubs.
- Note that you can alsp click on a person to view his location individually+
-Format: `map`
+Displays spread of querried people in Retail Analytics on a map with clustering.
+Zooming in and out of the map causes the clustering to change.
+
+Possible Formats:
+* Query 1) `all`: Select all customers
+** Format: `map all`
+** Example: `map all`
+* Query 2) `name`: Select customer if keyword in name
+** Format: `map name NAME [NAME]...`
+** Example: `map name Alex Bernice`
+* Query 3) `age`: Select customer if age within age range
+** Format: `map age MINAGE MAXAGE`
+** Example: `map age 15 56`
+* Query 4) `gen`: Select customers of specified gender
+** Format: `map gen [GENDER]`
+** Example: `map gen M`
+* Query 5) `tag`: Select customer with any of the specified tags
+** Format: `map tag TAG [TAG]`
+** Example: `map tag friends`
+
 
 [TIP]
 The map clusters people by location. These clusters are displayed as blue dots.
-
-Example
-
-* `map all` displays everyone in the map
 
 === Editing a person : `edit`
 
@@ -329,7 +344,17 @@ e.g. `find James Jake`
 * *Find Product by Price* `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
 * *Find Product by Category* `findproductbycategory CATEGORY`
 * *List* : `list`
-* *Geographically Visualise Data* : `map`
+* *Geographically Visualise Data*
+* ** Format1: `map all`
+* *** Example: `map all`
+* ** Format2: `map name NAME [NAME]...`
+* *** Example: `map name Alex Bernice`
+* ** Format3: `map age MINAGE MAXAGE`
+* *** Example: `map age 15 56`
+* ** Format4: `map gen [GENDER]`
+* *** Example: `map gen M`
+* ** Format5: `map tag TAG [TAG]`
+* *** Example: `map tag friends`
 * *Help* : `help`
 * *Recommendations* `recommend INDEX` +
 e.g. `recommend 1`
