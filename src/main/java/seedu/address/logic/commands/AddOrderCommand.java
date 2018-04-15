@@ -21,7 +21,7 @@ public class AddOrderCommand extends UndoableCommand {
             + ": Creates new order given a person's email, and at least one (Product ID, Quantity, Price)\n"
             + "Parameters: "
             + PREFIX_EMAIL + "EMAIL (Must be an existing person) "
-            + PREFIX_ORDER + "Product ID, Quantity, Price\n"
+            + PREFIX_SUBORDER + "Product ID, Quantity, Price\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
             + PREFIX_SUBORDER + "1 5 $3.00 "
