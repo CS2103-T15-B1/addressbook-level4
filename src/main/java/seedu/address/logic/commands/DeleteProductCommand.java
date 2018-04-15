@@ -11,36 +11,38 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.exceptions.ProductNotFoundException;
 
+//@@qinghao1
 /**
- * Deletes a product identified using it's last displayed index from the address book.
+ * Deletes a product identified using its ID.
  */
 public class DeleteProductCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "deleteproduct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the product identified by the index number used in the last product listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the product identified by its ID.\n"
+            + "Parameters: ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
+    public static final String MESSAGE_INVALID_PRODUCT = "The product is invalid. Check that the product ID is correct.";
 
-    private final Index targetIndex;
+    private int targetID;
 
     private Product productToDelete;
 
-    public DeleteProductCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteProductCommand(int targetID) {
+        this.targetID = targetID;
     }
 
 
     @Override
     public CommandResult executeUndoableCommand() {
-        requireNonNull(productToDelete);
         try {
+            requireNonNull(productToDelete);
             model.deleteProduct(productToDelete);
-        } catch (ProductNotFoundException pnfe) {
-            throw new AssertionError("The target product cannot be missing");
+        } catch (NullPointerException|ProductNotFoundException e) {
+            throw new AssertionError(MESSAGE_INVALID_PRODUCT);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
@@ -49,19 +51,20 @@ public class DeleteProductCommand extends UndoableCommand {
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
         List<Product> lastShownList = model.getFilteredProductList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
+        productToDelete = null;
+        //There should only be one product that matches the ID
+        for(Product product : lastShownList) {
+            if(product.getId() == targetID) {
+                productToDelete = product;
+            }
         }
-
-        productToDelete = lastShownList.get(targetIndex.getZeroBased());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && this.targetIndex.equals(((DeleteProductCommand) other).targetIndex) // state check
+                && this.targetID == (((DeleteProductCommand) other).targetID) // state check
                 && Objects.equals(this.productToDelete, ((DeleteProductCommand) other).productToDelete));
     }
 }
