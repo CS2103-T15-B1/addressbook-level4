@@ -3,7 +3,9 @@ package seedu.address.model.order;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.money.Money;
 import seedu.address.model.person.Person;
@@ -158,6 +160,21 @@ public class Order {
         // Check that total order price is non-negative
         boolean negativeOrderPrice = this.getOrderTotal().isMinus();
         valid = !negativeOrderPrice && valid;
+
+        //Check that product IDs are not repeated
+        Set<Integer> productIDs = new HashSet<>();
+        boolean repeatedID = false;
+        for (SubOrder subOrder : subOrders) {
+            //Loop through the suborders, checking if the product ID is in a previous suborder (using a Set<Integer>)
+            int productID = subOrder.getProductID();
+            if (productIDs.contains(productID)) {
+                repeatedID = true;
+                break;
+            } else {
+                productIDs.add(productID);
+            }
+        }
+        valid = !repeatedID && valid;
 
         return valid;
     }
