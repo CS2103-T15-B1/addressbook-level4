@@ -8,9 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.product.exceptions.DuplicateProductException;
 import seedu.address.model.product.exceptions.ProductNotFoundException;
+
+//@@author lowjiajin
 
 /**
  * A list of products that enforces uniqueness between its elements and does not allow nulls.
