@@ -40,7 +40,7 @@ public class ProductCard extends UiPart<Region> {
         this.product = product;
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullProductName);
-        price.setText(product.getPrice().value);
+        price.setText(product.getPrice().repMoney);
         category.getChildren().add(new Label(product.getCategory().value));
     }
 
