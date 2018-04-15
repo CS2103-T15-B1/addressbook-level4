@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.sun.javafx.scene.control.skin.TitledPaneSkin.TitleRegion?>
+<?import com.sun.javafx.scene.control.skin.TabPaneSkin.TabHeaderArea?>
+<?import javafx.scene.text.TextFlow?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600">
   <icons>
@@ -25,6 +28,8 @@
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+          <Menu mnemonicParsing="false" text="***RETAIL ANALYTICS***">
+          </Menu>
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
