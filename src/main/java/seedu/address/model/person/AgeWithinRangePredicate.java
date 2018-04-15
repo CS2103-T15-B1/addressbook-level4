@@ -10,18 +10,18 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code Person}'s {@code Age} is within the range given.
  */
 public class AgeWithinRangePredicate implements Predicate<Person> {
-    private final int minimumAge;
-    private final int maximumAge;
+    private final Age minimumAge;
+    private final Age maximumAge;
 
-    public AgeWithinRangePredicate(int mininumAge, int maximumAge) {
+    public AgeWithinRangePredicate(Age mininumAge, Age maximumAge) {
         this.minimumAge = mininumAge;
         this.maximumAge = maximumAge;
     }
 
     @Override
     public boolean test(Person person) {
-        return (minimumAge <= person.getAge().getNumericalAge()) &&
-                (maximumAge >= person.getAge().getNumericalAge());
+        return (minimumAge.compareTo(person.getAge())>=0) &&
+                (maximumAge.compareTo(person.getAge())<=0);
     }
 
     @Override
