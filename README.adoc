@@ -8,7 +8,7 @@ https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&utm_m
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/UiClassDiagram.png.png[width="600"]
+image::docs/images/UiClassDiagram.png[width="600"]
 endif::[]
 
 ifndef::env-github[]

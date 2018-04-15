@@ -18,7 +18,7 @@ Head Visualization Developer
 '''
 
 === link:\team\LowJiaJin.adoc[Low Jia Jin]
-image::lowjiajin.jpg[width="150", align="left"]s
+image::lowjiajin.jpg[width="150", align="left"]
 
 Role:
 Head Machine Learning Engineer
