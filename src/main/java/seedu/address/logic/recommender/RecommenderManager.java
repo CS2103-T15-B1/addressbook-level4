@@ -1,29 +1,35 @@
 package seedu.address.logic.recommender;
 
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import weka.classifiers.Classifier;
-import weka.core.Instances;
-import weka.filters.unsupervised.instance.RemoveWithValues;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
+import weka.classifiers.Classifier;
+import weka.core.Instances;
+import weka.filters.unsupervised.instance.RemoveWithValues;
+
 //@@author lowjiajin
+
+/**
+ * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person}.
+ */
 public class RecommenderManager {
     private static final String MESSAGE_INVALID_ARFF_PATH = "%1$s does not refer to a valid ARFF file.";
-    private static final String MESSAGE_ERROR_READING_ARFF = "Error reading ARFF, check file name and format.";
+    private static final String MESSAGE_ERROR_READING_ARFF = "File name or format invalid, error reading ARFF.";
     private static final String MESSAGE_CANNOT_CLOSE_READER = "Cannot close ARFF reader, reader still in use.";
     private static final String MESSAGE_BAD_REMOVER_SETTINGS = "{@code WEKA_REMOVER_SETTINGS} has invalid value.";
-    private static final String MESSAGE_ORDERS_IS_NULL = "No orders read from .arff. Check data entries in file.";
+    private static final String MESSAGE_ORDERS_IS_NULL = "Cannot classify with a lack of orders in .arff."
+            + " Check data entries in file.";
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
-    private String arffPath;
+    private File arff;
     private BufferedReader reader;
     private Instances orders;
     private RemoveWithValues isolator;
@@ -31,18 +37,17 @@ public class RecommenderManager {
     private ArrayList<String> productsWithClassifiers;
 
     /**
-     * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person} .
      * @param arffPath the data folder where the .arff orders file is stored.
      */
     public RecommenderManager(String arffPath, ReadOnlyAddressBook addressBook) {
-        setFilePath(arffPath);
+        setTrainerFile(arffPath);
         writeOrdersAsTraningData(addressBook);
         parseOrdersFromFile();
         trainRecommenderOnOrders();
     }
 
-    public void setFilePath(String path) {
-        arffPath = path;
+    public void setTrainerFile(String path) {
+        arff = new File(path);
     }
 
     /**
@@ -55,7 +60,7 @@ public class RecommenderManager {
     }
 
     private void writeOrdersAsTraningData(ReadOnlyAddressBook addressBook) {
-        ArffWriter arffWriter = new ArffWriter(arffPath, addressBook);
+        ArffWriter arffWriter = new ArffWriter(arff, addressBook);
         arffWriter.makeArffFromOrders();
     }
 
@@ -76,7 +81,7 @@ public class RecommenderManager {
                 throw new NullPointerException();
             }
         } catch (NullPointerException npe) {
-            System.out.println(MESSAGE_ORDERS_IS_NULL);
+            throw new AssertionError(MESSAGE_ORDERS_IS_NULL);
         }
 
         classifierDict = new HashMap<>();
@@ -96,9 +101,9 @@ public class RecommenderManager {
 
     private void getReaderFromArff() {
         try {
-            reader = new BufferedReader(new FileReader(arffPath));
+            reader = new BufferedReader(new FileReader(arff));
         } catch (FileNotFoundException e) {
-            System.out.println(String.format(MESSAGE_INVALID_ARFF_PATH, arffPath));
+            throw new AssertionError(String.format(MESSAGE_INVALID_ARFF_PATH, arff));
         }
     }
 
@@ -107,7 +112,7 @@ public class RecommenderManager {
             orders = new Instances(reader);
             orders.setClassIndex(orders.numAttributes() - 1);
         } catch (IOException e) {
-            System.out.println(MESSAGE_ERROR_READING_ARFF);
+            throw new AssertionError(MESSAGE_ERROR_READING_ARFF);
         }
     }
 
@@ -115,7 +120,7 @@ public class RecommenderManager {
         try {
             reader.close();
         } catch (IOException e) {
-            System.out.println(MESSAGE_CANNOT_CLOSE_READER);
+            throw new AssertionError(MESSAGE_CANNOT_CLOSE_READER);
         }
     }
 
@@ -131,7 +136,7 @@ public class RecommenderManager {
             isolator.setOptions(weka.core.Utils.splitOptions(String.format(
                     WEKA_REMOVER_SETTINGS, productNum + 1, productNum + 2)));
         } catch (Exception e) {
-            System.out.println(MESSAGE_BAD_REMOVER_SETTINGS);
+            throw new AssertionError(MESSAGE_BAD_REMOVER_SETTINGS);
         }
     }
 

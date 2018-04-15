@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
 
 //@@author lowjiajin
+
+/**
+ * Lists all the products which prices lie within the specified interval.
+ */
 public class FindProductByPriceCommand extends Command {
 
     public static final String COMMAND_WORD = "findproductbyprice";
