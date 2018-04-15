@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -28,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ID = "ID is invalid! Must be non-zero unsigned integer";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
 
     /**
@@ -41,6 +44,18 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses ID field and returns an int which is the ID.
+     * @throws IllegalValueException if the specified ID is invalid (not non-zero unsigned integer).
+     */
+    public static int parseID(String idString) throws IllegalValueException {
+        String trimmedID = idString.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedID)) {
+            throw new IllegalValueException(MESSAGE_INVALID_ID);
+        }
+        return Integer.parseInt(trimmedID);
     }
 
     /**
@@ -279,12 +294,12 @@ public class ParserUtil {
         Currency currency = Money.DEFAULT_CURRENCY;
         if (!Money.isValidMoney(trimmedPrice)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
-        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
-            String currencySymbol = trimmedPrice.substring(0,1);
+        } else if (Money.isValidMoneyWithUnknownPrefix(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.split(Money.MONEY_DIGITS)[0];
             currency = Money.parseCurrency(currencySymbol);
-            trimmedPrice = trimmedPrice.substring(1).trim();
+            String[] splitted = trimmedPrice.split(Money.MONEY_PREFIX);
+            trimmedPrice = splitted[splitted.length-1];
         }
-
         return new Money(new BigDecimal(trimmedPrice), currency);
 
     }

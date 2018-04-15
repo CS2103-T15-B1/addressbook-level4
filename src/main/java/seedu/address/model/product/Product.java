@@ -3,6 +3,8 @@ package seedu.address.model.product;
 
 import seedu.address.model.money.Money;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * presents the product offered in the retail store.
  * Attributes: name, price, category
@@ -16,6 +18,7 @@ public class Product {
     private Category category;
 
     public Product(ProductName name, Money price, Category category) {
+        requireAllNonNull(name, price, category);
         this.id = ++productCounter;
         this.name = name;
         this.price = price;

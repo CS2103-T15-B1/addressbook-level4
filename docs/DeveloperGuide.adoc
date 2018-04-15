@@ -856,8 +856,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Jia Jin*:
 
-* *Major*: Recommendations engine for customer, so that the user can provide these personalized recommendations to customers.
-* *Minor*: Basic filtered getter utilities for Product, Customer, Order classes
+* *Major*: Recommendations engine for customer, so that the user can provide these personalized product recommendations to customers.
+* *Minor*: Filtered commands to retrieve all products from a specific category or within a certain price range.
 
 *Siva*:
 
@@ -876,7 +876,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user who is adding a new product |create new product categories on-the-fly |manage pivots in inventory composition
 
-|`* * *` |user |add a customer by specifying their email, name, and address only, with age and gender optional |keep track of each individual’s orders going forward
+|`* * *` |user |add a customer by specifying their email, name, address, age, and gender |keep track of each individual’s orders going forward
 
 |`* * *` |user |add an order by specifying the date, the buyer, and a list of products bought | avoid repetitively creating multiple orders with the same date and buyer
 
@@ -886,9 +886,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |search for customers via their names or emails |view the profile of each customer and their purchase history
 
-|`* *` |user who is searching for customers |have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching |still locate customers without precisely remembering their name/email when I have many customers
+|`* ` |user who is searching for customers |have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching |still locate customers without precisely remembering their name/email when I have many customers
 
-|`* *` |user |also search for products in similar fashion as customers by typing their name or category |view the profile of each product and its sales history
+|`* * *` |user |search for groups of products by category or price range |isolate certain parts of their inventory without scrolling through many irrelevant products
 
 |`* *` |user currently on a product’s profile |update that product’s price |reproduce discounts or price raises in this application
 
@@ -914,7 +914,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |use the recommendations engine identify which users still haven’t bought, but are likely to want to buy a given product |perform targeted marketing (e.g. email blasts with specific products)
 
-|`* *` |user |re-train the recommendations engine's classifier on the latest data whenever desired |ensure its relevance as new products and orders come in
+|`* *` |user |re-train the recommendations engine's classifier on the latest data on execution of recommend command |ensure its relevance as new products and orders come in
 
 |`* * *` |user |display customers as an overlay on a map |understand how customers are geographically distributed, which have many possible gains (e.g. determine placement of physical marketing collateral such as flyers and banners)
 

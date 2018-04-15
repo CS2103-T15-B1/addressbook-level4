@@ -4,6 +4,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.product.ProductCategoryContainsKeywordsPredicate;
 
 //@@author lowjiajin
+
+/**
+ * Lists all product from the specified category
+ */
 public class FindProductByCategoryCommand extends Command {
 
     public static final String COMMAND_WORD = "findproductbycategory";
