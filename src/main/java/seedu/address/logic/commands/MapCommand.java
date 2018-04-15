@@ -29,7 +29,7 @@ public class MapCommand extends Command {
     public static final int CONTAINS_TAG_QUERY_NUM_PARAMETERS = 1; //min
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the geographic distribution of queried customers in Retail Analytics.\n"
+            + ": Displays the geographic distribution of queried customers in Retail Analytics with clustering.\n"
             + "Query 1) " + ALL_PERSONS_QUERY_WORD + ": Select all customers - Parameters: none \n"
             + "Examples: " + COMMAND_WORD + " " + ALL_PERSONS_QUERY_WORD + "\n"
             + "Query 2) " + NAME_CONTAINS_KEYWORDS_QUERY_WORD + ": Select customer if keyword in name  - Parameters: KEYWORD [MORE_KEYWORDS]...\n"
