@@ -11,6 +11,15 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+//@@author lowjiajin
+
+/**
+ * A list of products that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Order#equals(Object)
+ */
 public class UniqueOrderList implements Iterable<Order> {
 
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();

@@ -108,6 +108,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+// tag::findproducts[]
 === Finding all products within a certain price range: `findproductbyprice`
 Filters out all the products within the range [`MIN_PRICE`, `MAX_PRICE`] and displays them in the GUI.
 
@@ -125,13 +126,15 @@ Filters out all the products of a specific category and displays them in the GUI
 *Example*:
 
 * `findproductbycategory Clothing` finds all products of category `Clothing`
+// end::findproducts[]
 
+// tag::recommend[]
 === Finding product recommendations for a person: `recommend`
 Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. 
 
 Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase.
 
-image::recommend-example.jpg[width="600"]
+image::RecommendEg.jpg[width="600"]
 
 [IMPORTANT]
 The model is trained only on a person's _age_ and _gender_. To cap the influence of high volume buyers, multiple purchases of the same product are ignored. +
@@ -148,6 +151,7 @@ The sample data provided includes an order history of mostly younger persons buy
 *Example*:
 
 * `recommend 1` finds recommendations for person whose last shown index is 1.
+// end::recommend[]
 
 === Listing all persons : `list`
 
