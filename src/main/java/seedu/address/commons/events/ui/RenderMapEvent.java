@@ -6,7 +6,8 @@ import seedu.address.model.person.Person;
 import java.util.List;
 
 /**
- * Indicates a request to render the map of locations of all persons
+ * @author Sivalavida
+ * Indicates a request to render the malocations of selected people
  */
 public class RenderMapEvent extends BaseEvent {
 

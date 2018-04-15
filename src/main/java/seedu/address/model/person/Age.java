@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Comparator;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's age number in Retail Analytics.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
-public class Age {
+public class Age implements Comparable<Age>{
 
     /**
      * The minimum allowed age
@@ -51,7 +53,7 @@ public class Age {
     /**
      * Returns the int value of the persons Age
      */
-    public int getNumericalAge() {
+    private int getNumericalAge() {
         return Integer.parseInt(value);
     }
 
@@ -72,4 +74,8 @@ public class Age {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Age other) {
+        return (other.getNumericalAge() - this.getNumericalAge());
+    }
 }

@@ -1,13 +1,15 @@
 package seedu.address.model.person;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 
 /**
- * Tests if a {@code Person}'s {@code Tag}'s matches the  given tag.
+ * Tests if a {@code Person} contains a {@code Tag}'s which
+ * matches any of the  given tags.
  */
 public class ContainsTagPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -18,8 +20,14 @@ public class ContainsTagPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        for(Tag tag:person.getTags()){
+            for(String keyword: keywords){
+                if (tag.tagName.equals(keyword)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
