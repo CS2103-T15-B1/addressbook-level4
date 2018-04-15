@@ -2,20 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.MapCommand.*;
-import static seedu.address.logic.parser.ParserUtil.parseItemIds;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.person.Age.AGE_VALIDATION_REGEX;
 import static seedu.address.model.person.Age.isValidAge;
 import static seedu.address.model.person.Gender.isValidGender;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.order.ContainsItemPredicate;
 import seedu.address.model.person.*;
 //@@author Sivalavida
 /**

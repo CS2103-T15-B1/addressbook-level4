@@ -43,9 +43,9 @@ public class MapCommand extends Command {
 
     public static final String MESSAGE_MAP_PERSON_SUCCESS = "Number of customers displayed on map: %1$s";
 
-    private final Predicate predicate;
+    private final Predicate<Person> predicate;
 
-    public MapCommand(Predicate predicate) {
+    public MapCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
 
