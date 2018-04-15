@@ -53,12 +53,12 @@ public class DeleteProductCommand extends UndoableCommand {
         List<Product> lastShownList = model.getFilteredProductList();
         productToDelete = null;
         //There should only be one product that matches the ID
-        for(Product product : lastShownList) {
-            if(product.getId() == targetID) {
+        for (Product product : lastShownList) {
+            if (product.getId() == targetID) {
                 productToDelete = product;
             }
         }
-        if(productToDelete == null) {
+        if (productToDelete == null) {
             throw new CommandException(MESSAGE_INVALID_PRODUCT);
         }
     }

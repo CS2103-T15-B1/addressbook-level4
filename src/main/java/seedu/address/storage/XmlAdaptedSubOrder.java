@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 import java.util.Objects;
 
+//@@author qinghao1
 /**
  * JAXB-friendly version of the SubOrder.
  */
