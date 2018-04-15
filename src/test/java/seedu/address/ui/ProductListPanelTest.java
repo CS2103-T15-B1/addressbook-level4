@@ -3,9 +3,10 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PRODUCT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PRODUCT;
 import static seedu.address.testutil.TypicalProducts.getTypicalProducts;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysProduct;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
+import static seedu.address.ui.testutil.GuiTestAssert.assertProductCardEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,8 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.product.Product;
 
+//@@author He Yingxu
 public class ProductListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Product> TYPICAL_ProductS =
+    private static final ObservableList<Product> TYPICAL_PRODUCTS =
             FXCollections.observableList(getTypicalProducts());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PRODUCT);
@@ -27,22 +29,25 @@ public class ProductListPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        ProductListPanel productListPanel = new ProductListPanel(TYPICAL_ProductS);
+        ProductListPanel productListPanel = new ProductListPanel(TYPICAL_PRODUCTS);
         uiPartRule.setUiPart(productListPanel);
 
         productListPanelHandle = new ProductListPanelHandle(getChildNode(productListPanel.getRoot(),
-                ProductListPanelHandle.Product_LIST_VIEW_ID));
+                ProductListPanelHandle.PRODUCT_LIST_VIEW_ID));
     }
 
     @Test
     public void display() {
-        for (int i = 0; i < TYPICAL_ProductS.size(); i++) {
-            productListPanelHandle.navigateToCard(TYPICAL_ProductS.get(i));
-            Product expectedProduct = TYPICAL_ProductS.get(i);
+        for (int i = 0; i < TYPICAL_PRODUCTS.size(); i++) {
+            productListPanelHandle.navigateToCard(TYPICAL_PRODUCTS.get(i));
+            Product expectedProduct = TYPICAL_PRODUCTS.get(i);
             ProductCardHandle actualCard = productListPanelHandle.getProductCardHandle(i);
 
             assertCardDisplaysProduct(expectedProduct, actualCard);
-            assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
+
+            /*The index in the product list should be their real id instead of their orders.*/
+            int expectedIndex = expectedProduct.getId();
+            assertEquals(Integer.toString(expectedIndex) + ". ", actualCard.getId());
         }
     }
 
@@ -51,8 +56,8 @@ public class ProductListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        ProductCardHandle expectedCard = productListPanelHandle.getProductCardHandle(INDEX_SECOND_Product.getZeroBased());
+        ProductCardHandle expectedCard = productListPanelHandle.getProductCardHandle(INDEX_THIRD_PRODUCT.getZeroBased());
         ProductCardHandle selectedCard = productListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedCard, selectedCard);
+        assertProductCardEquals(expectedCard, selectedCard);
     }
 }

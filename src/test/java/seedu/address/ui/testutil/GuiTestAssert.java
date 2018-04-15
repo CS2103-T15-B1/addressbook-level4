@@ -17,9 +17,9 @@ import seedu.address.model.product.Product;
  */
 public class GuiTestAssert {
     /**
-     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     * Asserts that {@code actualPersonCard} displays the same values as {@code expectedPersonCard}.
      */
-    public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
+    public static void assertPersonCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
         assertEquals(expectedCard.getAddress(), actualCard.getAddress());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
@@ -46,6 +46,16 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getLongitude().value, actualCard.getLongitude());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+    }
+
+    /**
+     * Asserts that {@code actualProductCard} displays the same values as {@code expectedProductCard}.
+     */
+    public static void assertProductCardEquals(ProductCardHandle expectedCard, ProductCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getPrice(), actualCard.getPrice());
+        assertEquals(expectedCard.getCategory(), actualCard.getCategory());
     }
 
     /**
