@@ -51,10 +51,10 @@ public class AddressBookParser {
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-
+        //@@author Sivalavida
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
-
+        //@@author
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
