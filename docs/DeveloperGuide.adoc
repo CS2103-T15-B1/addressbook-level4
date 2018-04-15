@@ -382,19 +382,21 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 === Geographical Visualisation (`map` command)
 
-====How the feature is implemented
-We are using https://developers.google.com/maps/[Google Maps API] to implement this feature. The map command has
-parameters which will describe a querry (yet to be implemented), which will render a google map image with
-the locations of the filtered customers in the map.
+* How the feature is implemented
+** We are using https://developers.google.com/maps/[Google Maps API] to implement this feature. Google Maps'
+clustering API also has been used create clustering among the data points rendered. The map command has
+parameters which will describe a querry, which is required to filter the customers to render on the map.
+To implement a querry we had to create several subclasses of `Predicate<Person>` such as
+`AgeWithinRangePredicate`, `ContainsTagPredicate` and `GenderPredicate`.
 
 
-====Alternatives considered
-
-Initially we wanted to use a static image of Singapore and create edit the map based on the locations of the customers
+* Alternatives considered
+** Initially we wanted to use a static image of Singapore and create and edit the map based on the locations of the customers
 on the fly. However, we realised that the user might want a zoomable interface, if he needed the spread of customers
  viewed at a certain zoom level. Furthermore, this would restrit the use of our product only to retailer who are
  delevering around Singapore. Using the Google Maps API would enable our users to operate at any country and also have
- customers around the world.
+ customers around the world. Additionally, it would be much more difficult for us to implement clustering of data
+ if we rendered the images ourselves.
 
 
 

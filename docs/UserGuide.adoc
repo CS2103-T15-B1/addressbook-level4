@@ -154,20 +154,31 @@ The sample data provided includes an order history of mostly younger persons buy
 Shows a list of all persons in Retail Analytics. +
 Format: `list`
 
-=== Visualising locations of all persons in a map: `map`
+=== Displays the geographic distribution of queried customers in Retail Analytics with clustering: `map`
 
-Displays spread of all people in Retail Analytics on a map with clustering.
- Zooming in and out of the map cause the clustering to change.
- For the current version, the map command still uses stubs.
- Note that you can alsp click on a person to view his location individually+
-Format: `map`
+Displays spread of querried people in Retail Analytics on a map with clustering.
+Zooming in and out of the map causes the clustering to change.
+
+Possible Formats:
+* Query 1) `all`: Select all customers
+** Format: `map all`
+** Example: `map all`
+* Query 2) `name`: Select customer if keyword in name
+** Format: `map name NAME [NAME]...`
+** Example: `map name Alex Bernice`
+* Query 3) `age`: Select customer if age within age range
+** Format: `map age MINAGE MAXAGE`
+** Example: `map age 15 56`
+* Query 4) `gen`: Select customers of specified gender
+** Format: `map gen [GENDER]`
+** Example: `map gen M`
+* Query 5) `tag`: Select customer with any of the specified tags
+** Format: `map tag TAG [TAG]`
+** Example: `map tag friends`
+
 
 [TIP]
 The map clusters people by location. These clusters are displayed as blue dots.
-
-Example:
-
-* `map all` displays everyone in the map
 
 === Editing a person : `edit`
 
@@ -333,7 +344,17 @@ e.g. `find James Jake`
 * *Find Product by Price* `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
 * *Find Product by Category* `findproductbycategory CATEGORY`
 * *List* : `list`
-* *Geographically Visualise Data* : `map`
+* *Geographically Visualise Data*
+* ** Format1: `map all`
+* *** Example: `map all`
+* ** Format2: `map name NAME [NAME]...`
+* *** Example: `map name Alex Bernice`
+* ** Format3: `map age MINAGE MAXAGE`
+* *** Example: `map age 15 56`
+* ** Format4: `map gen [GENDER]`
+* *** Example: `map gen M`
+* ** Format5: `map tag TAG [TAG]`
+* *** Example: `map tag friends`
 * *Help* : `help`
 * *Recommendations* `recommend INDEX` +
 e.g. `recommend 1`

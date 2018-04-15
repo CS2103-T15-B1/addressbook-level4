@@ -1,10 +1,10 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalOrders.OrderOne;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalProducts.EGG;
+import static seedu.address.testutil.TypicalOrders.*;
+import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProducts.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
         List<Product> newProducts = Arrays.asList(EGG, EGG);
-        List<Order> newOrders = Arrays.asList(OrderOne, OrderOne);
+        List<Order> newOrders = Arrays.asList(ORDER_ONE, ORDER_ONE);
         AddressBookStub newData = new AddressBookStub(newPersons, newProducts, newOrders, newTags);
 
         thrown.expect(AssertionError.class);

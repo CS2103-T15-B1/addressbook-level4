@@ -9,6 +9,7 @@ import seedu.address.model.product.ProductName;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.*;
 
+//@@author qinghao1
 /**
  * JAXB-friendly version of the Product.
  */

@@ -51,10 +51,10 @@ public class AddressBookParser {
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-
+        //@@author Sivalavida
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
-
+        //@@author
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -115,7 +115,6 @@ public class AddressBookParser {
         }
     }
 
-    //@@author qinghao1
     /**
      * Overload parseCommand for commands that do not need addressBook, to maintain backwards compatibility
      * @param userInput
@@ -162,7 +161,6 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            //@@author lowjiajin
             case FindProductByCategoryCommand.COMMAND_WORD:
                 return new FindProductByCategoryCommandParser().parse(arguments);
 
@@ -175,7 +173,6 @@ public class AddressBookParser {
             case ListProductCommand.COMMAND_WORD:
                 return new ListProductCommand();
 
-            //@@author
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
 

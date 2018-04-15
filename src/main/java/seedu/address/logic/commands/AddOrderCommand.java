@@ -8,8 +8,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.exceptions.DuplicateOrderException;
 
+//@@author qinghao1
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Adds an order to the address book
  */
 public class AddOrderCommand extends UndoableCommand {
 
@@ -52,7 +53,7 @@ public class AddOrderCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         //Check that order is valid
-        if(!isValid()) {
+        if (!isValid()) {
             //If order invalid, decrement order counter so orders have sequential ID
             Order.decrementOrderCounter();
             throw new CommandException(MESSAGE_INVALID_ORDER);
