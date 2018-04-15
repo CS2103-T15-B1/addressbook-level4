@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.math.RoundingMode;
 
@@ -69,7 +70,7 @@ public class Money implements Comparable<Money>, Serializable {
     /**
      * String representation for Money class.
      */
-    public final String value;
+    public final String repMoney;
 
     private int fHashCode;
     private static final int HASH_SEED = 23;
@@ -86,11 +87,11 @@ public class Money implements Comparable<Money>, Serializable {
      * BigDecimal.
      */
     public Money(BigDecimal aAmount, Currency aCurrency, RoundingMode aRoundingStyle){
+        checkNotNull(aAmount, aCurrency, aRoundingStyle);
         fAmount = aAmount;
         fCurrency = aCurrency;
         fRounding = aRoundingStyle;
-        value = fCurrency.getSymbol() + " " + fAmount.toPlainString();
-        validateState();
+        repMoney = fCurrency.getSymbol() + " " + fAmount.toPlainString();
     }
 
     /**
@@ -310,43 +311,13 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     /**
-     * Divide this Money by an integral divisor.
-     *
-     * The scale of the returned Money is equal to the scale of
-     * 'this' Money since this Money is scale is applied to the new Money.
-     */
-    public Money div(int aDivisor){
-        BigDecimal divisor = new BigDecimal(aDivisor);
-        BigDecimal newAmount = fAmount.divide(divisor, fRounding);
-        return new Money(newAmount, fCurrency, fRounding);
-    }
-
-    /**
-     * Divide this Money by an non-integral divisor.
-     */
-    public Money div(double aDivisor){
-        BigDecimal newAmount = fAmount.divide(asBigDecimal(aDivisor), fRounding);
-        return new Money(newAmount, fCurrency, fRounding);
-    }
-
-    /** Return the absolute value of the amount. */
-    public Money abs(){
-        return isPlus() ? this : times(-1);
-    }
-
-    /** Return the amount x (-1). */
-    public Money negate(){
-        return times(-1);
-    }
-
-    /**
      * Returns
      * getAmount().getPlainString() + space + getCurrency().getSymbol().
      *
      * The return value uses the default locale/currency, and will not
      * always be suitable for display to an end user.
      */
-    public String toString(){ return value; }
+    public String toString(){ return repMoney; }
 
     /**
      * This equal is sensitive to scale.
@@ -402,16 +373,19 @@ public class Money implements Comparable<Money>, Serializable {
         return EQUAL;
     }
 
-    private void validateState(){
-        if( fAmount == null ) {
+    private void checkNotNull(BigDecimal aAmount, Currency aCurrency, RoundingMode aRoundingStyle){
+        if( aAmount == null ) {
             throw new IllegalArgumentException("Amount cannot be null");
         }
-        if( fCurrency == null ) {
+        if( aCurrency == null ) {
             throw new IllegalArgumentException("Currency cannot be null");
         }
-        if ( fAmount.scale() > getNumDecimalsForCurrency() ) {
+        if( aRoundingStyle == null) {
+            throw new IllegalArgumentException("rounding style cannot be null");
+        }
+        if ( aAmount.scale() > aCurrency.getDefaultFractionDigits() ) {
             throw new IllegalArgumentException(
-                    "Number of decimals is " + fAmount.scale() + ", but currency only takes " +
+                    "Number of decimals is " + aAmount.scale() + ", but currency only takes " +
                             getNumDecimalsForCurrency() + " decimals."
             );
         }
