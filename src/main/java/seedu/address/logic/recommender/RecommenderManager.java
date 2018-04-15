@@ -6,10 +6,7 @@ import weka.classifiers.Classifier;
 import weka.core.Instances;
 import weka.filters.unsupervised.instance.RemoveWithValues;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,7 +20,7 @@ public class RecommenderManager {
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
-    private String arffPath;
+    private File arff;
     private BufferedReader reader;
     private Instances orders;
     private RemoveWithValues isolator;
@@ -35,14 +32,14 @@ public class RecommenderManager {
      * @param arffPath the data folder where the .arff orders file is stored.
      */
     public RecommenderManager(String arffPath, ReadOnlyAddressBook addressBook) {
-        setFilePath(arffPath);
+        setTrainerFile(arffPath);
         writeOrdersAsTraningData(addressBook);
         parseOrdersFromFile();
         trainRecommenderOnOrders();
     }
 
-    public void setFilePath(String path) {
-        arffPath = path;
+    public void setTrainerFile(String path) {
+        arff = new File(path);
     }
 
     /**
@@ -55,7 +52,7 @@ public class RecommenderManager {
     }
 
     private void writeOrdersAsTraningData(ReadOnlyAddressBook addressBook) {
-        ArffWriter arffWriter = new ArffWriter(arffPath, addressBook);
+        ArffWriter arffWriter = new ArffWriter(arff, addressBook);
         arffWriter.makeArffFromOrders();
     }
 
@@ -96,9 +93,9 @@ public class RecommenderManager {
 
     private void getReaderFromArff() {
         try {
-            reader = new BufferedReader(new FileReader(arffPath));
+            reader = new BufferedReader(new FileReader(arff));
         } catch (FileNotFoundException e) {
-            System.out.println(String.format(MESSAGE_INVALID_ARFF_PATH, arffPath));
+            System.out.println(String.format(MESSAGE_INVALID_ARFF_PATH, arff));
         }
     }
 
