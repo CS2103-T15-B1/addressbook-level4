@@ -43,6 +43,7 @@ public class ProductCard extends UiPart<Region> {
         name.setText(product.getName().fullProductName);
         price.setText(product.getPrice().repMoney);
         category.setText(product.getCategory().value);
+
     }
 
     @Override
