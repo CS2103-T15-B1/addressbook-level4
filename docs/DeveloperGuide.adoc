@@ -885,7 +885,11 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 .. Test case: `addperson` +
-Expected
+   Expected: No person added. Error message appears giving you the correct format.
+.. Test case: `addperson n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/M age/23 lat/1.339160 lon/103.745166 t/friends t/onetag` +
+   Expected: Person successfully added. Appears as index 11 in the sample address book.
+.. Test case: `addperson n/Ben Doe p/98765432 e/bend@example.com a/456, Clementi Ave 6, #02-25 g/M age/25 lat/22.339160 lon/50.745166 t/friends t/tags t/moretags` +
+   Expected: Person successfully added. Appears as index 12 in the sample address book.
 
 === Deleting a person
 
@@ -899,9 +903,56 @@ Expected
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
+=== Finding products by category
+
+. Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.
+. Finding the products from a category with multiple products.
+.. Test case: `findproductbycategory Healthcare` +
+   Expected: Only Dentures and Toothbrush will be listed.
+.. Test case: Refresh the product listing with `listproduct`. Then, input `findproductbycategory healthcare` +
+   Expected: Again, only Dentures and Toothbrush will be listed. Note that the argument is not case sensitive.
+. Finding a product from a category with only one product
+.. Test case: `findproductbycategory Clothing` +
+   Expected: Only TrendyShirt is listed.
+. Negative examples
+.. Test case: `findproductbycategory ABC123` +
+   Expected: No products are listed because the category ABC123 does not exist.
+.. Test case: `findproductbycategory` +
+   Expected: Error detailing invalid format is displayed in CLI.
+
 === Adding a product
+
+. Adding a product
+
+.. Test case: `addproduct` +
+   Expected: No product is added. Error message appears giving you the correct format.
+.. Test case: `addproduct n/Egg pr/2.5 c/Food`
+   Expected: Product successfully added.
+.. Test case: `addproduct n/Egg pr/sgr2.5 c/Food`
+   Expected: Invalid format error, prompt should appear in CLI requesting that currency only has numbers and a dollar symbol.
 
 === Adding an order
 
+. Adding an order
+
+.. Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.
+.. Test case: `addorder` +
+   Expected: No order is added. Error detailing correct format should be provided.
+.. Test case: `addorder e/alex@example.com o/1 5 $3.00 o/2 4 $2.50 o/3 1 $100`
+   Expected: New order added to Alex Yeoh with 3 suborders for 3 different products. Does not merge with existing order by Alex.
+.. Test case: `addorder e/bernice@example.com o/1 5 $3.00`
+   Expected: New order added to Bernice Yu with 1 suborder. Does not merge with existing order by Bernice.
+
 === Recommending for a person
 
+. Recommends products that a person is likely to want to buy
+
+.. Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.
+.. Test case: `recommend 1` +
+   Expected: Recommendations for Alex Yeoh appears. Because Alex is young, TrendyShirt should top the list, while dentures is at the back. Lipstick should be just behind dentures as Alex is male.
+.. Test case: `recommend 2` +
+   Expected: Recommendations for Bernice Yu appears. Compared to Alex, Bernice is female, so Lipstick advances to  most likely in the prediction list..
+
+=== Other methods to test
+
+. `findproductbyname`, `findproductbyprice`, `map`, `listproduct`, `deleteproduct`, and `deleteorder`.
