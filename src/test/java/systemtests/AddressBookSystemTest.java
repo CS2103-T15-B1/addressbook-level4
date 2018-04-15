@@ -25,7 +25,9 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.OrderListPanelHandle;
 import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.ProductListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
@@ -101,9 +103,11 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
-    }
+    public PersonListPanelHandle getPersonListPanel() { return mainWindowHandle.getPersonListPanel(); }
+
+    public ProductListPanelHandle getProductListPanel() { return mainWindowHandle.getProductListPanel(); }
+
+    public OrderListPanelHandle getOrderListPanel() { return mainWindowHandle.getOrderListPanel(); }
 
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();

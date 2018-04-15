@@ -5,10 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import guitests.guihandles.OrderCardHandle;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ProductCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -48,6 +50,7 @@ public class GuiTestAssert {
                 actualCard.getTags());
     }
 
+    //@@author He Yingxu
     /**
      * Asserts that {@code actualProductCard} displays the same values as {@code expectedProductCard}.
      */
@@ -62,10 +65,31 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedProduct}.
      */
     public static void assertCardDisplaysProduct(Product expectedProduct, ProductCardHandle actualCard) {
+        assertEquals(expectedProduct.getId(), actualCard.getId());
         assertEquals(expectedProduct.getName().fullProductName, actualCard.getName());
         assertEquals(expectedProduct.getPrice().repMoney, actualCard.getPrice());
         assertEquals(expectedProduct.getCategory().value, actualCard.getCategory());
     }
+
+    /**
+     * Asserts that {@code actualOrderCard} displays the same values as {@code expectedOrderCard}.
+     */
+    public static void assertOrderCardEquals(OrderCardHandle expectedCard, OrderCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getPersonId(), actualCard.getPersonId());
+        assertEquals(expectedCard.getTime(), actualCard.getTime());
+        assertEquals(expectedCard.getSubOrders(), actualCard.getSubOrders());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedProduct}.
+     */
+    public static void assertCardDisplaysOrder(Order expectedOrder, OrderCardHandle actualOrder) {
+        assertEquals(expectedOrder.getId(), actualOrder.getId());
+        assertEquals(expectedOrder.getPersonId(), actualOrder.getPersonId());
+        assertEquals(expectedOrder.getTime(), actualOrder.getTime());
+    }
+
 
     /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
