@@ -15,6 +15,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //@@author lowjiajin
+
+/**
+ * Handles the writing of {@code addressBook}'s data into an .arff file for recommender training.
+ */
 public class ArffWriter {
     
     private static final String ARFF_HEADER = "@RELATION ConvertedOrders\n\n" +
@@ -47,12 +51,15 @@ public class ArffWriter {
     }
 
     public void makeArffFromOrders() {
-        BufferedWriter writer = makeFileToWrite();
+        BufferedWriter writer = makeWriter();
         writeArffHeader(writer);
         writeArffData(writer);
         closeArffFile(writer);
     }
 
+    /**
+     * @return HashMap which allows retrieval of a {@code product}'s name with its numerical id as key.
+     */
     private HashMap<Integer, String> getProductIdToNameMap() {
         HashMap<Integer, String> productIdToNameMap = new HashMap<>();
         
@@ -63,7 +70,11 @@ public class ArffWriter {
         return productIdToNameMap;
     }
 
-    private BufferedWriter makeFileToWrite() {
+    /**
+     * Makes a directory for the .arff file if it doesn't already exist, then,
+     * @return the new writer in erstwhile directory.
+     */
+    private BufferedWriter makeWriter() {
         arff.getParentFile().mkdirs();
         try {
             return new BufferedWriter(new FileWriter(arff));
@@ -73,6 +84,9 @@ public class ArffWriter {
         return null;
     }
 
+    /**
+     * Writes both the positive and negative purchase decisions as classes to be predicted, for every product.
+     */
     private void writeArffHeader(BufferedWriter writer) {
         String classLabels = products.stream()
                 .map(formatter::convertProductToBinaryLabels).collect(Collectors.joining(", "));
@@ -89,7 +103,11 @@ public class ArffWriter {
             writeOrdersOfPersonToArff(person, productsBoughtMap, writer);
         }
     }
-    
+
+    /**
+     * @return Map which allows retrieval of a set of all products a {@code person} has bought, 
+     * keyed by {@code person}'s id.
+     */
     private Map<String, HashSet<Integer>> makeProductsBoughtMap() {
         Map<String, HashSet<Integer>> productsBoughtMap = new HashMap<>();
         for (Order order : orders) {
@@ -98,6 +116,10 @@ public class ArffWriter {
         return productsBoughtMap;
     }
 
+    /**
+     * For a given order, records the {@code person} as having bought the {@code product},
+     * via {@code productsBoughtMap}.
+     */
     private void recordWhichPersonBoughtWhichProduct(Map<String, HashSet<Integer>> productsBoughtMap, Order order) {
         String personId = order.getPersonId();
 
@@ -109,6 +131,10 @@ public class ArffWriter {
         }
     }
 
+    /**
+     * Write whether a {@code person} has purchased a {@code product} as a data entry in the .arff file,
+     * for every {@code product} in the {@code addressBook}.
+     */
     private void writeOrdersOfPersonToArff(
             Person person, Map<String, HashSet<Integer>> productsBoughtMap, BufferedWriter writer) {
 
@@ -122,6 +148,7 @@ public class ArffWriter {
     }
 
     public HashSet<Integer> getProductsBoughtByPerson(Person person, Map<String, HashSet<Integer>> productsBoughtMap) {
+        // Defaults to an empty set in cases where a {@code person} has never bought anything.
         return productsBoughtMap.getOrDefault(person.getEmail().value, new HashSet<>());
     }
 

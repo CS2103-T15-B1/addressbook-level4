@@ -9,10 +9,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 
 //@@author lowjiajin
+
+/**
+ * Parses input arguments and creates a new RecommendCommand object
+ */
 public class RecommendCommandParser implements Parser<RecommendCommand> {
 
     private ReadOnlyAddressBook addressBook;
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the RecommendCommand
+     * and returns an RecommendCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     public RecommendCommandParser(ReadOnlyAddressBook addressBook) {
         this.addressBook = addressBook;
     }
