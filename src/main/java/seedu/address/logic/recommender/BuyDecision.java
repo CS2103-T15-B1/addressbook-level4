@@ -9,6 +9,7 @@ import static java.lang.Double.compare;
  * Package private to Recommender.
  */
 class BuyDecision implements Comparable<BuyDecision> {
+    private static final String MESSAGE_COMPARING_NULL = "Cannot compare a BuyDecision with a null.";
     private String productName;
     private double buyProb;
 
@@ -31,6 +32,9 @@ class BuyDecision implements Comparable<BuyDecision> {
      */
     @Override
     public int compareTo(BuyDecision other) {
+        if (!(other instanceof BuyDecision)) {
+            throw new AssertionError(MESSAGE_COMPARING_NULL);
+        }
         return compare(other.getBuyProb(), buyProb);
     }
 
