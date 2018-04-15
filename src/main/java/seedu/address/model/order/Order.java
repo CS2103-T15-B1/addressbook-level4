@@ -5,6 +5,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 /**
@@ -148,18 +150,18 @@ public class Order {
         sb.append(" by ");
         sb.append(personId);
         sb.append(" at ");
-        sb.append(time);
+        sb.append(time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
         sb.append(": \n");
         sb.append("-------------\n");
         int subOrderCt = 0;
         for(SubOrder so : subOrders) {
             sb.append(++subOrderCt);
-            sb.append('-');
+            sb.append("- ");
             sb.append(so.toString());
             sb.append('\n');
         }
         sb.append("-------------\n");
-        sb.append("Order total: ");
+        sb.append("Total: \n");
         sb.append(getOrderTotal());
         sb.append("-------------\n");
         return sb.toString();

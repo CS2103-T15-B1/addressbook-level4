@@ -70,7 +70,7 @@ public class SubOrder {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Product ID: ");
+        sb.append("Product ");
         sb.append(productID);
         sb.append(" x");
         sb.append(numProduct);
