@@ -4,7 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
+import seedu.address.model.order.Order;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -74,30 +76,7 @@ public class Person {
     public Age getAge() {
         return age;
     }
-
-//    public List<Order> getOrders() {
-//        //TODO Use order getter to find orders belonging to this person
-//    }
-
-    /**
-     * Get orders made equals or after to a certain time
-     * @param time
-     * @return orders after certain time
-     */
-//    public List<Order> getOrdersSinceTime(LocalDateTime time) {
-//        //TODO Use order getter to find orders belonging to this person
-//    }
-
-    /**
-     * Get time of most recent order
-     * @return last order time
-     */
-//    public LocalDateTime getLastOrderTime() {
-//        List<Order> allOrders = getOrders();
-//        Order lastOrder = allOrders.get(allOrders.size() - 1);
-//        return lastOrder.getTime();
-//    }
-    //@@author
+  
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

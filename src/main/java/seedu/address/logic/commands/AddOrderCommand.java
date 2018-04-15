@@ -27,7 +27,7 @@ public class AddOrderCommand extends UndoableCommand {
             + PREFIX_ORDER + "3 1 $100 ";
 
     public static final String MESSAGE_SUCCESS = "New order added.";
-    public static final String MESSAGE_DUPLICATE_ORDER = "This person already exists in the retail analytics";
+    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the app.";
     public static final String MESSAGE_INVALID_ORDER = "The order is invalid. Check that the person and products exist.";
 
     private final Order toAdd;
@@ -53,6 +53,8 @@ public class AddOrderCommand extends UndoableCommand {
         requireNonNull(model);
         //Check that order is valid
         if(!isValid()) {
+            //If order invalid, decrement order counter so orders have sequential ID
+            Order.decrementOrderCounter();
             throw new CommandException(MESSAGE_INVALID_ORDER);
         }
         try {
