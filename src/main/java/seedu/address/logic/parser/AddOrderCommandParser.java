@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,7 +11,6 @@ import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.SubOrder;
-import seedu.address.model.person.Email;
 
 //@@author qinghao1
 /**
@@ -27,9 +25,9 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
      */
     public AddOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_EMAIL, PREFIX_ORDER);
+                ArgumentTokenizer.tokenize(args, PREFIX_EMAIL, PREFIX_SUBORDER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EMAIL, PREFIX_ORDER)
+        if (!arePrefixesPresent(argMultimap, PREFIX_EMAIL, PREFIX_SUBORDER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
         }
@@ -39,7 +37,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
             String email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get().toString();
 
             List<SubOrder> subOrderList =
-                    ParserUtil.parseSubOrders(argMultimap.getAllValues(PREFIX_ORDER));
+                    ParserUtil.parseSubOrders(argMultimap.getAllValues(PREFIX_SUBORDER));
 
             Order order = new Order(email, subOrderList);
             return new AddOrderCommand(order);
