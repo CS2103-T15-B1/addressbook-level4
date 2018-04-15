@@ -1,5 +1,7 @@
 package seedu.address.logic.recommender;
 
+import static seedu.address.logic.recommender.Recommender.createRecommender;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +57,7 @@ public class RecommenderManager {
      * for the given {@code person}, for all the products with sufficient {@code orders} to make a recommendation.
      */
     public String getRecommendations(Person person) {
-        Recommender recommender = new Recommender();
+        Recommender recommender = createRecommender();
         return recommender.getRecommendations(productsWithClassifiers, person, classifierDict);
     }
 
