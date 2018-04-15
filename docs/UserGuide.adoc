@@ -17,7 +17,7 @@ By: `Team T15-B1`      Since: `Feb 2018`      Licence: `MIT`
 
 == Introduction
 
-Retail Analytics (RA) is for *retailers who handle hundreds to thousands of customers and orders and who are comfortable with using a desktop app to manage their analytics*. More importantly, RA is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RA can get your customer analytics tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Retail Analytics (RA) is for *retailers who handle customers and orders and who are comfortable with using a desktop app to manage their analytics*. More importantly, RA is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RA can get your customer analytics tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -54,6 +54,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+// tag::addperson[]
 === Adding a person: `addperson`
 
 Adds a person to Retail Analytics app. +
@@ -180,6 +181,7 @@ Format: `list`
 Shows a list of all products in Retail Analytics. +
 Format: `listproduct`
 
+// tag::map[]
 === Displays the geographic distribution of queried customers in Retail Analytics with clustering: `map`
 
 Displays spread of queried people in Retail Analytics on a map with clustering.
