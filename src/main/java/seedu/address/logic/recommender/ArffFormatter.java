@@ -6,6 +6,7 @@ import seedu.address.model.product.Product;
 import java.util.HashMap;
 import java.util.HashSet;
 
+//@@author lowjiajin
 public class ArffFormatter {
     private static final String PREFIX_NOT = "!";
     private final HashMap<Integer, String> productIdToNameMap;

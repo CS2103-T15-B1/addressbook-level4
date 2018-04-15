@@ -12,12 +12,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
-import static java.lang.Double.compare;
-
 //@@author lowjiajin
 public class Recommender {
-
+    
+    private static final int POSITIVE_CLASS_INDEX = 0;
+    
     private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "Cannot classify instance.";
+    
+    private static final String AGE_ATTRIBUTE_NAME = "age";
+    private static final String GENDER_ATTRIBUTE_NAME = "gender";
+    private static final String CLASS_ATTRIBUTE_NAME = "class";
+    private static final String INSTANCE_TYPE = "person";
+    private static final ArrayList<String> GENDER_NOMINALS = new ArrayList<String>(Arrays.asList("m", "f"));
 
     /**
      * Determines the likelihood of a person wanting to buy any product, assuming the product has a classifier.
@@ -26,40 +32,28 @@ public class Recommender {
     public String getRecommendations(ArrayList<String> productsWithClassifiers, Person person, HashMap<String, Classifier> classifierDict) {
 
         Instance personInstance = parsePerson(person);
-        ArrayList<Recommender.RecommenderProductDecision> ProductRecOfAPerson = new ArrayList<>();
+        ArrayList<BuyDecision> productRecOfAPerson = new ArrayList<>();
 
         for (int i = 0; i < productsWithClassifiers.size(); i++) {
             String currentProductPredicted = productsWithClassifiers.get(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
-            try {
-                Recommender.RecommenderProductDecision decision = new Recommender.RecommenderProductDecision(
-                        currentProductPredicted, classifier.distributionForInstance(personInstance)[0]);
-                ProductRecOfAPerson.add(decision);
-            } catch (Exception e) {
-                System.out.println(MESSAGE_CANNOT_CLASSIFY_INSTANCE);
-            }
+            BuyDecision decision = getBuyDecision(currentProductPredicted, classifier, personInstance);
+            productRecOfAPerson.add(decision);
         }
 
-        Collections.sort(ProductRecOfAPerson);
-        return Arrays.toString(ProductRecOfAPerson.toArray());
+        return getFormattedRecs(productRecOfAPerson);
     }
 
     /**
      * Extracts the feature data from a {@code person} and turns them into a {@code DenseInstance} for classification.
      */
     private Instance parsePerson(Person person) {
-
-        ArrayList<String> genderNominals = new ArrayList<String>(Arrays.asList("m", "f"));
-        Attribute ageAttribute = new Attribute("age");
-        Attribute genderAttribute = new Attribute("gender", genderNominals);
-        Attribute classAttribute = new Attribute("class", new ArrayList<>());
-
-        ArrayList<Attribute> attributes = new ArrayList<Attribute>(
-                Arrays.asList(ageAttribute, genderAttribute, classAttribute));
-
-        Instances persons = new Instances("persons", attributes, 1);
-
-        Instance personInstance = new DenseInstance(3);
+        // Set up the person as a Weka instance
+        ArrayList<Attribute> attributes = getAttributes();
+        Instances persons = new Instances(INSTANCE_TYPE, attributes, 1);
+        Instance personInstance = new DenseInstance(attributes.size());
+        
+        // Assign values to the aforementioned instance
         personInstance.setDataset(persons);
         personInstance.setValue(0, Double.parseDouble(person.getAge().value));
         personInstance.setValue(1, person.getGender().value.toLowerCase());
@@ -67,37 +61,33 @@ public class Recommender {
         return personInstance;
     }
 
+    public ArrayList<Attribute> getAttributes() {
+        Attribute ageAttribute = new Attribute(AGE_ATTRIBUTE_NAME);
+        Attribute genderAttribute = new Attribute(GENDER_ATTRIBUTE_NAME, GENDER_NOMINALS);
+        Attribute classAttribute = new Attribute(CLASS_ATTRIBUTE_NAME, new ArrayList<>());
+        return new ArrayList<Attribute>(Arrays.asList(ageAttribute, genderAttribute, classAttribute));
+    }
+
     /**
-     * Represents the confidence in the decision of whether to buy a given product, referenced by its {@code productId}.
+     * Uses Weka's {@code distributionForInstance} to obtain the probability of confidence in the buy decision.
      */
-    private final class RecommenderProductDecision implements Comparable<RecommenderProductDecision> {
-        private String productId;
-        private double buyProb;
+    private BuyDecision getBuyDecision(String currentProductPredicted, Classifier classifier, Instance personInstance) {
+        double buyProb = 0;
 
-        private RecommenderProductDecision(String productId, double buyProb) {
-            this.productId = productId;
-            this.buyProb = buyProb;
+        try {
+            buyProb = classifier.distributionForInstance(personInstance)[POSITIVE_CLASS_INDEX];
+        } catch (Exception e) {
+            System.out.println(MESSAGE_CANNOT_CLASSIFY_INSTANCE);
         }
+        return new BuyDecision(currentProductPredicted, buyProb);
+    }
 
-        private String getProductId() {
-            return productId;
-        }
-
-        private double getBuyProb() {
-            return buyProb;
-        }
-
-        /**
-         * Used in sorting the recommendations so only the most confident recommendations are presented.
-         */
-        @Override
-        public int compareTo(RecommenderProductDecision other) {
-            return compare(other.getBuyProb(), buyProb);
-        }
-
-        @Override
-        public String toString() {
-            return String.format("%1$s: %2$f", productId, buyProb);
-        }
+    /**
+     * Sorts the recommendations so the most confident recommendations come first
+     * @return the recommendations as a String
+     */
+    private String getFormattedRecs(ArrayList<BuyDecision> productRecOfAPerson) {
+        Collections.sort(productRecOfAPerson);
+        return Arrays.toString(productRecOfAPerson.toArray());
     }
 }
