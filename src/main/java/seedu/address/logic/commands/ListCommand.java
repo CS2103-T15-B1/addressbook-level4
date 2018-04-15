@@ -17,7 +17,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
-
+    //@@author qinghao1
     @Override
     public CommandResult execute() {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -35,4 +35,5 @@ public class ListCommand extends Command {
         model.updateFilteredOrderList(orderBelongsToPeoplePredicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    //@@author
 }
