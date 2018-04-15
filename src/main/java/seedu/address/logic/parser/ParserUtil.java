@@ -274,17 +274,12 @@ public class ParserUtil {
         Currency currency = Money.DEFAULT_CURRENCY;
         if (!Money.isValidMoney(trimmedPrice)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
-        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
-            String currencySymbol = trimmedPrice.substring(0,1);
-            currency = Money.parseCurrency(currencySymbol);
-            trimmedPrice = trimmedPrice.substring(1).trim();
         } else if (Money.isValidMoneyWithUnknownPrefix(trimmedPrice)) {
-            String currencySymbol = trimmedPrice.split("\\s*\\d+")[0];
+            String currencySymbol = trimmedPrice.split(Money.MONEY_DIGITS)[0];
             currency = Money.parseCurrency(currencySymbol);
-            trimmedPrice = trimmedPrice.split(Money.MONEY_PREFIX)[1];
-
+            String[] splitted = trimmedPrice.split(Money.MONEY_PREFIX);
+            trimmedPrice = splitted[splitted.length-1];
         }
-
         return new Money(new BigDecimal(trimmedPrice), currency);
 
     }

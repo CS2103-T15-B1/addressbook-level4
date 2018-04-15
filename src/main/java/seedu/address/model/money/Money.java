@@ -24,14 +24,17 @@ import seedu.address.model.money.exceptions.ObjectNotMoneyException;
  */
 public class Money implements Comparable<Money>, Serializable {
 
-    public static final String MONEY_VALIDATION_REGEX_WITH_CURRENCY = "(\\p{Sc})\\s*\\d+(\\.\\d+)?";
     public static final String MONEY_VALIDATION_REGEX_WITHOUT_CURRENCY = "\\d+(\\.\\d+)?";
-    public static final String MONEY_VALIDATION_REGEX_WITH_UNKNOWN_PREFIX = "(\\p{Alpha})+\\s*\\d+(\\.\\d+)?";
-    public static final String MONEY_PREFIX = "(\\p{Alpha})+\\s*";
+    public static final String MONEY_VALIDATION_REGEX_WITH_UNKNOWN_PREFIX = "(\\p{Alpha}+|\\p{Sc})\\s*\\d+(\\.\\d+)?";
+    public static final String MONEY_PREFIX = "(\\p{Alpha}+|\\p{Sc})\\s*";
+    public static final String MONEY_DIGITS = "\\s*\\d+(\\.\\d+)?";
 
     public static final String MESSAGE_MONEY_CONSTRAINTS =
             String.format("price should only contains currency sy/mbol(optional) and digits," +
                     " and it cannot be negative");
+    public static final String MESSAGE_MONEY_SYMBOL_CONSTRAINTS =
+            String.format("currency code should be limited ISO 4277 code" +
+            " as well ass ");
 
     /**
      * The money amount.
@@ -136,7 +139,7 @@ public class Money implements Comparable<Money>, Serializable {
      * Returns true if a given string is a valid Money.
      */
     public static boolean isValidMoney(String test) {
-        return isValidMoneyWithoutCurrency(test) || (isValidMoneyWithCurrency(test) || isValidMoneyWithUnknownPrefix(test));
+        return isValidMoneyWithoutCurrency(test) || isValidMoneyWithUnknownPrefix(test);
     }
 
     /**
@@ -144,13 +147,6 @@ public class Money implements Comparable<Money>, Serializable {
      */
     public static boolean isValidMoneyWithUnknownPrefix(String test) {
         return test.matches(MONEY_VALIDATION_REGEX_WITH_UNKNOWN_PREFIX);
-    }
-
-    /**
-     * Returns true if a given string is a valid Money with currency symbol.
-     */
-    public static boolean isValidMoneyWithCurrency(String test) {
-        return test.matches(MONEY_VALIDATION_REGEX_WITH_CURRENCY);
     }
 
     /**
@@ -167,7 +163,7 @@ public class Money implements Comparable<Money>, Serializable {
                 return currency;
             }
         }
-        return Money.DEFAULT_CURRENCY;
+        throw new IllegalArgumentException("unknown currency: " + symbol +"\n"+ MESSAGE_MONEY_SYMBOL_CONSTRAINTS);
     }
 
 
