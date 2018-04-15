@@ -117,15 +117,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getPhone().equals(this.getPhone())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress())
-                && otherPerson.getGender().equals(this.getGender())
-                && otherPerson.getAge().equals(this.getAge())
-                && otherPerson.getLatitude().equals(this.getLatitude())
-                && otherPerson.getLongitude().equals(this.getLongitude())
-                ;
+        return otherPerson.getEmail().equals(this.getEmail());
     }
 
     @Override

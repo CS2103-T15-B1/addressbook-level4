@@ -72,6 +72,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code gender} is invalid.
+     * @author Sivalavida
      */
     public static Gender parseGender(String gender) throws IllegalValueException {
         requireNonNull(gender);
@@ -85,6 +86,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> gender} into an {@code Optional<Gender>} if {@code gender} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     * @author Sivalavida
      */
     public static Optional<Gender> parseGender(Optional<String> gender) throws IllegalValueException {
         requireNonNull(gender);
@@ -96,6 +98,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code age} is invalid.
+     * @author Sivalavida
      */
     public static Age parseAge(String age) throws IllegalValueException {
         requireNonNull(age);
@@ -109,6 +112,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> age} into an {@code Optional<Age>} if {@code age} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     * @author Sivalavida
      */
     public static Optional<Age> parseAge(Optional<String> age) throws IllegalValueException {
         requireNonNull(age);
@@ -120,6 +124,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code latitude} is invalid.
+     * @author Sivalavida
      */
     public static Latitude parseLatitude(String latitude) throws IllegalValueException {
         requireNonNull(latitude);
@@ -133,6 +138,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> latitude} into an {@code Optional<Latitude>} if {@code latitude} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     * @author Sivalavida
      */
     public static Optional<Latitude> parseLatitude(Optional<String> latitude) throws IllegalValueException {
         requireNonNull(latitude);
@@ -144,6 +150,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code longitude} is invalid.
+     * @author Sivalavida
      */
     public static Longitude parseLongitude(String longitude) throws IllegalValueException {
         requireNonNull(longitude);
@@ -157,6 +164,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> longitude} into an {@code Optional<Longitude>} if {@code longitude} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     * @author Sivalavida
      */
     public static Optional<Longitude> parseLongitude(Optional<String> longitude) throws IllegalValueException {
         requireNonNull(longitude);
@@ -379,4 +387,18 @@ public class ParserUtil {
         }
         return subOrderList;
     }
+
+    /**
+     * Parses {@code String[] ItemIds} into a {@code List<Integer> ItemIds}
+     * @author Sivalavida
+     */
+    public static List<Integer> parseItemIds(String[] ItemIds){
+        requireNonNull(ItemIds);
+        final List<Integer>  newItemIds = new ArrayList<>();
+        for (String itemId : ItemIds) {
+            newItemIds.add(Integer.parseInt(itemId));
+        }
+        return newItemIds;
+    }
+
 }
