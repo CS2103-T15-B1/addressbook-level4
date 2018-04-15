@@ -195,6 +195,21 @@ public class RecommendCommand extends Command {
             return new RecommendCommandParser(addressBook).parse(arguments);
 
 ```
+###### \java\seedu\address\logic\parser\AddressBookParser.java
+``` java
+            case FindProductByCategoryCommand.COMMAND_WORD:
+                return new FindProductByCategoryCommandParser().parse(arguments);
+
+            case FindProductByNameCommand.COMMAND_WORD:
+                return new FindProductByNameCommandParser().parse(arguments);
+
+            case FindProductByPriceCommand.COMMAND_WORD:
+                return new FindProductByPriceCommandParser().parse(arguments);
+
+            case ListProductCommand.COMMAND_WORD:
+                return new ListProductCommand();
+
+```
 ###### \java\seedu\address\logic\parser\FindProductByCategoryCommandParser.java
 ``` java
 
