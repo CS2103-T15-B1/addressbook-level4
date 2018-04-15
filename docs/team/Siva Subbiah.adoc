@@ -8,50 +8,48 @@
 
 == Overview
 
-Retail Analytics (RA) is for retailers who handle hundreds to thousands of customers and orders and who are comfortable with using a desktop app to manage their analytics. More importantly, RA is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
+Retail Analytics (RA) is for e-retailers who handle of customers and orders and who are comfortable with using a desktop app to manage their analytics. More importantly, RA is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the map command*
-** What it does: allows user to gf selected customers in his list.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added `map` command and the HTML page for the browser
+** What it does: Renders a webpage which graphically visualises a list of querried customers on Google Maps.
+** Justification: This feature improves the product significantly because this tool enables the retailer to gain knowledge of where his customers are located. Therefore, he would be able to make better decisions for example as to where to locate a new warehouse.
+** Highlights: To come up with this command, I had to create a way to generate queries for the retailer to filter his list of customers by age, gender.As such it was
 
-* *Minor enhancement*: added several attributes to the person model .
+* *Minor enhancement*: added several attributes to the person model such as `Age`, `Gender`, `Latitude`, `Longitude`.
+** Justification: This feature is required so that we can get the location of the customers and the so that we can filter the list of customers based on these parameters which will be useful for the user.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*:
+link:..\collated\functional\Sivalavida.md[Functional Code]
+link:..\collated\test\Sivalavida.md[Test Code]
 
 * *Other contributions*:
+** General team tasks:
+*** Added sample data for Person with new attributes which I created.
+*** Created the HTML page for the Browser Panel hosted on my Github account. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#37])
+** Documentation:
+*** Wrote Appendix D of the Developer Guide. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#3])
+*** Edited documentation outside of my feature contribution to keep the documentation updated.
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+***  User Guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** PRs reviewed : https://github.com[#27], https://github.com[#34]
 
 == Contributions to the User Guide
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=map]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=addperson]
 
 == Contributions to the Developer Guide
 
@@ -59,13 +57,4 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=map]
