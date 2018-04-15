@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
-//@@author Sivalavida
+//@@author lowjiajin
 public class ProductNameContainsKeywordsPredicateTest {
     @Test
     public void equals() {
