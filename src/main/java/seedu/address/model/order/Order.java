@@ -131,15 +131,37 @@ public class Order {
     }
 
     /**
-     * Returns a table in string format which is the order summary (product name, number bought, price, total price)
-     * @return
+     * Decrements order counter. To be used when deleting invalid order.
+     */
+    public static void decrementOrderCounter() {
+        orderCounter = Math.max(orderCounter - 1, 0);
+    }
+
+    /**
+     * Returns a table in string format which is the order summary (product id, number bought, price, total price)
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for(SubOrder product : subOrders) {
-            // TODO get product by id, and convert to string
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Order ID ");
+        sb.append(id);
+        sb.append(" by ");
+        sb.append(personId);
+        sb.append(" at ");
+        sb.append(time);
+        sb.append(": \n");
+        sb.append("-------------\n");
+        int subOrderCt = 0;
+        for(SubOrder so : subOrders) {
+            sb.append(++subOrderCt);
+            sb.append('-');
+            sb.append(so.toString());
+            sb.append('\n');
         }
+        sb.append("-------------\n");
+        sb.append("Order total: ");
+        sb.append(getOrderTotal());
+        sb.append("-------------\n");
         return sb.toString();
     }
 
@@ -147,7 +169,7 @@ public class Order {
     public boolean equals(Object other) {
         return other == this ||
                 ((other instanceof Order) &&
-                        ((Order) other).getPersonId() == this.getPersonId() &&
+                        ((Order) other).getPersonId().equals(this.getPersonId()) &&
                         ((Order) other).getId() == this.getId() &&
                         ((Order) other).getSubOrders() == this.getSubOrders()
                 );

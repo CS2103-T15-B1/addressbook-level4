@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.model.order.OrderBelongsToPeoplePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Finds and lists all persons in retail analytics whose name contains any of the argument keywords.
@@ -27,6 +32,18 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredPersonList(predicate);
+
+        //Get emails of filtered people
+        List<String> emails = new ArrayList<>();
+        for(Person person : this.model.getFilteredPersonList()) {
+            emails.add(person.getEmail().toString());
+        }
+
+        //Create predicate to filter order list
+        OrderBelongsToPeoplePredicate orderBelongsToPeoplePredicate = new OrderBelongsToPeoplePredicate(emails);
+
+        //Update order list
+        model.updateFilteredOrderList(orderBelongsToPeoplePredicate);
         return new CommandResult(getMessageForListShownSummary(model.getFilteredPersonList().size(), message));
     }
 
