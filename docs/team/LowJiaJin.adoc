@@ -36,7 +36,7 @@ The category filter behaves more similarly to the code for finding a person.
 * *Other contributions*:
 ** General team tasks:
 *** Helped populate sample data for fresh address book. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
-*** Added unique product and order lists, as well as relevant setters. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
+*** Added unique product and order lists, as well as relevant setters and exceptions. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
 *** Solved bugs of teammates' feature scope while they were busy. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/76[#76])
 ** Documentation:
 *** Wrote Appendix B and C of the Developer Guide. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#3])
