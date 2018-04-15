@@ -6,9 +6,8 @@ import java.util.function.Predicate;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.RenderMapEvent;
 import seedu.address.model.person.Person;
-
+//@@author Sivalavida
 /**
- * @author Sivalavida
  * Displays the geographic distribution of queried customers in Retail Analytics.
  */
 public class MapCommand extends Command {

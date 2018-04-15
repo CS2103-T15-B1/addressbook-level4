@@ -73,7 +73,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     public String getEmail() {
         return emailLabel.getText();
     }
-
+    //@@author Sivalavida
     public String getGender() {
         return genderLabel.getText();
     }
@@ -89,7 +89,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     public String getLongitude() {
         return longitudeLabel.getText();
     }
-
+    //@@author
     public List<String> getTags() {
         return tagLabels
                 .stream()

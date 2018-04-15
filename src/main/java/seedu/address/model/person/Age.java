@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+//@@author Sivalavida
 /**
- * Represents a Person's age number in Retail Analytics.
+ * Represents a Person's age in Retail Analytics.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
 public class Age implements Comparable<Age>{
