@@ -8,6 +8,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.SubOrder;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * An UI component that displays information of a {@code Order}.
@@ -36,28 +40,30 @@ public class OrderCard extends UiPart<Region> {
     private Label time;
     @FXML
     private FlowPane subOrders;
+    @FXML
+    private Label totalPrice;
 
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
         this.order = order;
-        id.setText(displayedIndex + ". ");
+        id.setText(Integer.toString(displayedIndex));
         personId.setText(order.getPersonId());
         id.setText(Integer.toString(order.getId()));
-        time.setText(order.getTime().toString());
+        time.setText(order.getTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
 
         order.getSubOrders().forEach(subOrder ->
                 subOrders.getChildren().add(
-                        createProductBox(subOrder.getProductID(),subOrder.getNumProduct())
+                        createProductBox(subOrder)
                 ));
         subOrders.setHgap(10);
+        totalPrice.setText("Total: " + order.getOrderTotal());
     }
 
-    private VBox createProductBox (int productID, int NumProduct) {
+    private VBox createProductBox (SubOrder subOrder) {
         VBox box = new VBox();
         ObservableList list = box.getChildren();
-        Label id = new Label("ProductID: " + productID);
-        Label num = new Label("Num: " + NumProduct);
-        list.addAll(id, num);
+        Label id = new Label(subOrder.toString());
+        list.add(id);
         return box;
     }
 
