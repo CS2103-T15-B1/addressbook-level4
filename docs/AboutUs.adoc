@@ -9,8 +9,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-=== Siva Subbiah
-image::sivalavida.jpg[width="150", align="left"]
+=== link:\team\Siva Subbiah.adoc[Siva Subbiah]
+image::siva.jpg[width="150", align="left"]
 
 Role:
 Head Visualization Developer
@@ -18,22 +18,23 @@ Head Visualization Developer
 '''
 
 === link:\team\LowJiaJin.adoc[Low Jia Jin]
-image::lowjiajin.jpg[width="150", align="left"]
+image::lowjiajin.jpg[width="150", align="left"]s
 
 Role:
 Head Machine Learning Engineer
 
 '''
 
-=== Chu Qinghao
-image::qinghao1.jpg[width="150", align="left"]
+=== link:\team\qinghao.adoc[Chu Qinghao]
+image::qinghao.jpg[width="150", align="left"]
 
 Role:
 Head Backend Engineer
 
 '''
 
-=== He Yingxu
+=== link:\team\He Yingxu.adoc[He Yingxu]
+image::yingxu.jpeg[width="150", align="left"]
 
 Role:
 Head Backend Engineer

@@ -1,0 +1,318 @@
+From 2500cab53d2b6fe8bf79405900d67b63e49c791f Mon Sep 17 00:00:00 2001
+From: Chu Qing Hao <6337103+qinghao1@users.noreply.github.com>
+Date: Sun, 15 Apr 2018 15:39:09 +0800
+Subject: [PATCH 1/3] Change delete order to use ID instead of index
+
+---
+ .../address/logic/commands/DeleteOrderCommand.java | 32 ++++++++++++----------
+ .../logic/parser/DeleteOrderCommandParser.java     |  4 +--
+ .../seedu/address/logic/parser/ParserUtil.java     | 13 +++++++++
+ 3 files changed, 32 insertions(+), 17 deletions(-)
+
+diff --git a/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java b/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
+index 2945aa0..32da637 100644
+--- a/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
++++ b/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
+@@ -11,36 +11,38 @@ import seedu.address.logic.commands.exceptions.CommandException;
+ import seedu.address.model.order.Order;
+ import seedu.address.model.order.exceptions.OrderNotFoundException;
+ 
++//@@author qinghao1
+ /**
+- * Deletes a order identified using it's last displayed index from the address book.
++ * Deletes a order identified using its id from the address book.
+  */
+ public class DeleteOrderCommand extends UndoableCommand {
+ 
+     public static final String COMMAND_WORD = "deleteorder";
+ 
+     public static final String MESSAGE_USAGE = COMMAND_WORD
+-            + ": Deletes the order identified by the index number used in the last order listing.\n"
+-            + "Parameters: INDEX (must be a positive integer)\n"
++            + ": Deletes the order identified by its id.\n"
++            + "Parameters: ID (must be a positive integer)\n"
+             + "Example: " + COMMAND_WORD + " 1";
+ 
+     public static final String MESSAGE_DELETE_ORDER_SUCCESS = "Deleted Order: %1$s";
++    public static final String MESSAGE_INVALID_ORDER = "The order is invalid. Check that the order ID is correct.";
+ 
+-    private final Index targetIndex;
++    private final int targetID;
+ 
+     private Order orderToDelete;
+ 
+-    public DeleteOrderCommand(Index targetIndex) {
+-        this.targetIndex = targetIndex;
++    public DeleteOrderCommand(int targetID) {
++        this.targetID = targetID;
+     }
+ 
+ 
+     @Override
+     public CommandResult executeUndoableCommand() {
+-        requireNonNull(orderToDelete);
+         try {
++            requireNonNull(orderToDelete);
+             model.deleteOrder(orderToDelete);
+-        } catch (OrderNotFoundException onfe) {
+-            throw new AssertionError("The target order cannot be missing");
++        } catch (NullPointerException | OrderNotFoundException e) {
++            throw new AssertionError(MESSAGE_INVALID_ORDER);
+         }
+ 
+         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete));
+@@ -49,19 +51,19 @@ public class DeleteOrderCommand extends UndoableCommand {
+     @Override
+     protected void preprocessUndoableCommand() throws CommandException {
+         List<Order> lastShownList = model.getFilteredOrderList();
+-
+-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+-            throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
++        orderToDelete = null;
++        //There should only be one order that matches the ID
++        for(Order order : lastShownList) {
++            if(order.getId() == targetID)
++                orderToDelete = order;
+         }
+-
+-        orderToDelete = lastShownList.get(targetIndex.getZeroBased());
+     }
+ 
+     @Override
+     public boolean equals(Object other) {
+         return other == this // short circuit if same object
+                 || (other instanceof DeleteCommand // instanceof handles nulls
+-                && this.targetIndex.equals(((DeleteOrderCommand) other).targetIndex) // state check
++                && this.targetID == ((DeleteOrderCommand) other).targetID // state check
+                 && Objects.equals(this.orderToDelete, ((DeleteOrderCommand) other).orderToDelete));
+     }
+ }
+diff --git a/src/main/java/seedu/address/logic/parser/DeleteOrderCommandParser.java b/src/main/java/seedu/address/logic/parser/DeleteOrderCommandParser.java
+index c64d346..0a5623f 100644
+--- a/src/main/java/seedu/address/logic/parser/DeleteOrderCommandParser.java
++++ b/src/main/java/seedu/address/logic/parser/DeleteOrderCommandParser.java
+@@ -19,8 +19,8 @@ public class DeleteOrderCommandParser implements Parser<DeleteOrderCommand> {
+      */
+     public DeleteOrderCommand parse(String args) throws ParseException {
+         try {
+-            Index index = ParserUtil.parseIndex(args);
+-            return new DeleteOrderCommand(index);
++            int id = ParserUtil.parseID(args);
++            return new DeleteOrderCommand(id);
+         } catch (IllegalValueException ive) {
+             throw new ParseException(
+                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteOrderCommand.MESSAGE_USAGE));
+diff --git a/src/main/java/seedu/address/logic/parser/ParserUtil.java b/src/main/java/seedu/address/logic/parser/ParserUtil.java
+index 901a531..e981b13 100644
+--- a/src/main/java/seedu/address/logic/parser/ParserUtil.java
++++ b/src/main/java/seedu/address/logic/parser/ParserUtil.java
+@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
+ public class ParserUtil {
+ 
+     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
++    public static final String MESSAGE_INVALID_ID = "ID is invalid! Must be non-zero unsigned integer";
+     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+ 
+     /**
+@@ -43,6 +44,18 @@ public class ParserUtil {
+         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+     }
+ 
++    /**
++     * Parses ID field and returns an int which is the ID.
++     * @throws IllegalValueException if the specified ID is invalid (not non-zero unsigned integer).
++     */
++    public static int parseID(String idString) throws IllegalValueException {
++        String trimmedID = idString.trim();
++        if (!StringUtil.isNonZeroUnsignedInteger(trimmedID)) {
++            throw new IllegalValueException(MESSAGE_INVALID_ID);
++        }
++        return Integer.parseInt(trimmedID);
++    }
++
+     /**
+      * Parses a {@code String name} into a {@code Name}.
+      * Leading and trailing whitespaces will be trimmed.
+-- 
+2.15.1 (Apple Git-101)
+
+
+From 866cb62991907ffc37df27afdba475323fe05c79 Mon Sep 17 00:00:00 2001
+From: Chu Qing Hao <6337103+qinghao1@users.noreply.github.com>
+Date: Sun, 15 Apr 2018 15:45:52 +0800
+Subject: [PATCH 2/3] Change deleteproduct to use id instead of index
+
+---
+ .../logic/commands/DeleteProductCommand.java       | 33 ++++++++++++----------
+ .../logic/parser/DeleteProductCommandParser.java   |  4 +--
+ 2 files changed, 20 insertions(+), 17 deletions(-)
+
+diff --git a/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java b/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
+index 10ce501..c1b2e46 100644
+--- a/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
++++ b/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
+@@ -11,36 +11,38 @@ import seedu.address.logic.commands.exceptions.CommandException;
+ import seedu.address.model.product.Product;
+ import seedu.address.model.product.exceptions.ProductNotFoundException;
+ 
++//@@qinghao1
+ /**
+- * Deletes a product identified using it's last displayed index from the address book.
++ * Deletes a product identified using its ID.
+  */
+ public class DeleteProductCommand extends UndoableCommand {
+ 
+     public static final String COMMAND_WORD = "deleteproduct";
+ 
+     public static final String MESSAGE_USAGE = COMMAND_WORD
+-            + ": Deletes the product identified by the index number used in the last product listing.\n"
+-            + "Parameters: INDEX (must be a positive integer)\n"
++            + ": Deletes the product identified by its ID.\n"
++            + "Parameters: ID (must be a positive integer)\n"
+             + "Example: " + COMMAND_WORD + " 1";
+ 
+     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
++    public static final String MESSAGE_INVALID_PRODUCT = "The product is invalid. Check that the product ID is correct.";
+ 
+-    private final Index targetIndex;
++    private int targetID;
+ 
+     private Product productToDelete;
+ 
+-    public DeleteProductCommand(Index targetIndex) {
+-        this.targetIndex = targetIndex;
++    public DeleteProductCommand(int targetID) {
++        this.targetID = targetID;
+     }
+ 
+ 
+     @Override
+     public CommandResult executeUndoableCommand() {
+-        requireNonNull(productToDelete);
+         try {
++            requireNonNull(productToDelete);
+             model.deleteProduct(productToDelete);
+-        } catch (ProductNotFoundException pnfe) {
+-            throw new AssertionError("The target product cannot be missing");
++        } catch (NullPointerException|ProductNotFoundException e) {
++            throw new AssertionError(MESSAGE_INVALID_PRODUCT);
+         }
+ 
+         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
+@@ -49,19 +51,20 @@ public class DeleteProductCommand extends UndoableCommand {
+     @Override
+     protected void preprocessUndoableCommand() throws CommandException {
+         List<Product> lastShownList = model.getFilteredProductList();
+-
+-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+-            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
++        productToDelete = null;
++        //There should only be one product that matches the ID
++        for(Product product : lastShownList) {
++            if(product.getId() == targetID) {
++                productToDelete = product;
++            }
+         }
+-
+-        productToDelete = lastShownList.get(targetIndex.getZeroBased());
+     }
+ 
+     @Override
+     public boolean equals(Object other) {
+         return other == this // short circuit if same object
+                 || (other instanceof DeleteCommand // instanceof handles nulls
+-                && this.targetIndex.equals(((DeleteProductCommand) other).targetIndex) // state check
++                && this.targetID == (((DeleteProductCommand) other).targetID) // state check
+                 && Objects.equals(this.productToDelete, ((DeleteProductCommand) other).productToDelete));
+     }
+ }
+diff --git a/src/main/java/seedu/address/logic/parser/DeleteProductCommandParser.java b/src/main/java/seedu/address/logic/parser/DeleteProductCommandParser.java
+index 4e40fd7..e1ef2e5 100644
+--- a/src/main/java/seedu/address/logic/parser/DeleteProductCommandParser.java
++++ b/src/main/java/seedu/address/logic/parser/DeleteProductCommandParser.java
+@@ -19,8 +19,8 @@ public class DeleteProductCommandParser implements Parser<DeleteProductCommand>
+      */
+     public DeleteProductCommand parse(String args) throws ParseException {
+         try {
+-            Index index = ParserUtil.parseIndex(args);
+-            return new DeleteProductCommand(index);
++            int id = ParserUtil.parseID(args);
++            return new DeleteProductCommand(id);
+         } catch (IllegalValueException ive) {
+             throw new ParseException(
+                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteProductCommand.MESSAGE_USAGE));
+-- 
+2.15.1 (Apple Git-101)
+
+
+From 2a126c4a5c1f8f61478c25077ad63119317c0cff Mon Sep 17 00:00:00 2001
+From: Chu Qing Hao <6337103+qinghao1@users.noreply.github.com>
+Date: Sun, 15 Apr 2018 15:54:41 +0800
+Subject: [PATCH 3/3] Fix bugs
+
+---
+ .../java/seedu/address/logic/commands/DeleteOrderCommand.java    | 9 ++++++---
+ .../java/seedu/address/logic/commands/DeleteProductCommand.java  | 9 ++++++---
+ 2 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java b/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
+index 32da637..3e60d14 100644
+--- a/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
++++ b/src/main/java/seedu/address/logic/commands/DeleteOrderCommand.java
+@@ -38,11 +38,11 @@ public class DeleteOrderCommand extends UndoableCommand {
+ 
+     @Override
+     public CommandResult executeUndoableCommand() {
++        requireNonNull(orderToDelete);
+         try {
+-            requireNonNull(orderToDelete);
+             model.deleteOrder(orderToDelete);
+-        } catch (NullPointerException | OrderNotFoundException e) {
+-            throw new AssertionError(MESSAGE_INVALID_ORDER);
++        } catch (OrderNotFoundException e) {
++            throw new AssertionError("The target order cannot be missing.");
+         }
+ 
+         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete));
+@@ -57,6 +57,9 @@ public class DeleteOrderCommand extends UndoableCommand {
+             if(order.getId() == targetID)
+                 orderToDelete = order;
+         }
++        if(orderToDelete == null) {
++            throw new CommandException(MESSAGE_INVALID_ORDER);
++        }
+     }
+ 
+     @Override
+diff --git a/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java b/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
+index c1b2e46..d0b0eb1 100644
+--- a/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
++++ b/src/main/java/seedu/address/logic/commands/DeleteProductCommand.java
+@@ -38,11 +38,11 @@ public class DeleteProductCommand extends UndoableCommand {
+ 
+     @Override
+     public CommandResult executeUndoableCommand() {
++        requireNonNull(productToDelete);
+         try {
+-            requireNonNull(productToDelete);
+             model.deleteProduct(productToDelete);
+-        } catch (NullPointerException|ProductNotFoundException e) {
+-            throw new AssertionError(MESSAGE_INVALID_PRODUCT);
++        } catch (ProductNotFoundException e) {
++            throw new AssertionError("The product cannot be missing.");
+         }
+ 
+         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
+@@ -58,6 +58,9 @@ public class DeleteProductCommand extends UndoableCommand {
+                 productToDelete = product;
+             }
+         }
++        if(productToDelete == null) {
++            throw new CommandException(MESSAGE_INVALID_PRODUCT);
++        }
+     }
+ 
+     @Override
+-- 
+2.15.1 (Apple Git-101)
+

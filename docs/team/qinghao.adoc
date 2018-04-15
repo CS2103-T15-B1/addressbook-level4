@@ -9,43 +9,46 @@
 == Overview
 
 Retail Analytics is a desktop application written in Java for retailers that allows them to view, list and edit customers, orders and products. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added extra tables
-and relational logic so that advanced queries can be made in the application.
-
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added features such as extra tables and relational logic. We also added other advanced features such as a AI
+recommender engine and customer location visualization.
 
 == Summary of contributions
 
-* *Major enhancement*: added an extra order table to the application
+* *Major enhancement*: Added an extra Order table to the application
 ** What it does: allows the user to add orders which have customer, product and price fields.
-** Justification: This feature is crucial for the user of our product (retailers) and orders are a
-    central feature to our product.
-** Highlights: This enhancement greatly increased the complexity of the software (it only had one table originally). It required an in-depth analysis of code and design alternatives.
-   The implementation too was challenging as it required modifications to most of the code base at all abstraction levels.
+** Justification: This feature is crucial for the user of our product (retailers) and orders are a central feature to our product.
+** Highlights: This enhancement greatly increased the complexity of the software (it only had one table originally). It
+required an in-depth analysis of code and design alternatives.The implementation too was challenging as it required
+modifications to most of the code base at all abstraction levels.
 
-* *Major enhancement*: added a way to sort customers by total spending, total spending since `date` and last order date.
-** What it does: allows the user to sort the customer list by the above-mentioned variables.
-** Justification: This feature provides valuable insights for the retailers and allows them to see who are the most active and valuable customers.
+* *Minor enhancement*: Adapted existing storage for the new tables
+** What it does: writes the new Order and Product tables into an XML file
+on updates. This XML file is read on application startup.
+** Justification: This feature is needed to store the application data
+between uses.
 
 * *Code contributed*:
-//TODO
+** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/qinghao1.md[Functional Code]
+** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/qinghao1.md[Test Code]
 
 * *Other contributions*:
-//TODO
+** General team tasks:
+*** Help with writing test fixtures (PR https://github.com/CS2103JAN2018-T15-B1/main/pull/85[#85])
+*** Modify and improve GUI for Order and Product to be more user-friendly
+** Enhance existing features:
+*** Restrict Order in application view to be only those for customers in the current view
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5` (4 releases) on GitHub
-** Enhancements to existing features:
-//TODO
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Managed releases `v1.3` - `v1.5rc` (5 releases) on GitHub
+*** Setup Travis CI to work with project
+
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reviewed PRs and merged in code
+*** Reported bugs and suggestions for other teams in the class
 
 == Contributions to the User Guide
-
-//TODO
+** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/UserGuide.adoc#adding-an-order-code-addorder-code[Add Order Command]
+** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/UserGuide.adoc#deleting-an-order-code-deleteorder-code[Delete Order Command]
 
 == Contributions to the Developer Guide
-
-//TODO
+** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/DeveloperGuide.adoc#Implementation-RelationalLogic[Relational Logic]
