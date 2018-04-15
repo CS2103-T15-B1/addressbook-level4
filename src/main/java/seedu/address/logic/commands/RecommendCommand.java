@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.recommender.ArffWriter;
 import seedu.address.logic.recommender.RecommenderManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;

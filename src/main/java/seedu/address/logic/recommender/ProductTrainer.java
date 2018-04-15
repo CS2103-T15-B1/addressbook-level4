@@ -12,16 +12,23 @@ import weka.filters.unsupervised.instance.RemoveWithValues;
 import java.util.Random;
 
 //@@author lowjiajin
+
+/**
+ * Trains a classifier to predict whether or not one specific product will be bought.
+ */
 public class ProductTrainer {
-    private static final String MESSAGE_CANNOT_ISOLATE_PRODUCT = "Error when isolating orders of a given product. " +
-            "Check that {@code isolator} has valid settings for orders";
-    private static final String MESSAGE_CANNOT_BUILD_CLASSIFIER = "Error when building classifier. " +
-            "Check {@code orders} format.";
-    private static final String MESSAGE_CANNOT_EVALUATE_CLASSIFIER = "Error when evaluating classifier. " +
-            "Invalid parameters for {@code crossValidateModel()} method, or orders modified after classifier built.";
+    private static final String MESSAGE_CANNOT_ISOLATE_PRODUCT = "{@code isolator} has invalid settings for orders. " +
+            "Error when isolating orders of a given product.";
+    private static final String MESSAGE_CANNOT_BUILD_CLASSIFIER = "{@code orders} format is invalid. " +
+            "Error building classifier.";
+    private static final String MESSAGE_CANNOT_EVALUATE_CLASSIFIER = "Invalid parameters for " +
+            "{@code crossValidateModel()} method, or orders modified after classifier built. " +
+            "Error evaluating classifier.";
 
     private static final int WEKA_NUM_FEATURES_USED = 2;
     private static final int WEKA_MIN_ORDERS = 5;
+    
+    // Flag to print evaluation data for debugging
     private static final boolean WEKA_EVALUATE_CLASSIFIER = false;
 
     private Instances orders;
@@ -42,19 +49,22 @@ public class ProductTrainer {
     public AttributeSelectedClassifier getClassifier() {
         // Should not ever get the classifier before training it.
         assert attrSelClassifier != null;
-
         return attrSelClassifier;
     }
 
+    /**
+     * Remove all orders not involving a given product from the training dataset.
+     * Allows a binary decision on whether or not to buy a given product.
+     */
     private void isolateOrdersOfAProduct(RemoveWithValues isolator) {
         try {
             isolator.setInputFormat(orders);
             orders = Filter.useFilter(orders, isolator);
         } catch (Exception e) {
-            System.out.println(MESSAGE_CANNOT_ISOLATE_PRODUCT);
+            throw new AssertionError(MESSAGE_CANNOT_ISOLATE_PRODUCT);
         }
     }
-
+    
     private void trainClassifier() {
         if (hasEnoughOrdersToTrain()) {
             initClassifier();
@@ -65,6 +75,10 @@ public class ProductTrainer {
         }
     }
 
+    /**
+     * Ensures that noise is suppressed by not recommending products with too few {@code orders} 
+     * to provide a reliable Recommender prediction.
+     */
     private boolean hasEnoughOrdersToTrain() {
         return orders.numInstances() >= WEKA_MIN_ORDERS;
     }
@@ -91,8 +105,8 @@ public class ProductTrainer {
             attrSelClassifier.buildClassifier(orders);
             canBuild = true;
         } catch (Exception e) {
-            System.out.println(MESSAGE_CANNOT_BUILD_CLASSIFIER);
             canBuild = false;
+            throw new AssertionError(MESSAGE_CANNOT_BUILD_CLASSIFIER);
         }
     }
 
@@ -107,7 +121,7 @@ public class ProductTrainer {
             System.out.println(orders.classAttribute());
             System.out.println(evaluation.toSummaryString());
         } catch (Exception e) {
-            System.out.println(MESSAGE_CANNOT_EVALUATE_CLASSIFIER);
+            throw new AssertionError(MESSAGE_CANNOT_EVALUATE_CLASSIFIER);
         }
     }
 }
