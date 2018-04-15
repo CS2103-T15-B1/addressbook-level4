@@ -9,6 +9,7 @@ public class MainWindowHandle extends StageHandle {
 
     private final PersonListPanelHandle personListPanel;
     private final ProductListPanelHandle productListPanel;
+    private final OrderListPanelHandle orderListPanel;
     private final ResultDisplayHandle resultDisplay;
     private final CommandBoxHandle commandBox;
     private final StatusBarFooterHandle statusBarFooter;
@@ -20,6 +21,7 @@ public class MainWindowHandle extends StageHandle {
 
         personListPanel = new PersonListPanelHandle(getChildNode(PersonListPanelHandle.PERSON_LIST_VIEW_ID));
         productListPanel = new ProductListPanelHandle(getChildNode(ProductListPanelHandle.PRODUCT_LIST_VIEW_ID));
+        orderListPanel = new OrderListPanelHandle(getChildNode(OrderListPanelHandle.ORDER_LIST_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
@@ -33,6 +35,10 @@ public class MainWindowHandle extends StageHandle {
 
     public ProductListPanelHandle getProductListPanel() {
         return productListPanel;
+    }
+
+    public OrderListPanelHandle getOrderListPanel() {
+        return orderListPanel;
     }
 
     public ResultDisplayHandle getResultDisplay() {
