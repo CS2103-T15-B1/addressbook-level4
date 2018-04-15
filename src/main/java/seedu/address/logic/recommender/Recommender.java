@@ -13,6 +13,10 @@ import java.util.Collections;
 import java.util.HashMap;
 
 //@@author lowjiajin
+
+/**
+ * The logic that determines which products a person is most likely to buy for {@code RecommenderManager}.
+ */
 public class Recommender {
     
     private static final int POSITIVE_CLASS_INDEX = 0;
@@ -34,6 +38,7 @@ public class Recommender {
         Instance personInstance = parsePerson(person);
         ArrayList<BuyDecision> productRecOfAPerson = new ArrayList<>();
 
+        // Goes through every product with enough orders to allow a recommendation and records the recommendation
         for (int i = 0; i < productsWithClassifiers.size(); i++) {
             String currentProductPredicted = productsWithClassifiers.get(i);
             Classifier classifier = classifierDict.get(currentProductPredicted);
@@ -61,6 +66,10 @@ public class Recommender {
         return personInstance;
     }
 
+    /**
+     * Sets up the age and gender as classification features.
+     * @return the ArrayList of features, with the class (i.e. whether person will buy) to be predicted.
+     */
     public ArrayList<Attribute> getAttributes() {
         Attribute ageAttribute = new Attribute(AGE_ATTRIBUTE_NAME);
         Attribute genderAttribute = new Attribute(GENDER_ATTRIBUTE_NAME, GENDER_NOMINALS);
@@ -83,8 +92,8 @@ public class Recommender {
     }
 
     /**
-     * Sorts the recommendations so the most confident recommendations come first
-     * @return the recommendations as a String
+     * Sorts the recommendations so the most confident recommendations come first.
+     * @return the recommendations as a String.
      */
     private String getFormattedRecs(ArrayList<BuyDecision> productRecOfAPerson) {
         Collections.sort(productRecOfAPerson);
