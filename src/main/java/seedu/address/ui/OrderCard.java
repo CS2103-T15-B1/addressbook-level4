@@ -13,6 +13,7 @@ import seedu.address.model.order.SubOrder;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+//@@author YingxuH
 /**
  * An UI component that displays information of a {@code Order}.
  */
@@ -48,6 +49,7 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(Integer.toString(displayedIndex));
         personId.setText(order.getPersonId());
+
         id.setText(Integer.toString(order.getId()));
         time.setText(order.getTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
 

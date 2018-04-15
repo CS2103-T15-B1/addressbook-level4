@@ -81,6 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
+    //@@author YingxuH
 
     @Override
     public synchronized void deleteProduct(Product target) throws ProductNotFoundException {
@@ -95,8 +96,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         indicateAddressBookChanged();
     }
-
-
+    //@@author
     @Override
     public void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
@@ -133,11 +133,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //@@author YingxuH
     /**
      * Returns an unmodifiable view of the list of {@code Products} backed by the internal list of
      * {@code addressBook}
      */
-
     @Override
     public ObservableList<Product> getFilteredProductList() {
         return FXCollections.unmodifiableObservableList(filteredProducts);
@@ -148,6 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
     }
+    //@@author
 
     /**
      * Returns an unmodifiable view of the list of {@code Orders} backed by the internal list of

@@ -9,4 +9,13 @@ public class TypicalIndexes {
     public static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
+
+    //@@author He Yingxu
+    public static final Index INDEX_FIRST_PRODUCT = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_PRODUCT = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_PRODUCT = Index.fromOneBased(3);
+
+    public static final Index INDEX_FIRST_ORDER = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_ORDER = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_ORDER = Index.fromOneBased(3);
 }

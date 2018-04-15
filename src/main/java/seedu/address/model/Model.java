@@ -20,9 +20,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    //@@author YingxuH
     /** {@code Predicate} that always evaluate to true */
     Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
 
+    //@@author
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -35,12 +37,14 @@ public interface Model {
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
 
+    //@@author YingxuH
     /** Deletes the given product. */
     void deleteProduct(Product target) throws ProductNotFoundException;
 
     /** Adds the given product */
     void addProduct(Product product) throws DuplicateProductException;
 
+    //@@author
     /** Deletes the given order. */
     void deleteOrder(Order target) throws OrderNotFoundException;
 
@@ -66,6 +70,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //@@author YingxuH
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
 
@@ -75,6 +80,7 @@ public interface Model {
      */
     void updateFilteredProductList(Predicate<Product> predicate);
 
+    //@@author
     /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
