@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-//@@author Sivalavida
+//@@author lowjiajin
 public class ProductCostsBetweenPredicateTest {
 
     Money TEN_DOLLARS = new Money(new BigDecimal(10));
