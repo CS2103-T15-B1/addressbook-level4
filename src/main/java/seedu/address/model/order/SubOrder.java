@@ -10,7 +10,7 @@ import java.util.List;
  * SubOrder class for each single product purchased in an Order. Should be composited with Order
  * (i.e. can't exist without Order object which has pointer to this SubOrder object)
  *
- * Guarantees: SubOrder details are present and immutable
+ * Guarantees: field details are validated and immutable
  */
 public class SubOrder {
     public static final String MESSAGE_SUBORDER_CONSTRAINTS =
@@ -71,11 +71,11 @@ public class SubOrder {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Product ");
+        sb.append("PdtID ");
         sb.append(productID);
-        sb.append(" x");
+        sb.append("\tx");
         sb.append(numProduct);
-        sb.append(" @");
+        sb.append("\t@");
         sb.append(productPrice);
         return sb.toString();
     }

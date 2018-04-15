@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.exceptions.DuplicateProductException;
 
+//@@author YingxuH
 /**
  * Adds a product to the retail analytics.
  */

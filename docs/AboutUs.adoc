@@ -5,7 +5,7 @@
 
 Retail Analytics was developed by the https://github.com/CS2103JAN2018-T15-B1[T15-B1] team. +
 {empty} +
-We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore]. Please click on our names to head to our individual portfolios.
 
 == Project Team
 
@@ -17,8 +17,8 @@ Head Visualization Developer
 
 '''
 
-=== Low Jia Jin
-image::lowjiajin.png[width="150", align="left"]
+=== link:\team\LowJiaJin.adoc[Low Jia Jin]
+image::lowjiajin.jpg[width="150", align="left"]
 
 Role:
 Head Machine Learning Engineer

@@ -3,6 +3,7 @@ package seedu.address.commons.events.ui;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.ui.ProductCard;
 
+//@@author YingxuH
 /**
  * Represents a selection change in the Product List Panel
  */
