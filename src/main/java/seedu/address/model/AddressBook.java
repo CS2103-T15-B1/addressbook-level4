@@ -256,7 +256,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws OrderNotFoundException if the {@code key} is not in this {@code AddressBook}.
      */
     public boolean removeOrder(Order key) throws OrderNotFoundException {
-        if(orders.remove(key)) {
+        if (orders.remove(key)) {
             return true;
         } else {
             throw new OrderNotFoundException();
