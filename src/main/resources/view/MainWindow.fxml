@@ -28,7 +28,7 @@
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="***RETAIL ANALYTICS***">
+          <Menu mnemonicParsing="false" text="Retail Analytics">
           </Menu>
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
