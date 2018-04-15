@@ -29,6 +29,7 @@
             </HBox>
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <FlowPane fx:id="subOrders" />
+            <Label fx:id="totalPrice" styleClass="cell_small_label" text="\$totalPrice" />
         </VBox>
     </GridPane>
 </HBox>
