@@ -16,8 +16,7 @@ import java.util.stream.Collectors;
 
 //@@author lowjiajin
 public class ArffWriter {
-
-    private static final String PREFIX_NOT = "!";
+    
     private static final String ARFF_HEADER = "@RELATION ConvertedOrders\n\n" +
             "@ATTRIBUTE age NUMERIC\n" +
             "@ATTRIBUTE gender {M, F}\n" +
@@ -37,30 +36,31 @@ public class ArffWriter {
     private final ObservableList<Product> products;
     private final ObservableList<Order> orders;
     private final File arff;
-
-    private HashMap<Integer, String> productIdToNameMap;
+    private final ArffFormatter formatter;
 
     public ArffWriter(File arff, ReadOnlyAddressBook addressBook) {
         persons = addressBook.getPersonList();
         products = addressBook.getProductList();
         orders = addressBook.getOrderList();
         this.arff = arff;
-
-        productIdToNameMap = new HashMap<>();
+        formatter = new ArffFormatter(getProductIdToNameMap());
     }
 
     public void makeArffFromOrders() {
-        makeProductIdToNameMap();
         BufferedWriter writer = makeFileToWrite();
         writeArffHeader(writer);
         writeArffData(writer);
         closeArffFile(writer);
     }
 
-    private void makeProductIdToNameMap() {
+    private HashMap<Integer, String> getProductIdToNameMap() {
+        HashMap<Integer, String> productIdToNameMap = new HashMap<>();
+        
         for (Product product : products) {
             productIdToNameMap.put(product.getId(), product.getName().fullProductName);
         }
+        
+        return productIdToNameMap;
     }
 
     private BufferedWriter makeFileToWrite() {
@@ -75,16 +75,12 @@ public class ArffWriter {
 
     private void writeArffHeader(BufferedWriter writer) {
         String classLabels = products.stream()
-                .map(this::convertProductToBinaryLabels).collect(Collectors.joining(", "));
+                .map(formatter::convertProductToBinaryLabels).collect(Collectors.joining(", "));
         try {
             writer.write(String.format(ARFF_HEADER, classLabels));
         } catch (IOException ioe) {
             System.out.println(MESSAGE_ARFF_HEADER_WRITE_FAIL);
         }
-    }
-
-    private String convertProductToBinaryLabels(Product product) {
-        return String.format("%1$s, !%1$s", productIdToNameMap.get(product.getId()));
     }
 
     private void writeArffData(BufferedWriter writer) {
@@ -118,7 +114,7 @@ public class ArffWriter {
 
         try {
             for (Product product : products) {
-                writer.write(formatDataEntry(person, product, getProductsBoughtByPerson(person, productsBoughtMap)));
+                writer.write(formatter.formatDataEntry(person, product, getProductsBoughtByPerson(person, productsBoughtMap)));
             }
         } catch (IOException ioe) {
             System.out.println(MESSAGE_ARFF_DATA_WRITE_FAIL);
@@ -134,24 +130,6 @@ public class ArffWriter {
             writer.close();
         } catch (IOException ioe) {
             System.out.println(MESSAGE_ARFF_MAKE_CANNOT_CLOSE);
-        }
-    }    
-
-    private String formatDataEntry(Person person, Product product, HashSet<Integer> productsBoughtByPerson) {
-        return formatPersonFeatures(person).concat(getProductClassLabel(product.getId(), productsBoughtByPerson));
-    }
-
-    private String formatPersonFeatures(Person person) {
-        return String.format("\n%1$s,%2$s,", person.getAge().value, person.getGender());
-    }
-    
-    private String getProductClassLabel(Integer productId, HashSet<Integer> productsBoughtByPerson) {
-        boolean hasBoughtProduct = productsBoughtByPerson.contains(productId);
-
-        if (hasBoughtProduct) {
-            return productIdToNameMap.get(productId);
-        } else {
-            return PREFIX_NOT.concat(productIdToNameMap.get(productId));
         }
     }
 }
