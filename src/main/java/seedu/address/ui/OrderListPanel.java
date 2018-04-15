@@ -35,7 +35,7 @@ public class OrderListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Order> orderList) {
         ObservableList<OrderCard> mappedList = EasyBind.map(
-                orderList, (order) -> new OrderCard(order, orderList.indexOf(order) + 1));
+                orderList, (order) -> new OrderCard(order, order.getId()));
         orderListView.setItems(mappedList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
         setEventHandlerForSelectionChangeEvent();
