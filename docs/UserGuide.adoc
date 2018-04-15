@@ -160,6 +160,7 @@ Displays spread of querried people in Retail Analytics on a map with clustering.
 Zooming in and out of the map causes the clustering to change.
 
 Possible Formats:
+
 * Query 1) `all`: Select all customers
 ** Format: `map all`
 ** Example: `map all`
@@ -344,17 +345,17 @@ e.g. `find James Jake`
 * *Find Product by Price* `findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE`
 * *Find Product by Category* `findproductbycategory CATEGORY`
 * *List* : `list`
-* *Geographically Visualise Data*
-* ** Format1: `map all`
-* *** Example: `map all`
-* ** Format2: `map name NAME [NAME]...`
-* *** Example: `map name Alex Bernice`
-* ** Format3: `map age MINAGE MAXAGE`
-* *** Example: `map age 15 56`
-* ** Format4: `map gen [GENDER]`
-* *** Example: `map gen M`
-* ** Format5: `map tag TAG [TAG]`
-* *** Example: `map tag friends`
+* *Geographically Visualise Data* : `map`
+**  Format1: `map all`
+*** Example: `map all`
+** Format2: `map name NAME [NAME]...`
+*** Example: `map name Alex Bernice`
+** Format3: `map age MINAGE MAXAGE`
+*** Example: `map age 15 56`
+** Format4: `map gen [GENDER]`
+*** Example: `map gen M`
+** Format5: `map tag TAG [TAG]`
+*** Example: `map tag friends`
 * *Help* : `help`
 * *Recommendations* `recommend INDEX` +
 e.g. `recommend 1`
