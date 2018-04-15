@@ -35,7 +35,7 @@ public class ProductListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Product> productList) {
         ObservableList<ProductCard> mappedList = EasyBind.map(
-                productList, (product) -> new ProductCard(product, productList.indexOf(product) + 1));
+                productList, (product) -> new ProductCard(product, product.getId()));
         productListView.setItems(mappedList);
         productListView.setCellFactory(listView -> new ProductListViewCell());
         setEventHandlerForSelectionChangeEvent();
