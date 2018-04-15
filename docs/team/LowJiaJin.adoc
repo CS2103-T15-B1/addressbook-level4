@@ -35,7 +35,7 @@ The category filter behaves more similarly to the code for finding a person.
 
 * *Minor enhancement*: Appropriated the original find command's behaviour for findproductsbyname.
 
-* *Code contributed*: link:..\collated\functional\lowjiajin.md[Functional Code]
+* *Code contributed*: https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/lowjiajin.md[Functional Code], https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/lowjiajin.md[Test Code]
 
 * *Other contributions*:
 ** General team tasks:
