@@ -1,5 +1,28 @@
 # qinghao1
-###### /java/seedu/address/logic/commands/AddOrderCommandIntegrationTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
+``` java
+        @Override
+        public void addOrder(Order order) throws DuplicateOrderException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteOrder(Order order) throws OrderNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addProduct(Product product) throws DuplicateProductException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Product> getFilteredProductList() {
+            fail("This method should not be called.");
+            return null;
+        }
+```
+###### \java\seedu\address\logic\commands\AddOrderCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddOrderCommand}.
@@ -78,30 +101,31 @@ public class AddOrderCommandIntegrationTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\model\order\OrderBelongsToPeoplePredicateTest.java
 ``` java
-        @Override
-        public void addOrder(Order order) throws DuplicateOrderException {
-            fail("This method should not be called.");
-        }
+public class OrderBelongsToPeoplePredicateTest {
+    @Test
+    public void predicateReturnsTrue() {
+        List<String> emails = new ArrayList<>();
+        emails.add(ALICE.getEmail().toString());
+        emails.add(BENSON.getEmail().toString());
+        OrderBelongsToPeoplePredicate predicate = new OrderBelongsToPeoplePredicate(emails);
+        assertTrue(predicate.test(ORDER_ONE));
+        assertTrue(predicate.test(ORDER_FOUR));
+    }
 
-        @Override
-        public void deleteOrder(Order order) throws OrderNotFoundException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void addProduct(Product product) throws DuplicateProductException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Product> getFilteredProductList() {
-            fail("This method should not be called.");
-            return null;
-        }
+    @Test
+    public void predicateReturnsFalse() {
+        List<String> emails = new ArrayList<>();
+        emails.add(CARL.getEmail().toString());
+        emails.add(DANIEL.getEmail().toString());
+        OrderBelongsToPeoplePredicate predicate = new OrderBelongsToPeoplePredicate(emails);
+        assertFalse(predicate.test(ORDER_ONE));
+        assertFalse(predicate.test(ORDER_FOUR));
+    }
+}
 ```
-###### /java/seedu/address/model/order/OrderTest.java
+###### \java\seedu\address\model\order\OrderTest.java
 ``` java
 public class OrderTest {
     @Test
@@ -165,31 +189,7 @@ public class OrderTest {
     }
 }
 ```
-###### /java/seedu/address/model/order/OrderBelongsToPeoplePredicateTest.java
-``` java
-public class OrderBelongsToPeoplePredicateTest {
-    @Test
-    public void predicateReturnsTrue() {
-        List<String> emails = new ArrayList<>();
-        emails.add(ALICE.getEmail().toString());
-        emails.add(BENSON.getEmail().toString());
-        OrderBelongsToPeoplePredicate predicate = new OrderBelongsToPeoplePredicate(emails);
-        assertTrue(predicate.test(ORDER_ONE));
-        assertTrue(predicate.test(ORDER_FOUR));
-    }
-
-    @Test
-    public void predicateReturnsFalse() {
-        List<String> emails = new ArrayList<>();
-        emails.add(CARL.getEmail().toString());
-        emails.add(DANIEL.getEmail().toString());
-        OrderBelongsToPeoplePredicate predicate = new OrderBelongsToPeoplePredicate(emails);
-        assertFalse(predicate.test(ORDER_ONE));
-        assertFalse(predicate.test(ORDER_FOUR));
-    }
-}
-```
-###### /java/seedu/address/model/order/SubOrderTest.java
+###### \java\seedu\address\model\order\SubOrderTest.java
 ``` java
 public class SubOrderTest {
     @Test
@@ -217,21 +217,7 @@ public class SubOrderTest {
     }
 }
 ```
-###### /java/seedu/address/model/UniqueProductListTest.java
-``` java
-public class UniqueProductListTest {
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        UniqueProductList uniqueProductList = new UniqueProductList();
-        thrown.expect(UnsupportedOperationException.class);
-        uniqueProductList.asObservableList().remove(0);
-    }
-}
-```
-###### /java/seedu/address/model/UniqueOrderListTest.java
+###### \java\seedu\address\model\UniqueOrderListTest.java
 ``` java
 public class UniqueOrderListTest {
     @Rule
@@ -245,54 +231,57 @@ public class UniqueOrderListTest {
     }
 }
 ```
-###### /java/seedu/address/testutil/TypicalProducts.java
+###### \java\seedu\address\model\UniqueProductListTest.java
 ``` java
-/**
- * A utility class containing a list of {@code Product} objects to be used in tests.
- */
-public class TypicalProducts {
+public class UniqueProductListTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-    //Prevent instantiation
-    private TypicalProducts() {};
-
-    public static Product EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA;
-
-    //Wrap in static block because Money.parsePrice() throws IllegalValueException
-    static {
-        try {
-            //Product IDs are set manually for first few to ensure that IDs 1-6 are present, then automatically set later
-            EGG = new Product(1, new ProductName("Egg"),
-                    Money.parsePrice("0.5"), new Category("Food"));
-            MILK = new Product(2, new ProductName("Milk"),
-                    Money.parsePrice("2"), new Category("Food"));
-            SHIRT = new Product(3, new ProductName("Shirt"),
-                    Money.parsePrice("15"), new Category("Fashion"));
-            PANTS = new Product(4, new ProductName("Pants"),
-                    Money.parsePrice("20"), new Category("Fashion"));
-            LAPTOP = new Product(5, new ProductName("Laptop"),
-                    Money.parsePrice("2000"), new Category("Tech"));
-            SWEET = new Product(6, new ProductName("Sweet"),
-                    Money.parsePrice("0.05"), new Category("Food"));
-            PAPER = new Product(new ProductName("Paper"),
-                    Money.parsePrice("5"), new Category("Stationery"));
-            PEN = new Product(new ProductName("Pen"),
-                    Money.parsePrice("1.5"), new Category("Stationery"));
-            PENCIL = new Product(new ProductName("Pencil"),
-                    Money.parsePrice("1"), new Category("Stationery"));
-            SODA = new Product(new ProductName("Soda"),
-                    Money.parsePrice("2"), new Category("Food"));
-        } catch (IllegalValueException ive) {
-            ive.printStackTrace();
-        }
+    @Test
+    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+        UniqueProductList uniqueProductList = new UniqueProductList();
+        thrown.expect(UnsupportedOperationException.class);
+        uniqueProductList.asObservableList().remove(0);
     }
-
-    public static List<Product> getTypicalProducts() {
-        return new ArrayList<>(Arrays.asList(EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA));
-    }
-
 }
 ```
-###### /java/seedu/address/testutil/TypicalOrders.java
+###### \java\seedu\address\testutil\TypicalAddressBook.java
+``` java
+/**
+ * Class to get typical address book with typical persons, orders and products.
+ */
+public class TypicalAddressBook {
+    /**
+     * Returns an {@code AddressBook} with all the typical persons, orders and products.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            try {
+                ab.addPerson(person);
+            } catch (DuplicatePersonException e) {
+                throw new AssertionError("not possible");
+            }
+        }
+        for (Order order : TypicalOrders.getTypicalOrders()) {
+            try {
+                ab.addOrder(order);
+            } catch (DuplicateOrderException e) {
+                throw new AssertionError("not possible");
+            }
+        }
+        for (Product product : TypicalProducts.getTypicalProducts()) {
+            try {
+                ab.addProduct(product);
+            } catch (DuplicateProductException e) {
+                throw new AssertionError("not possible");
+            }
+        }
+        return ab;
+    }
+}
+```
+###### \java\seedu\address\testutil\TypicalOrders.java
 ``` java
 /**
  * A utility class containing a list of {@code Order} objects to be used in tests.
@@ -375,7 +364,54 @@ public class TypicalOrders {
     }
 }
 ```
-###### /java/seedu/address/testutil/TypicalSubOrders.java
+###### \java\seedu\address\testutil\TypicalProducts.java
+``` java
+/**
+ * A utility class containing a list of {@code Product} objects to be used in tests.
+ */
+public class TypicalProducts {
+
+    //Prevent instantiation
+    private TypicalProducts() {};
+
+    public static Product EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA;
+
+    //Wrap in static block because Money.parsePrice() throws IllegalValueException
+    static {
+        try {
+            //Product IDs are set manually for first few to ensure that IDs 1-6 are present, then automatically set later
+            EGG = new Product(1, new ProductName("Egg"),
+                    Money.parsePrice("0.5"), new Category("Food"));
+            MILK = new Product(2, new ProductName("Milk"),
+                    Money.parsePrice("2"), new Category("Food"));
+            SHIRT = new Product(3, new ProductName("Shirt"),
+                    Money.parsePrice("15"), new Category("Fashion"));
+            PANTS = new Product(4, new ProductName("Pants"),
+                    Money.parsePrice("20"), new Category("Fashion"));
+            LAPTOP = new Product(5, new ProductName("Laptop"),
+                    Money.parsePrice("2000"), new Category("Tech"));
+            SWEET = new Product(6, new ProductName("Sweet"),
+                    Money.parsePrice("0.05"), new Category("Food"));
+            PAPER = new Product(new ProductName("Paper"),
+                    Money.parsePrice("5"), new Category("Stationery"));
+            PEN = new Product(new ProductName("Pen"),
+                    Money.parsePrice("1.5"), new Category("Stationery"));
+            PENCIL = new Product(new ProductName("Pencil"),
+                    Money.parsePrice("1"), new Category("Stationery"));
+            SODA = new Product(new ProductName("Soda"),
+                    Money.parsePrice("2"), new Category("Food"));
+        } catch (IllegalValueException ive) {
+            ive.printStackTrace();
+        }
+    }
+
+    public static List<Product> getTypicalProducts() {
+        return new ArrayList<>(Arrays.asList(EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA));
+    }
+
+}
+```
+###### \java\seedu\address\testutil\TypicalSubOrders.java
 ``` java
 /**
  * A utility class containing a list of {@code SubOrder} objects to be used in tests.
@@ -400,42 +436,6 @@ public class TypicalSubOrders {
 
     public static List<SubOrder> getTypicalSubOrders() {
         return new ArrayList<>(Arrays.asList(SO_A, SO_B, SO_C, SO_D, SO_E, SO_F, SO_G, SO_H, SO_I, SO_LARGE, SO_FREE));
-    }
-}
-```
-###### /java/seedu/address/testutil/TypicalAddressBook.java
-``` java
-/**
- * Class to get typical address book with typical persons, orders and products.
- */
-public class TypicalAddressBook {
-    /**
-     * Returns an {@code AddressBook} with all the typical persons, orders and products.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Person person : TypicalPersons.getTypicalPersons()) {
-            try {
-                ab.addPerson(person);
-            } catch (DuplicatePersonException e) {
-                throw new AssertionError("not possible");
-            }
-        }
-        for (Order order : TypicalOrders.getTypicalOrders()) {
-            try {
-                ab.addOrder(order);
-            } catch (DuplicateOrderException e) {
-                throw new AssertionError("not possible");
-            }
-        }
-        for (Product product : TypicalProducts.getTypicalProducts()) {
-            try {
-                ab.addProduct(product);
-            } catch (DuplicateProductException e) {
-                throw new AssertionError("not possible");
-            }
-        }
-        return ab;
     }
 }
 ```
