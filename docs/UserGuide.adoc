@@ -57,7 +57,7 @@ Format: `help`
 // tag::addperson[]
 === Adding a person: `addperson`
 
-image::addPerson.jpg[width="600"]
+image::addPerson.PNG[width="600"]
 
 Adds a person to Retail Analytics app. +
 Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]...`
@@ -73,7 +73,7 @@ Examples:
 
 === Adding a product: `addproduct`
 
-image::addProduct.jpg[width="600"]
+image::addProduct.PNG[width="600"]
 
 Adds a product to Retail Analytics app. +
 Format: `addproduct n/NAME pr/PRICE c/CATEGORY`
@@ -193,7 +193,7 @@ tag::map[]
 Displays spread of queried people in Retail Analytics on a map with clustering.
 Zooming in and out of the map causes the clustering to change.
 
-image::GeographicVisualisation.jpg[width="600"]
+image::GeographicVisualisation.PNG[width="600"]
 
 Possible Formats:
 
