@@ -38,11 +38,11 @@ public class DeleteProductCommand extends UndoableCommand {
 
     @Override
     public CommandResult executeUndoableCommand() {
+        requireNonNull(productToDelete);
         try {
-            requireNonNull(productToDelete);
             model.deleteProduct(productToDelete);
-        } catch (NullPointerException|ProductNotFoundException e) {
-            throw new AssertionError(MESSAGE_INVALID_PRODUCT);
+        } catch (ProductNotFoundException e) {
+            throw new AssertionError("The product cannot be missing.");
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
@@ -57,6 +57,9 @@ public class DeleteProductCommand extends UndoableCommand {
             if(product.getId() == targetID) {
                 productToDelete = product;
             }
+        }
+        if(productToDelete == null) {
+            throw new CommandException(MESSAGE_INVALID_PRODUCT);
         }
     }
 

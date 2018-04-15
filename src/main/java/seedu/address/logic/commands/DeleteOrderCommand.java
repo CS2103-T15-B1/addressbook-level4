@@ -38,11 +38,11 @@ public class DeleteOrderCommand extends UndoableCommand {
 
     @Override
     public CommandResult executeUndoableCommand() {
+        requireNonNull(orderToDelete);
         try {
-            requireNonNull(orderToDelete);
             model.deleteOrder(orderToDelete);
-        } catch (NullPointerException | OrderNotFoundException e) {
-            throw new AssertionError(MESSAGE_INVALID_ORDER);
+        } catch (OrderNotFoundException e) {
+            throw new AssertionError("The target order cannot be missing.");
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete));
@@ -56,6 +56,9 @@ public class DeleteOrderCommand extends UndoableCommand {
         for(Order order : lastShownList) {
             if(order.getId() == targetID)
                 orderToDelete = order;
+        }
+        if(orderToDelete == null) {
+            throw new CommandException(MESSAGE_INVALID_ORDER);
         }
     }
 
