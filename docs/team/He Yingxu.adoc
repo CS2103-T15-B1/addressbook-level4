@@ -27,16 +27,16 @@ AddressBook - Level 4 is a retailer analysis application used for retailers to k
 *** help teammates implements command and model implementations for order class. (Commit https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/7afb006202449bcf21cc45bb3a7e2cf168cec555[7afb006], https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/5b84edd89f6cb13a8224d4a29b1eefe7830561d7[5b84edd]) (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
 *** 
 
-** Project management:
-*** maintain the issue tracker during our project progress 1.1 to 1.5. 
-*** help solve issues reported during the in-class testing session. https://github.com/CS2103JAN2018-T15-B1/main/issues/52[52]
+*** Project management:
+** maintain the issue tracker during our project progress 1.1 to 1.5. 
+** help solve issues reported during the in-class testing session. https://github.com/CS2103JAN2018-T15-B1/main/issues/52[52]
 
-** Enhancements to existing features:
-*** added product and order in GUI
-*** resized the customers' list in GUI (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/30[#30], https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide.
-*** draw UI and Model UML diagram in DeveloperGuide to help developers better visualize the architect (posted by my teammate).
-** Community:
-*** PRs reviewed 
+*** Enhancements to existing features:
+** added product and order in GUI
+** resized the customers' list in GUI (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/30[#30], https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
+*** Documentation:
+** Did cosmetic tweaks to existing contents of the User Guide.
+** draw UI and Model UML diagram in DeveloperGuide to help developers better visualize the architect (posted by my teammate).
+*** Community:
+** PRs reviewed 
 
