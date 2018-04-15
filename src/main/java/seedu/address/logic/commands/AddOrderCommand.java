@@ -34,7 +34,7 @@ public class AddOrderCommand extends UndoableCommand {
     private final Order toAdd;
 
     /**
-     * Creates an AddOrderCommand to add the specified {@code Order}
+     * Creates an {@code AddOrderCommand} to add the specified {@code Order}
      */
     public AddOrderCommand(Order order) {
         requireNonNull(order);
@@ -42,7 +42,7 @@ public class AddOrderCommand extends UndoableCommand {
     }
 
     /**
-     * Checks that the add order command is valid (order to be created is valid)
+     * Checks that the {@code AddOrderCommand} is valid (i.e. {@code Order} to be created is valid)
      */
     public boolean isValid() {
         ReadOnlyAddressBook ab = this.model.getAddressBook();
@@ -54,7 +54,7 @@ public class AddOrderCommand extends UndoableCommand {
         requireNonNull(model);
         //Check that order is valid
         if (!isValid()) {
-            //If order invalid, decrement order counter so orders have sequential ID
+            //If order invalid, decrement order counter because it was incremented during creation
             Order.decrementOrderCounter();
             throw new CommandException(MESSAGE_INVALID_ORDER);
         }

@@ -12,7 +12,7 @@ import seedu.address.model.product.Product;
 //@@author qinghao1
 /**
  * Represents a customer's order.
- * Guarantees: details are present and not null, field values are validated, immutable
+ * Guarantees: field values are validated and immutable
  */
 
 public class Order {
@@ -37,7 +37,7 @@ public class Order {
     }
 
     /**
-     * Adds order with person object instead of email String. To be used for debugging, testing etc.
+     * Adds order with person object instead of email string. To be used for debugging, testing etc.
      * @param person
      * @param subOrders
      */
@@ -125,14 +125,19 @@ public class Order {
 
     /**
      * Performs some basic checks to see if order is valid.
+     * - Checks that the order isn't empty
      * - Checks that customer email is valid
      * - Checks that all product IDs exist
+     * - Checks that order price is non-negative
      * @param customers list of all customers to check email against
      * @param products list of all products to check product ID against
      * @return validity
      */
     public boolean isValid(List<Person> customers, List<Product> products) {
         boolean valid = true;
+
+        //Check that SubOrder list is non-empty
+        valid = !subOrders.isEmpty() && valid;  // Trip valid to false if list is empty
 
         //Check that email is valid
         boolean foundEmail = false;
@@ -143,7 +148,7 @@ public class Order {
                 break;
             }
         }
-        valid = foundEmail && valid; // Trip valid to false if email not found
+        valid = foundEmail && valid;
 
         //Check that productIDs are valid (using SubOrder class)
         boolean allSubOrdersValid = true;
@@ -175,13 +180,13 @@ public class Order {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Order ID ");
+        sb.append("\nOrder ID ");
         sb.append(id);
         sb.append(" by ");
         sb.append(personId);
         sb.append(" at ");
-        sb.append(time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
-        sb.append(": \n");
+        sb.append(time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
+        sb.append(":\n");
         sb.append("-------------\n");
         int subOrderCt = 0;
         for (SubOrder so : subOrders) {
