@@ -56,7 +56,7 @@ public class OrderCardHandle extends NodeHandle<Node> {
      * returns all the children node inside each box
      * @return
      */
-    public List<ObservableList<Node>> getsubOrders() {
+    public List<ObservableList<Node>> getSubOrders() {
         return subOrdersLabels
                 .stream()
                 .map(VBox::getChildren)

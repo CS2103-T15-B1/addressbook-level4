@@ -42,16 +42,21 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         personId.setText(order.getPersonId());
-        id.setText(Integer.toString(order.getId()));
         time.setText(order.getTime().toString());
 
         order.getSubOrders().forEach(subOrder ->
                 subOrders.getChildren().add(
-                        createProductBox(subOrder.getProductID(),subOrder.getNumProduct())
+                        createProductBox(subOrder.getProductID(), subOrder.getNumProduct())
                 ));
         subOrders.setHgap(10);
     }
 
+    /**
+     * create the ui box that contains the details about suborder information
+     * @param productID
+     * @param NumProduct
+     * @return
+     */
     private VBox createProductBox (int productID, int NumProduct) {
         VBox box = new VBox();
         ObservableList list = box.getChildren();
