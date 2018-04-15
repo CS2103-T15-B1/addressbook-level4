@@ -90,7 +90,8 @@ Adds an order to Retail Analytics app. +
 Format: `addorder e/EMAIL o/SUBORDER [o/MORE_SUBORDERS]...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST`.
 
 [NOTE]
-The number listed beside the order entry in the GUI is not the displayed index, but the unique id permanently associated with given order.
+The number listed beside the order entry in the GUI is not the displayed index, but the unique id permanently associated with given order. Prices are manually recorded to
+allow for discounts and free items.
 
 [TIP]
 An order must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
@@ -153,7 +154,7 @@ Finds all products of category `Clothing` and `Health`
 
 // tag::recommend[]
 === Finding product recommendations for a person: `recommend`
-Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person. 
+Given a person, analyzes the app's entire order history to train a predictive model that guesses which products are likely to appeal to a given person.
 
 Outputs a list of (`product name`, `predicted chance of purchase`), ranked in descending order of predicted chance of purchase.
 
@@ -410,6 +411,10 @@ e.g. `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1`
 * *Clear* : `clear`
 * *Delete* : `deleteperson INDEX` +
 e.g. `deleteperson 3`
+* *Delete Product* : `deleteproduct PRODUCT_ID` +
+e.g. `deleteproduct 1`
+* *Delete Order* : `deleteorder ORDER_ID` +
+e.g. `deleteorder 5`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
