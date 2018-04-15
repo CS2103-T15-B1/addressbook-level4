@@ -1,4 +1,6 @@
 = Low Jia Jin - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 == PROJECT: Retail Analytics
 
