@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.RenderMapEvent;
+import seedu.address.model.order.OrderBelongsToPeoplePredicate;
 import seedu.address.model.person.Person;
 //@@author Sivalavida
 /**
@@ -54,6 +56,19 @@ public class MapCommand extends Command {
         model.updateFilteredPersonList(predicate);
         List<Person> updatedPersonList = model.getFilteredPersonList();//see find command when using query
         EventsCenter.getInstance().post(new RenderMapEvent(updatedPersonList));
+
+        //Get emails of filtered people
+        List<String> emails = new ArrayList<>();
+        for(Person person : updatedPersonList) {
+            emails.add(person.getEmail().toString());
+        }
+
+        //Create predicate to filter order list
+        OrderBelongsToPeoplePredicate orderBelongsToPeoplePredicate = new OrderBelongsToPeoplePredicate(emails);
+
+        //Update order list
+        model.updateFilteredOrderList(orderBelongsToPeoplePredicate);
+
         return new CommandResult(String.format(MESSAGE_MAP_PERSON_SUCCESS, updatedPersonList.size()));
     }
 
