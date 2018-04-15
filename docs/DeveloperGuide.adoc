@@ -436,7 +436,7 @@ The execution of the `recommend` command in the CLI will run the testing pipelin
 . The ranked list of recommendations is then passed back up to `RecommendCommand` via `RecommendManager` for CLI output.
 
 ==== Sequence Diagram
-A sequence diagram describing both training and testing pipelines is as follows:
+A sequence diagram describing both training and testing pipelines is provided below. It excludes return variables for brevity.
 
 image::RecommenderSequenceDiagram.jpg[width="1500"]
 
