@@ -17,10 +17,10 @@ public class AddOrderCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "addorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates new order given a person's email, and non-empty list of (Product ID, Number bought, Price)\n"
-            + "Parameters:"
-            + PREFIX_EMAIL + "EMAIL (Must be an existing person)"
-            + PREFIX_ORDER + "SUBORDER (List of product ID, Number, Price)\n"
+            + ": Creates new order given a person's email, and at least one (Product ID, Quantity, Price)\n"
+            + "Parameters: "
+            + PREFIX_EMAIL + "EMAIL (Must be an existing person) "
+            + PREFIX_ORDER + "Product ID, Quantity, Price\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
             + PREFIX_ORDER + "1 5 $3.00 "
