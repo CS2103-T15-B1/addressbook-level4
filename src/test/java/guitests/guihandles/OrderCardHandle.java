@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +52,16 @@ public class OrderCardHandle extends NodeHandle<Node> {
         return personIdLabel.getText();
     }
 
-    public String getTime() {
-        return timeLabel.getText();
+    public LocalDateTime getTime() {
+
+        Instant instant = Instant.parse(timeLabel.getText());
+
+        System.out.println("Instant : " + instant);
+
+        //get date time only
+        LocalDateTime result = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
+
+        return result;
     }
 
     /**

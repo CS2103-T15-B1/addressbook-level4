@@ -65,7 +65,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedProduct}.
      */
     public static void assertCardDisplaysProduct(Product expectedProduct, ProductCardHandle actualCard) {
-        assertEquals(expectedProduct.getId(), actualCard.getId());
+
         assertEquals(expectedProduct.getName().fullProductName, actualCard.getName());
         assertEquals(expectedProduct.getPrice().repMoney, actualCard.getPrice());
         assertEquals(expectedProduct.getCategory().value, actualCard.getCategory());
@@ -85,7 +85,6 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedProduct}.
      */
     public static void assertCardDisplaysOrder(Order expectedOrder, OrderCardHandle actualOrder) {
-        assertEquals(expectedOrder.getId(), actualOrder.getId());
         assertEquals(expectedOrder.getPersonId(), actualOrder.getPersonId());
         assertEquals(expectedOrder.getTime(), actualOrder.getTime());
     }
