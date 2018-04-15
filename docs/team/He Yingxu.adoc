@@ -24,7 +24,8 @@ AddressBook - Level 4 is a retailer analysis application used for retailers to k
 * *Minor enhancement*: added basic GUI for order class.
 * *Code contributed*: https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/YingxuH.md[Functional Code], https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/YingxuH.md[Test Code]
 * *Other contributions*:
-*** help teammates implements command and model implementations for order class. (Commit https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/7afb006202449bcf21cc45bb3a7e2cf168cec555[7afb006], https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/5b84edd89f6cb13a8224d4a29b1eefe7830561d7[5b84edd]) (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
+*** General 
+** help teammates implements command and model implementations for order class. (Commit https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/7afb006202449bcf21cc45bb3a7e2cf168cec555[7afb006], https://github.com/CS2103JAN2018-T15-B1/main/pull/34/commits/5b84edd89f6cb13a8224d4a29b1eefe7830561d7[5b84edd]) (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
 *** 
 
 *** Project management:
