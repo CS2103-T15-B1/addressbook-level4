@@ -46,7 +46,7 @@ public class OrderCard extends UiPart<Region> {
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
         this.order = order;
-        id.setText(displayedIndex + ". ");
+        id.setText(Integer.toString(displayedIndex));
         personId.setText(order.getPersonId());
         id.setText(Integer.toString(order.getId()));
         time.setText(order.getTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
