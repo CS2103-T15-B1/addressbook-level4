@@ -20,8 +20,10 @@ public class MainWindowHandle extends StageHandle {
         super(stage);
 
         personListPanel = new PersonListPanelHandle(getChildNode(PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        //@@author YingxuH
         productListPanel = new ProductListPanelHandle(getChildNode(ProductListPanelHandle.PRODUCT_LIST_VIEW_ID));
         orderListPanel = new OrderListPanelHandle(getChildNode(OrderListPanelHandle.ORDER_LIST_VIEW_ID));
+        //@@author
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
@@ -33,6 +35,7 @@ public class MainWindowHandle extends StageHandle {
         return personListPanel;
     }
 
+    //@@author YingxuH
     public ProductListPanelHandle getProductListPanel() {
         return productListPanel;
     }
@@ -41,6 +44,7 @@ public class MainWindowHandle extends StageHandle {
         return orderListPanel;
     }
 
+    //@@author
     public ResultDisplayHandle getResultDisplay() {
         return resultDisplay;
     }

@@ -11,6 +11,7 @@ import guitests.guihandles.ProductCardHandle;
 import seedu.address.model.product.Product;
 import seedu.address.testutil.ProductBuilder;
 
+//@@author YingxuH
 public class ProductCardTest extends GuiUnitTest {
 
     @Test

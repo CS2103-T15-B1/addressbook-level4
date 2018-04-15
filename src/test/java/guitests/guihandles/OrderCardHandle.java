@@ -13,7 +13,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@@author He Yingxu
+//@@author YingxuH
 
 /**
  * Provides a handle to a Order card in the Order list panel.

@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.product.Product;
 
-//@@author He Yingxu
+//@@author YingxuH
 public class ProductListPanelTest extends GuiUnitTest {
     private static final ObservableList<Product> TYPICAL_PRODUCTS =
             FXCollections.observableList(getTypicalProducts());
