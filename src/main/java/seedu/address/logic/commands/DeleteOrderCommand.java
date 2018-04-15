@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.exceptions.OrderNotFoundException;
@@ -52,13 +50,19 @@ public class DeleteOrderCommand extends UndoableCommand {
     protected void preprocessUndoableCommand() throws CommandException {
         List<Order> lastShownList = model.getFilteredOrderList();
         orderToDelete = null;
-        //There should only be one order that matches the ID
-        for(Order order : lastShownList) {
-            if(order.getId() == targetID)
+        int numberOrdersMatching = 0;
+        //There should only be one order that matches the ID, but we check anyway
+        for (Order order : lastShownList) {
+            if (order.getId() == targetID) {
                 orderToDelete = order;
+                ++numberOrdersMatching;
+            }
         }
-        if(orderToDelete == null) {
+        if (orderToDelete == null) {
             throw new CommandException(MESSAGE_INVALID_ORDER);
+        } else if (numberOrdersMatching > 1) {
+            //There are more than 1 order in the list with same ID! This should never happen.
+            throw new CommandException("More than 1 order with ID " + targetID + " found.");
         }
     }
 
