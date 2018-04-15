@@ -21,15 +21,13 @@ public class MapCommand extends Command {
     public static final String WITHIN_AGE_RANGE_QUERY_WORD = "age";
     public static final String GENDER_QUERY_WORD = "gen";
     public static final String CONTAINS_TAG_QUERY_WORD = "tag";
-    public static final String HAS_BOUGHT_ITEMS_QUERY_WORD = "item";
 
     //number of parameters (including query word) for respective query words
     public static final int ALL_PERSONS_QUERY_NUM_PARAMETERS = 0;
-    public static final int NAME_CONTAINS_KEYWORDS_QUERY_MIN_NUM_PARAMETERS = 0; //min
+    public static final int NAME_CONTAINS_KEYWORDS_QUERY_MIN_NUM_PARAMETERS = 1; //min
     public static final int WITHIN_AGE_RANGE_QUERY_NUM_PARAMETERS = 2;
-    public static final int IS_GENDER_QUERY_NUM_PARAMETERS = 3;
+    public static final int IS_GENDER_QUERY_NUM_PARAMETERS = 1;
     public static final int CONTAINS_TAG_QUERY_NUM_PARAMETERS = 1; //min
-    public static final int HAS_BOUGHT_ITEM_QUERY_NUM_PARAMETERS = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the geographic distribution of queried customers in Retail Analytics.\n"
@@ -42,15 +40,13 @@ public class MapCommand extends Command {
             + "Query 4) " + GENDER_QUERY_WORD + ": Select customers of specified gender - Parameters: GENDER\n"
             + "Examples: " + COMMAND_WORD + " " + GENDER_QUERY_WORD + " M\n"
             + "Query 5) " + CONTAINS_TAG_QUERY_WORD + ": Select customer with any of the specified tags - Parameters: TAG\n"
-            + "Examples: " + COMMAND_WORD + " " + CONTAINS_TAG_QUERY_WORD + " friends\n"
-            + "Query 6) " + HAS_BOUGHT_ITEMS_QUERY_WORD + ": Select customers who have bought the item - Parameters: ITEM_NAME [MORE_ITEM_NAMES]...\n"
-            + "Examples: " + COMMAND_WORD + " " + HAS_BOUGHT_ITEMS_QUERY_WORD + " Lipstick\n";
+            + "Examples: " + COMMAND_WORD + " " + CONTAINS_TAG_QUERY_WORD + " friends";
 
     public static final String MESSAGE_MAP_PERSON_SUCCESS = "Number of customers displayed on map: %1$s";
 
-    private final Predicate<Person> predicate;
+    private final Predicate predicate;
 
-    public MapCommand(Predicate<Person> predicate) {
+    public MapCommand(Predicate predicate) {
         this.predicate = predicate;
     }
 
@@ -60,7 +56,6 @@ public class MapCommand extends Command {
         List<Person> updatedPersonList = model.getFilteredPersonList();//see find command when using query
         EventsCenter.getInstance().post(new RenderMapEvent(updatedPersonList));
         return new CommandResult(String.format(MESSAGE_MAP_PERSON_SUCCESS, updatedPersonList.size()));
-
     }
 
     @Override

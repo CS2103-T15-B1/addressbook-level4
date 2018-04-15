@@ -18,7 +18,7 @@ public class GenderPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return (gender == person.getGender());
+        return (gender.equals(person.getGender()));
     }
 
     @Override

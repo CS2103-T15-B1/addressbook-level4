@@ -2,15 +2,20 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.MapCommand.*;
+import static seedu.address.logic.parser.ParserUtil.parseItemIds;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.person.Age.AGE_VALIDATION_REGEX;
 import static seedu.address.model.person.Age.isValidAge;
 import static seedu.address.model.person.Gender.isValidGender;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.ContainsItemPredicate;
 import seedu.address.model.person.*;
 
 /**
@@ -59,11 +64,9 @@ public class MapCommandParser implements Parser<MapCommand> {
                         isValidAge(queryParameters[1]));
             case GENDER_QUERY_WORD:
                 return queryParametersLength == IS_GENDER_QUERY_NUM_PARAMETERS &&
-                        isValidGender(queryParameters[1]);
+                        isValidGender(queryParameters[0]);
             case CONTAINS_TAG_QUERY_WORD:
                 return queryParametersLength >= CONTAINS_TAG_QUERY_NUM_PARAMETERS;
-            case HAS_BOUGHT_ITEMS_QUERY_WORD:
-                return queryParametersLength >= HAS_BOUGHT_ITEM_QUERY_NUM_PARAMETERS;
             default:
                 return false;//unknown query
         }
@@ -73,10 +76,10 @@ public class MapCommandParser implements Parser<MapCommand> {
      * Assumes that the queryWord and queryParameters are valid and returns the corresponding
      * predicate
      */
-    private Predicate<Person> getPredicate(String queryWord, String[] queryParameters) {
+    private Predicate getPredicate(String queryWord, String[] queryParameters) {
         switch (queryWord){
             case ALL_PERSONS_QUERY_WORD:
-                return null;
+                return PREDICATE_SHOW_ALL_PERSONS;
             case NAME_CONTAINS_KEYWORDS_QUERY_WORD:
                 return new NameContainsKeywordsPredicate(Arrays.asList(queryParameters)) ;
             case WITHIN_AGE_RANGE_QUERY_WORD:
@@ -85,8 +88,6 @@ public class MapCommandParser implements Parser<MapCommand> {
                 return new GenderPredicate(new Gender(queryParameters[0]));
             case CONTAINS_TAG_QUERY_WORD:
                 return new ContainsTagPredicate(Arrays.asList(queryParameters));
-//            case HAS_BOUGHT_ITEMS_QUERY_WORD:
-//                return queryParametersLength >= HAS_BOUGHT_ITEM_QUERY_NUM_PARAMETERS;
             default:
                 return null;//unknown query
         }
@@ -97,8 +98,7 @@ public class MapCommandParser implements Parser<MapCommand> {
                 queryWord.equals(NAME_CONTAINS_KEYWORDS_QUERY_WORD) ||
                 queryWord.equals(WITHIN_AGE_RANGE_QUERY_WORD) ||
                 queryWord.equals(GENDER_QUERY_WORD) ||
-                queryWord.equals(CONTAINS_TAG_QUERY_WORD) ||
-                queryWord.equals(HAS_BOUGHT_ITEMS_QUERY_WORD);
+                queryWord.equals(CONTAINS_TAG_QUERY_WORD);
     }
 
 
