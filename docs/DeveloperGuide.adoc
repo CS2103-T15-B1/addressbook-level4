@@ -414,24 +414,42 @@ Obtaining recommendations for products that a given customer is likely to want t
 Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:
 
 . Convert the `Order` records into a `.arff` file, the default format used by Weka, using the `ArffWriter` class.
-[NOTE]
+[IMPORTANT]
 The `.arff` must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as `"n" + productId`.  Since the `.arff` only stores the classification features (age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the `Order` records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the `.arff`. Additionally, the feature is binary (either bought or did not buy a product), the quantity of purchases does not count.
 . For each product, use `RemoveWithValues` to create an `isolator` that can filter out the orders involving that specific product in the `.arff`. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).
 . Pass the `isolator` into a `ProductTrainer`, which will use `ChiSquaredAttributeEval` to select the features most strongly associated with a purchase decision (i.e. an order exists for a given customer profile), and then build a `NaiveBayes` classifier around those features, for that specific product.
+
 [NOTE]
+[v2.0] Total user spending and recent user spending will be added as machine learning features.
+
+[IMPORTANT]
 The `ChiSquaredAttributeEval` only uses the 2 most discriminatory features to build the classifier, even with additional features to be added in v2.0. This combats the Curse of Dimensionality, given the possibly modest number of orders that a small business might have.
 . Save each successful `NaiveBayes` build to a `HashMap` keyed by the product ID, for later use on the test set (i.e. the customer whom we want to get likely purchase recommendations for).
-[NOTE]
-[v2.0] The classifiers would be saved to the hard disk, so that we do not have to re-initialize a `Recommender` every time the AddressBook is opened, since classifier building is computationally expensive.
 
 ==== Recommender Testing Pipeline
 The execution of the `recommend` command in the CLI will run the testing pipeline. The implementation is as follows:
 
-. Assign `classifierDict` in `Recommender` using one of the following means:
-.. Run the training pipeline in 3.5.1.
-.. [v2.0] The `Recommender` constructor will be overloaded to support a `classifierDict` attribute. We can use the `ReadClassifierDict` class in `Storage` to read the saved file to a `classifierDict`.
+. Run the training pipeline in 3.5.1.
 . Call `getRecommendations(customerId)`, which will result in getting the appropriate features from said `Customer`, and then running the features as an `Instance` through every classifier in `classifierDict`. The confidence of each purchase decision is returned via `distributionForInstance` as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the `Product` predicted to be most attractive to said `Customer` listed first, is assigned to `ProductRecOfAPerson`.
-. All `Product` objects which a given `Customer` has already bought will be stripped from his `ProductRecOfAPerson`. The remaining list will be sent to `ui` for output.
+[NOTE]
+[v2.0] All `Product` objects which a given `Customer` has already bought will be stripped from his `ProductRecOfAPerson`. The remaining list will be sent to `ui` for output.
+
+==== Design Considerations
+
+===== Aspect: Conversion of orders to training data format
+* **Alternative 1 (current choice):** Convert orders into a .arff file, stored in the data folder, which can be read by Weka as a training dataset.
+** Pros: All the header information and data entries are easily viewable as plaintext, allowing for quick prototyping and rapid debugging.
+** Cons: Requires a class to handle .arff formatting, which can be rather arbitrary. Unnecessarily adds the potential for IO errors due to the requirement of parsing a physical file, especially since the .arff file may simply be opened and modified to take on unexpected formats and values.
+* **Alternative 2:** Build the training set using the built in `Instances` and `Attribute` classes provided by Weka.
+** Pros: No writing of physical files required; entire recommendation process contained in memory.
+** Cons: Weka's documentation for those classes are rather opaque, and many methods have been deprecated. The way classes and attributes are assigned are rather unwieldy, and printing the relevant values of the training set becomes extremely involved.
+
+===== Aspect: What kind of classification to perform
+* **Alternative 1 (current choice):** Perform a binary classification for each product
+** Pros: Allows a person not buying a product to be treated as a signal for recommender decision (e.g. no young people buy dentures), which maximizes predictive power on small order sets.
+** Cons: Does not predict newly introduced products with few orders well, because the lack of orders is seen as a measure of how unpopular a product is regardless of a person's profile.
+* **Alternative 2 (current choice):** Perform a multiclass classification across all products
+** Pros: Does not require 
 
 == Documentation
 
