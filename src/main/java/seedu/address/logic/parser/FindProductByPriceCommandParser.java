@@ -1,16 +1,17 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
+
+import java.util.stream.Stream;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.FindProductByPriceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.money.Money;
 import seedu.address.model.product.ProductCostsBetweenPredicate;
 
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_PRICE;
 
 //@@author lowjiajin
 
@@ -22,6 +23,7 @@ public class FindProductByPriceCommandParser implements Parser<FindProductByPric
     /**
      * Parses the given {@code String} of arguments for the min and max price delimiters of the
      * FindProductByPriceCommand and returns a FindProductByPriceCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format.
      */
     public FindProductByPriceCommand parse(String args) throws ParseException {
@@ -32,7 +34,8 @@ public class FindProductByPriceCommandParser implements Parser<FindProductByPric
         // Ensures that the input conforms to the min and max price argument delimiters.
         if (!arePrefixesPresent(argMultimap, PREFIX_MIN_PRICE, PREFIX_MAX_PRICE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindProductByPriceCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindProductByPriceCommand.MESSAGE_USAGE));
         }
 
         try {

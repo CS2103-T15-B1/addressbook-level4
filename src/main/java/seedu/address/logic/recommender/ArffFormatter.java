@@ -1,10 +1,10 @@
 package seedu.address.logic.recommender;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.product.Product;
-
 import java.util.HashMap;
 import java.util.HashSet;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 
 //@@author lowjiajin
 
@@ -14,7 +14,6 @@ import java.util.HashSet;
 public class ArffFormatter {
     private static final String PREFIX_NOT = "!";
     private static final String WEKA_DELIMITER = ",";
-    
     private final HashMap<Integer, String> productIdToNameMap;
     
     public ArffFormatter(HashMap<Integer, String> productIdToNameMap) {
@@ -28,9 +27,12 @@ public class ArffFormatter {
     public String convertProductToBinaryLabels(Product product) {
         return String.format("%1$s%3$s %2$s%1$s", productIdToNameMap.get(product.getId()), PREFIX_NOT, WEKA_DELIMITER);
     }
-    
+
+    /**
+     * Concatenates the {@code person}'s features and his class (i.e. has bought a product or not) into an .arff entry
+     */
     public String formatDataEntry(Person person, Product product, HashSet<Integer> productsBoughtByPerson) {
-        return String.format("%1$s%2$s", 
+        return String.format("%1$s%2$s",
                 formatPersonFeatures(person), getProductClassLabel(product.getId(), productsBoughtByPerson));
     }
 

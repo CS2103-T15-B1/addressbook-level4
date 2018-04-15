@@ -117,7 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.removeOrder(target);
         indicateAddressBookChanged();
     }
-    //=========== Filtered Person, product and Order List Accessors =============================================================
+    //=========== Filtered Person, product and Order List Accessors ====================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code addressBook}

@@ -1,23 +1,31 @@
 package seedu.address.logic.recommender;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
 import weka.filters.unsupervised.instance.RemoveWithValues;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 //@@author lowjiajin
+
+/**
+ * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person}.
+ */
 public class RecommenderManager {
     private static final String MESSAGE_INVALID_ARFF_PATH = "%1$s does not refer to a valid ARFF file.";
     private static final String MESSAGE_ERROR_READING_ARFF = "File name or format invalid, error reading ARFF.";
     private static final String MESSAGE_CANNOT_CLOSE_READER = "Cannot close ARFF reader, reader still in use.";
     private static final String MESSAGE_BAD_REMOVER_SETTINGS = "{@code WEKA_REMOVER_SETTINGS} has invalid value.";
-    private static final String MESSAGE_ORDERS_IS_NULL = "Cannot classify with a lack of orders in .arff." +
-            " Check data entries in file.";
+    private static final String MESSAGE_ORDERS_IS_NULL = "Cannot classify with a lack of orders in .arff."
+            + " Check data entries in file.";
 
     private static final String WEKA_REMOVER_SETTINGS = "-S 0.0 -C last -L %1$d-%2$d -V -H";
 
@@ -29,7 +37,6 @@ public class RecommenderManager {
     private ArrayList<String> productsWithClassifiers;
 
     /**
-     * Manages the training of the recommendations classifier, and its subsequent use on a new {@code person} .
      * @param arffPath the data folder where the .arff orders file is stored.
      */
     public RecommenderManager(String arffPath, ReadOnlyAddressBook addressBook) {
