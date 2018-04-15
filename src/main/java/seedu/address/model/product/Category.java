@@ -1,5 +1,8 @@
 package seedu.address.model.product;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * The unique categories of the product.
  * Guarantees:
@@ -16,6 +19,8 @@ public class Category {
     public final String value;
 
     public Category(String categoryName) {
+        requireNonNull(categoryName);
+        checkArgument(isValidCategory(categoryName), MESSAGE_CATEGORY_CONSTRAINTS);
         this.value = categoryName;
     }
 
