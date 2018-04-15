@@ -140,12 +140,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Order> getFilteredOrderList() {
-            fail("This method should not be called.");
-            return null;
-        }
-
-        @Override
         public void addProduct(Product product) throws DuplicateProductException {
             fail("This method should not be called.");
         }
@@ -158,13 +152,18 @@ public class AddCommandTest {
         //@@author
 
         @Override
-        public void updateFilteredOrderList(Predicate<Order> predicate) {
+        public void updateFilteredProductList(Predicate<Product> predicate) {
             fail("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredProductList(Predicate<Product> predicate) {
-            fail("This method should not be called.");
+        public ObservableList<Order> getFilteredOrderList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredOrderList(Predicate<Order> predicate) {
+
         }
 
         @Override

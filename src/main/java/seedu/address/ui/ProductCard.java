@@ -39,10 +39,10 @@ public class ProductCard extends UiPart<Region> {
     public ProductCard(Product product, int displayedIndex) {
         super(FXML);
         this.product = product;
-        id.setText(displayedIndex + ". ");
+        id.setText(Integer.toString(displayedIndex));
         name.setText(product.getName().fullProductName);
         price.setText(product.getPrice().repMoney);
-        category.setText(product.getCategory().value);
+        category.setText("- " + product.getCategory().value);
 
     }
 

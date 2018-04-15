@@ -62,12 +62,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// list overwrite operations
-
     public void setPersons(List<Person> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
+
     //@@author YingxuH
+
     public void setProducts(List<Product> products) throws DuplicateProductException{
         this.products.setProducts(products);
     }
@@ -76,7 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.orders.setOrders(orders);
     }
     //@@author
-
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -105,12 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new AssertionError("AddressBooks should not have duplicate products");
         }
 
-        try {
-            setProducts(newData.getProductList());
-        } catch (DuplicateProductException dpe) {
-
-        }
-
+        //@@author lowjiajin
         try {
             setProducts(newData.getProductList());
         } catch (DuplicateProductException dpe) {
@@ -124,6 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //@@author
     //// person-level operations
 
     /**
