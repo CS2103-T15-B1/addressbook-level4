@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProducts.EGG;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.ProductCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -44,6 +46,15 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getLongitude().value, actualCard.getLongitude());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedProduct}.
+     */
+    public static void assertCardDisplaysProduct(Product expectedProduct, ProductCardHandle actualCard) {
+        assertEquals(expectedProduct.getName().fullProductName, actualCard.getName());
+        assertEquals(expectedProduct.getPrice().repMoney, actualCard.getPrice());
+        assertEquals(expectedProduct.getCategory().value, actualCard.getCategory());
     }
 
     /**
