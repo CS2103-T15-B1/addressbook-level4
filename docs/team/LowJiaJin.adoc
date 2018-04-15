@@ -1,4 +1,6 @@
 = Low Jia Jin - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 == PROJECT: Retail Analytics
 
@@ -31,4 +33,40 @@ Thus it is crucial to be able to filter that list by natural predicates, such as
 The price range filter requiring two distinct arguments representing the minimal and maximal extremes of the range, and a predicate to perform the numerical comparison.
 The category filter behaves more similarly to the code for finding a person.
 
-* *Code contributed*:
+* *Code contributed*: link:..\collated\functional\lowjiajin.md[Functional Code]
+
+* *Other contributions*:
+** General team tasks:
+*** Helped populate sample data for fresh address book. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
+*** Added unique product and order lists, as well as relevant setters and exceptions. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
+*** Solved bugs of teammates' feature scope while they were busy. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/76[#76])
+** Documentation:
+*** Wrote Appendix B and C of the Developer Guide. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/3[#3])
+*** Rewrote sections of the documentation outside of my feature contribution scope to be consistent with the app. (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/13[#13], https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
+** Project Management:
+*** Helped flag, redirect, and close all duplicate issues during user testing. (https://github.com/CS2103JAN2018-T15-B1/main/issues?q=is%3Aissue+is%3Aclosed[Most of] issues #43 to #73)
+*** Maintained the issue tracker in general (tagging, assignments)
+** Community:
+*** Reported bugs and suggestions for other group in class. (Issues https://github.com/CS2103JAN2018-T16-B2/main/issues/160[#160], https://github.com/CS2103JAN2018-T16-B2/main/issues/142[#142], https://github.com/CS2103JAN2018-T16-B2/main/issues/137[#137], https://github.com/CS2103JAN2018-T16-B2/main/issues/132[#132], and many others)
+** Tools:
+*** Fixed Gradle's javax.xml dependencies so the jar works on Java 9 as well. (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/40[#40])
+*** Added Weka as a dependency in Gradle (Pull request https://github.com/CS2103JAN2018-T15-B1/main/pull/14[#14])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=recommend]
+
+include::../UserGuide.adoc[tag=findproducts]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=recommend]
