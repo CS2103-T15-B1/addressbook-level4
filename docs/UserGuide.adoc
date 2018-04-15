@@ -134,7 +134,7 @@ Given a person, analyzes the app's entire order history to train a predictive mo
 
 Outputs a list of (`productId`, `predicted chance of purchase`), ranked in descending order of chance of purchase.
 
-image::\images\RecommendEg.jpg[width="600"]
+image::RecommendEg.jpg[width="600"]
 
 [IMPORTANT]
 The model is trained only on a person's _age_ and _gender_. To cap the influence of high volume buyers, multiple purchases of the same product are ignored. +
