@@ -9,7 +9,7 @@
 == Overview
 
 Retail Analytics is a desktop application written in Java for retailers that allows them to view, list and edit customers, orders and products. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added features such as extra tables and relational logic so that advanced queries can be made in the application. We also added other advanced features such as a AI
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added features such as extra tables and relational logic. We also added other advanced features such as a AI
 recommender engine and customer location visualization.
 
 == Summary of contributions
