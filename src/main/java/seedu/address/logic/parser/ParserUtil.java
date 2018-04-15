@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -276,6 +278,11 @@ public class ParserUtil {
             String currencySymbol = trimmedPrice.substring(0,1);
             currency = Money.parseCurrency(currencySymbol);
             trimmedPrice = trimmedPrice.substring(1).trim();
+        } else if (Money.isValidMoneyWithUnknownPrefix(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.split("\\s*\\d+")[0];
+            currency = Money.parseCurrency(currencySymbol);
+            trimmedPrice = trimmedPrice.split(Money.MONEY_PREFIX)[1];
+
         }
 
         return new Money(new BigDecimal(trimmedPrice), currency);
