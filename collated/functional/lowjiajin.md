@@ -931,17 +931,6 @@ public class RecommenderManager {
 ```
 ###### \java\seedu\address\model\AddressBook.java
 ``` java
-    public void setProducts(List<Product> products) throws DuplicateProductException{
-        this.products.setProducts(products);
-    }
-
-    public void setOrders(List<Order> orders) throws DuplicateOrderException {
-        this.orders.setOrders(orders);
-    }
-
-```
-###### \java\seedu\address\model\AddressBook.java
-``` java
         try {
             setProducts(newData.getProductList());
         } catch (DuplicateProductException dpe) {
@@ -1074,7 +1063,6 @@ public class UniqueOrderList implements Iterable<Order> {
 ```
 ###### \java\seedu\address\model\product\exceptions\DuplicateProductException.java
 ``` java
-
 /**
  * Signals that the operation will result in duplicate Person objects.
  */
