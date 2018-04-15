@@ -1,5 +1,7 @@
 package seedu.address.logic.recommender;
 
+import java.util.Random;
+
 import weka.attributeSelection.ChiSquaredAttributeEval;
 import weka.attributeSelection.Ranker;
 import weka.classifiers.Evaluation;
@@ -9,27 +11,23 @@ import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.RemoveWithValues;
 
-import java.util.Random;
-
 //@@author lowjiajin
 
 /**
  * Trains a classifier to predict whether or not one specific product will be bought.
  */
 public class ProductTrainer {
-    private static final String MESSAGE_CANNOT_ISOLATE_PRODUCT = "{@code isolator} has invalid settings for orders. " +
-            "Error when isolating orders of a given product.";
-    private static final String MESSAGE_CANNOT_BUILD_CLASSIFIER = "{@code orders} format is invalid. " +
-            "Error building classifier.";
-    private static final String MESSAGE_CANNOT_EVALUATE_CLASSIFIER = "Invalid parameters for " +
-            "{@code crossValidateModel()} method, or orders modified after classifier built. " +
-            "Error evaluating classifier.";
+    private static final String MESSAGE_CANNOT_ISOLATE_PRODUCT = "{@code isolator} has invalid settings for orders. "
+            + "Error when isolating orders of a given product.";
+    private static final String MESSAGE_CANNOT_BUILD_CLASSIFIER = "{@code orders} format is invalid. "
+            + "Error building classifier.";
+    private static final String MESSAGE_CANNOT_EVALUATE_CLASSIFIER = "Invalid parameters for "
+            + "{@code crossValidateModel()} method, or orders modified after classifier built. "
+            + "Error evaluating classifier.";
 
     private static final int WEKA_NUM_FEATURES_USED = 2;
     private static final int WEKA_MIN_ORDERS = 5;
-    
-    // Flag to print evaluation data for debugging
-    private static final boolean WEKA_EVALUATE_CLASSIFIER = false;
+    private static final boolean WEKA_EVALUATE_CLASSIFIER = false; // Flag to print evaluation data for debugging
 
     private Instances orders;
     private AttributeSelectedClassifier attrSelClassifier;
@@ -47,8 +45,7 @@ public class ProductTrainer {
     }
 
     public AttributeSelectedClassifier getClassifier() {
-        // Should not ever get the classifier before training it.
-        assert attrSelClassifier != null;
+        assert attrSelClassifier != null; // Should not ever get the classifier before training it.
         return attrSelClassifier;
     }
 
@@ -76,7 +73,7 @@ public class ProductTrainer {
     }
 
     /**
-     * Ensures that noise is suppressed by not recommending products with too few {@code orders} 
+     * Ensures that noise is suppressed by not recommending products with too few {@code orders}
      * to provide a reliable Recommender prediction.
      */
     private boolean hasEnoughOrdersToTrain() {

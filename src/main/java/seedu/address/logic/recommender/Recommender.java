@@ -1,5 +1,10 @@
 package seedu.address.logic.recommender;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+
 import seedu.address.model.person.Person;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
@@ -7,23 +12,18 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-
 //@@author lowjiajin
 
 /**
  * The logic that determines which products a person is most likely to buy for {@code RecommenderManager}.
  */
 public class Recommender {
-    
+
     private static final int POSITIVE_CLASS_INDEX = 0;
-    
-    private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "The attribute format has to match the classifier " +
-            "for the product to be classified.";
-    
+
+    private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "The attribute format has to match the classifier "
+            + "for the product to be classified.";
+
     private static final String AGE_ATTRIBUTE_NAME = "age";
     private static final String GENDER_ATTRIBUTE_NAME = "gender";
     private static final String CLASS_ATTRIBUTE_NAME = "class";
@@ -31,11 +31,12 @@ public class Recommender {
     private static final ArrayList<String> GENDER_NOMINALS = new ArrayList<String>(Arrays.asList("m", "f"));
 
     /**
-     * Determines the likelihood of a person wanting to buy any product, assuming the product has a classifier.
-     * @return A string in the following format: [<product id, probability of buying>, <...>, ...].
+     * Determines the likelihood of a person wanting to buy any product, assuming the product has a classifier,
+     * and returns the decision as a string.
      */
-    public String getRecommendations(ArrayList<String> productsWithClassifiers, Person person, HashMap<String, Classifier> classifierDict) {
-        
+    public String getRecommendations(
+            ArrayList<String> productsWithClassifiers, Person person, HashMap<String, Classifier> classifierDict) {
+
         Instance personInstance = parsePerson(person);
         ArrayList<BuyDecision> productRecOfAPerson = new ArrayList<>();
 
@@ -58,7 +59,7 @@ public class Recommender {
         ArrayList<Attribute> attributes = getAttributes();
         Instances persons = new Instances(INSTANCE_TYPE, attributes, 1);
         Instance personInstance = new DenseInstance(attributes.size());
-        
+
         // Assign values to the aforementioned instance
         personInstance.setDataset(persons);
         personInstance.setValue(0, Double.parseDouble(person.getAge().value));
@@ -69,6 +70,7 @@ public class Recommender {
 
     /**
      * Sets up the age and gender as classification features.
+     *
      * @return the ArrayList of features, with the class (i.e. whether person will buy) to be predicted.
      */
     public ArrayList<Attribute> getAttributes() {
@@ -94,6 +96,7 @@ public class Recommender {
 
     /**
      * Sorts the recommendations so the most confident recommendations come first.
+     *
      * @return the recommendations as a String.
      */
     private String getFormattedRecs(ArrayList<BuyDecision> productRecOfAPerson) {
