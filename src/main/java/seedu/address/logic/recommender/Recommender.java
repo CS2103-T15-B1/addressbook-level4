@@ -21,7 +21,8 @@ public class Recommender {
     
     private static final int POSITIVE_CLASS_INDEX = 0;
     
-    private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "Cannot classify instance.";
+    private static final String MESSAGE_CANNOT_CLASSIFY_INSTANCE = "The attribute format has to match the classifier " +
+            "for the product to be classified.";
     
     private static final String AGE_ATTRIBUTE_NAME = "age";
     private static final String GENDER_ATTRIBUTE_NAME = "gender";
@@ -34,7 +35,7 @@ public class Recommender {
      * @return A string in the following format: [<product id, probability of buying>, <...>, ...].
      */
     public String getRecommendations(ArrayList<String> productsWithClassifiers, Person person, HashMap<String, Classifier> classifierDict) {
-
+        
         Instance personInstance = parsePerson(person);
         ArrayList<BuyDecision> productRecOfAPerson = new ArrayList<>();
 
@@ -86,7 +87,7 @@ public class Recommender {
         try {
             buyProb = classifier.distributionForInstance(personInstance)[POSITIVE_CLASS_INDEX];
         } catch (Exception e) {
-            System.out.println(MESSAGE_CANNOT_CLASSIFY_INSTANCE);
+            throw new AssertionError(MESSAGE_CANNOT_CLASSIFY_INSTANCE);
         }
         return new BuyDecision(currentProductPredicted, buyProb);
     }
