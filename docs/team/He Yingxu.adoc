@@ -33,7 +33,7 @@ AddressBook - Level 4 is a retailer analysis application used for retailers to k
 
 ** Enhancements to existing features:
 *** added product and order in GUI
-*** resized the customers' list in GUI (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/30[#33], https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
+*** resized the customers' list in GUI (Pull requests https://github.com/CS2103JAN2018-T15-B1/main/pull/30[#30], https://github.com/CS2103JAN2018-T15-B1/main/pull/34[#34])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide.
 *** draw UI and Model UML diagram in DeveloperGuide to help developers better visualize the architect (posted by my teammate).
