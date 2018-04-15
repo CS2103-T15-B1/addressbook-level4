@@ -13,7 +13,7 @@ public class AddOrderCommand extends UndoableCommand {
             + ": Creates new order given a person's email, and at least one (Product ID, Quantity, Price)\n"
             + "Parameters: "
             + PREFIX_EMAIL + "EMAIL (Must be an existing person) "
-            + PREFIX_ORDER + "Product ID, Quantity, Price\n"
+            + PREFIX_SUBORDER + "Product ID, Quantity, Price\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
             + PREFIX_SUBORDER + "1 5 $3.00 "
@@ -135,6 +135,46 @@ public class DeleteOrderCommand extends UndoableCommand {
     }
 }
 
+```
+###### \java\seedu\address\logic\commands\FindCommand.java
+``` java
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredPersonList(predicate);
+
+        //Get emails of filtered people
+        List<String> emails = new ArrayList<>();
+        for(Person person : this.model.getFilteredPersonList()) {
+            emails.add(person.getEmail().toString());
+        }
+
+        //Create predicate to filter order list
+        OrderBelongsToPeoplePredicate orderBelongsToPeoplePredicate = new OrderBelongsToPeoplePredicate(emails);
+
+        //Update order list
+        model.updateFilteredOrderList(orderBelongsToPeoplePredicate);
+        return new CommandResult(getMessageForListShownSummary(model.getFilteredPersonList().size(), message));
+    }
+```
+###### \java\seedu\address\logic\commands\ListCommand.java
+``` java
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        //Get emails of filtered people
+        List<String> emails = new ArrayList<>();
+        for(Person person : this.model.getFilteredPersonList()) {
+            emails.add(person.getEmail().toString());
+        }
+
+        //Create predicate to filter order list
+        OrderBelongsToPeoplePredicate orderBelongsToPeoplePredicate = new OrderBelongsToPeoplePredicate(emails);
+
+        //Update order list
+        model.updateFilteredOrderList(orderBelongsToPeoplePredicate);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
 ```
 ###### \java\seedu\address\logic\parser\AddOrderCommandParser.java
 ``` java
