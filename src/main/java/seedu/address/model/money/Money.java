@@ -386,7 +386,7 @@ public class Money implements Comparable<Money>, Serializable {
         if ( aAmount.scale() > aCurrency.getDefaultFractionDigits() ) {
             throw new IllegalArgumentException(
                     "Number of decimals is " + aAmount.scale() + ", but currency only takes " +
-                            getNumDecimalsForCurrency() + " decimals."
+                            aCurrency.getDefaultFractionDigits() + " decimals."
             );
         }
     }
