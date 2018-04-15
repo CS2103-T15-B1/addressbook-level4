@@ -21,7 +21,7 @@ public class AddProductCommand extends UndoableCommand {
             + PREFIX_CATEGORY + "CATEGORY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Egg "
-            + PREFIX_PRICE + "$ 2.5 "
+            + PREFIX_PRICE + "SGD 2.5 "
             + PREFIX_CATEGORY + "Food ";
 
     public static final String MESSAGE_SUCCESS = "New product: %1$s";
