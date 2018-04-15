@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-
+//@@author Sivalavida
 /**
- * @author Sivalavida
  * Tests that a {@code Person}'s {@code Age} is within the range given.
  */
 public class GenderPredicate implements Predicate<Person> {
