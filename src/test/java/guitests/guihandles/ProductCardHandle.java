@@ -3,7 +3,7 @@ package guitests.guihandles;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
-//@@author He Yingxu
+//@@author YingxuH
 
 /**
  * Provides a handle to a product card in the product list panel.

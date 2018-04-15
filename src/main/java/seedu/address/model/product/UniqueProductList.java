@@ -12,6 +12,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.product.exceptions.DuplicateProductException;
 import seedu.address.model.product.exceptions.ProductNotFoundException;
 
+//@@author YingxuH
 /**
  * A list of products that enforces uniqueness between its elements and does not allow nulls.
  *

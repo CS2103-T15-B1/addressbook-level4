@@ -67,6 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    //@@author YingxuH
     public void setProducts(List<Product> products) throws DuplicateProductException{
         this.products.setProducts(products);
     }
@@ -74,6 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setOrders(List<Order> orders) throws DuplicateOrderException {
         this.orders.setOrders(orders);
     }
+    //@@author
 
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
@@ -96,7 +98,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         try {
             setPersons(syncedPersonList);
-            setProducts(syncedProductList);
             setProducts(syncedProductList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
@@ -196,6 +197,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// product-level operations
+    //@@author YingxuH
 
     /**
      * Adds a product to the address book.
@@ -220,6 +222,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new ProductNotFoundException();
         }
     }
+    //@@author
 
     //// tag-level operations
 
@@ -229,6 +232,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// order-level operations
 
+    //@@author YingxuH
     /**
      * Adds new order to address book.
      * @throws DuplicateOrderException if this order already exists.
@@ -264,6 +268,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
+    //@@author
     //// util methods
 
     @Override
@@ -282,6 +287,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asObservableList();
     }
 
+    //@@author YingxuH
     @Override
     public ObservableList<Product> getProductList() {
         return products.asObservableList();
@@ -292,6 +298,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return orders.asObservableList();
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

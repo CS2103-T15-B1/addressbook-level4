@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.order.Order;
 
-//@@author He Yingxu
+//@@author YingxuH
 public class OrderListPanelTest extends GuiUnitTest {
     private static final ObservableList<Order> TYPICAL_ORDERS =
             FXCollections.observableList(getTypicalOrders());

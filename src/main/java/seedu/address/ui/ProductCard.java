@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.product.Product;
 
-//@@author He Yingxu
+//@@author YingxuH
 /**
  * An UI component that displays information of a {@code Product}.
  */

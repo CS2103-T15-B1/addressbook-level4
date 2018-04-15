@@ -42,10 +42,13 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
+        //@@author YingxuH
         case AddProductCommand.COMMAND_WORD:
             return new AddProductCommandParser().parse(arguments);
 
+        case AddOrderCommand.COMMAND_WORD:
+            return new AddOrderCommandParser().parse(arguments);
+        //@@author
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -106,9 +109,6 @@ public class AddressBookParser {
         //@@author
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case AddOrderCommand.COMMAND_WORD:
-            return new AddOrderCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

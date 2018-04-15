@@ -7,8 +7,7 @@ import javafx.scene.control.ListView;
 import seedu.address.model.product.Product;
 import seedu.address.ui.ProductCard;
 
-// @@author He Yingxu
-
+//@@author YingxuH
 /**
  * Provides a handle for {@code ProductListPanel} containing the list of {@code ProductCard}.
  */

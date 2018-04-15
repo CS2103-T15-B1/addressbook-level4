@@ -50,7 +50,7 @@ public class GuiTestAssert {
                 actualCard.getTags());
     }
 
-    //@@author He Yingxu
+    //@@author YingxuH
     /**
      * Asserts that {@code actualProductCard} displays the same values as {@code expectedProductCard}.
      */
@@ -90,6 +90,7 @@ public class GuiTestAssert {
     }
 
 
+    //@@author
     /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
