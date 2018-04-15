@@ -17,15 +17,16 @@ public class AddOrderCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "addorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
+
             + ": Creates new order given a person's email, and at least one (Product ID, Quantity, Price)\n"
             + "Parameters: "
             + PREFIX_EMAIL + "EMAIL (Must be an existing person) "
             + PREFIX_ORDER + "Product ID, Quantity, Price\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "john@example.com "
-            + PREFIX_ORDER + "1 5 $3.00 "
-            + PREFIX_ORDER + "2 4 $2.50 "
-            + PREFIX_ORDER + "3 1 $100 ";
+            + PREFIX_SUBORDER + "1 5 $3.00 "
+            + PREFIX_SUBORDER + "2 4 $2.50 "
+            + PREFIX_SUBORDER + "3 1 $100 ";
 
     public static final String MESSAGE_SUCCESS = "New order added.";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the app.";
@@ -34,7 +35,7 @@ public class AddOrderCommand extends UndoableCommand {
     private final Order toAdd;
 
     /**
-     * Creates an AddOrderCommand to add the specified {@code Order}
+     * Creates an {@code AddOrderCommand} to add the specified {@code Order}
      */
     public AddOrderCommand(Order order) {
         requireNonNull(order);
@@ -42,7 +43,7 @@ public class AddOrderCommand extends UndoableCommand {
     }
 
     /**
-     * Checks that the add order command is valid (order to be created is valid)
+     * Checks that the {@code AddOrderCommand} is valid (i.e. {@code Order} to be created is valid)
      */
     public boolean isValid() {
         ReadOnlyAddressBook ab = this.model.getAddressBook();
@@ -54,7 +55,7 @@ public class AddOrderCommand extends UndoableCommand {
         requireNonNull(model);
         //Check that order is valid
         if (!isValid()) {
-            //If order invalid, decrement order counter so orders have sequential ID
+            //If order invalid, decrement order counter because it was incremented during creation
             Order.decrementOrderCounter();
             throw new CommandException(MESSAGE_INVALID_ORDER);
         }
