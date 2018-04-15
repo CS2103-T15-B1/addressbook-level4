@@ -9,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.money.Money;
+import seedu.address.model.money.exceptions.CurrencyUnknownException;
 import seedu.address.model.product.*;
 
 /**
@@ -42,6 +43,8 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
             throw new ParseException(ive.getMessage(), ive);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage(), iae);
+        } catch (CurrencyUnknownException cue) {
+            throw new ParseException(cue.getMessage(), cue);
         }
     }
 
