@@ -74,7 +74,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         gender = source.getGender().value;
-        age =source.getAge().value;
+        age = source.getAge().value;
         latitude = source.getLatitude().value;
         longitude = source.getLongitude().value;
         tagged = new ArrayList<>();

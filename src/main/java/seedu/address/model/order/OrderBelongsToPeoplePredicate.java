@@ -3,6 +3,9 @@ package seedu.address.model.order;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * This predicate filters orders according to a set of customer emails
+ */
 public class OrderBelongsToPeoplePredicate implements Predicate<Order> {
     private final List<String> emails;
 

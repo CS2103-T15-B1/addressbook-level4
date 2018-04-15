@@ -1,14 +1,15 @@
 package seedu.address.storage;
 
+import java.util.*;
+import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.money.Money;
 import seedu.address.model.product.Category;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 
-import javax.xml.bind.annotation.XmlElement;
-import java.util.*;
-
+//@@author qinghao1
 /**
  * JAXB-friendly version of the Product.
  */

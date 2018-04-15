@@ -1,14 +1,16 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.*;
+import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.SubOrder;
 import seedu.address.model.person.Email;
 
-import javax.xml.bind.annotation.XmlElement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.*;
+//@@author qinghao1
 /**
  * JAXB-friendly version of the Order.
  */
@@ -52,8 +54,9 @@ public class XmlAdaptedOrder {
         id = String.valueOf(source.getId());
         personId = source.getPersonId();
         time = source.getTime().toString();
-        for (SubOrder so : source.getSubOrders())
+        for (SubOrder so : source.getSubOrders()) {
             subOrders.add(new XmlAdaptedSubOrder(so));
+        }
     }
 
     /**

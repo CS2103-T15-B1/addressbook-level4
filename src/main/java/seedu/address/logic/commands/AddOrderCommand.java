@@ -28,7 +28,8 @@ public class AddOrderCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "New order added.";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the app.";
-    public static final String MESSAGE_INVALID_ORDER = "The order is invalid. Check that the person and products exist.";
+    public static final String MESSAGE_INVALID_ORDER =
+            "The order is invalid. Check that the person and products exist, and that product IDs are distinct. ";
 
     private final Order toAdd;
 

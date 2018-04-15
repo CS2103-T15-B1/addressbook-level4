@@ -115,7 +115,6 @@ public class AddressBookParser {
         }
     }
 
-    //@@author qinghao1
     /**
      * Overload parseCommand for commands that do not need addressBook, to maintain backwards compatibility
      * @param userInput
@@ -162,7 +161,6 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            //@@author lowjiajin
             case FindProductByCategoryCommand.COMMAND_WORD:
                 return new FindProductByCategoryCommandParser().parse(arguments);
 
@@ -175,7 +173,6 @@ public class AddressBookParser {
             case ListProductCommand.COMMAND_WORD:
                 return new ListProductCommand();
 
-            //@@author
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
 
