@@ -43,7 +43,7 @@ public class BrowserPanel extends UiPart<Region> {
         loadDefaultPage();
         registerAsAnEventHandler(this);
     }
-
+    //@@author Sivalavida
     /**
      * Loads location of person in Google Maps
      */
@@ -65,11 +65,8 @@ public class BrowserPanel extends UiPart<Region> {
             completeUrl += String.format("lat=%s,%s",person.getLatitude().value,person.getLongitude().value);
         }
         loadPage(completeUrl);
-//        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SELECTED_PERSON_LOCATION_PAGE_URL);
-//        loadPage(defaultPage.toExternalForm());
-
     }
-
+    //@@author
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
@@ -94,7 +91,7 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonLocationPage(event.getNewSelection().person);
     }
-
+    //@@author Sivalavida
     @Subscribe
     private void handleRenderMapEvent(RenderMapEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

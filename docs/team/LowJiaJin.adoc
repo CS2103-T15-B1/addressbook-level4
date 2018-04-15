@@ -1,0 +1,34 @@
+= Low Jia Jin - Project Portfolio
+
+== PROJECT: Retail Analytics
+
+---
+
+== Overview
+
+Retail Analytics is a desktop application written in Java for retailers of small and medium sized businesses who are comfortable managing their marketing informatics via CLI.
+It allows them to view, list and edit customers, orders and products, as well as obtain marketing insights from said data.
+
+There is a supplementary GUI created with JavaFX for visualization purposes.
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added extra tables
+and relational logic so that advanced queries can be made in the application.
+
+== Summary of contributions
+
+* *Major enhancement*: Added the `recommend` command and all the logic and utilities backing it.
+** What it does: Given a single user, determine which products he/she is likely to want to buy given the order history of the entire company.
+** Justification: Many businesses nowadays use product recommendations systems to increase sales through targeted advertising. 
+Akin to the emails you get from Amazon recommending products you might want. 
+Through this `recommend` command, business owners are able to know which customers to target with which products in their inventory, ultimately boosting sales.
+** Highlights: This enhancement morphs the software beyond a mere recording tool, to one which is capable of offering marketing insights that may not be self-evident from the raw data alone.
+It also works reasonably well despite being trained on only two features, which is a boon for smaller businesses who might not want to manage (or might not even have) excessive user data. It is a complex feature requiring six distinct classes to manage the interfacing between the app and the classification systems, as well as model training and testing protocols. 
+** Credits: The open source Machine Learning library, Weka, was used to obtain the Naive Bayes classifier and the classifier's instance feeding pipeline. 
+
+* *Minor enhancement*: Added 2 commands to allow the listing of all products *within a certain price range*, or *from a certain category*.
+** Justification: Even small and medium businesses might have a significant inventory of products that exceeds what the GUI can conveniently display at one time.
+Thus it is crucial to be able to filter that list by natural predicates, such as by the products' price range or category, to obtain more manageable subsets of products for further analysis.
+** Highlights: Both commands have distinct parsing routines and logic. 
+The price range filter requiring two distinct arguments representing the minimal and maximal extremes of the range, and a predicate to perform the numerical comparison.
+The category filter behaves more similarly to the code for finding a person.
+
+* *Code contributed*:
