@@ -382,19 +382,21 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 === Geographical Visualisation (`map` command)
 
-====How the feature is implemented
-We are using https://developers.google.com/maps/[Google Maps API] to implement this feature. The map command has
-parameters which will describe a querry (yet to be implemented), which will render a google map image with
-the locations of the filtered customers in the map.
+* How the feature is implemented
+** We are using https://developers.google.com/maps/[Google Maps API] to implement this feature. Google Maps'
+clustering API also has been used create clustering among the data points rendered. The map command has
+parameters which will describe a querry, which is required to filter the customers to render on the map.
+To implement a querry we had to create several subclasses of `Predicate<Person>` such as
+`AgeWithinRangePredicate`, `ContainsTagPredicate` and `GenderPredicate`.
 
 
-====Alternatives considered
-
-Initially we wanted to use a static image of Singapore and create edit the map based on the locations of the customers
+* Alternatives considered
+** Initially we wanted to use a static image of Singapore and create and edit the map based on the locations of the customers
 on the fly. However, we realised that the user might want a zoomable interface, if he needed the spread of customers
  viewed at a certain zoom level. Furthermore, this would restrit the use of our product only to retailer who are
  delevering around Singapore. Using the Google Maps API would enable our users to operate at any country and also have
- customers around the world.
+ customers around the world. Additionally, it would be much more difficult for us to implement clustering of data
+ if we rendered the images ourselves.
 
 
 
@@ -854,8 +856,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Jia Jin*:
 
-* *Major*: Recommendations engine for customer, so that the user can provide these personalized recommendations to customers.
-* *Minor*: Basic filtered getter utilities for Product, Customer, Order classes
+* *Major*: Recommendations engine for customer, so that the user can provide these personalized product recommendations to customers.
+* *Minor*: Filtered commands to retrieve all products from a specific category or within a certain price range.
 
 *Siva*:
 
@@ -874,7 +876,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user who is adding a new product |create new product categories on-the-fly |manage pivots in inventory composition
 
-|`* * *` |user |add a customer by specifying their email, name, and address only, with age and gender optional |keep track of each individual’s orders going forward
+|`* * *` |user |add a customer by specifying their email, name, address, age, and gender |keep track of each individual’s orders going forward
 
 |`* * *` |user |add an order by specifying the date, the buyer, and a list of products bought | avoid repetitively creating multiple orders with the same date and buyer
 
@@ -884,9 +886,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |search for customers via their names or emails |view the profile of each customer and their purchase history
 
-|`* *` |user who is searching for customers |have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching |still locate customers without precisely remembering their name/email when I have many customers
+|`* ` |user who is searching for customers |have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching |still locate customers without precisely remembering their name/email when I have many customers
 
-|`* *` |user |also search for products in similar fashion as customers by typing their name or category |view the profile of each product and its sales history
+|`* * *` |user |search for groups of products by category or price range |isolate certain parts of their inventory without scrolling through many irrelevant products
 
 |`* *` |user currently on a product’s profile |update that product’s price |reproduce discounts or price raises in this application
 
@@ -912,7 +914,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |use the recommendations engine identify which users still haven’t bought, but are likely to want to buy a given product |perform targeted marketing (e.g. email blasts with specific products)
 
-|`* *` |user |re-train the recommendations engine's classifier on the latest data whenever desired |ensure its relevance as new products and orders come in
+|`* *` |user |re-train the recommendations engine's classifier on the latest data on execution of recommend command |ensure its relevance as new products and orders come in
 
 |`* * *` |user |display customers as an overlay on a map |understand how customers are geographically distributed, which have many possible gains (e.g. determine placement of physical marketing collateral such as flyers and banners)
 

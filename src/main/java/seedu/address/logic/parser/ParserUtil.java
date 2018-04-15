@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -28,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ID = "ID is invalid! Must be non-zero unsigned integer";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
 
     /**
@@ -41,6 +44,18 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses ID field and returns an int which is the ID.
+     * @throws IllegalValueException if the specified ID is invalid (not non-zero unsigned integer).
+     */
+    public static int parseID(String idString) throws IllegalValueException {
+        String trimmedID = idString.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedID)) {
+            throw new IllegalValueException(MESSAGE_INVALID_ID);
+        }
+        return Integer.parseInt(trimmedID);
     }
 
     /**
@@ -66,7 +81,7 @@ public class ParserUtil {
         requireNonNull(name);
         return name.isPresent() ? Optional.of(parseName(name.get())) : Optional.empty();
     }
-
+    //@@author Sivalavida
     /**
      * Parses a {@code String gender} into a {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
@@ -85,6 +100,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> gender} into an {@code Optional<Gender>} if {@code gender} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     *
      */
     public static Optional<Gender> parseGender(Optional<String> gender) throws IllegalValueException {
         requireNonNull(gender);
@@ -96,6 +112,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code age} is invalid.
+     *
      */
     public static Age parseAge(String age) throws IllegalValueException {
         requireNonNull(age);
@@ -109,6 +126,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> age} into an {@code Optional<Age>} if {@code age} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     *
      */
     public static Optional<Age> parseAge(Optional<String> age) throws IllegalValueException {
         requireNonNull(age);
@@ -120,6 +138,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code latitude} is invalid.
+     *
      */
     public static Latitude parseLatitude(String latitude) throws IllegalValueException {
         requireNonNull(latitude);
@@ -133,6 +152,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> latitude} into an {@code Optional<Latitude>} if {@code latitude} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     *
      */
     public static Optional<Latitude> parseLatitude(Optional<String> latitude) throws IllegalValueException {
         requireNonNull(latitude);
@@ -144,6 +164,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code longitude} is invalid.
+     *
      */
     public static Longitude parseLongitude(String longitude) throws IllegalValueException {
         requireNonNull(longitude);
@@ -157,12 +178,13 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> longitude} into an {@code Optional<Longitude>} if {@code longitude} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
+     *
      */
     public static Optional<Longitude> parseLongitude(Optional<String> longitude) throws IllegalValueException {
         requireNonNull(longitude);
         return longitude.isPresent() ? Optional.of(parseLongitude(longitude.get())) : Optional.empty();
     }
-
+    //@@author
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
@@ -272,12 +294,12 @@ public class ParserUtil {
         Currency currency = Money.DEFAULT_CURRENCY;
         if (!Money.isValidMoney(trimmedPrice)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
-        } else if (Money.isValidMoneyWithCurrency(trimmedPrice)) {
-            String currencySymbol = trimmedPrice.substring(0,1);
+        } else if (Money.isValidMoneyWithUnknownPrefix(trimmedPrice)) {
+            String currencySymbol = trimmedPrice.split(Money.MONEY_DIGITS)[0];
             currency = Money.parseCurrency(currencySymbol);
-            trimmedPrice = trimmedPrice.substring(1).trim();
+            String[] splitted = trimmedPrice.split(Money.MONEY_PREFIX);
+            trimmedPrice = splitted[splitted.length-1];
         }
-
         return new Money(new BigDecimal(trimmedPrice), currency);
 
     }
@@ -379,4 +401,5 @@ public class ParserUtil {
         }
         return subOrderList;
     }
+
 }
