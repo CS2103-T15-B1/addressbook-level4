@@ -31,4 +31,20 @@ Thus it is crucial to be able to filter that list by natural predicates, such as
 The price range filter requiring two distinct arguments representing the minimal and maximal extremes of the range, and a predicate to perform the numerical comparison.
 The category filter behaves more similarly to the code for finding a person.
 
-* *Code contributed*:
+* *Code contributed*: link:..\collated\functional\lowjiajin.md[Functional Code]
+
+* *Other contributions*:
+** Helped populate sample data for fresh address book.
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=recommend]
+
+include::../UserGuide.adoc[tag=findproducts]
+
+== Contributions to the Developer Guide
