@@ -39,10 +39,10 @@ public class ArffWriter {
     private final ArffFormatter formatter;
 
     public ArffWriter(File arff, ReadOnlyAddressBook addressBook) {
+        this.arff = arff;
         persons = addressBook.getPersonList();
         products = addressBook.getProductList();
         orders = addressBook.getOrderList();
-        this.arff = arff;
         formatter = new ArffFormatter(getProductIdToNameMap());
     }
 
