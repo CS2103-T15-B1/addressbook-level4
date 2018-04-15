@@ -52,7 +52,7 @@ public class TypicalProducts {
     }
 
     public static List<Product> getTypicalProducts() {
-        return new ArrayList<Product>(Arrays.asList(EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA));
+        return new ArrayList<>(Arrays.asList(EGG, MILK, SHIRT, PANTS, LAPTOP, SWEET, PAPER, PEN, PENCIL, SODA));
     }
 
 }
