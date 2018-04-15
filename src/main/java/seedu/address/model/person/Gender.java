@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+//@@author Sivalavida
 /**
  * Represents a Person's gender in the retail analytics.
  * Guarantees: immutable; is valid as declared in {@link #isValidGender(String)}
@@ -15,11 +15,10 @@ public class Gender {
     public static final String MALE_SHORTFORM = "M";
     public static final String FEMALE_SHORTFORM = "F";
 
-    public String value;//either "M" or "F"
+    public String value;//either MALE_SHORTFORM or FEMALE_SHORTFORM
 
     /**
      * Constructs a {@code Gender}.
-     *
      * @param gender A valid gender (ie "M" or "F") (case insensitive).
      */
     public Gender(String gender) {
@@ -28,6 +27,10 @@ public class Gender {
         setGender(gender);
     }
 
+    /**
+     * Sets {@code value} to the uppercase value of {@code gender}
+     * @param gender a valid gender
+     */
     private void setGender(String gender) {
         assert isValidGender(gender);
 

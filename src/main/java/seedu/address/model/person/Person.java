@@ -58,7 +58,7 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-
+    //@@author Sivalavida
     public Gender getGender() {
         return gender;
     }
@@ -97,7 +97,7 @@ public class Person {
 //        Order lastOrder = allOrders.get(allOrders.size() - 1);
 //        return lastOrder.getTime();
 //    }
-
+    //@@author
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -117,7 +117,9 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getEmail().equals(this.getEmail())
+        return otherPerson.getName().equals(this.getName())
+                && otherPerson.getPhone().equals(this.getPhone())
+                && otherPerson.getEmail().equals(this.getEmail())
                 && otherPerson.getAddress().equals(this.getAddress())
                 && otherPerson.getGender().equals(this.getGender())
                 && otherPerson.getAge().equals(this.getAge())

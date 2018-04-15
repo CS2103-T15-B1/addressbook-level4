@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+//@@author Sivalavida
 /**
  * Represents a Person's Latitude in the Retail Analytics.
  * Guarantees: immutable; is valid as declared in {@link #isValidLongitude(String)}
@@ -40,9 +40,7 @@ public class Longitude {
     }
 
     /**
-     * A method to validate a longitude value
-     * @param test the longitude to check is valid
-     * @return true if test is a decimal value and within the MIN and MAX longitude
+     * return true if {@code test} is a decimal value and within the MIN and MAX longitude
      */
     public static boolean isValidLongitude(String test) {
         if (test.matches(LONGITUDE_VALIDATION_REGEX)) {

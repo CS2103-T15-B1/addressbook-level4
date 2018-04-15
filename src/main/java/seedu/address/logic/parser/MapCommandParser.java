@@ -17,9 +17,8 @@ import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.ContainsItemPredicate;
 import seedu.address.model.person.*;
-
+//@@author Sivalavida
 /**
- * @author Sivalavida
  * Parses input arguments and creates a new MapCommand object
  */
 public class MapCommandParser implements Parser<MapCommand> {
