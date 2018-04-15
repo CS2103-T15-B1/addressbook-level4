@@ -405,6 +405,7 @@ on the fly. However, we realised that the user might want a zoomable interface, 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::recommend[]
 [[Implementation-Recommender]]
 === Recommender
 
@@ -414,6 +415,7 @@ Obtaining recommendations for products that a given customer is likely to want t
 Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:
 
 . Convert the `Order` records into a `.arff` file, the default format used by Weka, using the `ArffWriter` class.
+The precise formatting of the data to the `.arff` header and data entry format is handled by the `ArffFormatter`, before being passed back to the `ArffWriter` for the file writing.
 [IMPORTANT]
 The `.arff` must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as `"n" + productId`.  Since the `.arff` only stores the classification features (age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the `Order` records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the `.arff`. Additionally, the feature is binary (either bought or did not buy a product), the quantity of purchases does not count.
 . For each product, use `RemoveWithValues` to create an `isolator` that can filter out the orders involving that specific product in the `.arff`. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).
@@ -433,6 +435,7 @@ The execution of the `recommend` command in the CLI will run the testing pipelin
 . Call `getRecommendations(customerId)`, which will result in getting the appropriate features from said `Customer`, and then running the features as an `Instance` through every classifier in `classifierDict`. The confidence of each purchase decision is returned via `distributionForInstance` as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the `Product` predicted to be most attractive to said `Customer` listed first, is assigned to `ProductRecOfAPerson`.
 [NOTE]
 [v2.0] All `Product` objects which a given `Customer` has already bought will be stripped from his `ProductRecOfAPerson`. The remaining list will be sent to `ui` for output.
+. The ranked list of recommendations is then passed back up to `RecommendCommand` via `RecommendManager` for CLI output.
 
 ==== Design Considerations
 
@@ -449,7 +452,17 @@ The execution of the `recommend` command in the CLI will run the testing pipelin
 ** Pros: Allows a person not buying a product to be treated as a signal for recommender decision (e.g. no young people buy dentures), which maximizes predictive power on small order sets.
 ** Cons: Does not predict newly introduced products with few orders well, because the lack of orders is seen as a measure of how unpopular a product is regardless of a person's profile.
 * **Alternative 2 (current choice):** Perform a multiclass classification across all products
-** Pros: Does not require 
+** Pros: Does not require us to comb through orders to find products that a person has yet to buy.
+** Cons: Multiclass classifiers tend to perform badly unless there are many training data points.
+// end::recommend[]
+
+===== Aspect: How much weight to give to multiple orders on the same product for one person
+* **Alternative 1 (current choice):** Ignore all additional orders of the same product over the first
+** Pros: Single users with many orders do not dominate the decision rules.
+** Cons: Possibly misses out on many useful training data points.
+* **Alternative 2:** Count each order of the same product over the first by the same person as a unique data entry
+** Pros: A more intuitive characterisation of the recommender (i.e. adding new orders will always result in a new training dataset for the recommender, instead of possibly having no impact)
+** Cons: Requires code restructuring to track the number of the same product bought by a person, since we are unable to do so from the .arff file as the file only contains non-unique sets of features, and not the unique person id which they were derived from.
 
 == Documentation
 
