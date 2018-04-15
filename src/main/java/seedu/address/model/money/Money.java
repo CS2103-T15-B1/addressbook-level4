@@ -11,6 +11,7 @@ import java.math.RoundingMode;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.money.exceptions.CurrencyUnknownException;
 import seedu.address.model.money.exceptions.MismatchedCurrencyException;
 import seedu.address.model.money.exceptions.ObjectNotMoneyException;
 /**
@@ -33,8 +34,7 @@ public class Money implements Comparable<Money>, Serializable {
             String.format("price should only contains currency sy/mbol(optional) and digits," +
                     " and it cannot be negative");
     public static final String MESSAGE_MONEY_SYMBOL_CONSTRAINTS =
-            String.format("currency code should be limited ISO 4277 code" +
-            " as well ass ");
+            String.format("currency code should be limited ISO 4277 code");
 
     /**
      * The money amount.
@@ -163,7 +163,7 @@ public class Money implements Comparable<Money>, Serializable {
                 return currency;
             }
         }
-        throw new IllegalArgumentException("unknown currency: " + symbol +"\n"+ MESSAGE_MONEY_SYMBOL_CONSTRAINTS);
+        throw new CurrencyUnknownException("unknown currency: " + symbol +"\n"+ MESSAGE_MONEY_SYMBOL_CONSTRAINTS);
     }
 
 
