@@ -19,8 +19,8 @@ public class DeleteOrderCommandParser implements Parser<DeleteOrderCommand> {
      */
     public DeleteOrderCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteOrderCommand(index);
+            int id = ParserUtil.parseID(args);
+            return new DeleteOrderCommand(id);
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteOrderCommand.MESSAGE_USAGE));

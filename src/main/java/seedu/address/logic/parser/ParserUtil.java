@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ID = "ID is invalid! Must be non-zero unsigned integer";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
 
     /**
@@ -41,6 +42,18 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses ID field and returns an int which is the ID.
+     * @throws IllegalValueException if the specified ID is invalid (not non-zero unsigned integer).
+     */
+    public static int parseID(String idString) throws IllegalValueException {
+        String trimmedID = idString.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedID)) {
+            throw new IllegalValueException(MESSAGE_INVALID_ID);
+        }
+        return Integer.parseInt(trimmedID);
     }
 
     /**
