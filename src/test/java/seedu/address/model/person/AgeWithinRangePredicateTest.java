@@ -58,12 +58,12 @@ public class AgeWithinRangePredicateTest {
         AgeWithinRangePredicate predicate = new AgeWithinRangePredicate(TEN_YEARS_OLD, TWENTY_YEARS_OLD);
         assertFalse(predicate.test(new PersonBuilder().withAge("35").build()));
 
-        // Age equal to left boundary
+        // Age below lower limit
         assertFalse(predicate.test(new PersonBuilder().withAge("2").build()));
 
         //Age range reversed
         predicate = new AgeWithinRangePredicate(TWENTY_YEARS_OLD, TEN_YEARS_OLD);
-        assertFalse(predicate.test(new PersonBuilder().withAge("2").build()));
+        assertFalse(predicate.test(new PersonBuilder().withAge("15").build()));
     }
 }
 
