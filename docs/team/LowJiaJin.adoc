@@ -33,6 +33,8 @@ Thus it is crucial to be able to filter that list by natural predicates, such as
 The price range filter requiring two distinct arguments representing the minimal and maximal extremes of the range, and a predicate to perform the numerical comparison.
 The category filter behaves more similarly to the code for finding a person.
 
+* *Minor enhancement*: Appropriated the original find command's behaviour for findproductsbyname.
+
 * *Code contributed*: link:..\collated\functional\lowjiajin.md[Functional Code]
 
 * *Other contributions*:
