@@ -21,6 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.exceptions.DuplicateOrderException;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -132,6 +135,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteOrder(Order target) throws OrderNotFoundException {
+
+        }
+
+        @Override
+        public void addOrder(Order product) throws DuplicateOrderException {
+
+        }
+
+        @Override
         public ObservableList<Product> getFilteredProductList() {
             fail("This method should not be called.");
             return null;
@@ -140,6 +153,16 @@ public class AddCommandTest {
         @Override
         public void updateFilteredProductList(Predicate<Product> predicate) {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Order> getFilteredOrderList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredOrderList(Predicate<Order> predicate) {
+
         }
 
         @Override
