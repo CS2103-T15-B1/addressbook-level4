@@ -195,6 +195,21 @@ public class RecommendCommand extends Command {
             return new RecommendCommandParser(addressBook).parse(arguments);
 
 ```
+###### \java\seedu\address\logic\parser\AddressBookParser.java
+``` java
+            case FindProductByCategoryCommand.COMMAND_WORD:
+                return new FindProductByCategoryCommandParser().parse(arguments);
+
+            case FindProductByNameCommand.COMMAND_WORD:
+                return new FindProductByNameCommandParser().parse(arguments);
+
+            case FindProductByPriceCommand.COMMAND_WORD:
+                return new FindProductByPriceCommandParser().parse(arguments);
+
+            case ListProductCommand.COMMAND_WORD:
+                return new ListProductCommand();
+
+```
 ###### \java\seedu\address\logic\parser\FindProductByCategoryCommandParser.java
 ``` java
 
@@ -916,6 +931,161 @@ public class RecommenderManager {
     }
 }
 ```
+###### \java\seedu\address\model\AddressBook.java
+``` java
+    public void setProducts(List<Product> products) throws DuplicateProductException{
+        this.products.setProducts(products);
+    }
+
+    public void setOrders(List<Order> orders) throws DuplicateOrderException {
+        this.orders.setOrders(orders);
+    }
+
+```
+###### \java\seedu\address\model\AddressBook.java
+``` java
+        try {
+            setProducts(newData.getProductList());
+        } catch (DuplicateProductException dpe) {
+
+        }
+
+        try {
+            setOrders(newData.getOrderList());
+        } catch (DuplicateOrderException doe) {
+
+        }
+    }
+
+```
+###### \java\seedu\address\model\order\exceptions\DuplicateOrderException.java
+``` java
+
+/**
+ * Signals that the operation will result in duplicate Order objects.
+ */
+public class DuplicateOrderException extends DuplicateDataException {
+    public DuplicateOrderException() {
+        super("Operation would result in duplicate orders");
+    }
+}
+```
+###### \java\seedu\address\model\order\UniqueOrderList.java
+``` java
+
+/**
+ * A list of products that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Order#equals(Object)
+ */
+public class UniqueOrderList implements Iterable<Order> {
+
+    private final ObservableList<Order> internalList = FXCollections.observableArrayList();
+
+    /**
+     * Returns true if the list contains an order
+     */
+    public boolean contains(Order toCheck) {
+        requireNonNull(toCheck);
+        return internalList.contains(toCheck);
+    }
+
+    /**
+     * Adds a new order to the list
+     * @param toAdd unique new order to be added. It shouldn't exist in list.
+     */
+    public void add(Order toAdd) throws DuplicateOrderException {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateOrderException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Removes the equivalent order from the list.
+     *
+     * @throws OrderNotFoundException if no such person could be found in the list.
+     */
+    public boolean remove(Order toRemove) throws OrderNotFoundException {
+        requireNonNull(toRemove);
+        final boolean orderFoundAndDeleted = internalList.remove(toRemove);
+        if (!orderFoundAndDeleted) {
+            throw new OrderNotFoundException();
+        }
+        return orderFoundAndDeleted;
+    }
+
+    /**
+     * Sets an order list to a new one.
+     * @param replacement the new list
+     */
+    public void setOrders(UniqueOrderList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Creates a new order list based on a list of distinct order objects.
+     * @param orders list of orders
+     */
+    public void setOrders(List<Order> orders) throws DuplicateOrderException {
+        requireAllNonNull(orders);
+        final UniqueOrderList replacement = new UniqueOrderList();
+        for (final Order order : orders) {
+            replacement.add(order);
+        }
+        setOrders(replacement);
+    }
+
+    /**
+     * Replaces the order {@code target} in the list with {@code editedOrder}.
+     *
+     * @throws DuplicateOrderException if the replacement is equivalent to another existing order in the list.
+     * @throws OrderNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setOrder(Order target, Order editedOrder)
+            throws DuplicateOrderException, OrderNotFoundException {
+        requireNonNull(editedOrder);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new OrderNotFoundException();
+        }
+
+        if (!target.equals(editedOrder) && internalList.contains(editedOrder)) {
+            throw new DuplicateOrderException();
+        }
+
+        internalList.set(index, editedOrder);
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Order> asObservableList() {
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    @Override
+    public Iterator<Order> iterator() {
+        return internalList.iterator();
+    }
+}
+```
+###### \java\seedu\address\model\product\exceptions\DuplicateProductException.java
+``` java
+
+/**
+ * Signals that the operation will result in duplicate Person objects.
+ */
+public class DuplicateProductException extends DuplicateDataException {
+    public DuplicateProductException() {
+        super("Operation would result in duplicate products");
+    }
+}
+```
 ###### \java\seedu\address\model\product\ProductCategoryContainsKeywordsPredicate.java
 ``` java
 public class ProductCategoryContainsKeywordsPredicate implements Predicate<Product> {
@@ -987,6 +1157,116 @@ public class ProductNameContainsKeywordsPredicate implements Predicate<Product> 
                 && this.keywords.equals(((ProductNameContainsKeywordsPredicate) other).keywords)); // state check
     }
 }
+```
+###### \java\seedu\address\model\product\UniqueProductList.java
+``` java
+
+/**
+ * A list of products that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Product#equals(Object)
+ */
+public class UniqueProductList implements Iterable<Product> {
+
+    private final ObservableList<Product> internalList = FXCollections.observableArrayList();
+
+    /**
+     * Returns true if the list contains an equivalent product as the given argument.
+     */
+    public boolean contains(Product toCheck) {
+        requireNonNull(toCheck);
+        return internalList.contains(toCheck);
+    }
+
+    /**
+     * Adds a product to the list.
+     *
+     * @throws DuplicateProductException if the product to add is a duplicate of an existing product in the list.
+     */
+    public void add(Product toAdd) throws DuplicateProductException {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateProductException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Replaces the product {@code target} in the list with {@code editedProduct}.
+     *
+     * @throws DuplicateProductException if the replacement is equivalent to another existing product in the list.
+     * @throws ProductNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setProduct(Product target, Product editedProduct)
+            throws DuplicateProductException, ProductNotFoundException {
+        requireNonNull(editedProduct);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
+        }
+
+        if (!target.equals(editedProduct) && internalList.contains(editedProduct)) {
+            throw new DuplicateProductException();
+        }
+
+        internalList.set(index, editedProduct);
+    }
+
+    /**
+     * Removes the equivalent product from the list.
+     *
+     * @throws ProductNotFoundException if no such product could be found in the list.
+     */
+    public boolean remove(Product toRemove) throws ProductNotFoundException {
+        requireNonNull(toRemove);
+        final boolean productFoundAndDeleted = internalList.remove(toRemove);
+        if (!productFoundAndDeleted) {
+            throw new ProductNotFoundException();
+        }
+        return productFoundAndDeleted;
+    }
+
+    public void setProducts(UniqueProductList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    public void setProducts(List<Product> products) throws DuplicateProductException {
+        requireAllNonNull(products);
+        final UniqueProductList replacement = new UniqueProductList();
+        for (final Product product : products) {
+            replacement.add(product);
+        }
+        setProducts(replacement);
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Product> asObservableList() {
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    @Override
+    public Iterator<Product> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueProductList // instanceof handles nulls
+                && this.internalList.equals(((UniqueProductList) other).internalList));
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+}
+
 ```
 ###### \java\seedu\address\model\util\SampleDataUtil.java
 ``` java
