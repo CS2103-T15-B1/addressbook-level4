@@ -1,12 +1,15 @@
 package seedu.address.model.order;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.List;
+
 import seedu.address.model.money.Money;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+//@@author qinghao1
 /**
  * Represents a customer's order.
  * Guarantees: details are present and not null, field values are validated, immutable
@@ -22,7 +25,7 @@ public class Order {
 
 
     /**
-     * Every field must be present and not null.
+     * Adds order with personId(email) and list of suborders. Every field must be present and not null.
      * @param personId id of person (customer) who made the order. Can be thought of as a foreign key
      * @param subOrders ArrayList of triple(product id, number bought, price) to represent the order
      */
@@ -30,6 +33,18 @@ public class Order {
         this.id = ++orderCounter;
         this.time = LocalDateTime.now();
         this.personId = personId;
+        this.subOrders = subOrders;
+    }
+
+    /**
+     * Adds order with person object instead of email String. To be used for debugging, testing etc.
+     * @param person
+     * @param subOrders
+     */
+    public Order(Person person, List<SubOrder> subOrders) {
+        this.id = ++orderCounter;
+        this.time = LocalDateTime.now();
+        this.personId = person.getEmail().toString();
         this.subOrders = subOrders;
     }
 
@@ -49,6 +64,23 @@ public class Order {
         this.subOrders = subOrders;
         orderCounter = Math.max(orderCounter, id);
     }
+
+    /**
+     * Adds a order with specified id and time, using Person object instead of email string.
+     * For debugging, testing, etc.
+     * @param id
+     * @param person
+     * @param time
+     * @param subOrders
+     */
+    public Order(int id, Person person, LocalDateTime time, List<SubOrder> subOrders) {
+        this.id = id;
+        this.time = time;
+        this.personId = person.getEmail().toString();
+        this.subOrders = subOrders;
+        orderCounter = Math.max(orderCounter, id);
+    }
+
     /**
      * Returns ID(i.e. email) of person who made the order.
      */
@@ -84,7 +116,7 @@ public class Order {
      */
     public Money getOrderTotal() {
         Money total = new Money();
-        for(SubOrder subOrder : subOrders) {
+        for (SubOrder subOrder : subOrders) {
             Money subOrderPrice = subOrder.getTotalPrice();
             total = total.plus(subOrderPrice);
         }
@@ -148,20 +180,20 @@ public class Order {
         sb.append(" by ");
         sb.append(personId);
         sb.append(" at ");
-        sb.append(time);
+        sb.append(time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
         sb.append(": \n");
         sb.append("-------------\n");
         int subOrderCt = 0;
-        for(SubOrder so : subOrders) {
+        for (SubOrder so : subOrders) {
             sb.append(++subOrderCt);
-            sb.append('-');
+            sb.append("- ");
             sb.append(so.toString());
             sb.append('\n');
         }
         sb.append("-------------\n");
-        sb.append("Order total: ");
+        sb.append("Total: ");
         sb.append(getOrderTotal());
-        sb.append("-------------\n");
+        sb.append("\n-------------\n");
         return sb.toString();
     }
 
