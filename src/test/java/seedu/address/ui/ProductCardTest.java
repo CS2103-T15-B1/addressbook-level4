@@ -16,7 +16,7 @@ public class ProductCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Product productWithNoCategory = new ProductBuilder().withCategory("").build();
+        Product productWithNoCategory = new ProductBuilder().withCategory("random").build();
         ProductCard productCard = new ProductCard(productWithNoCategory, 1);
         uiPartRule.setUiPart(productCard);
         assertCardDisplay(productCard, productWithNoCategory, 1);

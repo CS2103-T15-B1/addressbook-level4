@@ -47,7 +47,7 @@ public class ProductListPanelTest extends GuiUnitTest {
 
             /*The index in the product list should be their real id instead of their orders.*/
             int expectedIndex = expectedProduct.getId();
-            assertEquals(Integer.toString(expectedIndex) + ". ", actualCard.getId());
+            assertEquals(Integer.toString(expectedIndex)+". ", actualCard.getId());
         }
     }
 
@@ -56,7 +56,7 @@ public class ProductListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        ProductCardHandle expectedCard = productListPanelHandle.getProductCardHandle(INDEX_THIRD_PRODUCT.getZeroBased());
+        ProductCardHandle expectedCard = productListPanelHandle.getProductCardHandle(INDEX_SECOND_PRODUCT.getZeroBased());
         ProductCardHandle selectedCard = productListPanelHandle.getHandleToSelectedCard();
         assertProductCardEquals(expectedCard, selectedCard);
     }

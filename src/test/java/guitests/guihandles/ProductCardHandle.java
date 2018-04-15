@@ -12,7 +12,7 @@ public class ProductCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String PRICE_FIELD_ID = "#price";
-    private static final String CATEGORY_FIELD_ID = "#catgory";
+    private static final String CATEGORY_FIELD_ID = "#category";
 
     private final Label idLabel;
     private final Label nameLabel;
