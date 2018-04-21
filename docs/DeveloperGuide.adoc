@@ -400,7 +400,7 @@ The Order and SubOrder classes are responsible for storing the details of
 each order made by a customer.
 
 The Order class records the customer as well as the time of transaction. It contains a list of SubOrders.
-Each SubOrder records a single product that was made, as well as the number bought and the price at which it was bought.
+Each SubOrder records a single product that was purchased, as well as the number bought and the price at which it was bought.
 
 [#ORDER]
 .Structure of the Order and SubOrder Classes
@@ -469,14 +469,15 @@ The Order and SubOrder classes will check if the order is valid using the follow
 * No repeated product IDs
 
 ==== Design Considerations
-==== Product Name
+===== Aspect: Product Name
 * **Alternative 1(current choice):** Use product ID
 ** Pros: Easier to implement, more succinct
 ** Cons: Less user-friendly
 * **Alternative 2:** Use product name
 ** Pros: More user-friendly
-** Cons: Longer to type, much more difficult to implment
-===== Order Price
+** Cons: Longer to type, much more difficult to implement
+
+===== Aspect: Order Price
 
 * **Alternative 1 (current choice):** Let user pick price
 ** Pros: User can freely set discounts, or give free products to customer

@@ -47,9 +47,11 @@ between uses.
 *** Reported bugs and suggestions for other teams in the class
 
 == Contributions to the User Guide
-** include::../UserGuide.adoc[tag=addorder]
-** include::../UserGuide.adoc[tag=deleteorder]
+include::../UserGuide.adoc[tag=addorder]
+
+include::../UserGuide.adoc[tag=deleteorder]
 
 == Contributions to the Developer Guide
-** include::../DeveloperGuide.adoc[tag=order]
-** include::../DeveloperGuide.adoc[tag=addorder]
+include::../DeveloperGuide.adoc[tag=order]
+
+include::../DeveloperGuide.adoc[tag=addorder]
