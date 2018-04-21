@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Chu Qinghao - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Chu Qinghao - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-retail-analytics"><a class="link" href="#project-retail-analytics">PROJECT: Retail Analytics</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Retail Analytics is a desktop application written in Java for retailers that allows them to view, list and edit customers, orders and products. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It was adapted from a ~10k LoC address book application for a software engineering class project. Our team of 4 added features such as extra tables and relational logic. We also added other advanced features such as a AI
+recommender engine and customer location visualization.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Added an extra Order table to the application</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to add orders which have customer, product and price fields.</p>
+</li>
+<li>
+<p>Justification: This feature is crucial for the user of our product (retailers) and orders are a central feature to our product.</p>
+</li>
+<li>
+<p>Highlights: This enhancement greatly increased the complexity of the software (it only had one table originally). It
+required an in-depth analysis of code and design alternatives.The implementation too was challenging as it required
+modifications to most of the code base at all abstraction levels.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Adapted existing storage for the new tables</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: writes the new Order and Product tables into an XML file
+on updates. This XML file is read on application startup.</p>
+</li>
+<li>
+<p>Justification: This feature is needed to store the application data
+between uses.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/qinghao1.md">Functional Code</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/qinghao1.md">Test Code</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>General team tasks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Help with writing test fixtures (PR <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/85">#85</a>)</p>
+</li>
+<li>
+<p>Modify and improve GUI for Order and Product to be more user-friendly</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhance existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Restrict Order in application view to be only those for customers in the current view</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (5 releases) on GitHub</p>
+</li>
+<li>
+<p>Setup Travis CI to work with project</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reviewed PRs and merged in code</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="adding-an-order-code-addorder-code"><a class="link" href="#adding-an-order-code-addorder-code">Adding an order: <code>addorder</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addorder.PNG" alt="addorder" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Adds an order to Retail Analytics app.<br>
+Format: <code>addorder e/EMAIL o/SUBORDER [o/MORE_SUBORDERS]&#8230;&#8203;</code> where <code>SUBORDER</code> consists of <code>PRODUCT_ID QUANTITY COST</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number listed beside the order entry in the GUI is not the displayed index, but the unique id permanently associated with given order. Prices are manually recorded to
+allow for discounts and free items.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An order must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addorder e/alex@example.com o/1 2 $3</code> adds an order where alex bought 2 pieces of product whose id is 1 for $3 each.</p>
+</li>
+<li>
+<p><code>addorder e/bernice@example.com o/1 1 $1 o/2 1 $1</code> adds an order where alex bought 1 of product 1 for $1 and 1 of product 2 for $1, making $2 total.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-order-code-deleteorder-code"><a class="link" href="#deleting-an-order-code-deleteorder-code">Deleting an order : <code>deleteorder</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteorder.png" alt="deleteorder" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the specified order from Retail Analytics.<br>
+Format: <code>deleteorder ORDER_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the order at the specified <code>ORDER_ID</code>.</p>
+</li>
+<li>
+<p>The id refers to the number shown to the left of each order entry in the GUI.</p>
+</li>
+<li>
+<p>That number is <strong>not</strong> the positional index, but a permanent unique id. Hence, after deletion, the ids of the other orders will not cascade downward.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteorder 1</code><br>
+Deletes the order with id 1</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Implementation-Order"><a class="link" href="#Implementation-Order">Order and SubOrder Classes</a></h3>
+<div class="paragraph">
+<p>The Order and SubOrder classes are responsible for storing the details of
+each order made by a customer.</p>
+</div>
+<div class="paragraph">
+<p>The Order class records the customer as well as the time of transaction. It contains a list of SubOrders.
+Each SubOrder records a single product that was purchased, as well as the number bought and the price at which it was bought.</p>
+</div>
+<div id="ORDER" class="imageblock">
+<div class="content">
+<img src="../images/OrderClassDiagram.png" alt="OrderClassDiagram" width="1200">
+</div>
+<div class="title">Figure 1. Structure of the Order and SubOrder Classes</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>Each Order object has a foreign key for customer, and a list of SubOrders.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Order</span> {
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> personId;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="directive">final</span> LocalDateTime time;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">List</span>&lt;SubOrder&gt; subOrders;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each SubOrder object has a foreign key for product, as well as the price and number of items bought.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">SubOrder</span> {
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> productID;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> numProduct;
+    <span class="directive">private</span> <span class="directive">final</span> Money productPrice;
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-relational-logic"><a class="link" href="#aspect-relational-logic">Aspect: Relational Logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use separate lists for order and person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to view and edit the Order list separately from Person list.</p>
+</li>
+<li>
+<p>Cons: Repeated logic and code for Order list. Also, different to ensure composition and make sure that each Order
+belongs to a valid person.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Object Relational Mapping, so each Person is directly composited with multiple Order objects</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to ensure composition and associate Order and Person objects.</p>
+</li>
+<li>
+<p>Cons: Difficult to keep Orders for deleted people, and no single list so harder to integrate into GUI.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-customer-id"><a class="link" href="#aspect-customer-id">Aspect: Customer ID</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use customer email</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Guaranteed to be unique for every customer, app is compatible with AB4 xml storage file.</p>
+</li>
+<li>
+<p>Cons: More difficult to get customer object using email, but this is not necessary yet.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Add new ID variable to customer list, and use that</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can easily get customer using the ID, and makes the app more similar to a proper database.</p>
+</li>
+<li>
+<p>Cons: Need to make changes to Person class which will make the app incompatible with AB4 xml file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-AddOrder"><a class="link" href="#Implementation-AddOrder">Adding Order</a></h3>
+<div class="paragraph">
+<p>The AddOrder command is used to add an order to the database.</p>
+</div>
+<div class="paragraph">
+<p>Adding an order performs some vital validations, such as making sure the customer and products are valid.</p>
+</div>
+<div id="ADDORDER" class="imageblock">
+<div class="content">
+<img src="../images/AddOrderSequenceDiagram.png" alt="AddOrderSequenceDiagram" width="1200">
+</div>
+<div class="title">Figure 2. Sequence Diagram for Adding an Order</div>
+</div>
+<div class="sect3">
+<h4 id="checking-validity-of-order"><a class="link" href="#checking-validity-of-order">Checking Validity of Order</a></h4>
+<div class="paragraph">
+<p>The Order and SubOrder classes will check if the order is valid using the following rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Customer email is present in database</p>
+</li>
+<li>
+<p>All product IDs are present in database</p>
+</li>
+<li>
+<p>All prices are non-negative</p>
+</li>
+<li>
+<p>No repeated product IDs</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-product-name"><a class="link" href="#aspect-product-name">Aspect: Product Name</a></h5>
+<div class="paragraph">
+<p>We considered whether to use the product ID or let the user type the name of the product.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Use product ID</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement, more succinct.</p>
+</li>
+<li>
+<p>Cons: Less user-friendly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use product name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user-friendly.</p>
+</li>
+<li>
+<p>Cons: Longer to type, much more difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-order-price"><a class="link" href="#aspect-order-price">Aspect: Order Price</a></h5>
+<div class="paragraph">
+<p>We considered whether to let the user set a price for the order, or to use the current price of the product.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Let user set price</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can freely set discounts, or give free products to customer.</p>
+</li>
+<li>
+<p>Cons: Longer command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use current price of product</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to type, more user-friendly.</p>
+</li>
+<li>
+<p>Cons: Cannot set discounts and more difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-21 23:35:18 SGT
+</div>
+</div>
+</body>
+</html>

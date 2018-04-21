@@ -1,4 +1,5 @@
 build/
+!build/docs/html5/team
 .gradle/
 .checkstyle
 .settings/

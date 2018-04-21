@@ -1,0 +1,3222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Siva Subbiah - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Siva Subbiah - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-retail-analytics"><a class="link" href="#project-retail-analytics">PROJECT: Retail Analytics</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Retail Analytics (RA) is for e-retailers who handle of customers and orders and who are comfortable with using a desktop app to manage their analytics. More importantly, RA is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <code>map</code> command and the HTML page for the browser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Renders a webpage which graphically visualises a list of querried customers on Google Maps.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because this tool enables the retailer to gain knowledge of where his customers are located. Therefore, he would be able to make better decisions for example as to where to locate a new warehouse.</p>
+</li>
+<li>
+<p>Highlights: To come up with this command, I had to create a way to generate queries for the retailer to filter his list of customers by age, gender, name and tags. As such I have to create several predicates to filter the customers. I also had to read up on the Google Maps Clustering API in order to learn how to use it for our application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added several attributes to the person model such as <code>Age</code>, <code>Gender</code>, <code>Latitude</code>, <code>Longitude</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Justification: This feature is required so that we can get the location of the customers and the so that we can filter the list of customers based on these parameters which will be useful for the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>:</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: <a href="https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/functional/Sivalavida.md">Functional Code</a>, <a href="https://github.com/CS2103JAN2018-T15-B1/main/blob/master/collated/test/Sivalavida.md">Test Code</a></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>General team tasks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added sample data for Person with new attributes which I created.(Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/3">#23</a>)</p>
+</li>
+<li>
+<p>Created the HTML page for the Browser Panel hosted on my Github account. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/3">#37</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote Appendix D of the Developer Guide. (Pull request <a href="https://github.com/CS2103JAN2018-T15-B1/main/pull/3">#3</a>)</p>
+</li>
+<li>
+<p>Edited documentation outside of my feature contribution to keep the documentation updated.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.3</code> - <code>v1.4</code> (2 releases) on GitHub</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reported bugs and suggestions for other group in class.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="displays-the-geographic-distribution-of-queried-customers-in-retail-analytics-with-clustering-code-map-code"><a class="link" href="#displays-the-geographic-distribution-of-queried-customers-in-retail-analytics-with-clustering-code-map-code">Displays the geographic distribution of queried customers in Retail Analytics with clustering: <code>map</code></a></h3>
+<div class="paragraph">
+<p>Displays spread of queried people in Retail Analytics on a map with clustering.
+Zooming in and out of the map causes the clustering to change.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/GeographicVisualisation.PNG" alt="GeographicVisualisation" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Possible Formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Query 1) <code>all</code>: Select all customers</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map all</code></p>
+</li>
+<li>
+<p>Example: <code>map all</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 2) <code>name</code>: Select customer if keyword in name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map name NAME [NAME]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p>Example: <code>map name Alex Bernice</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 3) <code>age</code>: Select customer if age within age range</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map age MINAGE MAXAGE</code></p>
+</li>
+<li>
+<p>Example: <code>map age 15 56</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 4) <code>gen</code>: Select customers of specified gender</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map gen GENDER</code></p>
+</li>
+<li>
+<p>Example: <code>map gen M</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 5) <code>tag</code>: Select customer with any of the specified tags</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map tag TAG [TAG]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p>Example: <code>map tag friends</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The map clusters people by location. These clusters are displayed as blue dots.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">Editing a person : <code>edit</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing person in Retail Analytics.<br>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+From v2.0: Edit will support age, gender, latitude, and longitude.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>edit 2 n/Betsy Crower t/</code><br>
+Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-code-deleteperson-code"><a class="link" href="#deleting-a-person-code-deleteperson-code">Deleting a person : <code>deleteperson</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified person from Retail Analytics.<br>
+Format: <code>deleteperson INDEX</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Even when a person is deleted, his orders remain in the system. This is to ensure that financial and marketing data isn&#8217;t lost when persons need to be removed.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>deleteperson 2</code><br>
+Deletes the 2nd person in Retail Analytics.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>deleteperson 1</code><br>
+Deletes the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-product-code-deleteproduct-code"><a class="link" href="#deleting-an-product-code-deleteproduct-code">Deleting an product : <code>deleteproduct</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified product from Retail Analytics.<br>
+Format: <code>deleteproduct PRODUCT_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the product at the specified <code>PRODUCT_ID</code>.</p>
+</li>
+<li>
+<p>The id refers to the number shown to the left of each product entry in the GUI.</p>
+</li>
+<li>
+<p>That number is <strong>not</strong> the positional index, but a permanent unique id. Hence, after deletion, the ids of the other products will not cascade downward.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteproduct 1</code><br>
+Deletes the product with id 1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-order-code-deleteorder-code"><a class="link" href="#deleting-an-order-code-deleteorder-code">Deleting an order : <code>deleteorder</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteorder.png" alt="deleteorder" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the specified order from Retail Analytics.<br>
+Format: <code>deleteorder ORDER_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the order at the specified <code>ORDER_ID</code>.</p>
+</li>
+<li>
+<p>The id refers to the number shown to the left of each order entry in the GUI.</p>
+</li>
+<li>
+<p>That number is <strong>not</strong> the positional index, but a permanent unique id. Hence, after deletion, the ids of the other orders will not cascade downward.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteorder 1</code><br>
+Deletes the order with id 1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">Selecting a person : <code>select</code></a></h3>
+<div class="paragraph">
+<p>Selects the person identified by the index number used in the last person listing, and restricts the map view to that person.<br>
+Format: <code>select INDEX</code></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Known Bug:</strong> Select will highlight the product and order at the input positional index.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>select 2</code><br>
+Selects the 2nd person in Retail Analytics.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>select 1</code><br>
+Selects the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">Listing entered commands : <code>history</code></a></h3>
+<div class="paragraph">
+<p>Lists all the commands that you have entered in reverse chronological order.<br>
+Format: <code>history</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<div class="paragraph">
+<p>Restores Retail Analytics to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify Retail Analytics&#8217;s content <br>
+(<code>add</code>, <code>delete</code>, <code>edit</code>, <code>addproduct</code>, <code>addorder</code> and <code>clear</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">Clearing all entries : <code>clear</code></a></h3>
+<div class="paragraph">
+<p>Clears all entries from Retail Analytics.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h3>
+<div class="paragraph">
+<p>Retail Analytics data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Retail Analytics folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> <code>addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Add Product</strong> <code>addproduct n/NAME pr/PRICE c/CATEGORY</code><br>
+e.g. <code>addproduct n/Egg pr/$1 c/Food</code></p>
+</li>
+<li>
+<p><strong>Add Order</strong> <code>add e/EMAIL o/SUBORDER&#8230;&#8203;</code> where <code>SUBORDER</code> consists of <code>PRODUCT_ID QUANTITY COST</code><br>
+e.g. <code>addorder e/bernice@example.com o/1 1 $1 o/2 1 $1</code></p>
+</li>
+<li>
+<p><strong>Clear</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>deleteperson INDEX</code><br>
+e.g. <code>deleteperson 3</code></p>
+</li>
+<li>
+<p><strong>Delete Product</strong> : <code>deleteproduct PRODUCT_ID</code><br>
+e.g. <code>deleteproduct 1</code></p>
+</li>
+<li>
+<p><strong>Delete Order</strong> : <code>deleteorder ORDER_ID</code><br>
+e.g. <code>deleteorder 5</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find James Jake</code></p>
+</li>
+<li>
+<p><strong>Find Product by Price</strong> <code>findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE</code></p>
+</li>
+<li>
+<p><strong>Find Product by Category</strong> <code>findproductbycategory CATEGORY</code></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Geographically Visualise Data</strong> : <code>map</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format1: <code>map all</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map all</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format2: <code>map name NAME [NAME]&#8230;&#8203;</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map name Alex Bernice</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format3: <code>map age MINAGE MAXAGE</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map age 15 56</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format4: <code>map gen [GENDER]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map gen M</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format5: <code>map tag TAG [TAG]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map tag friends</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Recommendations</strong> <code>recommend INDEX</code><br>
+e.g. <code>recommend 1</code></p>
+</li>
+<li>
+<p><strong>Select</strong> : <code>select INDEX</code><br>
+e.g.<code>select 2</code></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>history</code></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-addperson-code"><a class="link" href="#adding-a-person-code-addperson-code">Adding a person: <code>addperson</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addPerson.PNG" alt="addPerson" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Adds a person to Retail Analytics app.<br>
+Format: <code>addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGITUDE [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A person can have any number of tags (including 0)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addperson n/John Doe p/98765432 e/johnd@example.com a/John street g/M lat/1.2345 lon/31.1, block 123, #01-01</code></p>
+</li>
+<li>
+<p><code>addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 g/F lat/1.321 lon/32.5 t/criminal</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-product-code-addproduct-code"><a class="link" href="#adding-a-product-code-addproduct-code">Adding a product: <code>addproduct</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addProduct.PNG" alt="addProduct" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Adds a product to Retail Analytics app.<br>
+Format: <code>addproduct n/NAME pr/PRICE c/CATEGORY</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number listed beside the product entry in the GUI is not the displayed index, but the unique id permanently associated with a given product.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addproduct n/Egg pr/$1 c/Food</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-an-order-code-addorder-code"><a class="link" href="#adding-an-order-code-addorder-code">Adding an order: <code>addorder</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addorder.PNG" alt="addorder" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Adds an order to Retail Analytics app.<br>
+Format: <code>addorder e/EMAIL o/SUBORDER [o/MORE_SUBORDERS]&#8230;&#8203;</code> where <code>SUBORDER</code> consists of <code>PRODUCT_ID QUANTITY COST</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number listed beside the order entry in the GUI is not the displayed index, but the unique id permanently associated with given order. Prices are manually recorded to
+allow for discounts and free items.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An order must have at least one suborder. Prices are recorded separately to prevent retroactive sales figure changes when product prices are modified after an order has been made.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addorder e/alex@example.com o/1 2 $3</code> adds an order where alex bought 2 pieces of product whose id is 1 for $3 each.</p>
+</li>
+<li>
+<p><code>addorder e/bernice@example.com o/1 1 $1 o/2 1 $1</code> adds an order where alex bought 1 of product 1 for $1 and 1 of product 2 for $1, making $2 total.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">Locating persons by name: <code>find</code></a></h3>
+<div class="paragraph">
+<p>Finds persons whose names contain any of the given keywords. Updates the order view to only show the order made by the persons found.+
+Format: <code>find KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find Betsy Tim John</code><br>
+Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-products-by-name-code-findproductbyname-code"><a class="link" href="#locating-products-by-name-code-findproductbyname-code">Locating products by name: <code>findproductbyname</code></a></h3>
+<div class="paragraph">
+<p>Finds products whose names contain any of the given keywords.
+Format: <code>findproductbyname KEYWORD [MORE_KEYWORDS]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Like <code>find</code>, the search is case insensitive and the keyword order does not matter. Only the name is searched and perfect keyword matches will be returned.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-all-products-within-a-certain-price-range-code-findproductbyprice-code"><a class="link" href="#finding-all-products-within-a-certain-price-range-code-findproductbyprice-code">Finding all products within a certain price range: <code>findproductbyprice</code></a></h3>
+<div class="paragraph">
+<p>Filters out all the products within the range [<code>MIN_PRICE</code>, <code>MAX_PRICE</code>] and displays them in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findproductbyprice minpr/10 maxpr/200</code> finds products with price between 10 and 200, inclusive</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-all-products-of-a-certain-category-code-findproductbycategory-code"><a class="link" href="#find-all-products-of-a-certain-category-code-findproductbycategory-code">Find all products of a certain category: <code>findproductbycategory</code></a></h3>
+<div class="paragraph">
+<p>Filters out all the products of a specific category and displays them in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>findproductbycategory CATEGORY [MORE_CATEGORIES]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findproductbycategory Clothing</code><br>
+Finds all products of category <code>Clothing</code></p>
+</li>
+<li>
+<p><code>findproductbycategory Clothing health</code><br>
+Finds all products of category <code>Clothing</code> and <code>Health</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-product-recommendations-for-a-person-code-recommend-code"><a class="link" href="#finding-product-recommendations-for-a-person-code-recommend-code">Finding product recommendations for a person: <code>recommend</code></a></h3>
+<div class="paragraph">
+<p>Given a person, analyzes the app&#8217;s entire order history to train a predictive model that guesses which products are likely to appeal to a given person.</p>
+</div>
+<div class="paragraph">
+<p>Outputs a list of (<code>product name</code>, <code>predicted chance of purchase</code>), ranked in descending order of predicted chance of purchase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RecommendEg.jpg" alt="RecommendEg" width="600">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The model makes predictions only considering the persons' <em>age</em> and <em>gender</em>. To cap the influence of high volume buyers, multiple purchases of the same product are ignored.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An analogous use would be how companies like Amazon know which products to recommend you in their targeted emails. Now, you can do the same for your business too.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>For v2.0</strong>: Support for consideration of predictive factors other than age and gender, and the option to not recommend products a user has already bought.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>recommend INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The sample data provided includes an order history of mostly younger persons buying <code>TrendyShirt</code>, older persons buying <code>Dentures</code>, females buying <code>Lipstick</code>, and a general audience for <code>Toothbrush</code>. You can casually validate the algorithm by noticing that the recommendations for a younger person ranks <code>TrendyShirt</code> at the front of the output, while <code>Dentures</code> will be right at the rear. Experiment by adding different persons, products, and orders, and see how he recommendations respond!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recommend 1</code> finds recommendations for person whose last shown index is 1.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">Listing all persons : <code>list</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all persons in Retail Analytics.<br>
+Format: <code>list</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-products-code-listproduct-code"><a class="link" href="#listing-all-products-code-listproduct-code">Listing all products : <code>listproduct</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all products in Retail Analytics.<br>
+Format: <code>listproduct</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="displays-the-geographic-distribution-of-queried-customers-in-retail-analytics-with-clustering-code-map-code-2"><a class="link" href="#displays-the-geographic-distribution-of-queried-customers-in-retail-analytics-with-clustering-code-map-code-2">Displays the geographic distribution of queried customers in Retail Analytics with clustering: <code>map</code></a></h3>
+<div class="paragraph">
+<p>Displays spread of queried people in Retail Analytics on a map with clustering.
+Zooming in and out of the map causes the clustering to change.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/GeographicVisualisation.PNG" alt="GeographicVisualisation" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Possible Formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Query 1) <code>all</code>: Select all customers</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map all</code></p>
+</li>
+<li>
+<p>Example: <code>map all</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 2) <code>name</code>: Select customer if keyword in name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map name NAME [NAME]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p>Example: <code>map name Alex Bernice</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 3) <code>age</code>: Select customer if age within age range</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map age MINAGE MAXAGE</code></p>
+</li>
+<li>
+<p>Example: <code>map age 15 56</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 4) <code>gen</code>: Select customers of specified gender</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map gen GENDER</code></p>
+</li>
+<li>
+<p>Example: <code>map gen M</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query 5) <code>tag</code>: Select customer with any of the specified tags</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: <code>map tag TAG [TAG]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p>Example: <code>map tag friends</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The map clusters people by location. These clusters are displayed as blue dots.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-person-code-edit-code-2"><a class="link" href="#editing-a-person-code-edit-code-2">Editing a person : <code>edit</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing person in Retail Analytics.<br>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+From v2.0: Edit will support age, gender, latitude, and longitude.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>edit 2 n/Betsy Crower t/</code><br>
+Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-code-deleteperson-code-2"><a class="link" href="#deleting-a-person-code-deleteperson-code-2">Deleting a person : <code>deleteperson</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified person from Retail Analytics.<br>
+Format: <code>deleteperson INDEX</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Even when a person is deleted, his orders remain in the system. This is to ensure that financial and marketing data isn&#8217;t lost when persons need to be removed.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>deleteperson 2</code><br>
+Deletes the 2nd person in Retail Analytics.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>deleteperson 1</code><br>
+Deletes the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-product-code-deleteproduct-code-2"><a class="link" href="#deleting-an-product-code-deleteproduct-code-2">Deleting an product : <code>deleteproduct</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified product from Retail Analytics.<br>
+Format: <code>deleteproduct PRODUCT_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the product at the specified <code>PRODUCT_ID</code>.</p>
+</li>
+<li>
+<p>The id refers to the number shown to the left of each product entry in the GUI.</p>
+</li>
+<li>
+<p>That number is <strong>not</strong> the positional index, but a permanent unique id. Hence, after deletion, the ids of the other products will not cascade downward.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteproduct 1</code><br>
+Deletes the product with id 1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-order-code-deleteorder-code-2"><a class="link" href="#deleting-an-order-code-deleteorder-code-2">Deleting an order : <code>deleteorder</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteorder.png" alt="deleteorder" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Deletes the specified order from Retail Analytics.<br>
+Format: <code>deleteorder ORDER_ID</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the order at the specified <code>ORDER_ID</code>.</p>
+</li>
+<li>
+<p>The id refers to the number shown to the left of each order entry in the GUI.</p>
+</li>
+<li>
+<p>That number is <strong>not</strong> the positional index, but a permanent unique id. Hence, after deletion, the ids of the other orders will not cascade downward.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteorder 1</code><br>
+Deletes the order with id 1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code-2"><a class="link" href="#selecting-a-person-code-select-code-2">Selecting a person : <code>select</code></a></h3>
+<div class="paragraph">
+<p>Selects the person identified by the index number used in the last person listing, and restricts the map view to that person.<br>
+Format: <code>select INDEX</code></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Known Bug:</strong> Select will highlight the product and order at the input positional index.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>select 2</code><br>
+Selects the 2nd person in Retail Analytics.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>select 1</code><br>
+Selects the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code-2"><a class="link" href="#listing-entered-commands-code-history-code-2">Listing entered commands : <code>history</code></a></h3>
+<div class="paragraph">
+<p>Lists all the commands that you have entered in reverse chronological order.<br>
+Format: <code>history</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undoing-previous-command-code-undo-code-2"><a class="link" href="#undoing-previous-command-code-undo-code-2">Undoing previous command : <code>undo</code></a></h3>
+<div class="paragraph">
+<p>Restores Retail Analytics to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify Retail Analytics&#8217;s content <br>
+(<code>add</code>, <code>delete</code>, <code>edit</code>, <code>addproduct</code>, <code>addorder</code> and <code>clear</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code-2"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-2">Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>deleteperson 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code-2"><a class="link" href="#clearing-all-entries-code-clear-code-2">Clearing all entries : <code>clear</code></a></h3>
+<div class="paragraph">
+<p>Clears all entries from Retail Analytics.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code-2"><a class="link" href="#exiting-the-program-code-exit-code-2">Exiting the program : <code>exit</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data-2"><a class="link" href="#saving-the-data-2">Saving the data</a></h3>
+<div class="paragraph">
+<p>Retail Analytics data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq-2"><a class="link" href="#faq-2">FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Retail Analytics folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary-2"><a class="link" href="#command-summary-2">Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> <code>addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER lat/LATITUDE lon/LONGTITUDE [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/M lat/1.2345 lon/301.1 t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Add Product</strong> <code>addproduct n/NAME pr/PRICE c/CATEGORY</code><br>
+e.g. <code>addproduct n/Egg pr/$1 c/Food</code></p>
+</li>
+<li>
+<p><strong>Add Order</strong> <code>add e/EMAIL o/SUBORDER&#8230;&#8203;</code> where <code>SUBORDER</code> consists of <code>PRODUCT_ID QUANTITY COST</code><br>
+e.g. <code>addorder e/bernice@example.com o/1 1 $1 o/2 1 $1</code></p>
+</li>
+<li>
+<p><strong>Clear</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>deleteperson INDEX</code><br>
+e.g. <code>deleteperson 3</code></p>
+</li>
+<li>
+<p><strong>Delete Product</strong> : <code>deleteproduct PRODUCT_ID</code><br>
+e.g. <code>deleteproduct 1</code></p>
+</li>
+<li>
+<p><strong>Delete Order</strong> : <code>deleteorder ORDER_ID</code><br>
+e.g. <code>deleteorder 5</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find James Jake</code></p>
+</li>
+<li>
+<p><strong>Find Product by Price</strong> <code>findproductbyprice minpr/MIN_PRICE maxpr/MAX_PRICE</code></p>
+</li>
+<li>
+<p><strong>Find Product by Category</strong> <code>findproductbycategory CATEGORY</code></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Geographically Visualise Data</strong> : <code>map</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format1: <code>map all</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map all</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format2: <code>map name NAME [NAME]&#8230;&#8203;</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map name Alex Bernice</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format3: <code>map age MINAGE MAXAGE</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map age 15 56</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format4: <code>map gen [GENDER]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map gen M</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Format5: <code>map tag TAG [TAG]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>map tag friends</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Recommendations</strong> <code>recommend INDEX</code><br>
+e.g. <code>recommend 1</code></p>
+</li>
+<li>
+<p><strong>Select</strong> : <code>select INDEX</code><br>
+e.g.<code>select 2</code></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>history</code></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="Implementation-Geographic"><a class="link" href="#Implementation-Geographic">Geographical Visualisation (<code>map</code> command)</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>How the feature is implemented</p>
+<div class="ulist">
+<ul>
+<li>
+<p>We are using <a href="https://developers.google.com/maps/">Google Maps API</a> to implement this feature. Google Maps'
+clustering API also has been used create clustering among the data points rendered. The map command has
+parameters which will describe a query, which is required to filter the customers to render on the map.
+To implement a querry we had to create several subclasses of <code>Predicate&lt;Person&gt;</code> such as
+<code>AgeWithinRangePredicate</code>, <code>ContainsTagPredicate</code> and <code>GenderPredicate</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternatives considered</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Initially we wanted to use a static image of Singapore and create and edit the map based on the locations of the customers
+on the fly. However, we realised that the user might want a zoomable interface, if he needed the spread of customers
+ viewed at a certain zoom level. Furthermore, this would restrit the use of our product only to retailer who are
+ delevering around Singapore. Using the Google Maps API would enable our users to operate at any country and also have
+ customers around the world. Additionally, it would be much more difficult for us to implement clustering of data
+ if we rendered the images ourselves.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Order"><a class="link" href="#Implementation-Order">Order and SubOrder Classes</a></h3>
+<div class="paragraph">
+<p>The Order and SubOrder classes are responsible for storing the details of
+each order made by a customer.</p>
+</div>
+<div class="paragraph">
+<p>The Order class records the customer as well as the time of transaction. It contains a list of SubOrders.
+Each SubOrder records a single product that was purchased, as well as the number bought and the price at which it was bought.</p>
+</div>
+<div id="ORDER" class="imageblock">
+<div class="content">
+<img src="../images/OrderClassDiagram.png" alt="OrderClassDiagram" width="1200">
+</div>
+<div class="title">Figure 1. Structure of the Order and SubOrder Classes</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>Each Order object has a foreign key for customer, and a list of SubOrders.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Order</span> {
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> personId;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="directive">final</span> LocalDateTime time;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">List</span>&lt;SubOrder&gt; subOrders;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each SubOrder object has a foreign key for product, as well as the price and number of items bought.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">SubOrder</span> {
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> productID;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> numProduct;
+    <span class="directive">private</span> <span class="directive">final</span> Money productPrice;
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-relational-logic"><a class="link" href="#aspect-relational-logic">Aspect: Relational Logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use separate lists for order and person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to view and edit the Order list separately from Person list.</p>
+</li>
+<li>
+<p>Cons: Repeated logic and code for Order list. Also, different to ensure composition and make sure that each Order
+belongs to a valid person.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Object Relational Mapping, so each Person is directly composited with multiple Order objects</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to ensure composition and associate Order and Person objects.</p>
+</li>
+<li>
+<p>Cons: Difficult to keep Orders for deleted people, and no single list so harder to integrate into GUI.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-customer-id"><a class="link" href="#aspect-customer-id">Aspect: Customer ID</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use customer email</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Guaranteed to be unique for every customer, app is compatible with AB4 xml storage file.</p>
+</li>
+<li>
+<p>Cons: More difficult to get customer object using email, but this is not necessary yet.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Add new ID variable to customer list, and use that</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can easily get customer using the ID, and makes the app more similar to a proper database.</p>
+</li>
+<li>
+<p>Cons: Need to make changes to Person class which will make the app incompatible with AB4 xml file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-AddOrder"><a class="link" href="#Implementation-AddOrder">Adding Order</a></h3>
+<div class="paragraph">
+<p>The AddOrder command is used to add an order to the database.</p>
+</div>
+<div class="paragraph">
+<p>Adding an order performs some vital validations, such as making sure the customer and products are valid.</p>
+</div>
+<div id="ADDORDER" class="imageblock">
+<div class="content">
+<img src="../images/AddOrderSequenceDiagram.png" alt="AddOrderSequenceDiagram" width="1200">
+</div>
+<div class="title">Figure 2. Sequence Diagram for Adding an Order</div>
+</div>
+<div class="sect3">
+<h4 id="checking-validity-of-order"><a class="link" href="#checking-validity-of-order">Checking Validity of Order</a></h4>
+<div class="paragraph">
+<p>The Order and SubOrder classes will check if the order is valid using the following rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Customer email is present in database</p>
+</li>
+<li>
+<p>All product IDs are present in database</p>
+</li>
+<li>
+<p>All prices are non-negative</p>
+</li>
+<li>
+<p>No repeated product IDs</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-product-name"><a class="link" href="#aspect-product-name">Aspect: Product Name</a></h5>
+<div class="paragraph">
+<p>We considered whether to use the product ID or let the user type the name of the product.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Use product ID</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement, more succinct.</p>
+</li>
+<li>
+<p>Cons: Less user-friendly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use product name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user-friendly.</p>
+</li>
+<li>
+<p>Cons: Longer to type, much more difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-order-price"><a class="link" href="#aspect-order-price">Aspect: Order Price</a></h5>
+<div class="paragraph">
+<p>We considered whether to let the user set a price for the order, or to use the current price of the product.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Let user set price</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can freely set discounts, or give free products to customer.</p>
+</li>
+<li>
+<p>Cons: Longer command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use current price of product</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to type, more user-friendly.</p>
+</li>
+<li>
+<p>Cons: Cannot set discounts and more difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">Configuration</a></h3>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Recommender"><a class="link" href="#Implementation-Recommender">Recommender</a></h3>
+<div class="sect3">
+<h4 id="recommender-training-pipeline"><a class="link" href="#recommender-training-pipeline">Recommender Training Pipeline</a></h4>
+<div class="paragraph">
+<p>Obtaining recommendations for products that a given customer is likely to want to buy can actually be thought of as a classification problem. The <code>Order</code> records serves as the test dataset, the instance variables of each Order&#8217;s <code>Customer</code> serve as the features, and the associated <code>Product</code> is the class label.</p>
+</div>
+<div class="paragraph">
+<p>Weka, an open source machine learning library containing filtering, feature selection, and classifier methods, as well as implementations of common data models, such as attributes, instances, etc. was used. The training pipeline is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Convert the <code>Order</code> records into a <code>.arff</code> file, the default format used by Weka, using the <code>ArffWriter</code> class.
+The precise formatting of the data to the <code>.arff</code> header and data entry format is handled by the <code>ArffFormatter</code>, before being passed back to the <code>ArffWriter</code> for the file writing.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>.arff</code> must not only list the orders for every item, but also the "non-orders" from customers that have not bought that product. These are labelled as <code>"n" + productId</code>.  Since the <code>.arff</code> only stores the classification features (age, gender), which may be non-unique, it is not possible to trace which customers have yet to buy a product after we stop referring to the <code>Order</code> records. Thus, the "non-orders" have to be populated at the same time as the reformatting of the actual orders to the <code>.arff</code>. Additionally, the feature is binary (either bought or did not buy a product), the quantity of purchases does not count.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>For each product, use <code>RemoveWithValues</code> to create an <code>isolator</code> that can filter out the orders involving that specific product in the <code>.arff</code>. This turns a multiclass classification to a binary decision (i.e. Will a given customer buy that specific product?).</p>
+</li>
+<li>
+<p>Pass the <code>isolator</code> into a <code>ProductTrainer</code>, which will use <code>ChiSquaredAttributeEval</code> to select the features most strongly associated with a purchase decision (i.e. an order exists for a given customer profile), and then build a <code>NaiveBayes</code> classifier around those features, for that specific product.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+[v2.0] Total user spending and recent user spending will be added as machine learning features.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>ChiSquaredAttributeEval</code> only uses the 2 most discriminatory features to build the classifier, even with additional features to be added in v2.0. This combats the Curse of Dimensionality, given the possibly modest number of orders that a small business might have.
+. Save each successful <code>NaiveBayes</code> build to a <code>HashMap</code> keyed by the product ID, for later use on the test set (i.e. the customer whom we want to get likely purchase recommendations for).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recommender-testing-pipeline"><a class="link" href="#recommender-testing-pipeline">Recommender Testing Pipeline</a></h4>
+<div class="paragraph">
+<p>The execution of the <code>recommend</code> command in the CLI will run the testing pipeline. The implementation is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the training pipeline in 3.5.1.</p>
+</li>
+<li>
+<p>Call <code>getRecommendations(customerId)</code>, which will result in getting the appropriate features from said <code>Customer</code>, and then running the features as an <code>Instance</code> through every classifier in <code>classifierDict</code>. The confidence of each purchase decision is returned via <code>distributionForInstance</code> as a percentage. These percentages are ranked, and a list of product recommendations in sorted order, with the <code>Product</code> predicted to be most attractive to said <code>Customer</code> listed first, is assigned to <code>ProductRecOfAPerson</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+[v2.0] All <code>Product</code> objects which a given <code>Customer</code> has already bought will be stripped from his <code>ProductRecOfAPerson</code>. The remaining list will be sent to <code>ui</code> for output.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The ranked list of recommendations is then passed back up to <code>RecommendCommand</code> via <code>RecommendManager</code> for CLI output.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sequence-diagram"><a class="link" href="#sequence-diagram">Sequence Diagram</a></h4>
+<div class="paragraph">
+<p>A sequence diagram describing both training and testing pipelines is provided below. It excludes return variables for brevity.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RecommenderSequenceDiagram.jpg" alt="RecommenderSequenceDiagram" width="1500">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-conversion-of-orders-to-training-data-format"><a class="link" href="#aspect-conversion-of-orders-to-training-data-format">Aspect: Conversion of orders to training data format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Convert orders into a .arff file, stored in the data folder, which can be read by Weka as a training dataset.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: All the header information and data entries are easily viewable as plaintext, allowing for quick prototyping and rapid debugging.</p>
+</li>
+<li>
+<p>Cons: Requires a class to handle .arff formatting, which can be rather arbitrary. Unnecessarily adds the potential for IO errors due to the requirement of parsing a physical file, especially since the .arff file may simply be opened and modified to take on unexpected formats and values.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Build the training set using the built in <code>Instances</code> and <code>Attribute</code> classes provided by Weka.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No writing of physical files required; entire recommendation process contained in memory.</p>
+</li>
+<li>
+<p>Cons: Weka&#8217;s documentation for those classes are rather opaque, and many methods have been deprecated. The way classes and attributes are assigned are rather unwieldy, and printing the relevant values of the training set becomes extremely involved.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-what-kind-of-classification-to-perform"><a class="link" href="#aspect-what-kind-of-classification-to-perform">Aspect: What kind of classification to perform</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Perform a binary classification for each product</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows a person not buying a product to be treated as a signal for recommender decision (e.g. no young people buy dentures), which maximizes predictive power on small order sets.</p>
+</li>
+<li>
+<p>Cons: Does not predict newly introduced products with few orders well, because the lack of orders is seen as a measure of how unpopular a product is regardless of a person&#8217;s profile.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Perform a multiclass classification across all products</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require us to comb through orders to find products that a person has yet to buy.</p>
+</li>
+<li>
+<p>Cons: Multiclass classifiers tend to perform badly unless there are many training data points.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-much-weight-to-give-to-multiple-orders-on-the-same-product-for-one-person"><a class="link" href="#aspect-how-much-weight-to-give-to-multiple-orders-on-the-same-product-for-one-person">Aspect: How much weight to give to multiple orders on the same product for one person</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Ignore all additional orders of the same product over the first</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Single users with many orders do not dominate the decision rules.</p>
+</li>
+<li>
+<p>Cons: Possibly misses out on many useful training data points.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Count each order of the same product over the first by the same person as a unique data entry</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A more intuitive characterisation of the recommender (i.e. adding new orders will always result in a new training dataset for the recommender, instead of possibly having no impact)</p>
+</li>
+<li>
+<p>Cons: Requires code restructuring to track the number of the same product bought by a person, since we are unable to do so from the .arff file as the file only contains non-unique sets of features, and not the unique person id which they were derived from.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We use asciidoc for writing documentation.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">Editing Documentation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
+Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">Publishing Documentation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">Converting Documentation to PDF format</a></h3>
+<div class="paragraph">
+<p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
+</div>
+<div class="paragraph">
+<p>Here are the steps to convert the project documentation files to PDF format.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files in the <code>docs/</code> directory to HTML format.</p>
+</li>
+<li>
+<p>Go to your generated HTML files in the <code>build/docs</code> folder, right click on them and select <code>Open with</code> &#8594; <code>Google Chrome</code>.</p>
+</li>
+<li>
+<p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
+</li>
+<li>
+<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
+</div>
+<div class="title">Figure 3. Saving documentation as PDF files in Chrome</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Testing"><a class="link" href="#Testing">Testing</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="running-tests"><a class="link" href="#running-tests">Running Tests</a></h3>
+<div class="paragraph">
+<p>There are three ways to run tests.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to platform/resolution-specific idiosyncrasies.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Method 1: Using IntelliJ JUnit test runner</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run 'All Tests'</code></p>
+</li>
+<li>
+<p>To run a subset of tests, you can right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Method 2: Using Gradle</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a console and run the command <code>gradlew clean allTests</code> (Mac/Linux: <code>./gradlew clean allTests</code>)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run tests using Gradle.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Method 3: Using Gradle (headless)</strong></p>
+</div>
+<div class="paragraph">
+<p>Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, our GUI tests can be run in the <em>headless</em> mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running.</p>
+</div>
+<div class="paragraph">
+<p>To run tests in headless mode, open a console and run the command <code>gradlew clean headless allTests</code> (Mac/Linux: <code>./gradlew clean headless allTests</code>)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">Types of tests</a></h3>
+<div class="paragraph">
+<p>We have two types of tests:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include,</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>System Tests</em> that test the entire App by simulating user actions on the GUI. These are in the <code>systemtests</code> package.</p>
+</li>
+<li>
+<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.address.ui</code> package.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>Unit tests</em> targeting the lowest level methods/classes.<br>
+e.g. <code>seedu.address.commons.StringUtilTest</code></p>
+</li>
+<li>
+<p><em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be working).<br>
+e.g. <code>seedu.address.storage.StorageManagerTest</code></p>
+</li>
+<li>
+<p>Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
+e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">Troubleshooting Testing</a></h3>
+<div class="paragraph">
+<p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reason: One of its dependencies, <code>UserGuide.html</code> in <code>src/main/resources/docs</code> is missing.</p>
+</li>
+<li>
+<p>Solution: Execute Gradle task <code>processResources</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dev-ops"><a class="link" href="#dev-ops">Dev Ops</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="build-automation"><a class="link" href="#build-automation">Build Automation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">Continuous Integration</a></h3>
+<div class="paragraph">
+<p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">Coverage Reporting</a></h3>
+<div class="paragraph">
+<p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="documentation-previews"><a class="link" href="#documentation-previews">Documentation Previews</a></h3>
+<div class="paragraph">
+<p>When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="making-a-release"><a class="link" href="#making-a-release">Making a Release</a></h3>
+<div class="paragraph">
+<p>Here are the steps to create a new release.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update the version number in <a href="{repoURL}/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
+</li>
+<li>
+<p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
+</li>
+<li>
+<p>Tag the repo with the version number. e.g. <code>v0.1</code></p>
+</li>
+<li>
+<p><a href="https://help.github.com/articles/creating-releases/">Create a new release using GitHub</a> and upload the JAR file you created.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">Managing Dependencies</a></h3>
+<div class="paragraph">
+<p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
+a. Include those libraries in the repo (this bloats the repo size)<br>
+b. Require developers to download those libraries manually (this creates extra work for developers)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix A: Product Scope</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Target user profile</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>small/medium e-retailer handle customers and orders</p>
+</li>
+<li>
+<p>primarily does deliveries of a select inventory to customer addresses</p>
+</li>
+<li>
+<p>desires analytics to aid in business management and marketing</p>
+</li>
+<li>
+<p>prefer desktop apps over other types</p>
+</li>
+<li>
+<p>can type fast</p>
+</li>
+<li>
+<p>prefers typing over mouse input</p>
+</li>
+<li>
+<p>is reasonably comfortable using CLI apps</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Value proposition</strong>: allows for statistic retrieval, trend analysis, and visualization of customers, products, and orders with an efficient text based input</p>
+</div>
+<div class="paragraph">
+<p><strong>Feature Contribution</strong></p>
+</div>
+<div class="sect2">
+<h3 id="feature-contribution"><a class="link" href="#feature-contribution">Feature Contribution</a></h3>
+<div class="paragraph">
+<p><strong>Qinghao</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major</strong>: Add individual customer/product stats, like customer ranking by spending, product ranking by sales etc. This is a key feature of the project that provides retail analytics for the user.</p>
+</li>
+<li>
+<p><strong>Minor</strong>: Add order class, to keep track of a customer&#8217;s order(s) and the products in the order.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Yingxu</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major</strong>: Add product class, to keep track of a single product type</p>
+</li>
+<li>
+<p><strong>Minor</strong>: Money class to keep track of price etc. because it cannot be stored in a Double due to precision issues</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Jia Jin</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major</strong>: Recommendations engine for customer, so that the user can provide these personalized product recommendations to customers.</p>
+</li>
+<li>
+<p><strong>Minor</strong>: Filtered commands to retrieve all products from a specific category or within a certain price range.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Siva</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major</strong>: Geographic visualization of the locations of a queried list of customers (with clustering). This is to better optimize the retailers logistics.</p>
+</li>
+<li>
+<p><strong>Minor</strong>: Add customer-specific attributes to Person class in existing address book code such as age, gender, latitude, longitude.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 59%;">
+<colgroup>
+<col style="width: 22%;">
+<col style="width: 23%;">
+<col style="width: 25%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a product by specifying its name, price, and category only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">track its sales going forward</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is adding a new product</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create new product categories on-the-fly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manage pivots in inventory composition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a customer by specifying their email, name, address, age, and gender</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of each individual’s orders going forward</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add an order by specifying the date, the buyer, and a list of products bought</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid repetitively creating multiple orders with the same date and buyer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many new customers, products, and orders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">import customers, products, and orders via XML files instead of adding them one-by-one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bulk load the database without wasting time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user importing the aforementioned XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a description of the specific entry and the violation to be highlighted if any entry violates the relevant relation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid manually hunting through a possibly huge XML to locate the import error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for customers via their names or emails</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the profile of each customer and their purchase history</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is searching for customers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have the search gives a ranked list of customers with most similar names/emails via fuzzy string matching</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">still locate customers without precisely remembering their name/email when I have many customers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for groups of products by category or price range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isolate certain parts of their inventory without scrolling through many irrelevant products</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user currently on a product’s profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update that product’s price</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reproduce discounts or price raises in this application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a ranked list of customers by total or recent spending</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reach out and reward loyal customers accordingly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain separate list of active/inactive users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make distinct decisions that focus on maximizing active ones or recapturing inactive ones</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a ranked list of products by total or recent sales</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">request appropriate inventory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain the aforementioned total and recent sales across entire product categories too</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which categories to pivot my retail business toward</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for customers via their names or emails</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the profile of each customer and their purchase history</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">graph the aforementioned product and category sales across time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">identify changes in product performance to decide on product strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">graph the numbers and proportions of active/inactive users across time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">identify changes in user retention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">graph the average monthly/yearly sales value of active users across time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use willingness to spend as a proxy of user trust and engagement, and make informed changes to marketing strategy to hit the desired ARPU</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">graph the total revenue across time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visually grasp if my business as a whole has been growing</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user viewing the aforementioned graphs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data points and relevant summary statistics can be exported to an XML for download</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform further analysis in another software (e.g. Tableau, MS Excel, etc.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the recommendations engine identify which users still haven’t bought, but are likely to want to buy a given product</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform targeted marketing (e.g. email blasts with specific products)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">re-train the recommendations engine&#8217;s classifier on the latest data on execution of recommend command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure its relevance as new products and orders come in</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">display customers as an overlay on a map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">understand how customers are geographically distributed, which have many possible gains (e.g. determine placement of physical marketing collateral such as flyers and banners)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user using the map overlay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter the users by total and recent expenditure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visually grasp the geographical distribution of my most/least valuable customers to understand market penetration and inform customer personas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user using the map overlay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter the users by products or product categories ordered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the penetration of specific products to personas that might be more prevalent in given locales</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>RetailAnalytics</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<h3 id="use-case-uc1-add-customer" class="discrete">Use case: UC1 - Add customer</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add customer (with atributes: email, name, age, gender, address, latitude, longitude)</p>
+</li>
+<li>
+<p>RetailAnalytics adds customer and shows success message</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. The formatting of the statement is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. RetailAnalytics shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc2-add-order" class="discrete">Use case: UC2 - Add Order</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add order (with atributes: customerid, itemid, quantity, price)</p>
+</li>
+<li>
+<p>RetailAnalytics adds order and shows success message</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. The formatting of the statement is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. RetailAnalytics shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc3-add-product" class="discrete">Use case: UC3 - Add Product</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add product (with atributes: name, price, category)</p>
+</li>
+<li>
+<p>RetailAnalytics adds product and shows success message</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. The formatting of the statement is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. RetailAnalytics shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc4-delete-customer" class="discrete">Use case: UC4 - Delete customer</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list customers</p>
+</li>
+<li>
+<p>RetailAnalytics shows a list of customers</p>
+</li>
+<li>
+<p>User requests to delete a specific customer in the list</p>
+</li>
+<li>
+<p>RetailAnalytics deletes the customer and all transactions associated with him</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. RetailAnalytics shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc5-request-analytics-customer-ranking-or-product-ranking" class="discrete">Use case: UC5 - Request Analytics (Customer ranking or Product Ranking)</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests a specific type of analytics</p>
+</li>
+<li>
+<p>RetailAnalytics shows a list of Customers or Products</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc6-request-geographic-visualisation-of-analytics-customer-ranking-or-product-ranking" class="discrete">Use case: UC6 - Request Geographic Visualisation of Analytics (Customer ranking or Product Ranking)</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests geographic visualisation of locations of a querried list of customers</p>
+</li>
+<li>
+<p>RetailAnalytics shows querried list of Customers and a map showing the spread of customers with clustering</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc7-search-for-person" class="discrete">Use case: UC7 -  Search for person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User searches for person based on name or email</p>
+</li>
+<li>
+<p>RetailAnalytics shows a list of customers with that name or email ( fuzzy-search)</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc8-delete-person" class="discrete">Use case: UC8 - Delete person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to delete a specific person in the list</p>
+</li>
+<li>
+<p>AddressBook deletes the person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 entries in the relational tables without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>Should be able to handle invalid input (highlight error and give correct instructions).</p>
+</li>
+<li>
+<p>should work on both 32-bit and 64-bit environment</p>
+</li>
+<li>
+<p>Should be able to show the analytical results within two seconds.</p>
+</li>
+<li>
+<p>Should be user-friendly for non-programmers.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="relational-database"></a> Relational Database</dt>
+<dd>
+<p>A database that organizes data into tables where rows representing instances
+and columns representing values attributed to that instance.</p>
+</dd>
+<dt class="hdlist1"><a id="hot-keys"></a> Hot Keys</dt>
+<dd>
+<p>A combination of keys which provides a shortcut to perform certain tasks.</p>
+</dd>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
+<dd>
+<p>A contact detail that is not meant to be shared with others</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Saving window preferences</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+</li>
+<li>
+<p>Re-launch the app by double-clicking the jar file.<br>
+Expected: The most recent window size and location is retained.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person"><a class="link" href="#adding-a-person">Adding a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a person</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>addperson</code><br>
+Expected: No person added. Error message appears giving you the correct format.</p>
+</li>
+<li>
+<p>Test case: <code>addperson n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/M age/23 lat/1.339160 lon/103.745166 t/friends t/onetag</code><br>
+Expected: Person successfully added. Appears as index 11 in the sample address book.</p>
+</li>
+<li>
+<p>Test case: <code>addperson n/Ben Doe p/98765432 e/bend@example.com a/456, Clementi Ave 6, #02-25 g/M age/25 lat/22.339160 lon/50.745166 t/friends t/tags t/moretags</code><br>
+Expected: Person successfully added. Appears as index 12 in the sample address book.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">Deleting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a person while all persons are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-products-by-category"><a class="link" href="#finding-products-by-category">Finding products by category</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.</p>
+</li>
+<li>
+<p>Finding the products from a category with multiple products.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>findproductbycategory Healthcare</code><br>
+Expected: Only Dentures and Toothbrush will be listed.</p>
+</li>
+<li>
+<p>Test case: Refresh the product listing with <code>listproduct</code>. Then, input <code>findproductbycategory healthcare</code><br>
+Expected: Again, only Dentures and Toothbrush will be listed. Note that the argument is not case sensitive.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Finding a product from a category with only one product</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>findproductbycategory Clothing</code><br>
+Expected: Only TrendyShirt is listed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Negative examples</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>findproductbycategory ABC123</code><br>
+Expected: No products are listed because the category ABC123 does not exist.</p>
+</li>
+<li>
+<p>Test case: <code>findproductbycategory</code><br>
+Expected: Error detailing invalid format is displayed in CLI.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-product"><a class="link" href="#adding-a-product">Adding a product</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a product</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addproduct</code><br>
+Expected: No product is added. Error message appears giving you the correct format.</p>
+</li>
+<li>
+<p>Test case: <code>addproduct n/Egg pr/2.5 c/Food</code>
+Expected: Product successfully added.</p>
+</li>
+<li>
+<p>Test case: <code>addproduct n/Egg pr/sgr2.5 c/Food</code>
+Expected: Invalid format error, prompt should appear in CLI requesting that currency only has numbers and a dollar symbol.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-an-order"><a class="link" href="#adding-an-order">Adding an order</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding an order</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.</p>
+</li>
+<li>
+<p>Test case: <code>addorder</code><br>
+Expected: No order is added. Error detailing correct format should be provided.</p>
+</li>
+<li>
+<p>Test case: <code>addorder e/alex@example.com o/1 5 $3.00 o/2 4 $2.50 o/3 1 $100</code>
+Expected: New order added to Alex Yeoh with 3 suborders for 3 different products. Does not merge with existing order by Alex.</p>
+</li>
+<li>
+<p>Test case: <code>addorder e/bernice@example.com o/1 5 $3.00</code>
+Expected: New order added to Bernice Yu with 1 suborder. Does not merge with existing order by Bernice.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="recommending-for-a-person"><a class="link" href="#recommending-for-a-person">Recommending for a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Recommends products that a person is likely to want to buy</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Either must not have performed any action other than the above, or start with a fresh address book by closing the app, deleting the data folder, and restarting the app.</p>
+</li>
+<li>
+<p>Test case: <code>recommend 1</code><br>
+Expected: Recommendations for Alex Yeoh appears. Because Alex is young, TrendyShirt should top the list, while dentures is at the back. Lipstick should be just behind dentures as Alex is male.</p>
+</li>
+<li>
+<p>Test case: <code>recommend 2</code><br>
+Expected: Recommendations for Bernice Yu appears. Compared to Alex, Bernice is female, so Lipstick advances to  most likely in the prediction list..</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-methods-to-test"><a class="link" href="#other-methods-to-test">Other methods to test</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>findproductbyname</code>, <code>findproductbyprice</code>, <code>map</code>, <code>listproduct</code>, <code>deleteproduct</code>, and <code>deleteorder</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-16 00:26:48 SGT
+</div>
+</div>
+</body>
+</html>
