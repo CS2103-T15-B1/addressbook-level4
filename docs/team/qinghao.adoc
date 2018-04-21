@@ -47,8 +47,9 @@ between uses.
 *** Reported bugs and suggestions for other teams in the class
 
 == Contributions to the User Guide
-** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/UserGuide.adoc#adding-an-order-code-addorder-code[Add Order Command]
-** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/UserGuide.adoc#deleting-an-order-code-deleteorder-code[Delete Order Command]
+** include::../UserGuide.adoc[tag=addorder]
+** include::../UserGuide.adoc[tag=deleteorder]
 
 == Contributions to the Developer Guide
-** link:https://github.com/CS2103JAN2018-T15-B1/main/blob/master/docs/DeveloperGuide.adoc#Implementation-RelationalLogic[Relational Logic]
+** include::../DeveloperGuide.adoc[tag=order]
+** include::../DeveloperGuide.adoc[tag=addorder]

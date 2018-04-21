@@ -85,7 +85,11 @@ Example:
 
 * `addproduct n/Egg pr/$1 c/Food`
 
+//tag::addorder[]
 === Adding an order: `addorder`
+
+image::addorder.PNG[width="600"]
+
 Adds an order to Retail Analytics app. +
 Format: `addorder e/EMAIL o/SUBORDER [o/MORE_SUBORDERS]...` where `SUBORDER` consists of `PRODUCT_ID QUANTITY COST`.
 
@@ -100,6 +104,7 @@ Examples:
 
 * `addorder e/alex@example.com o/1 2 $3` adds an order where alex bought 2 pieces of product whose id is 1 for $3 each.
 * `addorder e/bernice@example.com o/1 1 $1 o/2 1 $1` adds an order where alex bought 1 of product 1 for $1 and 1 of product 2 for $1, making $2 total.
+//end::addorder[]
 
 === Locating persons by name: `find`
 
@@ -279,7 +284,10 @@ Example:
 * `deleteproduct 1` +
 Deletes the product with id 1
 
+//tag::deleteorder[]
 === Deleting an order : `deleteorder`
+
+image::deleteorder.png[width="600"]
 
 Deletes the specified order from Retail Analytics. +
 Format: `deleteorder ORDER_ID`
@@ -294,6 +302,7 @@ Example:
 
 * `deleteorder 1` +
 Deletes the order with id 1
+//end::deleteorder[]
 
 === Selecting a person : `select`
 

@@ -393,17 +393,99 @@ on the fly. However, we realised that the user might want a zoomable interface, 
  customers around the world. Additionally, it would be much more difficult for us to implement clustering of data
  if we rendered the images ourselves.
 
-[[Implementation-RelationalLogic]]
-=== Relational Logic
-* How the feature is implemented
-** We want to ensure that each order corresponds to a valid customer and valid products. Thus, we need a unique key on each customer and product that we store in the order.
-For product, we use the product ID which is generated automatically. However, for customer, we use the customer email as the unique key because we wanted to keep the app
-backwards-compatible with the address-book-level4 app, meaning that XML files from the original addressbook can be directly read with our app. Thus we needed to use
-one of the existing variables associated with Person.
+//tag::order[]
+[[Implementation-Order]]
+=== Order and SubOrder Classes
+The Order and SubOrder classes are responsible for storing the details of
+each order made by a customer.
 
-* Alternatives considered
-** We considered using object relational mapping instead of relational tables to store the extra Order and Product data. This meant that each Person would be associated with zero to multiple Order objects instead of having an extra Order table. However, we decided against this due to the fact that it would be hard to retrieve orders of deleted people. (They are still present in our version because orders, once made, should not be deleted, because of accounting reasons.)
+The Order class records the customer as well as the time of transaction. It contains a list of SubOrders.
+Each SubOrder records a single product that was made, as well as the number bought and the price at which it was bought.
 
+[#ORDER]
+.Structure of the Order and SubOrder Classes
+image::OrderClassDiagram.png[width="1200"]
+
+==== Current Implementation
+
+Each Order object has a foreign key for customer, and a list of SubOrders.
+[source,java]
+public class Order {
+    private final String personId;
+    private final int id;
+    private final LocalDateTime time;
+    private final List<SubOrder> subOrders;
+    ...
+}
+
+Each SubOrder object has a foreign key for product, as well as the price and number of items bought.
+[source, java]
+public class SubOrder {
+    private final int productID;
+    private final int numProduct;
+    private final Money productPrice;
+    ...
+}
+
+==== Design Considerations
+
+===== Aspect: Relational Logic
+
+* **Alternative 1 (current choice):** Use separate lists for order and person
+** Pros: Easy to view and edit the Order list separately from Person list.
+** Cons: Repeated logic and code for Order list. Also, different to ensure composition and make sure that each Order
+belongs to a valid person.
+* **Alternative 2:** Use Object Relational Mapping, so each Person is directly composited with 0..* Order objects
+** Pros: Easy to ensure composition and associate Order and Person objects
+** Cons: Difficult to keep Orders for deleted people, and no single list so harder to integrate into GUI.
+
+===== Aspect: Customer ID
+
+* **Alternative 1 (current choice):** Use customer email
+** Pros: Guaranteed to be unique for every customer, app is compatible with AB4 xml file.
+** Cons: Hard to get customer using email
+* **Alternative 2:** Add new ID variable to customer list, and use that
+** Pros: Can easily get customer using the ID, and makes the app more similar to a proper database
+** Cons: Need to make changes to Person class which will make the app incompatible with AB4 xml storage file.
+//end::order[]
+
+//tag::addorder[]
+[[Implementation-AddOrder]]
+=== Adding Order
+The AddOrder command is used to add an order to the database.
+
+Adding an order performs some vital validations, such as making sure the customer and products are valid.
+
+[#ADDORDER]
+.Sequence Diagram for Adding an Order
+image::AddOrderSequenceDiagram.png[width="1200"]
+
+==== Checking Validity of Order
+The Order and SubOrder classes will check if the order is valid using the following rules:
+
+* Customer email is present in database
+* All product IDs are present in database
+* All prices are non-negative
+* No repeated product IDs
+
+==== Design Considerations
+==== Product Name
+* **Alternative 1(current choice):** Use product ID
+** Pros: Easier to implement, more succinct
+** Cons: Less user-friendly
+* **Alternative 2:** Use product name
+** Pros: More user-friendly
+** Cons: Longer to type, much more difficult to implment
+===== Order Price
+
+* **Alternative 1 (current choice):** Let user pick price
+** Pros: User can freely set discounts, or give free products to customer
+** Cons: Longer command
+* **Alternative 2:** Use current price of product
+** Pros: Easier to type
+** Cons: Cannot set discounts and increased complexith
+
+//end::addorder[]
 
 [[Implementation-Configuration]]
 === Configuration
