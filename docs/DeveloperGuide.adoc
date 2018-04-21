@@ -435,18 +435,18 @@ public class SubOrder {
 ** Pros: Easy to view and edit the Order list separately from Person list.
 ** Cons: Repeated logic and code for Order list. Also, different to ensure composition and make sure that each Order
 belongs to a valid person.
-* **Alternative 2:** Use Object Relational Mapping, so each Person is directly composited with 0..* Order objects
-** Pros: Easy to ensure composition and associate Order and Person objects
+* **Alternative 2:** Use Object Relational Mapping, so each Person is directly composited with multiple Order objects
+** Pros: Easy to ensure composition and associate Order and Person objects.
 ** Cons: Difficult to keep Orders for deleted people, and no single list so harder to integrate into GUI.
 
 ===== Aspect: Customer ID
 
 * **Alternative 1 (current choice):** Use customer email
-** Pros: Guaranteed to be unique for every customer, app is compatible with AB4 xml file.
-** Cons: Hard to get customer using email
+** Pros: Guaranteed to be unique for every customer, app is compatible with AB4 xml storage file.
+** Cons: More difficult to get customer object using email, but this is not necessary yet.
 * **Alternative 2:** Add new ID variable to customer list, and use that
-** Pros: Can easily get customer using the ID, and makes the app more similar to a proper database
-** Cons: Need to make changes to Person class which will make the app incompatible with AB4 xml storage file.
+** Pros: Can easily get customer using the ID, and makes the app more similar to a proper database.
+** Cons: Need to make changes to Person class which will make the app incompatible with AB4 xml file.
 //end::order[]
 
 //tag::addorder[]
@@ -469,22 +469,28 @@ The Order and SubOrder classes will check if the order is valid using the follow
 * No repeated product IDs
 
 ==== Design Considerations
+
 ===== Aspect: Product Name
+
+We considered whether to use the product ID or let the user type the name of the product.
+
 * **Alternative 1(current choice):** Use product ID
-** Pros: Easier to implement, more succinct
-** Cons: Less user-friendly
+** Pros: Easier to implement, more succinct.
+** Cons: Less user-friendly.
 * **Alternative 2:** Use product name
-** Pros: More user-friendly
-** Cons: Longer to type, much more difficult to implement
+** Pros: More user-friendly.
+** Cons: Longer to type, much more difficult to implement.
 
 ===== Aspect: Order Price
 
-* **Alternative 1 (current choice):** Let user pick price
-** Pros: User can freely set discounts, or give free products to customer
-** Cons: Longer command
+We considered whether to let the user set a price for the order, or to use the current price of the product.
+
+* **Alternative 1 (current choice):** Let user set price
+** Pros: User can freely set discounts, or give free products to customer.
+** Cons: Longer command.
 * **Alternative 2:** Use current price of product
-** Pros: Easier to type
-** Cons: Cannot set discounts and increased complexith
+** Pros: Easier to type, more user-friendly.
+** Cons: Cannot set discounts and more difficult to implement.
 
 //end::addorder[]
 
